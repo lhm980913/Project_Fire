@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hurt_Stage : MonoBehaviour
+public class Hurt_Stage : Player_Base_Stage
 {
-    // Start is called before the first frame update
-    void Start()
+    public Hurt_Stage()
     {
-        
+
+    }
+
+    public void Enter()
+    {
+        Debug.Log("hurt");
+    }
+
+    public void Input()
+    {
+
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update_()
     {
-        
+
+
     }
 }

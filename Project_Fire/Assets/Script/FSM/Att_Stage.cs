@@ -2,17 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Att_Stage : MonoBehaviour
+public class Att_Stage : Player_Base_Stage
 {
-    // Start is called before the first frame update
-    void Start()
+    public Att_Stage()
     {
-        
+
+    }
+    public void Enter()
+    {
+        Debug.Log("att");
+    }
+
+    public void Input()
+    {
+      
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update_()
     {
-        
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
+
     }
 }
