@@ -16,6 +16,7 @@ public class Stand_Stage :  Player_Base_Stage
     {
        // Player_Function.FStop(testplayer.Instance.playergameobj);
         Debug.Log("stand");
+        testplayer.Instance.canflash = true;
     }
 
     public void Input()
@@ -39,7 +40,10 @@ public class Stand_Stage :  Player_Base_Stage
         {
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
         }
-
+        if (Player_Controller_System.Instance.RT>0.65 &&testplayer.Instance.canrape)
+        {
+            testplayer._player.SetStage(testplayer.Instance.rape_stage);
+        }
     }
 
     public void Update_()

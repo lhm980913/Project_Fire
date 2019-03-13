@@ -13,6 +13,7 @@ public class Run_Stage : Player_Base_Stage
 
     public void Enter()
     {
+        testplayer.Instance.canflash = true;
         Debug.Log("run");
     }
 
@@ -35,7 +36,10 @@ public class Run_Stage : Player_Base_Stage
         {
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
         }
-
+        if (Player_Controller_System.Instance.RT > 0.65 && testplayer.Instance.canrape)
+        {
+            testplayer._player.SetStage(testplayer.Instance.rape_stage);
+        }
     }
 
     // Update is called once per frame

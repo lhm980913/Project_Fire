@@ -11,7 +11,7 @@ public class Jump_Stage : Player_Base_Stage
 
     public void Enter()
     {
-       
+        //testplayer.Instance.canflash = true;
         Debug.Log("jump");
     }
 
@@ -19,11 +19,17 @@ public class Jump_Stage : Player_Base_Stage
     {
         if (testplayer.Instance.grounded)
         {
+            
             testplayer._player.SetStage(testplayer.Instance.run_stage);
         }
-        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down && testplayer.Instance.canflash ==true)
         {
+            testplayer.Instance.canflash = false;
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        }
+        if (Player_Controller_System.Instance.RT > 0.65 && testplayer.Instance.canrape)
+        {
+            testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
     }
 

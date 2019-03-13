@@ -23,6 +23,6 @@ public class Hurt_Stage : Player_Base_Stage
     public void Update_()
     {
 
-
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime;
     }
 }

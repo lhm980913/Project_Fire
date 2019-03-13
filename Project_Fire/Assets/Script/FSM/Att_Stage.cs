@@ -11,6 +11,7 @@ public class Att_Stage : Player_Base_Stage
     public void Enter()
     {
         Debug.Log("att");
+        Player_Function.FStop(testplayer.Instance.playergameobj);
     }
 
     public void Input()

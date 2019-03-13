@@ -10,15 +10,21 @@ public class testplayer : MonoBehaviour
 
     public float speed;
     public float jump_speed;
+    public float little_jump_speed;
     public GameObject playergameobj;
     public bool grounded;
     public float maxflashspeed;
     public float flashtime;
     public float flashcd;
     public int face_to = 1;
+    public bool canflash = true;
+    public float rapelength;
+    public Vector3 target_pos;
+    public bool canrape;
+    public float rapespeed;
     // Start is called before the first frame update
 
-    
+
     static public Player _player;
     public AnimationCurve ac;
 
@@ -26,6 +32,7 @@ public class testplayer : MonoBehaviour
     public Player_Base_Stage run_stage;
     public Player_Base_Stage jump_stage;
     public Player_Base_Stage flash_stage;
+    public Player_Base_Stage rape_stage;
 
 
     private void Awake()
@@ -35,6 +42,7 @@ public class testplayer : MonoBehaviour
         run_stage = new Run_Stage();
         jump_stage = new Jump_Stage();
         flash_stage = new Flash_Stage();
+        rape_stage = new Rape_Stage();
         if (Instance==null)
         {
             Instance = this;
