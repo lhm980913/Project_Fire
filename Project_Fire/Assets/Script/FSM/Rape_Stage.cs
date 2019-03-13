@@ -14,6 +14,7 @@ public class Rape_Stage : Player_Base_Stage
 
     public void Enter()
     {
+        Debug.Log("rape");
         pos = testplayer.Instance.playergameobj.transform.position;
         a = 0;
         target = testplayer.Instance.target_pos;

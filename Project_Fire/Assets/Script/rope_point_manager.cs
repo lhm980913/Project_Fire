@@ -30,11 +30,9 @@ public class rope_point_manager : MonoBehaviour
     {
        rp =  Physics.OverlapSphere(testplayer.Instance.transform.position, testplayer.Instance.rapelength, rape_point);
 
-        player_dir = FCheckdir( Vector2.zero,new Vector2(Player_Controller_System.Instance.Horizontal_Left, Player_Controller_System.Instance.Vertical_Left));
-        if(Player_Controller_System.Instance.Horizontal_Left==0&& Player_Controller_System.Instance.Vertical_Left==0)
-        {
-            player_dir = 90;
-        }
+
+        Fcheckdir(ref player_dir);
+
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
         float min = 180;
@@ -97,5 +95,24 @@ public class rope_point_manager : MonoBehaviour
 
         // 角度 = 弧度*180.0f/PI
         return a;
+    }
+    void Fcheckdir(ref float dir)
+    {
+        if (Player_Controller_System.Instance.Horizontal_Left == 0 && Player_Controller_System.Instance.Vertical_Left == 0)
+        {
+
+        }
+        else
+        {
+            player_dir = FCheckdir(Vector2.zero, new Vector2(Player_Controller_System.Instance.Horizontal_Left, Player_Controller_System.Instance.Vertical_Left));
+        }
+        if (Player_Controller_System.Instance.Horizontal_Right == 0 && Player_Controller_System.Instance.Vertical_Right == 0)
+        {
+
+        }
+        else
+        {
+            player_dir = FCheckdir(Vector2.zero, new Vector2(Player_Controller_System.Instance.Horizontal_Right, Player_Controller_System.Instance.Vertical_Right));
+        }
     }
 }

@@ -28,6 +28,8 @@ public class testplayer : MonoBehaviour
 
     static public Player _player;
     public AnimationCurve ac;
+    public Animator animation;
+    public GameObject moudle_player;
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -61,6 +63,11 @@ public class testplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 90, 0);
+
+
+        FAnimation();
+        
         grounded = FCheckground();
         flashcd -= Time.deltaTime;
         FYspeedclamp();
@@ -84,5 +91,11 @@ public class testplayer : MonoBehaviour
         {
             playergameobj.GetComponent<Rigidbody>().velocity = new Vector3(playergameobj.GetComponent<Rigidbody>().velocity.x, ymaxspeed, 0);
         }
+    }
+    void FAnimation()
+    {
+        animation.SetFloat("speed", playergameobj.GetComponent<Rigidbody>().velocity.y);
+
+        animation.SetBool("ground", grounded);
     }
 }

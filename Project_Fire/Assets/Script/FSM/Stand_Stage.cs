@@ -39,8 +39,8 @@ public class Stand_Stage :  Player_Base_Stage
         if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
         {
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
-        }
-        if (Player_Controller_System.Instance.RT>0.65 &&testplayer.Instance.canrape)
+        } 
+        if (Player_Controller_System.Instance.Button_B== Player_Controller_System.Button_Stage.down && testplayer.Instance.canrape)
         {
             testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
