@@ -22,6 +22,7 @@ public class testplayer : MonoBehaviour
     public Vector3 target_pos;
     public bool canrape;
     public float rapespeed;
+    public float ymaxspeed;
     // Start is called before the first frame update
 
 
@@ -62,7 +63,7 @@ public class testplayer : MonoBehaviour
     {
         grounded = FCheckground();
         flashcd -= Time.deltaTime;
-        
+        FYspeedclamp();
         _player.Update();
     }
     bool FCheckground()
@@ -77,5 +78,11 @@ public class testplayer : MonoBehaviour
         else return true;
     }
     
-
+    void FYspeedclamp()
+    {
+        if(playergameobj.GetComponent<Rigidbody>().velocity.y<ymaxspeed)
+        {
+            playergameobj.GetComponent<Rigidbody>().velocity = new Vector3(playergameobj.GetComponent<Rigidbody>().velocity.x, ymaxspeed, 0);
+        }
+    }
 }
