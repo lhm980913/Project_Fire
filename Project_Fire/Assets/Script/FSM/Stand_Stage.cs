@@ -14,8 +14,8 @@ public class Stand_Stage :  Player_Base_Stage
 
     public void Enter()
     {
-        Player_Function.FStop(testplayer.Instance.playergameobj);
-        
+       // Player_Function.FStop(testplayer.Instance.playergameobj);
+        Debug.Log("stand");
     }
 
     public void Input()
@@ -26,11 +26,25 @@ public class Stand_Stage :  Player_Base_Stage
 
             testplayer._player.SetStage(testplayer.Instance.run_stage);
         }
-      
+        if (Player_Controller_System.Instance.Button_A==Player_Controller_System.Button_Stage.down&&testplayer.Instance.grounded)
+        {
+            Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
+        }
+        if (!testplayer.Instance.grounded)
+        {
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
+        }
+        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        {
+            testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        }
+
     }
 
     public void Update_()
     {
-       
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
+        Player_Function.FFace_to();
     }
 }
