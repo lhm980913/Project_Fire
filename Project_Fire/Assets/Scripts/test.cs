@@ -31,6 +31,13 @@ public class test : MonoBehaviour
             instance.FRaidalBlurShock();
             Debug.Log("L");
         }
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            instance.FMotionVector();
+            Debug.Log("I");
+        }
+
     }
 
 }

@@ -2,9 +2,7 @@
 {
     Properties
     {
-        _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _BlurStrength ("Blur Strength", float) = 0.5
-		_BlurDist ("Blur Dist", float) = 0.1
+		_MainTex("MainTex",2D)="white"{}
     }
     SubShader
     {
