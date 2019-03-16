@@ -12,6 +12,7 @@ public enum Enemy_Stage
 public abstract class enemy_base : MonoBehaviour
 {
     public float maxhp;
+    private bool canMove;
     Enemy_Stage _stage;
     public Enemy_Stage Stage
     {
@@ -40,5 +41,9 @@ public abstract class enemy_base : MonoBehaviour
     }
 
     public abstract void FSM(Enemy_Stage stage);
+    public abstract void FBeatBack();
+    public abstract void FBeHurt(int damage);
+    public abstract void FEnableMove();
+    public abstract void FDisableMove();
 
 }

@@ -14,17 +14,17 @@ public class ProcessSystem : MonoBehaviour
         }
     }
 
-    public void FHitSomething(Enemy enemy)
+    public void FHitSomething(enemy_base enemy)
     {
 
     }
 
-    public void FHitBySomething(Enemy enemy)
+    public void FHitBySomething(enemy_base enemy)
     {
 
     }
 
-    public void FHitEnemyAttack(Enemy enemy)
+    public void FHitEnemyAttack(enemy_base enemy)
     {
 
     }
