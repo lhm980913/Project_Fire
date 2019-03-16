@@ -11,31 +11,48 @@ public class testplayer : MonoBehaviour
     public float speed;
     public float jump_speed;
     public float little_jump_speed;
-    public GameObject playergameobj;
-    public bool grounded;
     public float maxflashspeed;
-    public float flashtime;
-    public float flashcd;
-    public int face_to = 1;
-    public bool canflash = true;
-    public float rapelength;
-    public Vector3 target_pos;
-    public bool canrape;
+    public float flashtime; 
+    public float rapelength;   
     public float rapespeed;
     public float ymaxspeed;
+    public float player_att_speed;
+    public GameObject weapon;
+
+    [HideInInspector]
+    public GameObject playergameobj;
+    [HideInInspector]
+    public bool canatt = true;
+    [HideInInspector]
+    public bool grounded;
+    [HideInInspector]
+    public float flashcd;
+    [HideInInspector]
+    public int face_to = 1;
+    [HideInInspector]
+    public bool canflash = true;
+    [HideInInspector]
+    public Vector3 target_pos;
+    [HideInInspector]
+    public bool canrape;
+    [HideInInspector]
+    public float aa;
     // Start is called before the first frame update
 
 
     static public Player _player;
     public AnimationCurve ac;
-    public Animator animation;
+    public Animator anim;
     public GameObject moudle_player;
+
+   
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
     public Player_Base_Stage jump_stage;
     public Player_Base_Stage flash_stage;
     public Player_Base_Stage rape_stage;
+    public Player_Base_Stage att_stage;
 
 
     private void Awake()
@@ -46,12 +63,13 @@ public class testplayer : MonoBehaviour
         jump_stage = new Jump_Stage();
         flash_stage = new Flash_Stage();
         rape_stage = new Rape_Stage();
+        att_stage = new Att_Stage();
         if (Instance==null)
         {
             Instance = this;
         }
         playergameobj = this.gameObject;
-
+        aa = player_att_speed;
        
     }
 
@@ -63,9 +81,10 @@ public class testplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        attcount();
         moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 90, 0);
-
-
+   
+        
         FAnimation();
         
         grounded = FCheckground();
@@ -94,8 +113,23 @@ public class testplayer : MonoBehaviour
     }
     void FAnimation()
     {
-        animation.SetFloat("speed", playergameobj.GetComponent<Rigidbody>().velocity.y);
+        anim.SetFloat("speed", playergameobj.GetComponent<Rigidbody>().velocity.y);
 
-        animation.SetBool("ground", grounded);
+        anim.SetBool("ground", grounded);
+    }
+    void attcount()
+    {
+        
+        if(!canatt)
+        {
+
+            aa -= Time.deltaTime;
+            if(aa<0)
+            {
+                canatt = true;
+            }
+
+
+        }
     }
 }
