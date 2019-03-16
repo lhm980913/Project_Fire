@@ -40,6 +40,13 @@ public class Run_Stage : Player_Base_Stage
         {
             testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
+        if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && testplayer.Instance.canatt)
+        {
+            
+                testplayer._player.SetStage(testplayer.Instance.att_stage);
+            
+
+        }
     }
 
     // Update is called once per frame

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Att_Stage : Player_Base_Stage
 {
+    float ttt = 0.3f;
     public Att_Stage()
     {
 
@@ -11,11 +12,27 @@ public class Att_Stage : Player_Base_Stage
     public void Enter()
     {
         Debug.Log("att");
+        testplayer.Instance.canatt = false;
+        testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
+        if (Player_Controller_System.Instance.Vertical_Left < 0.7 && Player_Controller_System.Instance.Vertical_Left > -0.7)
+        {
+
+        }
+
+        
+        testplayer.Instance.anim.SetTrigger("att1");
+        ttt = 0.3f;
     }
 
     public void Input()
     {
+        ttt -= Time.deltaTime;
+      if(ttt<0)
+        {
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
+         
+        }
       
     }
 
