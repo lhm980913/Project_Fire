@@ -14,8 +14,6 @@ public class enemy_lizarrd : enemy_base
 
     }
 
-
-
     public override void FSM(Enemy_Stage stage)
     {
         switch (stage)
