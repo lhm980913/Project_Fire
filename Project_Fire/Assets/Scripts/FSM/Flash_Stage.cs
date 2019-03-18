@@ -27,6 +27,11 @@ public class Flash_Stage : Player_Base_Stage
             {
                 testplayer._player.SetStage(testplayer.Instance.stand_stage);
             }
+           
+        }
+        if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.down && testplayer.Instance.canrape)
+        {
+            testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
     }
 
