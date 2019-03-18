@@ -85,3 +85,20 @@ public class YinXian : activeEffect
         }
     }
 }
+
+public class HuiShen : activeEffect
+{
+    float Duration;
+    float Intervals;
+    float Distance;
+    float Damage;
+    float ShockRadius;
+    float ShockDamage;
+
+    HuiShen(int damage, int shockDamage)
+    {
+        Duration = 3;
+        Intervals = 0.5f;
+        Distance = 2;
+    }
+}
