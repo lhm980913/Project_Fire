@@ -61,6 +61,7 @@ abstract public class WeaponEffect
     public string Name;
     public string Description;
     abstract public void Execute();
+    protected LayerMask enemy_layermask = 1 << 11;
 }
 
 public class activeEffect:WeaponEffect

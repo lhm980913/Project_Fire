@@ -7,9 +7,10 @@ public class XianDan : activeEffect
     float Distance;
     float Height;
     int Damage;
+    
     Transform playerTransform;
 
-    XianDan(int damage)
+    public XianDan(int damage)
     {
         callType = CallType.active;
         Distance = 4;
@@ -24,7 +25,7 @@ public class XianDan : activeEffect
     {
         Transform playerTransform = testplayer.Instance.transform;
         Collider[] colliders;
-        colliders = Physics.OverlapBox(playerTransform.position + playerTransform.forward * 0.5f, new Vector3(Distance / 2, 1, 1), Quaternion.identity, 1 << 11);
+        colliders = Physics.OverlapBox(playerTransform.position + playerTransform.forward * 0.5f, new Vector3(Distance / 2, 1, 1), Quaternion.identity, enemy_layermask);
         foreach (var collider in colliders)
         {
             if (collider.transform.tag == "Enemy")
@@ -41,6 +42,7 @@ public class YinXian : activeEffect
     float Duration;
     float Intervals;
     int Damage;
+    
     Transform playerTransform;
 
     YinXian(int damage)
@@ -58,7 +60,7 @@ public class YinXian : activeEffect
     {
         
         Collider[] colliders;
-        colliders = Physics.OverlapBox(playerTransform.position, new Vector3(100,1,1), Quaternion.identity, 1 << 11);
+        colliders = Physics.OverlapBox(playerTransform.position, new Vector3(100,1,1), Quaternion.identity, enemy_layermask);
         enemy_base[] enemys = new enemy_base[colliders.Length];
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -84,6 +86,8 @@ public class YinXian : activeEffect
             enemy.FEnableMove();
         }
     }
+
+
 }
 
 public class HuiShen : activeEffect
