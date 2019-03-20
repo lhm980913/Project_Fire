@@ -10,8 +10,8 @@ Material:
   m_Name: Lizarrd
   m_Shader: {fileID: 4800000, guid: c181c9c05c95bdd429a88707134d5a51, type: 3}
   m_ShaderKeywords: _EMISSION_MAP _METALLIC_MAP _NORMAL_MAP _OCCLUSION_MAP
-  m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -83,7 +83,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.03
+    - _OutlineWidth: 1
     - _Parallax: 0.02
     - _ParallaxStrength: 0
     - _Smoothness: 0
@@ -94,7 +94,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowColor: {r: 0.5377358, g: 0.33735314, b: 0.3850101, a: 1}
