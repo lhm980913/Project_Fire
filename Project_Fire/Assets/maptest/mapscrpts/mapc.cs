@@ -37,8 +37,15 @@ public class mapc : MonoBehaviour
         exitsnum = 4;
         //Fcreatwall();
         Modledetil start = Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
-       
 
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
+        Fcreatmod(Random.Range(10, 50), Random.Range(10, 50), Random.Range(4, 4));
 
     }
 
