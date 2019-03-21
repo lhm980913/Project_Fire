@@ -5,6 +5,7 @@ using UnityEngine;
 public class Att_Stage : Player_Base_Stage
 {
     float ttt = 0.3f;
+    bool atttarget;
     public Att_Stage()
     {
 
@@ -23,6 +24,10 @@ public class Att_Stage : Player_Base_Stage
         
         testplayer.Instance.anim.SetTrigger("att1");
         ttt = 0.3f;
+
+
+        //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
+        //hit.collider.gameObject
     }
 
     public void Input()
