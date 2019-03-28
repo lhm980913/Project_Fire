@@ -27,16 +27,16 @@ enum Tiles
 public class createmap : MonoBehaviour
 {
     //尝试生成房间的数量
-    public int numRoomTries = 50;
+    public int numRoomTries;
     //在已经连接的房间和走廊中再次连接的机会，使得地牢不完美
-    public int extraConnectorChance = 20;
+    public int extraConnectorChance;
     //控制生成房间的大小
-    public int roomExtraSize = 0;
+    public int roomExtraSize;
     //控制迷宫的曲折程度
-    public int windingPercent = 0;
+    public int windingPercent;
 
-    public int width = 51;
-    public int height = 51;
+    public int width;
+    public int height;
     public GameObject wall, floor, connect;
 
     private Transform mapParent;
@@ -52,8 +52,8 @@ public class createmap : MonoBehaviour
     void Start()
     {
         rooms = new List<Rect>();
-        map = new Tiles[width, height];
-        _regions = new int[width, height];
+        map = new Tiles[1000, 1000];
+        _regions = new int[1000, 1000];
         mapParent = GameObject.FindGameObjectWithTag("mapParent").transform;
         Generate();
     }
@@ -104,7 +104,7 @@ public class createmap : MonoBehaviour
         for (int i = 0; i < numRoomTries; i++)
         {
             //确保房间长宽为奇数
-            int size = Random.Range(1, 3 + roomExtraSize) * 2 + 1;
+            int size = Random.Range(3, 3 + roomExtraSize) * 2 + 1;
             int rectangularity = Random.Range(0, 1 + size / 2) * 2;
             int w = size, h = size;
             if (0 == Random.Range(0, 1))
@@ -248,6 +248,7 @@ public class createmap : MonoBehaviour
                 if (regions.Count < 2)
                     continue;
                 connectorRegions[new Vector2(i, j)] = regions;
+                map[i, j] = Tiles.Connect;
                 //标志连接点
                 //SetConnectCube(i,j);
             }
@@ -266,7 +267,10 @@ public class createmap : MonoBehaviour
         while (openRegions.Count > 1)
         {
             //随机选择一个连接点
-            Vector2 connector = connectors[Random.Range(0, connectors.Count - 1)];
+            int inww = Random.Range(0, connectors.Count - 1);
+            Debug.Log(inww);
+            Debug.Log("count"+connectors.Count);
+            Vector2 connector = connectors[inww];
             //连接
             AddJunction(connector);
             //合并连接区域我们将选择第一个区域（任意）和
@@ -406,12 +410,12 @@ public class createmap : MonoBehaviour
         return true;
     }
 
-    private void SetConnectCube(int i, int j)
-    {
-        GameObject go = Instantiate(connect, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
-        go.transform.SetParent(mapParent);
-        go.layer = LayerMask.NameToLayer("wall");
-    }
+    //private void SetConnectCube(int i, int j)
+    //{
+    //    GameObject go = Instantiate(connect, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
+    //    go.transform.SetParent(mapParent);
+    //    go.layer = LayerMask.NameToLayer("wall");
+    //}
 
     /*
      * 地图全部初始化为墙
@@ -444,6 +448,12 @@ public class createmap : MonoBehaviour
                 else if (map[i, j] == Tiles.Wall)
                 {
                     GameObject go = Instantiate(wall, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapParent);
+                    go.layer = LayerMask.NameToLayer("wall");
+                }
+                else if (map[i, j] == Tiles.Connect)
+                {
+                    GameObject go = Instantiate(connect, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
                     go.layer = LayerMask.NameToLayer("wall");
                 }
