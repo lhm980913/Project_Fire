@@ -17,10 +17,19 @@ public class Jump_Stage : Player_Base_Stage
 
     public void Input()
     {
+        if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down && !testplayer.Instance.grounded)
+        {
+            Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
+        }
+
+
+
         if (testplayer.Instance.grounded)
         {
             
             testplayer._player.SetStage(testplayer.Instance.run_stage);
+
         }
         if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down && testplayer.Instance.canflash ==true)
         {

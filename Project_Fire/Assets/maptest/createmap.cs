@@ -34,6 +34,7 @@ public class createmap : MonoBehaviour
     public int roomExtraSize = 0;
     //控制迷宫的曲折程度
     public int windingPercent = 0;
+    public int scale;
 
     public int width = 51;
     public int height = 51;
@@ -56,6 +57,7 @@ public class createmap : MonoBehaviour
         _regions = new int[width, height];
         mapParent = GameObject.FindGameObjectWithTag("mapParent").transform;
         Generate();
+        mapParent.transform.localScale = Vector3.one * scale;
     }
 
     void Update()
@@ -104,7 +106,7 @@ public class createmap : MonoBehaviour
         for (int i = 0; i < numRoomTries; i++)
         {
             //确保房间长宽为奇数
-            int size = Random.Range(1, 3 + roomExtraSize) * 2 + 1;
+            int size = Random.Range(1, 1 + roomExtraSize) * 2 + 1;
             int rectangularity = Random.Range(0, 1 + size / 2) * 2;
             int w = size, h = size;
             if (0 == Random.Range(0, 1))
@@ -436,16 +438,16 @@ public class createmap : MonoBehaviour
             {
                 if (map[i, j] == Tiles.Floor)
                 {
-                    GameObject go = Instantiate(floor, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
+                    GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
                     //设置层级
                     go.layer = LayerMask.NameToLayer("floor");
                 }
                 else if (map[i, j] == Tiles.Wall)
                 {
-                    GameObject go = Instantiate(wall, new Vector3(i, j, 1), Quaternion.identity) as GameObject;
+                    GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
-                    go.layer = LayerMask.NameToLayer("wall");
+                    go.layer = LayerMask.NameToLayer("Ground");
                 }
             }
         }
