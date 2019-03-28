@@ -53,7 +53,8 @@ public class testplayer : MonoBehaviour
     public AnimationCurve ac;
     public Animator anim;
     public GameObject moudle_player;
-    
+
+   
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -111,16 +112,13 @@ public class testplayer : MonoBehaviour
     bool FCheckground()
     {
         LayerMask lm = 1 << 9;
-        Collider[] a = Physics.OverlapSphere(playergameobj.transform.position - new Vector3(0,0.5f,0), 0.2f,lm);
-
+        Collider[] a = Physics.OverlapSphere(playergameobj.transform.position - new Vector3(0,0.5f,0), 0.02f,lm);
+      
         if (a.Length == 0)
         {
             return false;
         }
-        else
-        {
-            return true;
-        }
+        else return true;
     }
     void FCountFlash()
     {
@@ -170,6 +168,4 @@ public class testplayer : MonoBehaviour
             _player.SetStage(hurt_stage);
         }
     }
-
-    
 }
