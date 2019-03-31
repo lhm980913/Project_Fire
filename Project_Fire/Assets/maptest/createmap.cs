@@ -18,7 +18,16 @@ class Directions
 
 class ninecube
 {
-    public static Vector2 one = new Vector2(-1, 1);
+    //public static Vector2 one = new Vector2(-1, 1);
+    //public static Vector2 two = new Vector2(0, 1);
+    //public static Vector2 three = new Vector2(1, 1);
+    //public static Vector2 four = new Vector2(-1, 0);
+    //public static Vector2 five = new Vector2(0, 0);
+    //public static Vector2 six = new Vector2(1, 0);
+    //public static Vector2 seven = new Vector2(-1, -1);
+    //public static Vector2 eight = new Vector2(0, -1);
+    //public static Vector2 nine = new Vector2(1, -1);
+     public static Vector2 one = new Vector2(-1, 1);
     public static Vector2 two = new Vector2(0, 1);
     public static Vector2 three = new Vector2(1, 1);
     public static Vector2 four = new Vector2(-1, 0);
@@ -57,13 +66,14 @@ public class createmap : MonoBehaviour
     public int roomMinSize = 0;
     //控制迷宫的曲折程度
     public int windingPercent = 0;
-    public int scale;
+    public float scale;
 
     public int width;
     public int height;
     public GameObject wall, floor, connect,door,dead;
 
     private Transform mapParent;
+    private Transform rape_manager;
     //生成的有效房间
     private List<Rect> rooms;
     //正被雕刻的区域的索引。(每个房间一个索引，每个不连通的迷宫一个索引，在连通之前)
@@ -74,7 +84,8 @@ public class createmap : MonoBehaviour
     private Tiles[,] map;
 
     Tiles[,] map1;
-    
+    Tiles[,] map_final;
+
     void Start()
     {
         //int a = width;
@@ -84,8 +95,10 @@ public class createmap : MonoBehaviour
         rooms = new List<Rect>();
         map = new Tiles[width, height];
         map1 = new Tiles[width + 4, height + 4];
+        map_final = new Tiles[3*width + 12, 3*height + 12];
         _regions = new int[width, height];
         mapParent = GameObject.FindGameObjectWithTag("mapParent").transform;
+        rape_manager = GameObject.FindGameObjectWithTag("rape_manager").transform;
         Generate();
         mapParent.transform.localScale = Vector3.one * scale;
         
@@ -143,7 +156,7 @@ public class createmap : MonoBehaviour
 
             //int size1 = Random.Range(roomMinSize, roomExtraSize) * 2 + 1;
             int w = size, h = size;
-            if (0 == Random.Range(0, 1))
+            if (0 == Random.Range(0, 2))
             {
                 w += rectangularity;
             }
@@ -151,10 +164,10 @@ public class createmap : MonoBehaviour
             {
                 h += rectangularity;
             }
-            int x = Random.Range(0, (width - w) / 2) * 2 + 1;
-            int y = Random.Range(0, (height - h) / 2) * 2 + 1;
+            int x = Random.Range(2, (width - w-2) / 2) * 2 + 1;
+            int y = Random.Range(2, (height - h-2) / 2) * 2 + 1;
             //print(x+"  "+y);
-            Rect room = new Rect(x, y, w, h);
+            Rect room = new Rect(x, y, w+1, h+1);
             //判断房间是否和已存在的重叠
             bool overlaps = false;
             foreach (Rect r in rooms)
@@ -488,9 +501,9 @@ public class createmap : MonoBehaviour
 
     private void InstanceMap()
     {
-        for (int x = 0; x < width+4; x++)
+        for (int x = 0; x < width + 4; x++)
         {
-            for (int y = 0; y < height+4; y++)
+            for (int y = 0; y < height + 4; y++)
             {
                 map1[x, y] = Tiles.Wall;
             }
@@ -499,17 +512,48 @@ public class createmap : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                map1[2 + i, 2 + j] = map[i,j];
+                map1[2 + i, 2 + j] = map[i, j];
+
+            }
+        }
+        for (int x = 0; x < 3*width + 12; x++)
+        {
+            for (int y = 0; y < 3*height + 12; y++)
+            {
+                map_final[x, y] = Tiles.Wall;
+            }
+        }
+        for (int i = 3; i < 3*width+6; i+=3)
+        {
+            for (int j = 3; j < 3*height+6; j+=3)
+            {
+                int[] a;
+                a = new int[9];
+                for (int k=0;k<9;k++)
+                {
+                    map_final[i + k % 3, j + (int)k / 3] = map1[i  / 3, j  / 3];
+                    if (map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Wall ||
+                        map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Tianchong ||
+                        map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Connect)
+                    {                    
+                        a[k] = 1;
+                    }
+                    else
+                    {
+                        a[k] = 0;
+                    }
+                }
+                destory(a ,i, j);
+
 
             }
         }
 
-
-        for (int i = 1; i < width+3; i++)
+        for (int i = 1; i < 3*width + 12; i++)
         {
-            for (int j = 1; j < height+3; j++)
+            for (int j = 1; j < 3*height + 12; j++)
             {
-                if (map1[i, j] == Tiles.Floor)
+                if (map_final[i, j] == Tiles.Floor)
                 {
                     GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
@@ -518,36 +562,80 @@ public class createmap : MonoBehaviour
 
                     go.layer = LayerMask.NameToLayer("floor");
                 }
-                else if (map1[i, j] == Tiles.Wall)
+                else if (map_final[i, j] == Tiles.Wall)
                 {
                     GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
-                    chuancan(go, i, j);
+                    //chuancan(go, i, j);
                     go.layer = LayerMask.NameToLayer("Ground");
                 }
-                else if (map1[i, j] == Tiles.Connect)
+                else if (map_final[i, j] == Tiles.Connect)
                 {
                     GameObject go = Instantiate(connect, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
-                    chuancan(go, i, j);
+                    //chuancan(go, i, j);
                     go.layer = LayerMask.NameToLayer("Ground");
                 }
-                else if (map1[i, j] == Tiles.Door)
+                else if (map_final[i, j] == Tiles.Door)
                 {
                     GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
+                    go.transform.SetParent(rape_manager);
                     //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("floor");
+                    go.layer = LayerMask.NameToLayer("Rape_Point");
                 }
-                else if (map1[i, j] == Tiles.Tianchong)
+                else if (map_final[i, j] == Tiles.Tianchong)
                 {
                     GameObject go = Instantiate(dead, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
-                    chuancan(go, i, j);
+                    //chuancan(go, i, j);
                     go.layer = LayerMask.NameToLayer("Ground");
                 }
             }
         }
+
+        //for (int i = 1; i < width+3; i++)
+        //{
+        //    for (int j = 1; j < height+3; j++)
+        //    {
+        //        if (map1[i, j] == Tiles.Floor)
+        //        {
+        //            GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+        //            go.transform.SetParent(mapParent);
+        //            //设置层级
+        //            //chuancan(go,i,j);
+
+        //            go.layer = LayerMask.NameToLayer("floor");
+        //        }
+        //        else if (map1[i, j] == Tiles.Wall)
+        //        {
+        //            GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+        //            go.transform.SetParent(mapParent);
+        //            //chuancan(go, i, j);
+        //            go.layer = LayerMask.NameToLayer("Ground");
+        //        }
+        //        else if (map1[i, j] == Tiles.Connect)
+        //        {
+        //            GameObject go = Instantiate(connect, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+        //            go.transform.SetParent(mapParent);
+        //            //chuancan(go, i, j);
+        //            go.layer = LayerMask.NameToLayer("Ground");
+        //        }
+        //        else if (map1[i, j] == Tiles.Door)
+        //        {
+        //            GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+        //            go.transform.SetParent(rape_manager);
+        //            //chuancan(go, i, j);
+        //            go.layer = LayerMask.NameToLayer("Rape_Point");
+        //        }
+        //        else if (map1[i, j] == Tiles.Tianchong)
+        //        {
+        //            GameObject go = Instantiate(dead, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+        //            go.transform.SetParent(mapParent);
+        //            //chuancan(go, i, j);
+        //            go.layer = LayerMask.NameToLayer("Ground");
+        //        }
+        //    }
+        //}
     }
     void chuancan(GameObject go,int i,int j)
     {
@@ -567,5 +655,50 @@ public class createmap : MonoBehaviour
        
         go.GetComponent<cube>().suround = a;
     }
+    void destory(int[] suround,int i,int j)
+    {
+        if(map_final[i+1,j+1]==Tiles.Door)
+        {
+            map_final[i + 0, j + 0] = Tiles.Floor;
+            map_final[i + 0, j + 1] = Tiles.Floor;
+            map_final[i + 0, j + 2] = Tiles.Floor;
+            map_final[i + 1, j + 0] = Tiles.Floor;
+            map_final[i + 1, j + 2] = Tiles.Floor;
+            map_final[i + 2, j + 0] = Tiles.Floor;
+            map_final[i + 2, j + 1] = Tiles.Floor;
+            map_final[i + 2, j + 2] = Tiles.Floor;
 
+        }
+        else
+        {
+            for (int x = 0; x < 9; x++)
+            {
+
+                if (suround[x] == 0)
+                {
+                    map_final[i + (x % 3), j + (8 - x) / 3] = Tiles.Floor;
+                }
+                if (suround[0] == 1 && (suround[1] == 0 || suround[3] == 0))
+                {
+                    map_final[i, j + 2] = Tiles.Floor;
+                }
+                if (suround[2] == 1 && (suround[1] == 0 || suround[5] == 0))
+                {
+                    //  Destroy(instance[2]);
+                    map_final[i + 2, j + 2] = Tiles.Floor;
+                }
+                if (suround[6] == 1 && (suround[3] == 0 || suround[7] == 0))
+                {
+                    map_final[i, j] = Tiles.Floor;
+                }
+                if (suround[8] == 1 && (suround[5] == 0 || suround[7] == 0))
+                {
+                    // Destroy(instance[8]);
+                    map_final[i + 2, j] = Tiles.Floor;
+                }
+
+            }
+        }
+        
+    }
 }

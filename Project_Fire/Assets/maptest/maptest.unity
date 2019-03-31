@@ -157,17 +157,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRoomTries: 1000
   extraConnectorChance: 10000
-  roomExtraSize: 3
+  roomExtraSize: 4
   roomMinSize: 2
   windingPercent: 0
   scale: 1
   width: 51
-  height: 51
-  wall: {fileID: 5625775494812212333, guid: d964d6426dec5874ba979ec598454c34, type: 3}
-  floor: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
-  connect: {fileID: 5625775494812212333, guid: 605de8e479675ec46ab0a8d05a7ff724, type: 3}
+  height: 27
+  wall: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
+  floor: {fileID: 465477789}
+  connect: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
   door: {fileID: 1609672158138558631, guid: 679dc666dd30f534f9e85a1618dc012d, type: 3}
-  dead: {fileID: 5625775494812212333, guid: 729e8d2b8d1e5b145b70ea846d27932e, type: 3}
+  dead: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
 --- !u!1 &361198557
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +306,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1129217962}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,7 +367,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 1537
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -391,6 +392,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1129217961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129217962}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: rape_manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1129217962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129217961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 616050022}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693813797
 GameObject:

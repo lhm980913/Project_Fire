@@ -16,7 +16,19 @@ public class cube : MonoBehaviour
     }
     void Start()
     {
-        for(int i=0;i<9;i++)
+        destory(suround);
+
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    void destory(int[] suround)
+    {
+        for (int i = 0; i < 9; i++)
         {
 
             if (suround[i] == 0)
@@ -41,11 +53,5 @@ public class cube : MonoBehaviour
             }
 
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
