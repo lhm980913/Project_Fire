@@ -17,6 +17,11 @@ public class Jump_Stage : Player_Base_Stage
 
     public void Input()
     {
+        if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down)
+        {
+            Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
+        }
         if (testplayer.Instance.grounded)
         {
             

@@ -19,7 +19,7 @@ public class rope_point_manager : MonoBehaviour
     {
        
         rape_point = 1 << 10;
-        dir_cha = new List<float>(new float[10]);
+        dir_cha = new List<float>(new float[1000]);
         ground = 1 << 9;
     }
     // Start is called before the first frame update
@@ -45,8 +45,6 @@ public class rope_point_manager : MonoBehaviour
 
             if (id[i] != 1)
             {
-
-
                 dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
                 if (dir_cha[i] < min)
                 {
@@ -61,18 +59,18 @@ public class rope_point_manager : MonoBehaviour
             else
             {
                 dir_cha[i] = 180;
-                if(target ==i)
+                if (target == i)
                 {
                     target = 9999;
                 }
             }
 
-           
+
         }
         //Debug.Log(target );
         if (target<rp.Length)
         {
-           testplayer.Instance.target_pos = rp[target].transform.position;
+            testplayer.Instance.target_pos = rp[target].transform.position;
             testplayer.Instance.canrape = true;
         }
         else
@@ -143,10 +141,10 @@ public class rope_point_manager : MonoBehaviour
     int[] FCheckHide(Collider[] c)
     {
         
-        int[] id = new int[10];
+        int[] id = new int[c.Length];
         for (int i = 0; i < c.Length; i++)
         {
-            if (Physics.Raycast(testplayer.Instance.transform.position,c[i].transform.position,testplayer.Instance.rapelength,ground))
+            if (Physics.Raycast(testplayer.Instance.transform.position,c[i].transform.position - testplayer.Instance.transform.position, testplayer.Instance.rapelength,ground))
             {
                 id[i] = 1;
             }
