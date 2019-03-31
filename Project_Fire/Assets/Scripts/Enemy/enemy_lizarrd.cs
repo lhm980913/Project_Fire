@@ -58,10 +58,6 @@ public class enemy_lizarrd : enemy_base
                 break;
             case Enemy_Stage.stand:
                 {
-                    
-                    
-                   
-
                     faceto *= -1;
                     transform.Translate(transform.right * -faceto * movespeed * 2.5f * Time.deltaTime, Space.Self);
                     Stage = Enemy_Stage.walk;
@@ -90,15 +86,10 @@ public class enemy_lizarrd : enemy_base
                 break;
             case Enemy_Stage.hurt:
                 {
-
-
                     //FHurt(1, Enemy_Stage.stand);
                     FFaceToPlayer();
                     FBeHurt(beattforce);
-                  
-                        Stage = Enemy_Stage.walk;
-                   
-                    
+                    Stage = Enemy_Stage.walk;
                 }
                 break;
                 

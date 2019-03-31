@@ -5,7 +5,7 @@ using UnityEngine;
 public interface EnemyState_Base
 {
     void Enter();
-    void Update();
+    IEnumerator<YieldInstruction> Update();
     void Exit();
 }
 
