@@ -156,18 +156,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRoomTries: 1000
-  extraConnectorChance: 10000
+  extraConnectorChance: 50
   roomExtraSize: 4
   roomMinSize: 2
   windingPercent: 0
   scale: 1
-  width: 51
-  height: 27
+  width: 41
+  height: 41
   wall: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
   floor: {fileID: 465477789}
-  connect: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
+  connect: {fileID: 1609672158138558631, guid: 6e8659c7cf364a2408ff93f6124570b7, type: 3}
   door: {fileID: 1609672158138558631, guid: 679dc666dd30f534f9e85a1618dc012d, type: 3}
-  dead: {fileID: 1609672158138558631, guid: 7ae421c7cc545bc448e7bc1101769280, type: 3}
+  dead: {fileID: 1609672158138558631, guid: 41b7cc2371cd2bd47a47fa6685423a91, type: 3}
 --- !u!1 &361198557
 GameObject:
   m_ObjectHideFlags: 0

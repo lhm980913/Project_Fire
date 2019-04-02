@@ -11,7 +11,7 @@ class Directions
     public static Vector2 down = new Vector2(0, -1);
     public static Vector2 left = new Vector2(-1, 0);
     public static Vector2 right = new Vector2(1, 0);
-
+    public static Vector2[] helf = { up, right };
     public static Vector2[] all = { up, down, left, right };
 
 }
@@ -51,7 +51,9 @@ enum Tiles
     Floor,
     Connect,
     Door,
-    Tianchong
+    Tianchong,
+    Bianjie,
+    Room
 }
 
 //确保地图的长宽是奇数
@@ -137,6 +139,11 @@ public class createmap : MonoBehaviour
         FillMaze();
         ConnectRegions();
         RemoveDeadEnds();
+        Reconnect();
+        
+        mapgenerate();
+
+        FgenerateTerrace();
         InstanceMap();
     }
 
@@ -164,10 +171,10 @@ public class createmap : MonoBehaviour
             {
                 h += rectangularity;
             }
-            int x = Random.Range(2, (width - w-2) / 2) * 2 + 1;
-            int y = Random.Range(2, (height - h-2) / 2) * 2 + 1;
+            int x = Random.Range(0, (width - w) / 2) * 2 + 1;
+            int y = Random.Range(0, (height - h) / 2) * 2 + 1;
             //print(x+"  "+y);
-            Rect room = new Rect(x, y, w+1, h+1);
+            Rect room = new Rect(x, y, w, h);
             //判断房间是否和已存在的重叠
             bool overlaps = false;
             foreach (Rect r in rooms)
@@ -192,7 +199,8 @@ public class createmap : MonoBehaviour
             {
                 for (int k = y; k < y + h; k++)
                 {
-                    Carve(new Vector2(j, k));
+                    Carveroom(new Vector2(j, k));
+                   // Carve(new Vector2(j, k));
                 }
             }
         }
@@ -357,6 +365,128 @@ public class createmap : MonoBehaviour
         }
     }
 
+    //还原重复连通
+    void Reconnect()
+    {
+        for (int i = 1; i < width - 1; i++)
+        {
+            for (int j = 1; j < height - 1; j++)
+            {
+                if(map[i,j] ==Tiles.Door)
+                {
+                    foreach(Vector2 dir in Directions.helf)
+                    {
+                        if(map[i+(int)dir.x,j+(int)dir.y]==Tiles.Connect)
+                        {
+                            Fcheckconnect(i + (int)dir.x, j + (int)dir.y);
+                        }
+                    }
+                }
+
+
+
+            }
+        }
+    }
+
+
+    void Fcheckconnect(int i,int j)
+    {
+        //if (map[i, j] == Tiles.Door)
+        //{
+        //    foreach (Vector2 dir in Directions.helf)
+        //    {
+        //        if (map[i + (int)dir.x, j + (int)dir.y] == Tiles.Connect)
+        //        {
+        //            Fcheckconnect(i + (int)dir.x, j + (int)dir.y);
+        //        }
+        //    }
+        //}
+        foreach (Vector2 dir in Directions.helf)
+        {
+            if (map[i + (int)dir.x, j + (int)dir.y] == Tiles.Connect)
+            {
+                Fcheckconnect(i + (int)dir.x, j + (int)dir.y);
+            }
+            else if (map[i + (int)dir.x, j + (int)dir.y] == Tiles.Door)
+            {
+                map[i + (int)dir.x, j + (int)dir.y] = Tiles.Connect;
+                Fcheckconnect(i + (int)dir.x, j + (int)dir.y);
+            }
+        }
+    }
+    //竖直通道生成平台
+    void FgenerateTerrace()
+    {
+
+        for (int i = 1; i < width + 3; i++)
+        {
+            for (int j = 1; j < height + 3; j++)
+            {
+                if(map1[i,j]==Tiles.Floor )
+                {
+                    if( map1[i, j - 1] != Tiles.Floor)
+                    {
+                        if (map1[i, j - 1] == Tiles.Door&& map1[i, j + 1] == Tiles.Floor)
+                        {
+                            map_final[3 * i +2 , 3 * j -  1] = Tiles.Wall;
+                        }
+                        int k = 1;
+                        while(map1[i ,j+k]==Tiles.Floor)
+                        {
+                         
+                                //Random.Range(3 * i-1, )
+                             if(Random.Range(0,0)%6==0)
+                            {
+                                
+                                if (map_final[3 * i - 2 + ((k / 2) % 2) * 4, 3 * j + (3 * k) + 1] == Tiles.Door)
+                                {
+                                    map_final[3 * i + ((k / 2) % 2) * 4, 3 * j + (3 * k) + 1] = Tiles.Wall;
+                                }
+                                else if (map_final[3 * i  + ((k / 2) % 2) * 4, 3 * j + (3 * k) + 1] == Tiles.Door)
+                                {
+                                    map_final[3 * i - 2 + ((k / 2) % 2) * 4, 3 * j + (3 * k) + 1] = Tiles.Wall;
+                                }
+                                else
+                                {
+                                    map_final[3 * i - 1 + ((k / 2) % 2) * 4, 3 * j + (3 * k) + 1] = Tiles.Wall;
+                                }
+                            }
+                            else
+                            {
+                                map_final[3 * i +2, 3 * j + (3 * k) + 1] = Tiles.Door;
+                            }
+                            
+
+                            //map_final[3 * i + 3, 3 * j + (3 * k) + 1] = Tiles.Wall;
+
+                            k +=2;
+
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //void shuapoingtai(int i,int j)
+    //{
+    //    if(map1[i, j + 1] == Tiles.Floor)
+    //    {
+    //        map_final[i * 3 + 3, j * 3 + 3] = Tiles.Wall;
+    //    }
+
+
+
+    //}
+
+
+
+
+
+
+
 
     /*
      * 简化迷宫
@@ -378,7 +508,7 @@ public class createmap : MonoBehaviour
                     int exists = 0;
                     foreach (Vector2 dir in Directions.all)
                     {
-                        if (map[i + (int)dir.x, j + (int)dir.y] != Tiles.Floor&& map[i + (int)dir.x, j + (int)dir.y] != Tiles.Door)
+                        if (map[i + (int)dir.x, j + (int)dir.y] != Tiles.Floor&& map[i + (int)dir.x, j + (int)dir.y] != Tiles.Door&& map[i + (int)dir.x, j + (int)dir.y] != Tiles.Room)
                         {
                             exists++;
                         }
@@ -417,7 +547,14 @@ public class createmap : MonoBehaviour
         map[x, y] = Tiles.Floor;
         _regions[x, y] = currentRegion;
     }
-
+    private void Carveroom(Vector2 pos, Tiles type = Tiles.Room)
+    {
+        int x = (int)pos.x, y = (int)pos.y;
+        //print(width +"   "+ height);
+        //print("now:" + pos);
+        map[x, y] = Tiles.Room;
+        _regions[x, y] = currentRegion;
+    }
     //dir是方向
     private bool CanCarve(Vector2 pos, Vector2 dir)
     {
@@ -469,11 +606,11 @@ public class createmap : MonoBehaviour
 
 
 
-        //if (Random.Range(0, extraConnectorChance) == 0&&false)
-        //{
-        //    AddJunction(pos);
+        if (Random.Range(0, extraConnectorChance) == 0)
+        {
+            AddJunction(pos);
 
-        //}
+        }
         return true;
     }
 
@@ -498,8 +635,8 @@ public class createmap : MonoBehaviour
             }
         }
     }
-
-    private void InstanceMap()
+    //地图二维数组转换
+    void mapgenerate()
     {
         for (int x = 0; x < width + 4; x++)
         {
@@ -516,26 +653,26 @@ public class createmap : MonoBehaviour
 
             }
         }
-        for (int x = 0; x < 3*width + 12; x++)
+        for (int x = 0; x < 3 * width + 12; x++)
         {
-            for (int y = 0; y < 3*height + 12; y++)
+            for (int y = 0; y < 3 * height + 12; y++)
             {
-                map_final[x, y] = Tiles.Wall;
+                map_final[x, y] = Tiles.Bianjie;
             }
         }
-        for (int i = 3; i < 3*width+6; i+=3)
+        for (int i = 3; i < 3 * width + 6; i += 3)
         {
-            for (int j = 3; j < 3*height+6; j+=3)
+            for (int j = 3; j < 3 * height + 6; j += 3)
             {
                 int[] a;
                 a = new int[9];
-                for (int k=0;k<9;k++)
+                for (int k = 0; k < 9; k++)
                 {
-                    map_final[i + k % 3, j + (int)k / 3] = map1[i  / 3, j  / 3];
+                    map_final[i + k % 3, j + (int)k / 3] = map1[i / 3, j / 3];
                     if (map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Wall ||
                         map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Tianchong ||
                         map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Connect)
-                    {                    
+                    {
                         a[k] = 1;
                     }
                     else
@@ -543,11 +680,64 @@ public class createmap : MonoBehaviour
                         a[k] = 0;
                     }
                 }
-                destory(a ,i, j);
+                destory(a, i, j);
 
 
             }
         }
+    }
+
+
+
+    private void InstanceMap()
+    {
+        //for (int x = 0; x < width + 4; x++)
+        //{
+        //    for (int y = 0; y < height + 4; y++)
+        //    {
+        //        map1[x, y] = Tiles.Wall;
+        //    }
+        //}
+        //for (int i = 0; i < width; i++)
+        //{
+        //    for (int j = 0; j < height; j++)
+        //    {
+        //        map1[2 + i, 2 + j] = map[i, j];
+
+        //    }
+        //}
+        //for (int x = 0; x < 3*width + 12; x++)
+        //{
+        //    for (int y = 0; y < 3*height + 12; y++)
+        //    {
+        //        map_final[x, y] = Tiles.Bianjie;
+        //    }
+        //}
+        //for (int i = 3; i < 3*width+6; i+=3)
+        //{
+        //    for (int j = 3; j < 3*height+6; j+=3)
+        //    {
+        //        int[] a;
+        //        a = new int[9];
+        //        for (int k=0;k<9;k++)
+        //        {
+        //            map_final[i + k % 3, j + (int)k / 3] = map1[i  / 3, j  / 3];
+        //            if (map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Wall ||
+        //                map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Tianchong ||
+        //                map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Connect)
+        //            {                    
+        //                a[k] = 1;
+        //            }
+        //            else
+        //            {
+        //                a[k] = 0;
+        //            }
+        //        }
+        //        destory(a ,i, j);
+
+
+        //    }
+        //}
 
         for (int i = 1; i < 3*width + 12; i++)
         {
@@ -589,6 +779,22 @@ public class createmap : MonoBehaviour
                     go.transform.SetParent(mapParent);
                     //chuancan(go, i, j);
                     go.layer = LayerMask.NameToLayer("Ground");
+                }
+                else if (map_final[i, j] == Tiles.Bianjie)
+                {
+                    GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapParent);
+                    //chuancan(go, i, j);
+                    go.layer = LayerMask.NameToLayer("Ground");
+                }
+                else if (map_final[i, j] == Tiles.Room)
+                {
+                    GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapParent);
+                    //设置层级
+                    //chuancan(go,i,j);
+
+                    go.layer = LayerMask.NameToLayer("floor");
                 }
             }
         }
