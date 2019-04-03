@@ -21,6 +21,7 @@ public class Run_Stage : Player_Base_Stage
     {
         if (Player_Controller_System.Instance.Horizontal_Left == 0)
         {
+            Player_Function.FStop(testplayer.Instance.playergameobj);
             testplayer._player.SetStage(testplayer.Instance.stand_stage);
         }
         if(Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down && testplayer.Instance.grounded)

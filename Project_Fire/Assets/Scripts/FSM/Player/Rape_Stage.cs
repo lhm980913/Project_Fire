@@ -26,7 +26,7 @@ public class Rape_Stage : Player_Base_Stage
         if(Vector3.Distance(testplayer.Instance.transform.position, target)<0.3f )
         {
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
-            testplayer._player.SetStage(testplayer.Instance.stand_stage);
+            testplayer._player.SetStage(testplayer.Instance.jump_stage);
         }
     }
 

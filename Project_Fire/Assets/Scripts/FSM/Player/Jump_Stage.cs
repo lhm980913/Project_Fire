@@ -25,7 +25,7 @@ public class Jump_Stage : Player_Base_Stage
         if (testplayer.Instance.grounded)
         {
             
-            testplayer._player.SetStage(testplayer.Instance.run_stage);
+            testplayer._player.SetStage(testplayer.Instance.stand_stage);
         }
         if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down && testplayer.Instance.canflash ==true)
         {
