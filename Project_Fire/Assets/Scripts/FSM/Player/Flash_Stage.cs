@@ -13,6 +13,7 @@ public class Flash_Stage : Player_Base_Stage
         Debug.Log("flash");
         testplayer.Instance.flashtime = 0;
         testplayer.Instance.flashcd = 0.6f;
+        testplayer.Instance.anim.SetTrigger("flash");
     }
 
     public void Input()

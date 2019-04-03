@@ -20,6 +20,7 @@ public class testplayer : MonoBehaviour
     public float canthurtcount;
     public float hurtforce;
 
+    public ParticleSystem daoguang;
     public GameObject weapon;
 
     [HideInInspector]
@@ -112,13 +113,17 @@ public class testplayer : MonoBehaviour
     bool FCheckground()
     {
         LayerMask lm = 1 << 9;
-        Collider[] a = Physics.OverlapSphere(playergameobj.transform.position - new Vector3(0,0.5f,0), 0.02f,lm);
-      
-        if (a.Length == 0)
-        {
-            return false;
-        }
-        else return true;
+        //Collider[] a = Physics.OverlapSphere(playergameobj.transform.position - new Vector3(0,0.5f,0), 0.02f,lm);
+        bool a;// = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
+        //a = Physics.BoxCast(transform.position, Vector3.one, -transform.up, Quaternion.identity, 0.2f, 1 << 9);
+        a = Physics.Raycast(transform.position, -transform.up, 0.8f, lm);
+        //Gizmos.DrawCube(transform.position , Vector3.one);
+        return a;
+        //if (a.Length == 0)
+        //{
+        //    return false;
+        //}
+        //else return true;
     }
     void FCountFlash()
     {
@@ -128,6 +133,8 @@ public class testplayer : MonoBehaviour
     void FFilp()
     {
         moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 90, 0);
+        daoguang.transform.position = new Vector3(daoguang.transform.position.x, daoguang.transform.position.y, 0.37f*face_to);
+        daoguang.startRotation3D = new Vector3(daoguang.startRotation3D.x, 1.57f+face_to*1.57f ,daoguang.startRotation3D.z);
     }
     void FYspeedclamp()
     {
