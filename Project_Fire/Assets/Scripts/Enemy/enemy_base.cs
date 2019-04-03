@@ -5,51 +5,49 @@ using UnityEngine;
 
 public enum Enemy_Stage
 {
-    stand,
-    att,
-    walk,
-    run,
-    hurt
+    Idle,
+    Attack,
+    Patrol,
+    Alert,
+    Hurt
 }
 public class enemy_base : MonoBehaviour
 {
-    public float maxhp;
-    public float attfield;
-    public float movespeed;
-    public float visionfield;
-    public float beattforce;
+    public float MaxHP;
+    public float ATK;
+    public float VisionDistance;
+    public float AttackDistance;
+    public float MoveSpeed;
+    public float IdleTime;
+    public bool  BeatAway;
+    public float LowBeatForce;
+    public float HighBeatForce;
+
     public bool atting = false;
     public Animator anim;
 
-    private bool canMove;
+    private float HP;
+
+    protected Coroutine stateCoroutine;
     protected int faceto = 1;
     protected LayerMask player_layermask = 1 << 12;
-
    
     Enemy_Stage _stage;
     public Enemy_Stage Stage
     {
-        get
-        {
-            return this._stage;
-        }
-        set
-        {
-            this._stage = value;
-        }
-
+        get{return this._stage;}
+        set{this._stage = value;}
     }
-    float _hp;
     public float Hp
     {
         set
         {
-            this._hp = Mathf.Clamp(value, 0f, maxhp);
+            this.HP = Mathf.Clamp(value, 0f, MaxHP);
 
         }
         get
         {
-            return this._hp;
+            return this.HP;
         }
     }
 
@@ -78,7 +76,6 @@ public class enemy_base : MonoBehaviour
 
     }
 
-
     public virtual bool FSeePlayer()
     {
         return false;
@@ -101,12 +98,6 @@ public class enemy_base : MonoBehaviour
         Stage = stage_;
         StopAllCoroutines();
     }
-
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        
-
-
-    }
+    
 
 }
