@@ -72,7 +72,7 @@ public class createmap : MonoBehaviour
 
     public int width;
     public int height;
-    public GameObject wall, floor, connect,door,dead;
+    public GameObject wall, floor, connect,door,dead,room;
 
     private Transform mapParent;
     private Transform rape_manager;
@@ -789,7 +789,7 @@ public class createmap : MonoBehaviour
                 }
                 else if (map_final[i, j] == Tiles.Room)
                 {
-                    GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                    GameObject go = Instantiate(room, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
                     go.transform.SetParent(mapParent);
                     //设置层级
                     //chuancan(go,i,j);
