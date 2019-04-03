@@ -14,6 +14,7 @@ public class Flash_Stage : Player_Base_Stage
         testplayer.Instance.flashtime = 0;
         testplayer.Instance.flashcd = 0.6f;
         testplayer.Instance.anim.SetTrigger("flash");
+        CameraEffectSystem.Instance.FMotionVector();
     }
 
     public void Input()
@@ -41,5 +42,6 @@ public class Flash_Stage : Player_Base_Stage
     {
         testplayer.Instance.flashtime += Time.deltaTime;
         Player_Function.FFlash(testplayer.Instance.playergameobj, testplayer.Instance.ac, testplayer.Instance.maxflashspeed, testplayer.Instance.flashtime,testplayer.Instance.face_to);
+        
     }
 }

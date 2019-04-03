@@ -157,10 +157,10 @@ public class enemy_lizarrd : enemy_base
         Stage = Enemy_Stage.Alert;
         StopAllCoroutines();
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        //ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance,other, this);
+        ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
     }
 
     private void OnDrawGizmos()
@@ -177,25 +177,31 @@ public class enemy_lizarrd : enemy_base
     {
         if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")&&anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
         {
+            atting = true;
             return;
         }
         if (FCanAttPlayer())
         {
+            atting = true;
             FAttack();
-            Debug.Log("Att");
+            //Debug.Log("Att");
             return;
+        }
+        else
+        {
+            atting = false;
         }
         
         if (FCanSeePlayer())
         {
             FCatch();
-            Debug.Log("cat");
+            //Debug.Log("cat");
             return;
         }
         else 
         {
             FPatrol();
-            Debug.Log("Patrol");
+            //Debug.Log("Patrol");
             return;
         }
         Debug.Log("Bug");

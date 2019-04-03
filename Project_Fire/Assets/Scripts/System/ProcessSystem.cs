@@ -36,6 +36,7 @@ public class ProcessSystem : MonoBehaviour
 
     public void FPlayerWeapon_Enemy(WeaponSystem PlayerWeapon, Collider playeratt, enemy_base Enemy)
     {
+        Debug.Log(playeratt.transform.name);
         if (playeratt.tag == "player_weapon")
         {
             if (Enemy.Stage != Enemy_Stage.Attack)
