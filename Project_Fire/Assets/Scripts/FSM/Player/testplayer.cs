@@ -174,10 +174,8 @@ public class testplayer : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
         if((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
         {
-            print(11111);
             enemypos = other.transform.position;
             _player.SetStage(hurt_stage);
         }

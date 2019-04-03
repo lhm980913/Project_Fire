@@ -11,15 +11,12 @@ public class enemy_lizarrd : enemy_base
     }
     private void Update()
     {
-        FSM(Stage);
+        //FSM(Stage);
+        RuleBasedAI();
     }
 
     public override void FSM(Enemy_Stage stage)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            stateCoroutine = StartCoroutine(Hurt());
-        }
         switch (stage)
         {
             case Enemy_Stage.Idle:
@@ -28,7 +25,7 @@ public class enemy_lizarrd : enemy_base
                     {
                         stateCoroutine = StartCoroutine(Idle(IdleTime));
                     }
-                    if (FSeePlayer())
+                    if (FCanSeePlayer())
                     {
                         Stage = Enemy_Stage.Alert;
                         anim.SetTrigger("IdleToAlert");
@@ -39,12 +36,12 @@ public class enemy_lizarrd : enemy_base
             case Enemy_Stage.Patrol:
                 {
                     stateCoroutine = null;
-                    if (FSeePlayer())
+                    if (FCanSeePlayer())
                     {
                         Stage = Enemy_Stage.Alert;
                         anim.SetTrigger("PatrolToAlert");
                     }
-                    if (FCheckFilp())
+                    if (FCanFilp())
                     {
                         Stage = Enemy_Stage.Idle;
                         anim.SetTrigger("PatrolToIdle");
@@ -55,12 +52,12 @@ public class enemy_lizarrd : enemy_base
             case Enemy_Stage.Alert:
                 {
                     stateCoroutine = null;
-                    if (!FSeePlayer())
+                    if (!FCanSeePlayer())
                     {
                         Stage = Enemy_Stage.Patrol;
                         anim.SetTrigger("AlertToPatrol");
                     }
-                    if (FAttPlayer())
+                    if (FCanAttPlayer())
                     {
                         Stage = Enemy_Stage.Attack;
                         anim.SetTrigger("AlertToAttack");
@@ -78,12 +75,12 @@ public class enemy_lizarrd : enemy_base
                 }
             case Enemy_Stage.Attack:
                 {
-                    if (!FAttPlayer())
+                    if (!FCanAttPlayer())
                     {
                         Stage = Enemy_Stage.Alert;
                         anim.SetTrigger("AttackToAlert");
                     }
-                    if (!FSeePlayer())
+                    if (!FCanSeePlayer())
                     {
                         Stage = Enemy_Stage.Patrol;
                         anim.SetTrigger("AttackToPatrol");
@@ -126,41 +123,12 @@ public class enemy_lizarrd : enemy_base
         }
             
     }
-    public override bool FCheckFilp()
-    {
-        bool a;// = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
-        a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
-        bool b=true;//= Physics.Raycast(transform.position, -transform.up, 2, 1 << 9);
-        //b = Physics.BoxCast(transform.position + Vector3.right * 2, Vector3.one, -transform.up, Quaternion.identity, 5, 1 << 9);
-        b = Physics.CheckBox(transform.position + transform.forward * 2 - transform.up, Vector3.one, Quaternion.identity, 1 << 9);
-        return a||!b;
-    }
-    public override bool FAttPlayer()
-    {
-        //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
-        return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, AttackDistance, player_layermask);
-    }
-    public override void FFaceToPlayer()
-    {
-        if (testplayer.Instance.transform.position.x < this.transform.position.x)
-        {
-            this.faceto = -1;
-        }
-        else
-        {
-            this.faceto = 1;
-        }
-    }
-    public override bool FSeePlayer()
-    {
-        //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
-        return Physics.BoxCast(transform.position, Vector3.one + (Vector3.right * VisionDistance), transform.forward, Quaternion.identity, VisionDistance, player_layermask);
-    }
+    
     public override IEnumerator FHurt(float time, Enemy_Stage stage_)
     {
         yield return new WaitForSeconds(time);
         print(11);
-        FFaceToPlayer();
+        FIsFaceToPlayer();
         // FBeHurt();
         Stage = stage_;
         StopAllCoroutines();
@@ -189,10 +157,7 @@ public class enemy_lizarrd : enemy_base
         Stage = Enemy_Stage.Alert;
         StopAllCoroutines();
     }
-    private void FFlip()
-    {
-        transform.Rotate(new Vector3(0, 180, 0),Space.World);
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         //ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance,other, this);
@@ -200,12 +165,143 @@ public class enemy_lizarrd : enemy_base
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(transform.position + transform.forward, Vector3.one);
+        Gizmos.DrawCube(transform.position, Vector3.one + transform.forward * VisionDistance);
     }
 
     //private void OnGUI()
     //{
     //    GUI.Label(new Rect(0, 0, 100, 100), stateCoroutine.ToString());
     //}
+    /************************************************RuleBasedAI******************************************/
+    private void RuleBasedAI()
+    {
+        if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attack")&&anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1)
+        {
+            return;
+        }
+        if (FCanAttPlayer())
+        {
+            FAttack();
+            Debug.Log("Att");
+            return;
+        }
+        
+        if (FCanSeePlayer())
+        {
+            FCatch();
+            Debug.Log("cat");
+            return;
+        }
+        else 
+        {
+            FPatrol();
+            Debug.Log("Patrol");
+            return;
+        }
+        Debug.Log("Bug");
+    }
+    /****************************************************************************************************/
 
+    /************************************************Declare**********************************************/
+    public override bool FCanFilp()
+    {
+        bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
+        bool b = Physics.CheckBox(transform.position + transform.forward * 2 - transform.up, Vector3.one, Quaternion.identity, 1 << 9);
+        return a || !b;
+    }
+
+    public override bool FCanAttPlayer()
+    {
+        return Physics.BoxCast(transform.position, Vector3.one * 0.5f, transform.forward, Quaternion.identity, AttackDistance, player_layermask);
+        
+    }
+
+    public override bool FIsFaceToPlayer()
+    {
+        if((testplayer.Instance.transform.position - transform.position).x * transform.forward.x < 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    public override bool FCanSeePlayer()
+    {
+        //return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, VisionDistance, player_layermask);
+        return Physics.CheckBox(transform.position, Vector3.one + transform.forward * VisionDistance, Quaternion.identity, player_layermask);
+    }
+    /***********************************************************************************************************/
+
+    /*************************************************Action****************************************************/
+    private void FFlip()
+    {
+        transform.Rotate(new Vector3(0, 180, 0), Space.Self);
+    }
+
+    private void FAttack()
+    {
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            //anim.Play("Attack");
+            anim.CrossFade("Attack", 0.01f);
+        }
+        else if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1){
+            anim.Play("Attack",0,0.0f);
+        }
+    }
+
+    private void FWalk()
+    {
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+        {
+            //anim.Play("Walk",0,0.0f);
+            anim.CrossFade("Walk", 0.01f);
+        }
+        transform.Translate(transform.forward * MoveSpeed * Time.deltaTime, Space.World);
+    }
+
+    private void FCatch()
+    {
+        if (FIsFaceToPlayer())
+        {
+            FWalk();
+        }
+        else
+        {
+            FFlip();
+            FWalk();
+        }
+    }
+
+    private void FPatrol()
+    {
+        if (FCanFilp())
+        {
+            FFlip();
+            FWalk();
+        }
+        else
+        {
+            FWalk();
+        }
+    }
+
+    private void FStand()
+    {
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Stand"))
+        {
+            anim.CrossFade("Stand", 0.0f);
+        }
+    }
+
+    //private void FIsDead()
+    //{
+    //    if(Hp <= 0)
+    //    {
+    //        animation.Play("Lizard_Dead");
+    //    }
+    //}
+    /***********************************************************************************************************/
 }

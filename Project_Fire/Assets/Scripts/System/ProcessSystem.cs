@@ -44,7 +44,7 @@ public class ProcessSystem : MonoBehaviour
             }
             else
             {
-                Enemy.FFaceToPlayer();
+                Enemy.FIsFaceToPlayer();
                 Enemy.FBeHurt(Enemy.LowBeatForce);
             }
             if (Enemy.atting)

@@ -23,8 +23,6 @@ public class Stand_Stage :  Player_Base_Stage
     {
         if (Player_Controller_System.Instance.Horizontal_Left != 0)
         {
-
-
             testplayer._player.SetStage(testplayer.Instance.run_stage);
         }
         if (Player_Controller_System.Instance.Button_A==Player_Controller_System.Button_Stage.down&&testplayer.Instance.grounded)

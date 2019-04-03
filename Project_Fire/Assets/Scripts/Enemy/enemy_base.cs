@@ -76,21 +76,21 @@ public class enemy_base : MonoBehaviour
 
     }
 
-    public virtual bool FSeePlayer()
+    public virtual bool FCanSeePlayer()
     {
         return false;
     }
-    public virtual bool FAttPlayer()
+    public virtual bool FCanAttPlayer()
     {
         return false;
     }
-    public virtual bool FCheckFilp()
+    public virtual bool FCanFilp()
     {
         return false;
     }
-    public virtual void FFaceToPlayer()
+    public virtual bool FIsFaceToPlayer()
     {
-        
+        return false;
     }
     public virtual IEnumerator FHurt(float time,Enemy_Stage stage_)
     {
