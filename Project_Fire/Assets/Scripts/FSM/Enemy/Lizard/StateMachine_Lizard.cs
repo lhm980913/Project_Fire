@@ -2,19 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Lizard_State : EnemyState_Base
+public class Lizard_StateMachine : FiniteStateMachine
 {
-    protected enemy_base instance;
-    abstract public void Enter();
-    abstract public IEnumerator<YieldInstruction> Update();
-    abstract public void Exit();
-}
+    public Lizard_StateMachine(enemy_base e, Animator animator)
+    {
+        Lizard_State_Alert alert = new Lizard_State_Alert(e,this);
+        Lizard_State_Attack attack = new Lizard_State_Attack(e,this);
+        Lizard_State_Hurt hurt = new Lizard_State_Hurt(e,this);
+        Lizard_State_Idle idle = new Lizard_State_Idle(e,this);
+        Lizard_State_Patrol patrol = new Lizard_State_Patrol(e,this);
 
-public class Lizard_State_Stand : Lizard_State
+        states.Add("alert", alert);
+        states.Add("attack", attack);
+        states.Add("hurt", hurt);
+        states.Add("idle", idle);
+        states.Add("patrol", patrol);
+
+        initialState = idle;
+        activeState = idle;
+    }
+}
+//State
+public class Lizard_State_Idle : EnemyState_Base
 {
-    public Lizard_State_Stand(enemy_base enemy)
+    public Lizard_State_Idle(enemy_base enemy,FiniteStateMachine f)
     {
         instance = enemy;
+        fsm = f;
     }
 
     override public void Enter()
@@ -33,11 +47,12 @@ public class Lizard_State_Stand : Lizard_State
     }
 }
 
-public class Lizard_State_Walk : Lizard_State
+public class Lizard_State_Alert : EnemyState_Base
 {
-    public Lizard_State_Walk(enemy_base enemy)
+    public Lizard_State_Alert(enemy_base enemy, FiniteStateMachine f)
     {
         instance = enemy;
+        fsm = f;
     }
 
     override public void Enter()
@@ -56,11 +71,12 @@ public class Lizard_State_Walk : Lizard_State
     }
 }
 
-public class Lizard_State_Run : Lizard_State
+public class Lizard_State_Patrol : EnemyState_Base
 {
-    public Lizard_State_Run(enemy_base enemy)
+    public Lizard_State_Patrol(enemy_base enemy, FiniteStateMachine f)
     {
         instance = enemy;
+        fsm = f;
     }
 
     override public void Enter()
@@ -79,11 +95,12 @@ public class Lizard_State_Run : Lizard_State
     }
 }
 
-public class Lizard_State_Attack : Lizard_State
+public class Lizard_State_Attack : EnemyState_Base
 {
-    public Lizard_State_Attack(enemy_base enemy)
+    public Lizard_State_Attack(enemy_base enemy, FiniteStateMachine f)
     {
         instance = enemy;
+        fsm = f;
     }
 
     override public void Enter()
@@ -102,11 +119,12 @@ public class Lizard_State_Attack : Lizard_State
     }
 }
 
-public class Lizard_State_Hurt : Lizard_State
+public class Lizard_State_Hurt : EnemyState_Base
 {
-    public Lizard_State_Hurt(enemy_base enemy)
+    public Lizard_State_Hurt(enemy_base enemy, FiniteStateMachine f)
     {
         instance = enemy;
+        fsm = f;
     }
 
     override public void Enter()

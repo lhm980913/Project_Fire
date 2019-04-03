@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface EnemyState_Base
+public abstract class EnemyState_Base
 {
-    void Enter();
-    IEnumerator<YieldInstruction> Update();
-    void Exit();
+    protected FiniteStateMachine fsm;
+    protected enemy_base instance;
+    protected float stiffness;
+    
+    abstract public void Enter();
+    abstract public IEnumerator<YieldInstruction> Update();
+    abstract public void Exit();
 }
-

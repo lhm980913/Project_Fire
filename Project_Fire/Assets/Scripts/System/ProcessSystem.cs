@@ -34,21 +34,21 @@ public class ProcessSystem : MonoBehaviour
 
     }
 
-    public void FPlayerWeapon_Enemy(WeaponSystem PlayerWeapon ,Collider playeratt, enemy_base Enemy)
+    public void FPlayerWeapon_Enemy(WeaponSystem PlayerWeapon, Collider playeratt, enemy_base Enemy)
     {
-       if(playeratt.tag=="player_weapon")
+        if (playeratt.tag == "player_weapon")
         {
-            if (Enemy.Stage != Enemy_Stage.att)
+            if (Enemy.Stage != Enemy_Stage.Attack)
             {
-                Enemy.Stage = Enemy_Stage.hurt;
+                Enemy.Stage = Enemy_Stage.Hurt;
             }
             else
             {
                 Enemy.FFaceToPlayer();
-                Enemy.FBeHurt(Enemy.beattforce);
+                Enemy.FBeHurt(Enemy.LowBeatForce);
             }
-            if(Enemy.atting)
-            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
+            if (Enemy.atting)
+                StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
 
         }
 

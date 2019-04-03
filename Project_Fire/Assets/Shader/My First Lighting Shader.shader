@@ -53,44 +53,44 @@
 	ENDCG
 
 	SubShader {
-		//Pass
-		//{
-		//	Cull front 
-		//	ZTest Always
-		//	CGPROGRAM
-		//	#pragma vertex vert 
-		//	#pragma fragment frag 
-		//	#include"UnityCG.cginc"
+		Pass
+		{
+			Cull front 
+			ZTest Always
+			CGPROGRAM
+			#pragma vertex vert 
+			#pragma fragment frag 
+			#include"UnityCG.cginc"
 
-		//	float _OutlineWidth;
-		//	fixed4 _OutlineColor;
+			float _OutlineWidth;
+			fixed4 _OutlineColor;
 
-		//	struct a2v
-		//	{
-		//		float4 vertex : POSITION;
-		//		float3 normal : NORMAL;
-		//	};
+			struct a2v
+			{
+				float4 vertex : POSITION;
+				float3 normal : NORMAL;
+			};
 
-		//	float4 vert ( a2v v) : SV_POSITION
-		//	{
-		//		float4 clipPos = UnityObjectToClipPos(v.vertex);
-		//		float3 clipNormal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
+			float4 vert ( a2v v) : SV_POSITION
+			{
+				float4 clipPos = UnityObjectToClipPos(v.vertex);
+				float3 clipNormal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
 
-		//		float3 viewPos = UnityObjectToViewPos(v.vertex);
-		//		float ratio = _ProjectionParams.x/viewPos.z;
+				float3 viewPos = UnityObjectToViewPos(v.vertex);
+				float ratio = _ProjectionParams.x/viewPos.z;
 
-		//		float2 offset = TransformViewToProjection(clipNormal.xy);
-		//		clipPos.xy += offset * _OutlineWidth * ratio; 
-		//		return clipPos;
-		//	}
+				float2 offset = TransformViewToProjection(clipNormal.xy);
+				clipPos.xy += offset * _OutlineWidth * ratio; 
+				return clipPos;
+			}
 
-		//	float4 frag () : SV_Target
-		//	{
-		//		return _OutlineColor;
-		//	}
+			float4 frag () : SV_Target
+			{
+				return _OutlineColor;
+			}
 
-		//	ENDCG
-		//}
+			ENDCG
+		}
 
 		Pass {
 			Tags {
