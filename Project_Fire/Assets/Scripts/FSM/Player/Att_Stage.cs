@@ -18,11 +18,22 @@ public class Att_Stage : Player_Base_Stage
         Player_Function.FStop(testplayer.Instance.playergameobj);
         if (Player_Controller_System.Instance.Vertical_Left < 0.7 && Player_Controller_System.Instance.Vertical_Left > -0.7)
         {
-
+            testplayer.Instance.anim.SetTrigger("att1");
+        }else if(Player_Controller_System.Instance.Vertical_Left > 0.7)
+        {
+            testplayer.Instance.anim.SetTrigger("att_up");
+        }
+        else if(Player_Controller_System.Instance.Vertical_Left <-0.7 &&!testplayer.Instance.grounded)
+        {
+            testplayer.Instance.anim.SetTrigger("att_down");
+        }
+        else
+        {
+            testplayer.Instance.anim.SetTrigger("att1");
         }
 
         
-        testplayer.Instance.anim.SetTrigger("att1");
+        
         ttt = 0.3f;
 
 
