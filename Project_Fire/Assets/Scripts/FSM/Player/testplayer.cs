@@ -138,8 +138,15 @@ public class testplayer : MonoBehaviour
     }
     void FAnimation()
     {
-        anim.SetFloat("speed", playergameobj.GetComponent<Rigidbody>().velocity.y);
-
+        anim.SetFloat("jumpSpeed", playergameobj.GetComponent<Rigidbody>().velocity.y);
+        if (Mathf.Abs(playergameobj.GetComponent<Rigidbody>().velocity.x) > 0.001)
+        {
+            anim.SetBool("OnRunning", true);
+        }
+        else
+        {
+            anim.SetBool("OnRunning", false);
+        }
         anim.SetBool("ground", grounded);
     }
     void attcount()
