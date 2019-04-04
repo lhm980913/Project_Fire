@@ -50,7 +50,9 @@ public class testplayer : MonoBehaviour
     [HideInInspector]
     public float aa;
     [HideInInspector]
-    public bool canhurt =true;
+    public bool canhurt = true;
+    [HideInInspector]
+    public bool atting = false;
     // Start is called before the first frame update
 
 
@@ -136,7 +138,7 @@ public class testplayer : MonoBehaviour
     }
     void FFilp()
     {
-        moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 90, 0);
+        moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 120, 0);
         daoguang.transform.position = new Vector3(daoguang.transform.position.x, daoguang.transform.position.y, 0.37f*face_to);
         daoguang.startRotation3D = new Vector3(daoguang.startRotation3D.x, 1.57f+face_to*1.57f ,daoguang.startRotation3D.z);
         //slide_dust.transform.position = new Vector3(slide_dust.transform.position.x , slide_dust.transform.position.y, transform.position.z + face_to * 0.5f);
@@ -157,6 +159,7 @@ public class testplayer : MonoBehaviour
     }
     void FAnimation()
     {
+        anim.SetBool("atting", atting);
         anim.SetFloat("jumpSpeed", playergameobj.GetComponent<Rigidbody>().velocity.y);
         if (Mathf.Abs(playergameobj.GetComponent<Rigidbody>().velocity.x) > 0.001)
         {

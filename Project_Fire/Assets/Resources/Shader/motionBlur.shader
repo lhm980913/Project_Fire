@@ -3,6 +3,7 @@
     Properties
     {
 		_MainTex("MainTex",2D)="white"{}
+		_Dis ("Distance",Range(0,0.5)) = 0.1
 		[NoScaleOffset]_SampleTex ("Sample Texture", 2D) = "white" {}
     }
     SubShader
@@ -41,14 +42,28 @@
 			sampler2D _SampleTex;
             sampler2D _MainTex;
 			float _Strength;
+			float _Dis;
 
             fixed4 frag (v2f i) : SV_Target
             {
-				float strength = _Strength * tex2D(_SampleTex, i.uv).r;
-				float2 uv = i.uv + float2(strength,0);
-                fixed4 sampleCol = tex2D(_MainTex, uv);
+				//float strength = _Strength * tex2D(_SampleTex, i.uv).r;
+				//float2 uv = i.uv + float2(_Dis,0);
+    //            fixed4 sampleCol = tex2D(_MainTex, uv);
                 fixed4 originalCol = tex2D(_MainTex, i.uv);
-				fixed4 col = lerp(sampleCol, originalCol, _Strength);
+				float2 uv;
+				float4 sampleCol = float4(0,0,0,1);
+				uv = i.uv + float2(_Dis/5.0f * 1,0);
+				sampleCol += tex2D(_MainTex,uv);
+				uv = i.uv + float2(_Dis/5.0f * 2,0);
+				sampleCol += tex2D(_MainTex,uv);
+				uv = i.uv + float2(_Dis/5.0f * 3,0);
+				sampleCol += tex2D(_MainTex,uv);
+				uv = i.uv + float2(_Dis/5.0f * 4,0);
+				sampleCol += tex2D(_MainTex,uv);
+				uv = i.uv + float2(_Dis/5.0f * 5,0);
+				sampleCol += tex2D(_MainTex,uv);
+				fixed4 col = (sampleCol + originalCol)/6.0f;
+				//fixed4 col = lerp(sampleCol, originalCol, _Strength);
                 return col;
             }
             ENDCG

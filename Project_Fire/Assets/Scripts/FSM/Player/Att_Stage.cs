@@ -13,6 +13,7 @@ public class Att_Stage : Player_Base_Stage
     public void Enter()
     {
         Debug.Log("att");
+        testplayer.Instance.atting = true;
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
@@ -47,7 +48,7 @@ public class Att_Stage : Player_Base_Stage
       if(ttt<0)
         {
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
-         
+            testplayer.Instance.atting = false;
         }
       
     }
