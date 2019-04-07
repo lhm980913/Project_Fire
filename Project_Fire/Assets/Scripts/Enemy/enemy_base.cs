@@ -18,10 +18,12 @@ public class enemy_base : MonoBehaviour
     public float VisionDistance;
     public float AttackDistance;
     public float MoveSpeed;
+    public float RunSpeed;
     public float IdleTime;
     public bool  BeatAway;
     public float LowBeatForce;
     public float HighBeatForce;
+    public float HitCD;
 
     public bool atting = false;
     public Animator anim;
@@ -31,6 +33,7 @@ public class enemy_base : MonoBehaviour
     protected Coroutine stateCoroutine;
     protected int faceto = 1;
     protected LayerMask player_layermask = 1 << 12;
+    protected BehaviorDesigner.Runtime.BehaviorTree BT;
    
     Enemy_Stage _stage;
     public Enemy_Stage Stage

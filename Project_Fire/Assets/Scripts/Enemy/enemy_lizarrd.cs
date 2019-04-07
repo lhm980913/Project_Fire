@@ -7,12 +7,14 @@ public class enemy_lizarrd : enemy_base
     
     void Start()
     {
-        Stage = Enemy_Stage.Idle;  
+        Stage = Enemy_Stage.Idle;
+        BT = GetComponent<BehaviorDesigner.Runtime.BehaviorTree>();
+        Debug.Log(BT.BehaviorName);
     }
     private void Update()
     {
         //FSM(Stage);
-        RuleBasedAI();
+        //RuleBasedAI();
     }
 
     public override void FSM(Enemy_Stage stage)
@@ -121,7 +123,7 @@ public class enemy_lizarrd : enemy_base
         {
             this.GetComponent<Rigidbody>().velocity += new Vector3(-1, 1, 0) * force;
         }
-            
+        BT.SendEvent("BeHurt");
     }
     
     public override IEnumerator FHurt(float time, Enemy_Stage stage_)
@@ -165,7 +167,7 @@ public class enemy_lizarrd : enemy_base
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(transform.position, Vector3.one + transform.forward * VisionDistance);
+        Gizmos.DrawWireCube(transform.position, Vector3.one + VisionDistance * Vector3.right);
     }
 
     //private void OnGUI()
@@ -301,13 +303,4 @@ public class enemy_lizarrd : enemy_base
             anim.CrossFade("Stand", 0.0f);
         }
     }
-
-    //private void FIsDead()
-    //{
-    //    if(Hp <= 0)
-    //    {
-    //        animation.Play("Lizard_Dead");
-    //    }
-    //}
-    /***********************************************************************************************************/
 }

@@ -12,7 +12,7 @@ public class Jump_Stage : Player_Base_Stage
     public void Enter()
     {
         //testplayer.Instance.canflash = true;
-        Debug.Log("jump");
+        //Debug.Log("jump");
     }
 
     public void Input()

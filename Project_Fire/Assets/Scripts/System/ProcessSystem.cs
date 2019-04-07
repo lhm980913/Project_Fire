@@ -36,21 +36,20 @@ public class ProcessSystem : MonoBehaviour
 
     public void FPlayerWeapon_Enemy(WeaponSystem PlayerWeapon, Collider playeratt, enemy_base Enemy)
     {
-        Debug.Log(playeratt.transform.name);
         if (playeratt.tag == "player_weapon")
         {
-            if (Enemy.Stage != Enemy_Stage.Attack)
-            {
-                Enemy.Stage = Enemy_Stage.Hurt;
-            }
-            else
-            {
-                Enemy.FIsFaceToPlayer();
-                Enemy.FBeHurt(Enemy.LowBeatForce);
-            }
-            if (Enemy.atting)
-                StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
-
+            Enemy.FBeHurt(Enemy.LowBeatForce);
+            //if (Enemy.Stage != Enemy_Stage.Attack)
+            //{
+            //    Enemy.Stage = Enemy_Stage.Hurt;
+            //}
+            //else
+            //{
+            //    Enemy.FIsFaceToPlayer();
+            //    Enemy.FBeHurt(Enemy.LowBeatForce);
+            //}
+            //if (Enemy.atting)
+            //    StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
         }
 
 

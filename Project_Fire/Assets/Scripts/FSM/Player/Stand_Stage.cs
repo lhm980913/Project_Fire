@@ -15,7 +15,7 @@ public class Stand_Stage :  Player_Base_Stage
     public void Enter()
     {
        // Player_Function.FStop(testplayer.Instance.playergameobj);
-        Debug.Log("stand");
+        //Debug.Log("stand");
         testplayer.Instance.canflash = true;
     }
 
