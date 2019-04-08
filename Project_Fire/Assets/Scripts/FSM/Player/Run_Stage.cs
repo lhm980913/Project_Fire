@@ -14,7 +14,7 @@ public class Run_Stage : Player_Base_Stage
     public void Enter()
     {
         testplayer.Instance.canflash = true;
-        Debug.Log("run");
+        //Debug.Log("run");
     }
 
     public void Input()
