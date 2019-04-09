@@ -15,7 +15,19 @@ class Directions
     public static Vector2[] all = { up, down, left, right };
 
 }
+public class Room
+{
+    public Room()
+    {
+        room = new Rect();
+        entence_area = new List<Rect>();
+    }
+    public Rect room;
+    //public int room_id;
+    public List<Rect> entence_area;
 
+
+}
 class ninecube
 {
     //public static Vector2 one = new Vector2(-1, 1);
@@ -77,11 +89,11 @@ public class createmap : MonoBehaviour
     private Transform mapParent;
     private Transform rape_manager;
     //生成的有效房间
+    List<Room> Room_Data;
     private List<Rect> rooms;
     //正被雕刻的区域的索引。(每个房间一个索引，每个不连通的迷宫一个索引，在连通之前)
     private int currentRegion = 0;
-    //原文https://github.com/munificent/piecemeal Array2D
-    //改成int[,]
+   
     private int[,] _regions;
     private Tiles[,] map;
 
@@ -93,7 +105,7 @@ public class createmap : MonoBehaviour
         //int a = width;
         //width = height;
         //height = a;
-
+        Room_Data = new List<Room>();
         rooms = new List<Rect>();
         map = new Tiles[width, height];
         map1 = new Tiles[width + 4, height + 4];
@@ -144,6 +156,9 @@ public class createmap : MonoBehaviour
         mapgenerate();
 
         FgenerateTerrace();
+
+       // generate_room();
+
         InstanceMap();
     }
 
@@ -415,6 +430,125 @@ public class createmap : MonoBehaviour
             }
         }
     }
+    //平铺房间--规则1
+    void generate_room()
+    {
+        //在边角铺阻挡模块（长方形）并且不会挡住出口
+        //由下至上铺平台，两种间隔 可以直接跳上去的和跳接钩上去的
+        //平台规则分为窄，中，宽三种
+        get_all_room_data();
+
+
+    }
+    //描绘房间内部内容
+    void paint_room()
+    {
+        for(int i=0;i<Room_Data.Count;i++)
+        {
+            int w = Random.Range((1 / 5) * (int)Room_Data[i].room.width, (3 / 5) * (int)Room_Data[i].room.width);
+            int h = Random.Range((1 / 5) * (int)Room_Data[i].room.height, (3 / 5) * (int)Room_Data[i].room.height);
+            int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x-w+ (int)Room_Data[i].room.width);
+            int y = Random.Range((int)Room_Data[i].room.y, (int)Room_Data[i].room.y - h + (int)Room_Data[i].room.height);
+            Rect a1 = new Rect(x, y, w, h);
+
+
+
+        }
+    }
+    //随机生成阻挡块
+    void generate_cube()
+    {
+
+
+
+
+
+
+    }
+    //得到所有房间信息
+    void get_all_room_data()
+    {
+        
+        for (int i =0; i < 3 * width + 12; i++)
+        {
+            for (int j = 0; j < 3 * height + 12; j++)
+            {  
+                if (map_final[i, j] == Tiles.Room)
+                {
+                    if (map_final[i - 1, j] != Tiles.Room && map_final[i, j - 1] != Tiles.Room)
+                    {
+                        
+                        
+                        Room a = new Room();
+                        Vector2 endpoint = check_room(i, j);
+                        a.room = new Rect(i - 1, j - 1, endpoint.x + 2 - i, endpoint.y + 2 - j);
+                        a.entence_area = check_room_enter(a.room);
+                        //print(a.room);
+                        //for(int k=0;k<a.entence_area.Count;k++)
+                        //{
+                        //    print(a.entence_area[k]);
+                        //}
+                       
+                        Room_Data.Add(a);
+                    }            
+                }
+              
+            }
+        }
+    }
+    List<Rect> check_room_enter(Rect room)
+    {
+        List<Rect> a = new List<Rect>();
+        for(int i=0;i<room.width;i++)
+        {
+            if(map_final[(int)room.x+i, (int)room.y-1] == Tiles.Door)
+            {
+                //a = new Rect((int)room.x + i - 2, (int)room.y - 1, 5, 5);
+                a.Add(new Rect((int)room.x + i - 2, (int)room.y - 1, 5, 5));
+            }
+            if (map_final[(int)room.x + i, (int)room.y+(int)room.height + 1] == Tiles.Door)
+            {
+               // a = new Rect((int)room.x + i - 2, (int)room.y + (int)room.height-5, 5, 5);
+                a.Add(new Rect((int)room.x + i - 2, (int)room.y + (int)room.height - 5, 5, 5));
+            }
+
+        }
+        for(int j = 0; j < room.height; j++)
+        {
+            if (map_final[(int)room.x -1, (int)room.y +j] == Tiles.Door)
+            {
+               // a = new Rect((int)room.x, (int)room.y +j - 2, 5, 5);
+                a.Add(new Rect((int)room.x, (int)room.y + j - 2, 5, 5));
+            }
+            if (map_final[(int)room.x+(int)room.width+1, (int)room.y + j] == Tiles.Door)
+            {
+               // a = new Rect((int)room.x+ (int)room.width-5, (int)room.y + j - 2, 5, 5);
+                a.Add(new Rect((int)room.x + (int)room.width - 5, (int)room.y + j - 2, 5, 5));
+            }
+        }
+        return a;
+    }
+    Vector2 check_room(int x,int y)
+    {
+        if(map_final[x+1, y+1]== Tiles.Room)
+        {
+           return check_room(x + 1, y + 1);
+            
+        }
+        else if(map_final[x + 1, y ] == Tiles.Room)
+        {
+            return check_room(x + 1, y );
+        }
+        else if(map_final[x , y +1] == Tiles.Room)
+        {
+            return check_room(x , y + 1);
+        }
+        else
+        {
+            return new Vector2(x, y);
+        }    
+    }
+
     //竖直通道生成平台
     void FgenerateTerrace()
     {
@@ -666,6 +800,7 @@ public class createmap : MonoBehaviour
             {
                 int[] a;
                 a = new int[9];
+                Tiles b = map1[i / 3, j / 3];
                 for (int k = 0; k < 9; k++)
                 {
                     map_final[i + k % 3, j + (int)k / 3] = map1[i / 3, j / 3];
@@ -680,7 +815,7 @@ public class createmap : MonoBehaviour
                         a[k] = 0;
                     }
                 }
-                destory(a, i, j);
+                destory(a, i, j,b);
 
 
             }
@@ -739,9 +874,9 @@ public class createmap : MonoBehaviour
         //    }
         //}
 
-        for (int i = 1; i < 3*width + 12; i++)
+        for (int i = 0; i < 3*width + 12; i++)
         {
-            for (int j = 1; j < 3*height + 12; j++)
+            for (int j = 0; j < 3*height + 12; j++)
             {
                 if (map_final[i, j] == Tiles.Floor)
                 {
@@ -861,8 +996,12 @@ public class createmap : MonoBehaviour
        
         go.GetComponent<cube>().suround = a;
     }
-    void destory(int[] suround,int i,int j)
+    void destory(int[] suround,int i,int j,Tiles now)
     {
+        if (now !=Tiles.Floor&&now!=Tiles.Room)
+        {
+            now = Tiles.Floor;
+        }
         if(map_final[i+1,j+1]==Tiles.Door)
         {
             map_final[i + 0, j + 0] = Tiles.Floor;
@@ -882,25 +1021,25 @@ public class createmap : MonoBehaviour
 
                 if (suround[x] == 0)
                 {
-                    map_final[i + (x % 3), j + (8 - x) / 3] = Tiles.Floor;
+                    map_final[i + (x % 3), j + (8 - x) / 3] = now;
                 }
                 if (suround[0] == 1 && (suround[1] == 0 || suround[3] == 0))
                 {
-                    map_final[i, j + 2] = Tiles.Floor;
+                    map_final[i, j + 2] = now;
                 }
                 if (suround[2] == 1 && (suround[1] == 0 || suround[5] == 0))
                 {
                     //  Destroy(instance[2]);
-                    map_final[i + 2, j + 2] = Tiles.Floor;
+                    map_final[i + 2, j + 2] = now;
                 }
                 if (suround[6] == 1 && (suround[3] == 0 || suround[7] == 0))
                 {
-                    map_final[i, j] = Tiles.Floor;
+                    map_final[i, j] = now;
                 }
                 if (suround[8] == 1 && (suround[5] == 0 || suround[7] == 0))
                 {
                     // Destroy(instance[8]);
-                    map_final[i + 2, j] = Tiles.Floor;
+                    map_final[i + 2, j] = now;
                 }
 
             }
