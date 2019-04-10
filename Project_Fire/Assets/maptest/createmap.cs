@@ -469,17 +469,21 @@ public class createmap : MonoBehaviour
                 generate_cube(i, ref mianji, ref hide_cube_1, ref hide_cube_2,ref count);
                
             }
-            print(hide_cube_1.Count);
-            print(hide_cube_2.Count);
+            //print(hide_cube_1.Count);
+            //print(hide_cube_2.Count);
             //生成房间内部平台
-            
-
+            //int k = 60;
+            //while(--k !=0)
+            //{
+            //    generate_platform(i,ref hide_cube_1);
+            //}
 
         }
     }
     //随机生成台子
     void generate_platform(int i,ref List<Rect> hide)
     {
+        
         int w = Random.Range((int)((float)Room_Data[i].room.width * 0.05f), (int)((float)Room_Data[i].room.width * 0.5f));
         int h = 1;
         int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x - w + (int)Room_Data[i].room.width);
@@ -487,15 +491,24 @@ public class createmap : MonoBehaviour
         Rect a1 = new Rect(x, y, w, h);
         if(hide_rect(a1,hide))
         {
-            generate_platform(i, ref hide);
+            //generate_platform(i, ref hide);
         }
         else
         {
             for (int n = x; n <= x + w; n++)
             {
                 map_final[n, y] = Tiles.RoomWall;
-
-
+               
+                
+            }
+            if (Random.Range(0, 2) == 0)
+            {
+                hide.Add(new Rect(x - 3, y - 4, x + 6, 7));
+            }
+            else
+            {
+                map_final[x - 1, y - 1] = Tiles.Door; 
+                hide.Add(new Rect(x - 3, y - 7, x + 6, 10));
             }
         }
     }
