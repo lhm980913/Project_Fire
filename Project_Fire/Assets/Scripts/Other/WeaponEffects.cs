@@ -138,10 +138,4 @@ public class HuiShen : activeEffect
             yield return new WaitForSeconds(Intervals);
         }
     }
-
-    private IEnumerator<YieldInstruction> Shock()
-    {
-        float time = 0;
-        Player_Controller_System.Instance.
-    }
 }

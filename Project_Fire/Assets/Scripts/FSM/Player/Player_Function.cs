@@ -39,10 +39,10 @@ public class Player_Function
     {
         player.transform.position = Vector3.SmoothDamp(player.transform.position, target, ref a, time);
     }
-    static public void FRape1(GameObject player, Vector3 target, float time, Vector3 player_begin_pos,ref float a)
+    static public void FRape1(GameObject player, Vector3 target, float speed, Vector3 player_begin_pos,ref float a)
     {
        
         a += Time.deltaTime;
-        player.transform.position = Vector3.Lerp(player_begin_pos,target,a*time);
+        player.transform.position = Vector3.Lerp(player_begin_pos,target,a* speed);
     }
 }
