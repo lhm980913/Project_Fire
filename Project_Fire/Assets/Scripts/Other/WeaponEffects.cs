@@ -45,7 +45,7 @@ public class YinXian : activeEffect
     
     Transform playerTransform;
 
-    YinXian(int damage)
+    public YinXian(int damage)
     {
         callType = CallType.active;
         Duration = 0.75f;
@@ -70,7 +70,7 @@ public class YinXian : activeEffect
         WeaponSystem.instance.StartCoroutine(Disable(enemys));
     }
 
-    public IEnumerator<YieldInstruction> Disable(enemy_base[] enemys)
+    private IEnumerator<YieldInstruction> Disable(enemy_base[] enemys)
     {
         float time = 0;
         while(time < Duration)
@@ -99,10 +99,49 @@ public class HuiShen : activeEffect
     float ShockRadius;
     float ShockDamage;
 
-    HuiShen(int damage, int shockDamage)
+    Transform playerTransform;
+
+    public HuiShen(int damage, int shockDamage)
     {
         Duration = 3;
         Intervals = 0.5f;
         Distance = 2;
+        ShockDamage = shockDamage;
+        playerTransform = testplayer.Instance.transform;
+        Damage = damage;
+        ShockRadius = 2;
+        callType = CallType.active;
+        Name = "回身";
+        Description = "每" + Intervals + "秒对角色左右分别释放一道距离为" + Distance + "的斩击，造成" + damage + "点伤害，持续" + Duration + "秒." + "期间再次激活可以造成一次半径为" +
+            ShockRadius + "的冲击波，造成" + damage + "点伤害，并击飞敌人";
+    }
+
+    public override void Execute()
+    {
+        
+    }
+
+    private IEnumerator<YieldInstruction> Sword()
+    {
+        float time = 0;
+        Collider[] colliders;
+        enemy_base[] enemys;
+        while (time < Duration)
+        {
+            colliders = Physics.OverlapBox(playerTransform.position, new Vector3(Distance + 1, 1, 1));
+            enemys = new enemy_base[colliders.Length];
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                enemys[i] = colliders[i].GetComponent<enemy_base>();
+                enemys[i].FBeHurt(Damage);
+            }
+            yield return new WaitForSeconds(Intervals);
+        }
+    }
+
+    private IEnumerator<YieldInstruction> Shock()
+    {
+        float time = 0;
+        Player_Controller_System.Instance.
     }
 }
