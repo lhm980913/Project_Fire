@@ -139,9 +139,9 @@ public class HuiShen : activeEffect
         }
     }
 
-    private IEnumerator<YieldInstruction> Shock()
-    {
-        float time = 0;
-        Player_Controller_System.Instance.
-    }
+    //private IEnumerator<YieldInstruction> Shock()
+    //{
+    //    float time = 0;
+    //    Player_Controller_System.Instance.
+    //}
 }
