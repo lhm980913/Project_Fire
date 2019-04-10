@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Rape_Stage : Player_Base_Stage
 {
-    Vector3 pos;
-    float a;
+    Transform playerTransform;
+    float time;
     Vector3 target;
+    float initDistance;
     public Rape_Stage()
     {
 
@@ -15,10 +16,13 @@ public class Rape_Stage : Player_Base_Stage
     public void Enter()
     {
         Debug.Log("rape");
-        pos = testplayer.Instance.playergameobj.transform.position;
-        a = 0;
+        playerTransform = testplayer.Instance.playergameobj.transform;
+        time = 0;
         target = testplayer.Instance.target_pos;
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        initDistance = (target - playerTransform.position).sqrMagnitude;
+        testplayer.Instance.anim.SetBool("AfterRope", true);
+        testplayer.Instance.anim.SetBool("isThrowing", true);
     }
 
     public void Input()
@@ -27,6 +31,8 @@ public class Rape_Stage : Player_Base_Stage
         {
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
+            testplayer.Instance.anim.SetFloat("DistancePercent", 1);
+            testplayer.Instance.anim.SetTrigger("ArrivePoint");
         }
     }
 
@@ -34,7 +40,13 @@ public class Rape_Stage : Player_Base_Stage
     public void Update_()
     {
         //Player_Function.FRape(testplayer.Instance.gameObject, testplayer.Instance.target_pos, testplayer.Instance.rapespeed, Vector3.zero);
+        if (!testplayer.Instance.anim.GetBool("isThrowing"))
+        {
+            float percent = (target - playerTransform.position).sqrMagnitude / initDistance;
+            testplayer.Instance.anim.SetFloat("DistancePercent", 1-percent);
 
-        Player_Function.FRape1(testplayer.Instance.gameObject, target, testplayer.Instance.rapespeed, pos,ref a);
+            Player_Function.FRape1(testplayer.Instance.gameObject, target, testplayer.Instance.rapespeed, playerTransform.position, ref time);
+        }
+        
     }
 }
