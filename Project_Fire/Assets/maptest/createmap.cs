@@ -25,7 +25,7 @@ public class Room
     public Rect room;
     //public int room_id;
     public List<Rect> entence_area;
-
+    public int area;
 
 }
 class ninecube
@@ -65,7 +65,8 @@ enum Tiles
     Door,
     Tianchong,
     Bianjie,
-    Room
+    Room,
+    RoomWall
 }
 
 //确保地图的长宽是奇数
@@ -84,8 +85,9 @@ public class createmap : MonoBehaviour
 
     public int width;
     public int height;
-    public GameObject wall, floor, connect,door,dead,room;
+    public GameObject wall, floor, connect,door,dead,room,romwall;
 
+    int fuzadu;
     private Transform mapParent;
     private Transform rape_manager;
     //生成的有效房间
@@ -105,6 +107,7 @@ public class createmap : MonoBehaviour
         //int a = width;
         //width = height;
         //height = a;
+        fuzadu = Random.Range(5, 20);
         Room_Data = new List<Room>();
         rooms = new List<Rect>();
         map = new Tiles[width, height];
@@ -157,8 +160,11 @@ public class createmap : MonoBehaviour
 
         FgenerateTerrace();
 
-       // generate_room();
+        generate_room();
 
+        //绿色坏点清除
+
+        ///////////////////////
         InstanceMap();
     }
 
@@ -397,9 +403,6 @@ public class createmap : MonoBehaviour
                         }
                     }
                 }
-
-
-
             }
         }
     }
@@ -437,34 +440,226 @@ public class createmap : MonoBehaviour
         //由下至上铺平台，两种间隔 可以直接跳上去的和跳接钩上去的
         //平台规则分为窄，中，宽三种
         get_all_room_data();
+        paint_room();
 
 
     }
-    //描绘房间内部内容
+    //绘制房间内部内容
     void paint_room()
     {
         for(int i=0;i<Room_Data.Count;i++)
         {
-            int w = Random.Range((1 / 5) * (int)Room_Data[i].room.width, (3 / 5) * (int)Room_Data[i].room.width);
-            int h = Random.Range((1 / 5) * (int)Room_Data[i].room.height, (3 / 5) * (int)Room_Data[i].room.height);
-            int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x-w+ (int)Room_Data[i].room.width);
-            int y = Random.Range((int)Room_Data[i].room.y, (int)Room_Data[i].room.y - h + (int)Room_Data[i].room.height);
-            Rect a1 = new Rect(x, y, w, h);
+            int count = 0;
+            int mianji = Room_Data[i].area;
+            List<Rect> hide_cube_1 = new List<Rect>();
+            List<Rect> hide_cube_2 = new List<Rect>();
 
+            hide_cube_1.Add(new Rect(Room_Data[i].room.x, Room_Data[i].room.y, 3, Room_Data[i].room.height));
+            hide_cube_1.Add(new Rect(Room_Data[i].room.x, Room_Data[i].room.y, Room_Data[i].room.width, 3));
+            hide_cube_1.Add(new Rect(Room_Data[i].room.x+ Room_Data[i].room.width-3, Room_Data[i].room.y, 3, Room_Data[i].room.height));
+            hide_cube_1.Add(new Rect(Room_Data[i].room.x, Room_Data[i].room.y+ Room_Data[i].room.height-3, Room_Data[i].room.width, 3));
+
+            foreach (Rect r in Room_Data[i].entence_area)
+            {
+                hide_cube_2.Add(r);
+            }
+           
+            while (mianji > Room_Data[i].area * 0.8f&&count< fuzadu)
+            {
+                generate_cube(i, ref mianji, ref hide_cube_1, ref hide_cube_2,ref count);
+               
+            }
+            print(hide_cube_1.Count);
+            print(hide_cube_2.Count);
+            //生成房间内部平台
+            
 
 
         }
     }
-    //随机生成阻挡块
-    void generate_cube()
+    //随机生成台子
+    void generate_platform(int i,ref List<Rect> hide)
     {
+        int w = Random.Range((int)((float)Room_Data[i].room.width * 0.05f), (int)((float)Room_Data[i].room.width * 0.5f));
+        int h = 1;
+        int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x - w + (int)Room_Data[i].room.width);
+        int y = Random.Range((int)Room_Data[i].room.y, (int)Room_Data[i].room.y - h + (int)Room_Data[i].room.height);
+        Rect a1 = new Rect(x, y, w, h);
+        if(hide_rect(a1,hide))
+        {
+            generate_platform(i, ref hide);
+        }
+        else
+        {
+            for (int n = x; n <= x + w; n++)
+            {
+                map_final[n, y] = Tiles.RoomWall;
 
 
-
-
-
-
+            }
+        }
     }
+    //随机生成阻挡块
+    void generate_cube(int i,ref int mianji,ref List<Rect> hide_1,ref List<Rect> hide_2,ref int count)
+    {
+        count++;
+        if (count > fuzadu) return;
+        //  Rect chushi = new Rect(Room_Data[i].room.x + 3, Room_Data[i].room.y + 3, Room_Data[i].room.width - 6, Room_Data[i].room.height - 6);
+        if (Random.Range(0,3) == 0)
+        {
+            int w = Random.Range((int)((float)Room_Data[i].room.width * 0.2f), (int)((float)Room_Data[i].room.width * 0.5f));
+            int h = Random.Range((int)(Room_Data[i].room.height * 0.1f), (int)(Room_Data[i].room.height * 0.3f));
+
+            int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x - w + (int)Room_Data[i].room.width);
+            int y = Random.Range((int)Room_Data[i].room.y, (int)Room_Data[i].room.y - h + (int)Room_Data[i].room.height);
+
+            Rect a1 = new Rect(x, y, w, h);
+            
+            if (!hide_rect(a1, hide_1))
+            {
+                for (int n = x; n <= x + w; n++)
+                {
+                    for (int m = y; m <= y + h; m++)
+                    {
+                        map_final[n, m] = Tiles.RoomWall;
+                    }
+                }
+                if(map_final[x - 1, y + h] == Tiles.Room && map_final[x - 1, y + h+1] == Tiles.Room)
+                {
+                    map_final[x - 1, y + h] = Tiles.Door;
+                }
+                if (map_final[x + w + 1, y + h] == Tiles.Room && map_final[x + w + 1, y +1 +h] == Tiles.Room)
+                {
+                    map_final[x + w + 1, y + h] = Tiles.Door;
+                }
+                Rect a2 = new Rect(x - 3, y - 3, w + 6, h + 6);
+                hide_1.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                hide_2.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                mianji -= w * h;
+                //print(hide_1.Count);
+                //print(hide_2.Count);
+
+
+            }
+            else
+            {
+                generate_cube(i ,ref mianji, ref hide_1, ref hide_2,ref count);
+            }
+
+
+        }
+        else
+        {
+            int w = Random.Range((int)((float)Room_Data[i].room.width * 0.2f), (int)((float)Room_Data[i].room.width * 0.5f));
+            int h = Random.Range((int)(Room_Data[i].room.height * 0.1f), (int)(Room_Data[i].room.height * 0.3f));
+            int x=0, y=0;
+            int a = Random.Range(0, 5);
+            switch (a)
+            {
+                //左下角
+                case 0:
+                    {
+                        x =(int) Room_Data[i].room.x;
+                        y = (int)Room_Data[i].room.y;
+                    }
+                    break;
+                   
+                case 1:
+                    {
+                        x = (int)Room_Data[i].room.x + (int)Room_Data[i].room.width - w;
+                        y = Random.Range((int)Room_Data[i].room.y + 3, (int)Room_Data[i].room.y + (int)Room_Data[i].room.height - 3 - h);
+                    }
+                    break;
+                    
+                case 2:
+                    {
+                        x = (int)Room_Data[i].room.x;
+                        y = Random.Range((int)Room_Data[i].room.y + 3, (int)Room_Data[i].room.y + (int)Room_Data[i].room.height - 3 - h);
+                    }
+                    break;
+                    //右下
+                case 3:
+                    {
+                        x = (int)Room_Data[i].room.x + (int)Room_Data[i].room.width - w;
+                        y = (int)Room_Data[i].room.y;
+                    }
+                    break;
+                case 4:
+                    {
+                        x = Random.Range((int)Room_Data[i].room.x + 3, (int)Room_Data[i].room.x + (int)Room_Data[i].room.width - 3 - w);
+                        y = (int)Room_Data[i].room.y;
+                    }
+                    break;
+                case 5:
+                    {
+                        x = (int)Room_Data[i].room.x + (int)Room_Data[i].room.width - w;
+                        y = (int)Room_Data[i].room.y + (int)Room_Data[i].room.height - h;
+                     
+                    }
+                    break;
+                case 6:
+                    {
+                        x = Random.Range((int)Room_Data[i].room.x + 3, (int)Room_Data[i].room.x + (int)Room_Data[i].room.width - 3 - w);
+                        y = (int)Room_Data[i].room.y + (int)Room_Data[i].room.height -h;
+                    }
+                    break;
+                case 7:
+                    {
+                       
+                        x = (int)Room_Data[i].room.x;
+                        y = (int)Room_Data[i].room.y + (int)Room_Data[i].room.height - h;
+                    }
+                    break;
+
+            }
+            Rect a1 = new Rect(x, y, w, h);
+            
+            if (hide_rect(a1,hide_2))
+            {
+                generate_cube(i, ref mianji, ref hide_1, ref hide_2,ref count);
+            }
+            else
+            {
+                
+                for (int n = x; n <= x + w; n++)
+                {
+                    for (int m = y; m <= y + h; m++)
+                    {
+                        map_final[n, m] = Tiles.RoomWall;
+                    }
+                }
+                if (map_final[x - 1, y + h] == Tiles.Room && map_final[x - 1, y + h + 1] == Tiles.Room)
+                {
+                    map_final[x - 1, y + h] = Tiles.Door;
+                }
+                if (map_final[x + w + 1, y + h] == Tiles.Room && map_final[x + w + 1, y + 1 + h] == Tiles.Room)
+                {
+                    map_final[x + w + 1, y + h] = Tiles.Door;
+                }
+                Rect a2 = new Rect(x - 3, y - 3, w + 6, h + 6);
+                mianji -= w * h;
+                hide_1.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                hide_2.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                //print(hide_1.Count);
+                //print(hide_2.Count);
+            }
+
+
+        }
+    }
+    bool hide_rect(Rect cube,List<Rect> a)
+    {
+        for(int i=0;i<a.Count;i++)
+        {
+            if(cube.Overlaps(a[i]))
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     //得到所有房间信息
     void get_all_room_data()
     {
@@ -488,7 +683,7 @@ public class createmap : MonoBehaviour
                         //{
                         //    print(a.entence_area[k]);
                         //}
-                       
+                        a.area = (int)a.room.width * (int)a.room.height;
                         Room_Data.Add(a);
                     }            
                 }
@@ -930,6 +1125,15 @@ public class createmap : MonoBehaviour
                     //chuancan(go,i,j);
 
                     go.layer = LayerMask.NameToLayer("floor");
+                }
+                else if (map_final[i, j] == Tiles.RoomWall)
+                {
+                    GameObject go = Instantiate(romwall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                    go.transform.SetParent(mapParent);
+                    //设置层级
+                    //chuancan(go,i,j);
+
+                    go.layer = LayerMask.NameToLayer("Ground");
                 }
             }
         }
