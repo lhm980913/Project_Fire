@@ -39,7 +39,7 @@ public class rope_point_manager : MonoBehaviour
       
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
-        float min = 180;
+        float min = 100;
         for(int i=0;i<rp.Length;i++)
         {
 
