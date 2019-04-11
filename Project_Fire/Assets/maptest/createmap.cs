@@ -95,7 +95,9 @@ public class createmap : MonoBehaviour
     private List<Rect> rooms;
     //正被雕刻的区域的索引。(每个房间一个索引，每个不连通的迷宫一个索引，在连通之前)
     private int currentRegion = 0;
-   
+    [SerializeField]
+    public GameObject[] decorate;
+
     private int[,] _regions;
     private Tiles[,] map;
 
@@ -166,9 +168,51 @@ public class createmap : MonoBehaviour
 
         ///////////////////////
         InstanceMap();
+        generate_decorate();
     }
 
+    //生成近景装饰
+    void generate_decorate()
+    {
 
+        for (int i = 3; i < 3 * width + 9; i++)
+        {
+            for (int j = 3; j < 3 * height + 9; j++)
+            {
+                if(map_final[i,j]!=Tiles.Door&& map_final[i, j] != Tiles.Floor&& map_final[i, j] != Tiles.Room)
+                {
+                    if(map_final[i,j+1]==Tiles.Room|| map_final[i, j] == Tiles.Door || map_final[i, j] == Tiles.Floor)
+                    {
+                        if(Random.Range(0,100)<40)
+                        {
+                            GameObject dec = Instantiate(decorate[Random.Range(0, 27)], new Vector3(i, j+1, 0), Quaternion.identity);
+                            dec.transform.SetParent(mapParent);
+                            dec.layer = LayerMask.NameToLayer("decorate");
+                            //GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                            //go.transform.SetParent(mapParent);
+                            ////chuancan(go, i, j);
+                            //go.layer = LayerMask.NameToLayer("Ground");
+                        }
+                    }
+
+
+
+                }
+
+
+
+
+
+
+
+            }
+        }
+
+
+
+
+
+    }
     /*
      *生成房间
      *1.随机房间（随机大小，奇数）
@@ -472,11 +516,11 @@ public class createmap : MonoBehaviour
             //print(hide_cube_1.Count);
             //print(hide_cube_2.Count);
             //生成房间内部平台
-            //int k = 60;
-            //while(--k !=0)
-            //{
-            //    generate_platform(i,ref hide_cube_1);
-            //}
+            int k = 60;
+            while (--k != 0)
+            {
+                generate_platform(i, ref hide_cube_1);
+            }
 
         }
     }

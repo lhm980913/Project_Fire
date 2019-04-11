@@ -47,7 +47,11 @@ public class Jump_Stage : Player_Base_Stage
 
     public void Update_()
     {
-        Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
+        //if(Player_Controller_System.Instance.Horizontal_Left!=0)
+        //{
+            Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
+        //}
+       
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
         Player_Function.FFace_to();
     }

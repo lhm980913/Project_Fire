@@ -167,7 +167,8 @@ public class enemy_lizarrd : enemy_base
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, Vector3.one + VisionDistance * Vector3.right);
+
+        Gizmos.DrawWireCube(transform.position + Vector3.down , Vector3.one + VisionDistance * Vector3.right);
     }
 
     //private void OnGUI()

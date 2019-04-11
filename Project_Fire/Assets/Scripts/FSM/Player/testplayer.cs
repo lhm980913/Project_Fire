@@ -86,6 +86,7 @@ public class testplayer : MonoBehaviour
         if (Instance==null)
         {
             Instance = this;
+
         }
         playergameobj = this.gameObject;
         aa = player_att_speed;
@@ -114,6 +115,7 @@ public class testplayer : MonoBehaviour
         grounded = FCheckground();
 
         FYspeedclamp();
+
         _player.Update();
     }
     bool FCheckground()
@@ -187,12 +189,22 @@ public class testplayer : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
         {
+
             enemypos = other.transform.position;
+            atting = false;
             _player.SetStage(hurt_stage);
+        }
+        if (other.tag == "enemy_weapon" && atting)
+        {
+            print(1110);
+            StartCoroutine( CameraEffectSystem.Instance.FTimeScaleControl(0.15f,0.001f));
+            StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
+            anim.Play("player_stand2");
+            other.gameObject.GetComponentInParent<Animator>().Play("stand");
         }
     }
 }

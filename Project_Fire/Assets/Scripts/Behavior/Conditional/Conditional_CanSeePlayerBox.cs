@@ -28,7 +28,7 @@ public class Conditional_CanSeePlayerBox : Conditional
         //{
         //    return TaskStatus.Failure;
         //}
-        if (Physics.CheckBox(transform.position, Vector3.one + VisionDistance * Vector3.right, Quaternion.identity, layer))
+        if (Physics.CheckBox(transform.position + Vector3.down, Vector3.one + VisionDistance * Vector3.right, Quaternion.identity, layer))
         {
             return TaskStatus.Success;
         }

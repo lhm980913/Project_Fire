@@ -19,5 +19,14 @@ public class Camera_test : MonoBehaviour
         //    this.transform.position,
         //    new Vector3(testplayer.Instance.playergameobj.transform.position.x, testplayer.Instance.playergameobj.transform.position.y, this.transform.position.z), ref a, ttt);
        
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            transform.position=transform.position+Vector3.forward;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            transform.position = transform.position - Vector3.forward;
+        }
+
     }
 }

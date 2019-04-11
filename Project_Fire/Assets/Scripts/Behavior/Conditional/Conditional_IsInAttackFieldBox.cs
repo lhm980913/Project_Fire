@@ -20,7 +20,7 @@ public class Conditional_IsInAttackFieldBox : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        if(Physics.BoxCast(transform.position, Vector3.one * 0.5f, transform.forward, Quaternion.identity, AttackDistance, layer))
+        if(Physics.BoxCast(transform.position + Vector3.down, Vector3.one * 0.5f, transform.forward, Quaternion.identity, AttackDistance, layer))
         {
             return TaskStatus.Success;
         }

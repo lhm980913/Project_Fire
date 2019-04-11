@@ -15,14 +15,17 @@ public class Flash_Stage : Player_Base_Stage
         testplayer.Instance.flashcd = 0.6f;
         testplayer.Instance.anim.SetTrigger("flash");
         CameraEffectSystem.Instance.FMotionVector();
+        testplayer.Instance.canhurt = false;
     }
 
     public void Input()
     {
         if(testplayer.Instance.flashtime>testplayer.Instance.ac.keys[2].time)
         {
+            testplayer.Instance.canhurt = true;
             if (!testplayer.Instance.grounded)
             {
+
                 testplayer._player.SetStage(testplayer.Instance.jump_stage);
             }
             else
@@ -33,6 +36,7 @@ public class Flash_Stage : Player_Base_Stage
         }
         if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.down && testplayer.Instance.canrape)
         {
+            testplayer.Instance.canhurt = true;
             testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
     }

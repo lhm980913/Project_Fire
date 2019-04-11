@@ -76,7 +76,7 @@ public class enemy_base : MonoBehaviour
     }
     public virtual void FBeHurt(float force)
     {
-
+      
     }
 
     public virtual bool FCanSeePlayer()

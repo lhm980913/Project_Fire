@@ -7,7 +7,7 @@ using UnityEngine;
 public struct CameraShake
 {
     public float Duration;
-    public int Strength;
+    public float Strength;
     public AnimationCurve StrengthCurve;
 }
 
@@ -137,6 +137,23 @@ public class CameraEffectSystem : MonoBehaviour
         
         mainCamera.transform.position = originalPos;
     }
+    public IEnumerator FCameraShake(float time,float sterength)
+    {
+        float startTime = Time.realtimeSinceStartup;
+        float deltaTime = 0;
+        Vector3 originalPos = mainCamera.transform.position;
+        float ratio;
+        while (deltaTime < time)
+        {
+            ratio = deltaTime / time;
+            
+            mainCamera.transform.position = originalPos + UnityEngine.Random.insideUnitSphere * sterength;
+            deltaTime = Time.realtimeSinceStartup - startTime;
+            yield return null;
+        }
+
+        mainCamera.transform.position = originalPos;
+    }
 
     public IEnumerator FTimeScaleControl()
     {
@@ -148,6 +165,23 @@ public class CameraEffectSystem : MonoBehaviour
         {
             ratio = deltaTime / timeScale.Duration;
             scale = timeScale.TimeScaleCurve.Evaluate(ratio);
+
+            Time.timeScale = scale;
+
+            deltaTime = Time.realtimeSinceStartup - startTime;
+            yield return null;
+        }
+        Time.timeScale = 1;
+    }
+    public IEnumerator FTimeScaleControl(float time,float scale)
+    {
+        float startTime = Time.realtimeSinceStartup;
+        float deltaTime = 0;
+       
+        float ratio;
+        while (deltaTime < time)
+        {
+            
 
             Time.timeScale = scale;
 

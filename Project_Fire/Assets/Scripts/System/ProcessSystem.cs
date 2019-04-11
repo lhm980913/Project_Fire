@@ -49,7 +49,8 @@ public class ProcessSystem : MonoBehaviour
             //    Enemy.FBeHurt(Enemy.LowBeatForce);
             //}
             //if (Enemy.atting)
-            //    StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
+            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
+            StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
         }
 
 
