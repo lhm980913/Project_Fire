@@ -165,12 +165,34 @@ public class createmap : MonoBehaviour
         generate_room();
 
         //绿色坏点清除
-
+        del_door();
         ///////////////////////
         InstanceMap();
-        generate_decorate();
+       // generate_decorate();
     }
+    void del_door()
+    {
+        for (int i = 8; i < 3 * width-4 ; i++)
+        {
+            for (int j = 8; j < 3 * height-4; j++)
+            {
+                if(map_final[i,j]==Tiles.Door)
+                {
+                    for (int n = i + 1; n <= i + 5; n++)
+                    {
+                        for (int m = j -4; m <= j + 4; m++)
+                        {
+                            if(map_final[n,m]==Tiles.Door)
+                            {
+                                map_final[n, m] = map_final[n, m + 1];
+                            }
+                        }
+                    }
+                }
 
+            }
+        }
+    }
     //生成近景装饰
     void generate_decorate()
     {
@@ -494,6 +516,7 @@ public class createmap : MonoBehaviour
         for(int i=0;i<Room_Data.Count;i++)
         {
             int count = 0;
+            fuzadu = Random.Range(3, 20);
             int mianji = Room_Data[i].area;
             List<Rect> hide_cube_1 = new List<Rect>();
             List<Rect> hide_cube_2 = new List<Rect>();
@@ -516,7 +539,7 @@ public class createmap : MonoBehaviour
             //print(hide_cube_1.Count);
             //print(hide_cube_2.Count);
             //生成房间内部平台
-            int k = 60;
+            int k = Random.Range(60,500);
             while (--k != 0)
             {
                 generate_platform(i, ref hide_cube_1);
@@ -529,11 +552,15 @@ public class createmap : MonoBehaviour
     {
         
         int w = Random.Range((int)((float)Room_Data[i].room.width * 0.05f), (int)((float)Room_Data[i].room.width * 0.5f));
+        if(w<3)
+        {
+            w = 3;
+        }
         int h = 1;
         int x = Random.Range((int)Room_Data[i].room.x, (int)Room_Data[i].room.x - w + (int)Room_Data[i].room.width);
         int y = Random.Range((int)Room_Data[i].room.y, (int)Room_Data[i].room.y - h + (int)Room_Data[i].room.height);
         Rect a1 = new Rect(x, y, w, h);
-        if(hide_rect(a1,hide))
+        if(hide_rect(new Rect(x-1,y-1,w+2,h+2),hide))
         {
             //generate_platform(i, ref hide);
         }
@@ -547,12 +574,12 @@ public class createmap : MonoBehaviour
             }
             if (Random.Range(0, 2) == 0)
             {
-                hide.Add(new Rect(x - 3, y - 4, x + 6, 7));
+                hide.Add(new Rect(x - 4, y - 4, x + 8, 7));
             }
             else
             {
                 map_final[x - 1, y - 1] = Tiles.Door; 
-                hide.Add(new Rect(x - 3, y - 7, x + 6, 10));
+                hide.Add(new Rect(x - 4, y - 7, x + 8, 10));
             }
         }
     }
@@ -590,8 +617,8 @@ public class createmap : MonoBehaviour
                     map_final[x + w + 1, y + h] = Tiles.Door;
                 }
                 Rect a2 = new Rect(x - 3, y - 3, w + 6, h + 6);
-                hide_1.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
-                hide_2.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                hide_1.Add(new Rect(x - 4, y - 4, w + 8, h + 8));
+                hide_2.Add(new Rect(x - 4, y - 4, w + 8, h + 8));
                 mianji -= w * h;
                 //print(hide_1.Count);
                 //print(hide_2.Count);
@@ -685,18 +712,22 @@ public class createmap : MonoBehaviour
                         map_final[n, m] = Tiles.RoomWall;
                     }
                 }
-                if (map_final[x - 1, y + h] == Tiles.Room && map_final[x - 1, y + h + 1] == Tiles.Room)
+                if(a!=0&&a!=3&&a!=4)
                 {
-                    map_final[x - 1, y + h] = Tiles.Door;
+                    if (map_final[x - 1, y + h] == Tiles.Room && map_final[x - 1, y + h + 1] == Tiles.Room)
+                    {
+                        map_final[x - 1, y + h] = Tiles.Door;
+                    }
+                    if (map_final[x + w + 1, y + h] == Tiles.Room && map_final[x + w + 1, y + 1 + h] == Tiles.Room)
+                    {
+                        map_final[x + w + 1, y + h] = Tiles.Door;
+                    }
                 }
-                if (map_final[x + w + 1, y + h] == Tiles.Room && map_final[x + w + 1, y + 1 + h] == Tiles.Room)
-                {
-                    map_final[x + w + 1, y + h] = Tiles.Door;
-                }
+             
                 Rect a2 = new Rect(x - 3, y - 3, w + 6, h + 6);
                 mianji -= w * h;
-                hide_1.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
-                hide_2.Add(new Rect(x - 4, y - 3, w + 8, h + 6));
+                hide_1.Add(new Rect(x - 4, y - 4, w + 8, h + 8));
+                hide_2.Add(new Rect(x - 4, y - 4, w + 8, h + 8));
                 //print(hide_1.Count);
                 //print(hide_2.Count);
             }
@@ -816,6 +847,7 @@ public class createmap : MonoBehaviour
                         if (map1[i, j - 1] == Tiles.Door&& map1[i, j + 1] == Tiles.Floor)
                         {
                             map_final[3 * i +2 , 3 * j -  1] = Tiles.Wall;
+                            map_final[3 * i + 3, 3 * j - 1] = Tiles.Wall;
                         }
                         int k = 1;
                         while(map1[i ,j+k]==Tiles.Floor)
