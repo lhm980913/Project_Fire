@@ -44,6 +44,7 @@ public class Att_Stage : Player_Base_Stage
 
     public void Input()
     {
+        Player_Function.FStop(testplayer.Instance.playergameobj);
         ttt -= Time.deltaTime;
       if(ttt<0)
         {
