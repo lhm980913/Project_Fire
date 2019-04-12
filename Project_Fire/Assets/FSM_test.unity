@@ -5307,7 +5307,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5f21529a38330b940aa1ca0129f5a0c9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7058,6 +7058,11 @@ PrefabInstance:
       propertyPath: cameraShake.Strength
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1793678505734673937, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: motionVector.Strength
+      value: 0.017
+      objectReference: {fileID: 0}
     - target: {fileID: 7390599888331319436, guid: 048ac3c2b98912040b8d05703bf4c131,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8081,6 +8086,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152514085826603914, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_AfterStackBundles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152514085826603914, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152514085826603914, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_AfterStackBundles.Array.data[0].assemblyQualifiedName
+      value: MotionBlur, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152514085826603914, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_AfterStackBundles.Array.data[1].assemblyQualifiedName
+      value: RadialBlur, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950129762686706909, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: weight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 048ac3c2b98912040b8d05703bf4c131, type: 3}
