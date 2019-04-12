@@ -38,7 +38,7 @@ public class ProcessSystem : MonoBehaviour
     {
         if (playeratt.tag == "player_weapon")
         {
-            Enemy.FBeHurt(Enemy.LowBeatForce);
+//Enemy.FBeHurt(Enemy.LowBeatForce);
             //if (Enemy.Stage != Enemy_Stage.Attack)
             //{
             //    Enemy.Stage = Enemy_Stage.Hurt;
