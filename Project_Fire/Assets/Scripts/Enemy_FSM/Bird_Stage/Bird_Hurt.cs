@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bird_Hurt : MonoBehaviour
+public class Bird_Hurt : Enemy_Base_Stage
 {
-    // Start is called before the first frame update
-    void Start()
+    enemy_bird enemy;
+
+    public Bird_Hurt(enemy_bird ee)
     {
-        
+
+        enemy = ee;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+
+    }
+    public override void Update()
+    {
+
+    }
+
+    public override void Check()
+    {
+
     }
 }

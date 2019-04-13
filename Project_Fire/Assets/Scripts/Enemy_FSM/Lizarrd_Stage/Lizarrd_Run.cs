@@ -12,7 +12,7 @@ public class Lizarrd_Run : Enemy_Base_Stage
 
     public override void Enter()
     {
-        base.Enter();
+        enemy.anim.CrossFade("lizarrd_run", 0.1f);
     }
     public override void Update()
     {
