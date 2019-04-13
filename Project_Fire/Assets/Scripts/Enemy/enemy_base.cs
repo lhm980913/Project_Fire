@@ -35,7 +35,7 @@
 //    protected int faceto = 1;
 //    protected LayerMask player_layermask = 1 << 12;
 //    protected BehaviorDesigner.Runtime.BehaviorTree BT;
-   
+
 //    Enemy_Stage _stage;
 //    public Enemy_Stage Stage
 //    {
@@ -77,7 +77,7 @@
 //    }
 //    public virtual void FBeHurt(float force)
 //    {
-      
+
 //    }
 
 //    public virtual bool FCanSeePlayer()
@@ -112,16 +112,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum Enemy_Stage
-{
-    stand,
-    att,
-    walk,
-    run,
-    hurt
-}
+//public enum Enemy_Stage
+//{
+//    stand,
+//    att,
+//    walk,
+//    run,
+//    hurt
+//}
 public class enemy_base : MonoBehaviour
 {
+ 
+
     public float maxhp;
     public float attfield;
     public float movespeed;
@@ -131,23 +133,23 @@ public class enemy_base : MonoBehaviour
     public Animator anim;
 
     private bool canMove;
-    protected int faceto = 1;
-    protected LayerMask player_layermask = 1 << 12;
+    public int faceto = 1;
+    public LayerMask player_layermask = 1 << 12;
 
 
-    Enemy_Stage _stage;
-    public Enemy_Stage Stage
-    {
-        get
-        {
-            return this._stage;
-        }
-        set
-        {
-            this._stage = value;
-        }
+    //Enemy_Stage _stage;
+    //public Enemy_Stage Stage
+    //{
+    //    get
+    //    {
+    //        return this._stage;
+    //    }
+    //    set
+    //    {
+    //        this._stage = value;
+    //    }
 
-    }
+    //}
     float _hp;
     public float Hp
     {
@@ -162,10 +164,10 @@ public class enemy_base : MonoBehaviour
         }
     }
 
-    public virtual void FSM(Enemy_Stage stage)
-    {
+    //public virtual void FSM(Enemy_Stage stage)
+    //{
 
-    }
+    //}
     public virtual void FBeatBack()
     {
 
@@ -204,12 +206,12 @@ public class enemy_base : MonoBehaviour
     {
 
     }
-    public virtual IEnumerator FHurt(float time, Enemy_Stage stage_)
-    {
-        yield return new WaitForSeconds(time);
-        Stage = stage_;
-        StopAllCoroutines();
-    }
+    //public virtual IEnumerator FHurt(float time, Enemy_Stage stage_)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    Stage = stage_;
+    //    StopAllCoroutines();
+    //}
 
     protected virtual void OnTriggerEnter(Collider other)
     {
