@@ -172,7 +172,6 @@ public class CameraEffectSystem : MonoBehaviour
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
        
-        float ratio;
         while (deltaTime < time)
         {
             

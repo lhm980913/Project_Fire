@@ -5,7 +5,6 @@ using UnityEngine;
 public class XianDan : activeEffect
 {
     float Distance;
-    float Height;
     int Damage;
     
     Transform playerTransform;
@@ -14,7 +13,6 @@ public class XianDan : activeEffect
     {
         callType = CallType.active;
         Distance = 4;
-        Height = 2;
         playerTransform = testplayer.Instance.transform;
         Name = "霰弹";
         Damage = damage;
