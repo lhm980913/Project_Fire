@@ -15,6 +15,49 @@ MonoBehaviour:
   settings:
   - {fileID: 114558700522180254}
   - {fileID: 114981969338399362}
+  - {fileID: 114233116269137552}
+  - {fileID: 114339033742667502}
+--- !u!114 &114233116269137552
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: Assembly-CSharp::MotionBlur
+  active: 0
+  enabled:
+    overrideState: 1
+    value: 1
+  Distance:
+    overrideState: 1
+    value: 0.0020907316
+--- !u!114 &114339033742667502
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e888937256ab5e94481d857eedb9d17e, type: 3}
+  m_Name: RadialBlur
+  m_EditorClassIdentifier: 
+  active: 0
+  enabled:
+    overrideState: 1
+    value: 1
+  Distance:
+    overrideState: 1
+    value: 1
+  Stength:
+    overrideState: 1
+    value: 1
 --- !u!114 &114558700522180254
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -62,6 +105,28 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
+--- !u!114 &114910307235422864
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: RaidalBlur
+  m_EditorClassIdentifier: Assembly-CSharp::RaidalBlur
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  Distance:
+    overrideState: 0
+    value: 0.011
+  Stength:
+    overrideState: 0
+    value: 0.2
 --- !u!114 &114981969338399362
 MonoBehaviour:
   m_ObjectHideFlags: 3

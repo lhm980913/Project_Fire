@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 [Serializable]
 public struct CameraShake
@@ -12,7 +12,7 @@ public struct CameraShake
 }
 
 [Serializable]
-public struct RadialBlur
+public struct RadialBlurPara
 {
     public float Duration;
     public float Strength;
@@ -29,10 +29,6 @@ public struct RadialBlur
     public float dist;
     [HideInInspector]
     public float ratio;
-    [HideInInspector]
-    public int ID_BlurStrength;
-    [HideInInspector]
-    public int ID_BlurDistance;
 }
 
 [Serializable]
@@ -43,7 +39,7 @@ public struct TimeScale
 }
 
 [Serializable]
-public struct MotionVector
+public struct MotionVectorPara
 {
     public float Duration;
     [Range(0,0.1f)]
@@ -57,8 +53,6 @@ public struct MotionVector
     public float strength;
     [HideInInspector]
     public float ratio;
-    [HideInInspector]
-    public int ID_Strength;
 }
 
 public class CameraEffectSystem : MonoBehaviour
@@ -68,18 +62,19 @@ public class CameraEffectSystem : MonoBehaviour
     [Header("Camera Shake")]
     public CameraShake cameraShake;
     [Header("Radial Blur")]
-    public RadialBlur radialBlur;
+    public RadialBlurPara radialBlur;
     [Header("Time Scale Control")]
     public TimeScale timeScale;
     [Header("Motion Vector")]
-    public MotionVector motionVector;
+    public MotionVectorPara motionVector;
 
     private Camera mainCamera;
-    private Material RadialBlur_Mat;
-    private Material MotionVector_Mat;
     private bool motionVectorIsOpen;
     private bool radialBlurIsOpen;
-    RenderTexture rt;
+
+    private PostProcessProfile PPP;
+    private MotionBlur motionBlurSetting;
+    private RadialBlur RadialBlurSetting;
 
     private void Awake()
     {
@@ -90,20 +85,18 @@ public class CameraEffectSystem : MonoBehaviour
         //init
         mainCamera = Camera.main;
 
-        UnityEngine.Object obj = Resources.Load("Material/radialBlur");
-        RadialBlur_Mat = Instantiate(obj) as Material;
-
-        obj = Resources.Load("Material/motionVector");
-        MotionVector_Mat = Instantiate(obj) as Material;
-
         radialBlurIsOpen = false;
         motionVectorIsOpen = false;
 
-        radialBlur.ID_BlurDistance = Shader.PropertyToID("_BlurDist");
-        radialBlur.ID_BlurStrength = Shader.PropertyToID("_BlurStrength");
-        motionVector.ID_Strength = Shader.PropertyToID("_Strength");
+        PPP = GetComponent<PostProcessVolume>().sharedProfile;
+        motionBlurSetting = PPP.GetSetting<MotionBlur>();
+        RadialBlurSetting = PPP.GetSetting<RadialBlur>();
+    }
 
-        rt = new RenderTexture(Screen.width, Screen.height, 0);
+    private void Update()
+    {
+        InvokeRadialBlur();
+        InvokeMotionVector();
     }
 
     public void FRaidalBlurShock()
@@ -116,6 +109,7 @@ public class CameraEffectSystem : MonoBehaviour
     public void FMotionVector()
     {
         motionVectorIsOpen = true;
+        motionBlurSetting.active = true;
         motionVector.startTime = Time.realtimeSinceStartup;
         motionVector.deltaTime = 0;
     }
@@ -178,7 +172,6 @@ public class CameraEffectSystem : MonoBehaviour
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
        
-        float ratio;
         while (deltaTime < time)
         {
             
@@ -196,61 +189,42 @@ public class CameraEffectSystem : MonoBehaviour
 
     }
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
-    {
-        
-        if((!radialBlurIsOpen) && (!motionVectorIsOpen))
-            Graphics.Blit(source, destination);
-        else
-        {
-            InvokeRadialBlur(source, rt);
-            InvokeMotionVector(rt, destination);
-        }
-    }
-
-    private void InvokeRadialBlur(RenderTexture source, RenderTexture destination)
+    private void InvokeRadialBlur()
     {
         if (radialBlurIsOpen)
         {
             radialBlur.ratio = radialBlur.deltaTime / radialBlur.Duration;
             radialBlur.strength = radialBlur.StrengthCurve.Evaluate(radialBlur.ratio);
             radialBlur.dist = radialBlur.DistanceCurve.Evaluate(radialBlur.ratio);
-
-            RadialBlur_Mat.SetFloat(radialBlur.ID_BlurStrength, radialBlur.strength * radialBlur.Strength);
-            RadialBlur_Mat.SetFloat(radialBlur.ID_BlurDistance, radialBlur.dist * radialBlur.Distance);
-
-            Graphics.Blit(source, destination, RadialBlur_Mat);
+            
             radialBlur.deltaTime = Time.realtimeSinceStartup - radialBlur.startTime;
+
+            RadialBlurSetting.Distance.Override(radialBlur.dist);
+            RadialBlurSetting.Stength.Override(radialBlur.strength);
 
             if (radialBlur.deltaTime > radialBlur.Duration)
             {
                 radialBlurIsOpen = false;
             }
         }
-        else
-            Graphics.Blit(source, destination);
     }
 
-    private void InvokeMotionVector(RenderTexture source, RenderTexture destination)
+    private void InvokeMotionVector()
     {
         if(motionVectorIsOpen)
         {
             motionVector.ratio = motionVector.deltaTime / motionVector.Duration;
             motionVector.strength = motionVector.StrengthCurve.Evaluate(motionVector.ratio);
-
-            MotionVector_Mat.SetFloat(motionVector.ID_Strength, motionVector.strength * motionVector.Strength);
-
-            Graphics.Blit(source, destination, MotionVector_Mat);
+            
             motionVector.deltaTime = Time.realtimeSinceStartup - motionVector.startTime;
+
+            motionBlurSetting.Distance.Override(motionVector.strength * motionVector.Strength);
 
             if (motionVector.deltaTime > motionVector.Duration)
             {
                 motionVectorIsOpen = false;
+                motionBlurSetting.active = false;
             }
-        }
-        else
-        {
-            Graphics.Blit(source, destination);
         }
     }
 }
