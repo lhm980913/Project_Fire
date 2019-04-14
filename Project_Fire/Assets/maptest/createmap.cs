@@ -516,7 +516,7 @@ public class createmap : MonoBehaviour
         for(int i=0;i<Room_Data.Count;i++)
         {
             int count = 0;
-            fuzadu = Random.Range(3, 20);
+            fuzadu = Random.Range(5, 20);
             int mianji = Room_Data[i].area;
             List<Rect> hide_cube_1 = new List<Rect>();
             List<Rect> hide_cube_2 = new List<Rect>();
