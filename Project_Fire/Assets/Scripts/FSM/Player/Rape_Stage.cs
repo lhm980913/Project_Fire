@@ -8,6 +8,7 @@ public class Rape_Stage : Player_Base_Stage
     float time;
     Vector3 target;
     float initDistance;
+    Vector3 dir;
     public Rape_Stage()
     {
 
@@ -23,11 +24,12 @@ public class Rape_Stage : Player_Base_Stage
         initDistance = (target - playerTransform.position).sqrMagnitude;
         testplayer.Instance.anim.SetBool("AfterRope", true);
         testplayer.Instance.anim.SetBool("isThrowing", true);
+        dir =Vector3.Normalize( target - testplayer.Instance.transform.position);
     }
 
     public void Input()
     {
-        if(Vector3.Distance(testplayer.Instance.transform.position, target)<0.3f )
+        if(Vector3.Distance(testplayer.Instance.transform.position, target)<0.2f )
         {
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
             testplayer._player.SetStage(testplayer.Instance.jump_stage);

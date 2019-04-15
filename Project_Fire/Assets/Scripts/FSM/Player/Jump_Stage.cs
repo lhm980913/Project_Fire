@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Jump_Stage : Player_Base_Stage
 {
+    float jumpcount;
     public Jump_Stage()
     {
-
+        
     }
 
     public void Enter()
     {
         //testplayer.Instance.canflash = true;
         //Debug.Log("jump");
+        jumpcount = 0.25f;
     }
 
     public void Input()
@@ -47,11 +49,31 @@ public class Jump_Stage : Player_Base_Stage
 
     public void Update_()
     {
-        //if(Player_Controller_System.Instance.Horizontal_Left!=0)
+       
+        //if (Player_Controller_System.Instance.Horizontal_Left != 0)
         //{
             Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
         //}
-       
+        if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.stay || Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down)
+        {
+            if (testplayer.Instance.canjump == true)
+            {
+                jumpcount -= Time.deltaTime;
+                testplayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.up * testplayer.Instance.jump_speed + new Vector3(testplayer.Instance.GetComponent<Rigidbody>().velocity.x, 0, 0);
+                if(jumpcount<0)
+                {
+                    testplayer.Instance.canjump = false;
+                }
+            }
+        }
+        else
+        {
+            testplayer.Instance.canjump = false;
+        }
+
+
+
+
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
         Player_Function.FFace_to();
     }

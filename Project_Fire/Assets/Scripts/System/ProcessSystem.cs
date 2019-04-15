@@ -38,17 +38,16 @@ public class ProcessSystem : MonoBehaviour
     {
         if (playeratt.tag == "player_weapon")
         {
-//Enemy.FBeHurt(Enemy.LowBeatForce);
-            //if (Enemy.Stage != Enemy_Stage.Attack)
-            //{
-            //    Enemy.Stage = Enemy_Stage.Hurt;
-            //}
-            //else
-            //{
-            //    Enemy.FIsFaceToPlayer();
-            //    Enemy.FBeHurt(Enemy.LowBeatForce);
-            //}
-            //if (Enemy.atting)
+            if(Enemy.type=="lizarrd")
+            {
+                enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
+                a.enemy.SetStage(a.lizarrd_hurt_stage);
+            }
+            if (Enemy.type == "bird")
+            {
+                enemy_bird a = (enemy_bird)Enemy;
+                a.enemy.SetStage(a.bird_hurt_stage);
+            }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
         }
@@ -62,5 +61,13 @@ public class ProcessSystem : MonoBehaviour
     public void FPlayer_EnemyWeapon(testplayer Player)
     {
 
+    }
+    public void Fenemy_re(GameObject enemy)
+    {
+        if(enemy.GetComponent<enemy_lizarrd_new>())
+        {
+            enemy.GetComponentInParent<Animator>().CrossFade("lizarrd_stand1", 0.1f);
+        }
+        
     }
 }

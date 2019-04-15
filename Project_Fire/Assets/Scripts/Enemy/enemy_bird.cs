@@ -19,6 +19,7 @@ public class enemy_bird : enemy_base
     public GameObject bullet;
     private void Awake()
     {
+        type = "bird";
         if (self != this)
         {
             self = this;
@@ -94,5 +95,6 @@ public class enemy_bird : enemy_base
         
     }
 
+   
 
 }

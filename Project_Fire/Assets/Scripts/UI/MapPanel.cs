@@ -8,7 +8,7 @@ public class MapPanel : BasePanel
     {
         if (IsTop)
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab)|| Player_Controller_System.Instance.Button_Back == Player_Controller_System.Button_Stage.down)
             {
                 UIManager.Instance.PopPanel();
             }

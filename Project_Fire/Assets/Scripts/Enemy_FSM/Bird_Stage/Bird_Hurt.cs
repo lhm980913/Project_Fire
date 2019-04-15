@@ -14,11 +14,11 @@ public class Bird_Hurt : Enemy_Base_Stage
 
     public override void Enter()
     {
-
+        Debug.Log("打到鸟");
     }
     public override void Update()
     {
-
+        enemy.enemy.SetStage(enemy.bird_att_stage);
     }
 
     public override void Check()
