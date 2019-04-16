@@ -12,15 +12,15 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
 
     public override void Enter()
     {
-        base.Enter();
+        Debug.Log(11);
     }
     public override void Update()
     {
-        base.Update();
+        enemy.enemy.SetStage(enemy.lizarrd_run_stage);
     }
 
     public override void Check()
     {
-        base.Check();
+        
     }
 }

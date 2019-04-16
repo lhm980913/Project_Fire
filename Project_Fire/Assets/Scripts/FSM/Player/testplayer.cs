@@ -19,6 +19,8 @@ public class testplayer : MonoBehaviour
     public float player_att_speed;
     public float canthurtcount;
     public float hurtforce;
+    public GameObject playerwapon;
+
 
     public ParticleSystem daoguang;
     public ParticleSystem slide_dust;
@@ -53,6 +55,10 @@ public class testplayer : MonoBehaviour
     public bool canhurt = true;
     [HideInInspector]
     public bool atting = false;
+    [HideInInspector]
+    public Vector3 velocity;
+    [HideInInspector]
+    public Vector3 physic_velocity;
     // Start is called before the first frame update
 
 
@@ -60,8 +66,8 @@ public class testplayer : MonoBehaviour
     public AnimationCurve ac;
     public Animator anim;
     public GameObject moudle_player;
+    public bool canjump;
 
-   
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -73,6 +79,7 @@ public class testplayer : MonoBehaviour
 
     private void Awake()
     {
+        UIManager.Instance.PushPanel(UIBaseType.MainPanel);
         _player = new Player();
 
         stand_stage = new Stand_Stage();
@@ -103,7 +110,7 @@ public class testplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  print(Player_Controller_System.Instance.Horizontal_Left);
+       
 
 
         attcount();
@@ -124,9 +131,10 @@ public class testplayer : MonoBehaviour
         //Collider[] a = Physics.OverlapSphere(playergameobj.transform.position - new Vector3(0,0.5f,0), 0.02f,lm);
         bool a;// = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
         //a = Physics.BoxCast(transform.position, Vector3.one, -transform.up, Quaternion.identity, 0.2f, 1 << 9);
-        a = Physics.Raycast(transform.position, -transform.up, 0.8f, lm);
+        a = Physics.Raycast(transform.position-Vector3.left*0.2f, -transform.up, 0.8f, lm);
+        bool b = Physics.Raycast(transform.position + Vector3.left * 0.2f, -transform.up, 0.8f, lm);
         //Gizmos.DrawCube(transform.position , Vector3.one);
-        return a;
+        return a||b;
         //if (a.Length == 0)
         //{
         //    return false;
@@ -150,6 +158,7 @@ public class testplayer : MonoBehaviour
         // slide_dust.shape.position.Set(0.5f * face_to, -0.5f, 0.3f);
         att_up_effect.startRotation3D = new Vector3(att_up_effect.startRotation3D.x, 1.57f + -1*face_to * 1.57f, att_up_effect.startRotation3D.z);
         att_down_effect.startRotation3D = new Vector3(att_down_effect.startRotation3D.x, 1.57f + -1 * face_to * 1.57f, att_down_effect.startRotation3D.z);
+        playerwapon.transform.localRotation = Quaternion.Euler(0, -face_to*30, 0);
 
     }
     void FYspeedclamp()
@@ -191,20 +200,29 @@ public class testplayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
+        if (other.tag == "enemy_weapon" && atting)
         {
-
+            print(1110);
+            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.00001f));
+            StartCoroutine(wudi(0.2f));
+            //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
+            anim.CrossFade("att_pindao",0);
+            ProcessSystem.Instance.Fenemy_re(other.gameObject);
+            
+        }
+        if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
+        {
+            print("tmd死");
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
         }
-        if (other.tag == "enemy_weapon" && atting)
-        {
-            print(1110);
-            StartCoroutine( CameraEffectSystem.Instance.FTimeScaleControl(0.15f,0.001f));
-            StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
-            anim.Play("player_stand2");
-            other.gameObject.GetComponentInParent<Animator>().Play("stand");
-        }
+       
+    }
+   public IEnumerator wudi(float time)
+    {
+        canhurt = false;
+        yield return new WaitForSeconds(time);
+        canhurt = true;
     }
 }

@@ -226,6 +226,7 @@ public class enemy_lizarrd_new : enemy_base
     public Lizarrd_Run lizarrd_run_stage;
     private void Awake()
     {
+        type = "lizarrd";
         if(self!=this)
         {
             self = this;
@@ -277,11 +278,11 @@ public class enemy_lizarrd_new : enemy_base
     }
     public override bool FCheckFilp()
     {
-        bool a;// = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
-        a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
-        bool b;//= Physics.Raycast(transform.position, -transform.up, 2, 1 << 9);
-        b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
-        print(!b);
+        bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
+       // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
+        bool b= Physics.Raycast(transform.position + transform.up + transform.forward * 1, -transform.up, 3, 1 << 9);
+       // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
+
         return a || !b;
     }
     public override bool FAttPlayer()
@@ -324,11 +325,11 @@ public class enemy_lizarrd_new : enemy_base
 
     //}
 
-    private void OnTriggerEnter(Collider other)
-    {
+    //private void OnTriggerEnter(Collider other)
+    //{
 
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
-    }
+    //    ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
+    //}
     //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
     //{
     //    yield return new WaitForSeconds(time);

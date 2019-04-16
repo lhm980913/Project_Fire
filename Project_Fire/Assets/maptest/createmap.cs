@@ -180,7 +180,7 @@ public class createmap : MonoBehaviour
                 {
                     for (int n = i + 1; n <= i + 5; n++)
                     {
-                        for (int m = j -4; m <= j + 4; m++)
+                        for (int m = j -2; m <= j + 4; m++)
                         {
                             if(map_final[n,m]==Tiles.Door)
                             {
@@ -540,6 +540,7 @@ public class createmap : MonoBehaviour
             //print(hide_cube_2.Count);
             //生成房间内部平台
             int k = Random.Range(60,500);
+            k = 500;
             while (--k != 0)
             {
                 generate_platform(i, ref hide_cube_1);
@@ -578,8 +579,9 @@ public class createmap : MonoBehaviour
             }
             else
             {
-                map_final[x - 1, y - 1] = Tiles.Door; 
-                hide.Add(new Rect(x - 4, y - 7, x + 8, 10));
+                map_final[x - 1, y - 1] = Tiles.Door;
+                // hide.Add(new Rect(x - 4, y - 7, x + 8, 10));
+                hide.Add(new Rect(x - 2, y - 4, x + 4, 8));
             }
         }
     }
@@ -638,6 +640,7 @@ public class createmap : MonoBehaviour
             int h = Random.Range((int)(Room_Data[i].room.height * 0.1f), (int)(Room_Data[i].room.height * 0.3f));
             int x=0, y=0;
             int a = Random.Range(0, 5);
+            
             switch (a)
             {
                 //左下角
@@ -723,7 +726,17 @@ public class createmap : MonoBehaviour
                         map_final[x + w + 1, y + h] = Tiles.Door;
                     }
                 }
-             
+                if ( a == 4)
+                {
+                    if (hide_rect(new Vector2(x-1,y+h),Room_Data[i].entence_area))
+                    {
+                        map_final[x - 1, y + h] = Tiles.Door;
+                    }
+                    if (hide_rect(new Vector2(x + w + 1, y + h), Room_Data[i].entence_area))
+                    {
+                        map_final[x + w + 1, y + h] = Tiles.Door;
+                    }
+                }
                 Rect a2 = new Rect(x - 3, y - 3, w + 6, h + 6);
                 mianji -= w * h;
                 hide_1.Add(new Rect(x - 4, y - 4, w + 8, h + 8));
@@ -740,6 +753,18 @@ public class createmap : MonoBehaviour
         for(int i=0;i<a.Count;i++)
         {
             if(cube.Overlaps(a[i]))
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+    bool hide_rect(Vector2 pos, List<Rect> a)
+    {
+        for (int i = 0; i < a.Count; i++)
+        {
+            if (a[i].Contains(pos))
             {
                 return true;
             }

@@ -122,8 +122,8 @@ using UnityEngine;
 //}
 public class enemy_base : MonoBehaviour
 {
- 
 
+    public string type = "";
     public float maxhp;
     public float attfield;
     public float movespeed;
@@ -216,7 +216,7 @@ public class enemy_base : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
 
-
+        ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
 
     }
 

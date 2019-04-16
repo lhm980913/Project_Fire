@@ -9,7 +9,9 @@ public class Player_Function
     static public void FWalk(GameObject player, Player_Controller_System inp,float speed)
     {
        player.GetComponent<Rigidbody>().velocity = Vector3.right * inp.Horizontal_Left * speed + new Vector3(0, player.GetComponent<Rigidbody>().velocity.y,0);
-      //  player.gameObject.transform.Translate(Vector3.right * inp.Horizontal_Left *Time.deltaTime * speed,Space.World);
+       // player.GetComponent<Rigidbody>().velocity += Vector3.right * inp.Horizontal_Left * speed + new Vector3(0, player.GetComponent<Rigidbody>().velocity.y, 0);
+        //  player.gameObject.transform.Translate(Vector3.right * inp.Horizontal_Left *Time.deltaTime * speed,Space.World);
+
     }
     static public void FStop(GameObject player)
     {
@@ -17,7 +19,13 @@ public class Player_Function
     }
    static public void FJump(GameObject player , float jump_speed)
     {
+       // player.GetComponent<Rigidbody>().velocity += Vector3.up * jump_speed;
         player.GetComponent<Rigidbody>().velocity += Vector3.up * jump_speed;
+    }
+    static public void FJump(GameObject player, float jump_speed,Vector3 dir)
+    {
+        //player.GetComponent<Rigidbody>().velocity += dir * jump_speed;
+        player.GetComponent<Rigidbody>().velocity += dir * jump_speed;
     }
     static public void FFlash(GameObject player,AnimationCurve ac,float speed,float time,int faceto)
     {
@@ -45,4 +53,5 @@ public class Player_Function
         a += Time.deltaTime;
         player.transform.position = Vector3.Lerp(player_begin_pos,target,a* speed);
     }
+
 }

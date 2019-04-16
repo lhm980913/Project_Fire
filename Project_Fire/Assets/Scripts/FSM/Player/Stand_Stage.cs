@@ -27,7 +27,9 @@ public class Stand_Stage :  Player_Base_Stage
         }
         if (Player_Controller_System.Instance.Button_A==Player_Controller_System.Button_Stage.down&&testplayer.Instance.grounded)
         {
-            Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
+            // Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
+            //testplayer.Instance.StartCoroutine(testplayer.Instance.Jump(testplayer.Instance.playergameobj, 7));
+            testplayer.Instance.canjump = true;
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
         }
         if (!testplayer.Instance.grounded)
