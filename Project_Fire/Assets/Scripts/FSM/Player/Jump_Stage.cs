@@ -14,7 +14,7 @@ public class Jump_Stage : Player_Base_Stage
     {
         //testplayer.Instance.canflash = true;
         //Debug.Log("jump");
-        jumpcount = 0.25f;
+        //jumpcount = 0.25f;
     }
 
     public void Input()
@@ -24,6 +24,12 @@ public class Jump_Stage : Player_Base_Stage
         //    Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.jump_speed);
         //    testplayer._player.SetStage(testplayer.Instance.jump_stage);
         //}
+        if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down && testplayer.Instance.doublejump)
+        {
+            Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.doublejump_speed);
+            testplayer.Instance.doublejump = false;
+            testplayer._player.SetStage(testplayer.Instance.doublejump_stage);
+        }
         if (testplayer.Instance.grounded)
         {
             
@@ -54,22 +60,22 @@ public class Jump_Stage : Player_Base_Stage
         //{
             Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
         //}
-        if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.stay || Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down)
-        {
-            if (testplayer.Instance.canjump == true)
-            {
-                jumpcount -= Time.deltaTime;
-                testplayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.up * testplayer.Instance.jump_speed + new Vector3(testplayer.Instance.GetComponent<Rigidbody>().velocity.x, 0, 0);
-                if(jumpcount<0)
-                {
-                    testplayer.Instance.canjump = false;
-                }
-            }
-        }
-        else
-        {
-            testplayer.Instance.canjump = false;
-        }
+        //if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.stay || Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down)
+        //{
+        //    if (testplayer.Instance.canjump == true)
+        //    {
+        //        jumpcount -= Time.deltaTime;
+        //        testplayer.Instance.GetComponent<Rigidbody>().velocity = Vector3.up * testplayer.Instance.jump_speed + new Vector3(testplayer.Instance.GetComponent<Rigidbody>().velocity.x, 0, 0);
+        //        if(jumpcount<0)
+        //        {
+        //            testplayer.Instance.canjump = false;
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    testplayer.Instance.canjump = false;
+        //}
 
 
 

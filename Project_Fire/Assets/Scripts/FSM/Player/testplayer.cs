@@ -10,6 +10,7 @@ public class testplayer : MonoBehaviour
 
     public float speed;
     public float jump_speed;
+    public float doublejump_speed;
     public float little_jump_speed;
     public float maxflashspeed;
 
@@ -52,6 +53,8 @@ public class testplayer : MonoBehaviour
     [HideInInspector]
     public float aa;
     [HideInInspector]
+    public float aaex;
+    [HideInInspector]
     public bool canhurt = true;
     [HideInInspector]
     public bool atting = false;
@@ -60,7 +63,8 @@ public class testplayer : MonoBehaviour
     [HideInInspector]
     public Vector3 physic_velocity;
     // Start is called before the first frame update
-
+    public bool doublejump = true;
+    [HideInInspector]
 
     static public Player _player;
     public AnimationCurve ac;
@@ -76,7 +80,7 @@ public class testplayer : MonoBehaviour
     public Player_Base_Stage rape_stage;
     public Player_Base_Stage att_stage;
     public Player_Base_Stage hurt_stage;
-
+    public Player_Base_Stage doublejump_stage;
     private void Awake()
     {
         UIManager.Instance.PushPanel(UIBaseType.MainPanel);
@@ -89,7 +93,7 @@ public class testplayer : MonoBehaviour
         rape_stage = new Rape_Stage();
         att_stage = new Att_Stage();
         hurt_stage = new Hurt_Stage();
-
+        doublejump_stage = new DoubleJump_Stage();
         if (Instance==null)
         {
             Instance = this;
@@ -120,6 +124,10 @@ public class testplayer : MonoBehaviour
         FAnimation();
         
         grounded = FCheckground();
+        if(grounded)
+        {
+            doublejump = true;
+        }
 
         FYspeedclamp();
 
@@ -189,7 +197,8 @@ public class testplayer : MonoBehaviour
         {
 
             aa -= Time.deltaTime;
-            if(aa<0)
+            aaex -= Time.deltaTime;
+            if (aa<0)
             {
                 canatt = true;
             }
@@ -207,6 +216,7 @@ public class testplayer : MonoBehaviour
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             anim.CrossFade("att_pindao",0);
+            aaex = 0.2f;
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             
         }

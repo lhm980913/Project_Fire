@@ -33,7 +33,8 @@ public class Player_Function
    static public void FJump(GameObject player , float jump_speed)
     {
        // player.GetComponent<Rigidbody>().velocity += Vector3.up * jump_speed;
-        player.GetComponent<Rigidbody>().velocity += Vector3.up * jump_speed;
+        //player.GetComponent<Rigidbody>().velocity += Vector3.up * jump_speed;
+        player.GetComponent<Rigidbody>().velocity = Vector3.up * jump_speed + new Vector3(player.GetComponent<Rigidbody>().velocity.x, 0, 0); ;
     }
     static public void FJump(GameObject player, float jump_speed,Vector3 dir)
     {

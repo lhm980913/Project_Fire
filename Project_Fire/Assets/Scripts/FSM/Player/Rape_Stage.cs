@@ -16,6 +16,7 @@ public class Rape_Stage : Player_Base_Stage
 
     public void Enter()
     {
+       
         Debug.Log("rape");
         playerTransform = testplayer.Instance.playergameobj.transform;
         time = 0;
@@ -25,6 +26,14 @@ public class Rape_Stage : Player_Base_Stage
         testplayer.Instance.anim.SetBool("AfterRope", true);
         testplayer.Instance.anim.SetBool("isThrowing", true);
         dir =Vector3.Normalize( target - testplayer.Instance.transform.position);
+        if (target.x - testplayer.Instance.transform.position.x < 0)
+        {
+            testplayer.Instance.face_to = -1;
+        }
+        else
+        {
+            testplayer.Instance.face_to = 1;
+        }
     }
 
     public void Input()
