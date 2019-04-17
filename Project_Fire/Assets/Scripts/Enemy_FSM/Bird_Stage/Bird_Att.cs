@@ -14,7 +14,7 @@ public class Bird_Att : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 1.8f;
+        count = 2f;
         // enemy.anim.CrossFade("lizarrd_att", 0.2f);
         Debug.Log("att");
         enemy.Fatt();

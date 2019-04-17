@@ -51,7 +51,11 @@ public class Att_Stage : Player_Base_Stage
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
         }
-      
+        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        {
+            testplayer.Instance.atting = false;
+            testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        }
     }
 
     // Update is called once per frame

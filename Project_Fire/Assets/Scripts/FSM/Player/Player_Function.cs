@@ -8,7 +8,20 @@ public class Player_Function
 
     static public void FWalk(GameObject player, Player_Controller_System inp,float speed)
     {
-       player.GetComponent<Rigidbody>().velocity = Vector3.right * inp.Horizontal_Left * speed + new Vector3(0, player.GetComponent<Rigidbody>().velocity.y,0);
+        int a = 0;
+        if (inp.Horizontal_Left > 0)
+        {
+            a = 1;
+        }
+        else if (inp.Horizontal_Left < 0)
+        {
+            a = -1;
+        }
+        else
+        {
+            a = 0;
+        }
+       player.GetComponent<Rigidbody>().velocity = Vector3.right * a * speed + new Vector3(0, player.GetComponent<Rigidbody>().velocity.y,0);
        // player.GetComponent<Rigidbody>().velocity += Vector3.right * inp.Horizontal_Left * speed + new Vector3(0, player.GetComponent<Rigidbody>().velocity.y, 0);
         //  player.gameObject.transform.Translate(Vector3.right * inp.Horizontal_Left *Time.deltaTime * speed,Space.World);
 
