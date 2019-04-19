@@ -124,6 +124,7 @@ public class testplayer : MonoBehaviour
         FYspeedclamp();
 
         _player.Update();
+
     }
     bool FCheckground()
     {
@@ -198,11 +199,16 @@ public class testplayer : MonoBehaviour
         }
     }
 
+    private void FActiveRune()
+    {
+        RuneManager.Instance.UseRune(RuneEvent.Active);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy_weapon" && atting)
         {
-            print(1110);
+            //print(1110);
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.00001f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
@@ -212,7 +218,7 @@ public class testplayer : MonoBehaviour
         }
         if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
         {
-            print("tmd死");
+            //print("tmd死");
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);

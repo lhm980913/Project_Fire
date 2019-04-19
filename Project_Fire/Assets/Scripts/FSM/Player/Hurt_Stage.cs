@@ -13,7 +13,7 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Enter()
     {
-        Debug.Log("hurt");
+        //Debug.Log("hurt");
         enemypos = testplayer.Instance.enemypos;
         testplayer.Instance.canhurt = false;
         if (enemypos.x-testplayer.Instance.transform.position.x<0)

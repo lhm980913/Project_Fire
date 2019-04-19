@@ -34,7 +34,7 @@ public class ProcessSystem : MonoBehaviour
 
     }
 
-    public void FPlayerWeapon_Enemy(WeaponSystem PlayerWeapon, Collider playeratt, enemy_base Enemy)
+    public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
         if (playeratt.tag == "player_weapon")
         {
@@ -50,6 +50,7 @@ public class ProcessSystem : MonoBehaviour
             }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
+            RuneManager.Instance.UseRune(RuneEvent.OnAttack);
         }
 
 
