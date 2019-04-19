@@ -216,7 +216,7 @@ public class enemy_base : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
 
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
+        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
     }
 

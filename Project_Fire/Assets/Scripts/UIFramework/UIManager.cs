@@ -88,6 +88,14 @@ public class UIManager
         top.OnResume();
     }
 
+    //更换Rune
+    public void ExangeRune(RuneEntity entity)
+    {
+        PushPanel(UIBaseType.ExchangePanel);
+        ExchangePanel temp = (ExchangePanel)panelStack.Peek();
+        temp.PickedRune = entity.rune;
+    }
+
     public BasePanel GetPanel(UIBaseType type)
     {
         if(Panels == null)

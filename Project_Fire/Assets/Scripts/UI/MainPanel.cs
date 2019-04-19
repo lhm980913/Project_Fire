@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainPanel : BasePanel
 {
+    public GameObject[] RuneImages = new GameObject[4];
     private void Update()
     {
         if (IsTop)
