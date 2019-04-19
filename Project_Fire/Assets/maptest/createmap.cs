@@ -168,7 +168,7 @@ public class createmap : MonoBehaviour
         del_door();
         ///////////////////////
         InstanceMap();
-       // generate_decorate();
+        generate_decorate();
     }
     void del_door()
     {
@@ -205,9 +205,9 @@ public class createmap : MonoBehaviour
                 {
                     if(map_final[i,j+1]==Tiles.Room|| map_final[i, j] == Tiles.Door || map_final[i, j] == Tiles.Floor)
                     {
-                        if(Random.Range(0,100)<40)
+                        if(Random.Range(0,100)<20)
                         {
-                            GameObject dec = Instantiate(decorate[Random.Range(0, 27)], new Vector3(i, j+1, 0), Quaternion.identity);
+                            GameObject dec = Instantiate(decorate[Random.Range(0, 3)], new Vector3(i, j+1, 0), Quaternion.identity);
                             dec.transform.SetParent(mapParent);
                             dec.layer = LayerMask.NameToLayer("decorate");
                             //GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;

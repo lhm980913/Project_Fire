@@ -9972,14 +9972,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327f146ed5736514f9c68c44cc25ced1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jump_speed: 11
+  speed: 8
+  jump_speed: 15
+  doublejump_speed: 10
   little_jump_speed: 11
   maxflashspeed: 25
   rapelength: 5
   rapespeed: 2
   ymaxspeed: -15
-  player_att_speed: 0.3
+  player_att_speed: 0.35
   canthurtcount: 2
   hurtforce: 3
   playerwapon: {fileID: 7390599888144768758}
@@ -10004,6 +10005,7 @@ MonoBehaviour:
   atting: 0
   velocity: {x: 0, y: 0, z: 0}
   physic_velocity: {x: 0, y: 0, z: 0}
+  doublejump: 1
   ac:
     serializedVersion: 2
     m_Curve:

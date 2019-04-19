@@ -26,7 +26,7 @@ public class Att_Stage : Player_Base_Stage
         }
         else if(Player_Controller_System.Instance.Vertical_Left <-0.7 &&!testplayer.Instance.grounded)
         {
-            testplayer.Instance.anim.SetTrigger("att_down");
+            testplayer.Instance.anim.SetTrigger("att1");
         }
         else
         {
@@ -51,7 +51,12 @@ public class Att_Stage : Player_Base_Stage
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
         }
-      
+        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        {
+            testplayer.Instance.atting = false;
+            testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        }
+
     }
 
     // Update is called once per frame
