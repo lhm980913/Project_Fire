@@ -15,6 +15,7 @@ public class Bird_Hurt : Enemy_Base_Stage
     public override void Enter()
     {
         Debug.Log("打到鸟");
+        enemy.hurt_count = enemy.hurt_yuzhi;
     }
     public override void Update()
     {

@@ -13,10 +13,12 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
     public override void Enter()
     {
         Debug.Log(11);
+        enemy.hurt_count = enemy.hurt_yuzhi;
+
     }
     public override void Update()
     {
-        enemy.enemy.SetStage(enemy.lizarrd_run_stage);
+        enemy.enemy.SetStage(enemy.lizarrd_walk_stage);
     }
 
     public override void Check()

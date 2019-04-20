@@ -238,6 +238,7 @@ public class enemy_lizarrd_new : enemy_base
         lizarrd_run_stage = new Lizarrd_Run(self);
         lizarrd_walk_stage = new Lizarrd_Walk(self);
 
+        hurt_count = hurt_yuzhi;
         enemy = new Enemy(lizarrd_walk_stage);
     }
     private void Start()
@@ -257,6 +258,9 @@ public class enemy_lizarrd_new : enemy_base
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
+
+        
+
     }
 
 
@@ -325,11 +329,33 @@ public class enemy_lizarrd_new : enemy_base
 
     //}
 
-    //private void OnTriggerEnter(Collider other)
+    //public override void OnTriggerEnter(Collider other)
     //{
 
-    //    ProcessSystem.Instance.FPlayerWeapon_Enemy(WeaponSystem.instance, other, this);
+    //    ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
     //}
+    protected override void OnTriggerEnter(Collider other)
+    {
+
+        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        StartCoroutine(filp());
+    }
+
+
+    IEnumerator filp()
+    {
+        yield return new WaitForSeconds(Random.Range(0, 0.6f));
+        if(testplayer.Instance.transform.position.x-this.transform.position.x>0&&faceto==-1)
+        {
+            faceto *= -1;
+        }
+        else if(testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
+        {
+            faceto *= -1;
+        }
+        StopAllCoroutines();
+    }
+
     //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
     //{
     //    yield return new WaitForSeconds(time);
@@ -346,4 +372,4 @@ public class enemy_lizarrd_new : enemy_base
 
 
 
-    }
+}
