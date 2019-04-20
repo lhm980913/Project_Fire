@@ -338,23 +338,22 @@ public class enemy_lizarrd_new : enemy_base
     {
 
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
-        StartCoroutine(filp());
+
+        if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage)
+        {
+            if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
+            {
+                faceto *= -1;
+            }
+            else if (testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
+            {
+                faceto *= -1;
+            }
+        }
+       
     }
 
 
-    IEnumerator filp()
-    {
-        yield return new WaitForSeconds(Random.Range(0, 0.6f));
-        if(testplayer.Instance.transform.position.x-this.transform.position.x>0&&faceto==-1)
-        {
-            faceto *= -1;
-        }
-        else if(testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
-        {
-            faceto *= -1;
-        }
-        StopAllCoroutines();
-    }
 
     //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
     //{
