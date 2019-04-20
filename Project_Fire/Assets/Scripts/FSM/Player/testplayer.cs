@@ -231,7 +231,7 @@ public class testplayer : MonoBehaviour
             //print("tmd死");
             enemypos = other.transform.position;
             atting = false;
-            //_player.SetStage(hurt_stage);
+            _player.SetStage(hurt_stage);
         }
        
     }
