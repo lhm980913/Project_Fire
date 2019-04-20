@@ -52,9 +52,8 @@ public class ProcessSystem : MonoBehaviour
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
             RuneManager.Instance.UseRune(RuneEvent.OnAttack);
         }
-
-
     }
+
     public void FPlayerWeapon_EnemyWeapon(playerweapon PlayerWeapon)
     {
        
