@@ -129,6 +129,8 @@ public class enemy_base : MonoBehaviour
     public float movespeed;
     public float visionfield;
     public float beattforce;
+    public float hurt_count;
+    public float hurt_yuzhi;
     public bool atting = false;
     public Animator anim;
 

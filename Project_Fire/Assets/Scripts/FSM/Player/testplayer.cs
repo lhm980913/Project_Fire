@@ -53,6 +53,8 @@ public class testplayer : MonoBehaviour
     [HideInInspector]
     public float aa;
     [HideInInspector]
+    public float player_attack;
+    [HideInInspector]
     public float aaex;
     [HideInInspector]
     public bool canhurt = true;
@@ -102,6 +104,7 @@ public class testplayer : MonoBehaviour
         playergameobj = this.gameObject;
         aa = player_att_speed;
         canhurt = true;
+        player_attack = 100;
     }
 
     void Start()
@@ -231,7 +234,7 @@ public class testplayer : MonoBehaviour
             //print("tmd死");
             enemypos = other.transform.position;
             atting = false;
-            //_player.SetStage(hurt_stage);
+            _player.SetStage(hurt_stage);
         }
        
     }

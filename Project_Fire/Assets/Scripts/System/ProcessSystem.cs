@@ -41,12 +41,24 @@ public class ProcessSystem : MonoBehaviour
             if(Enemy.type=="lizarrd")
             {
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
-                a.enemy.SetStage(a.lizarrd_hurt_stage);
+                a.hurt_count -= testplayer.Instance.player_attack;
+                a.Hp -= testplayer.Instance.player_attack;
+                if (a.hurt_count<0)
+                {
+                    a.enemy.SetStage(a.lizarrd_hurt_stage);
+                }
+                
             }
             if (Enemy.type == "bird")
             {
                 enemy_bird a = (enemy_bird)Enemy;
-                a.enemy.SetStage(a.bird_hurt_stage);
+                a.hurt_count -= testplayer.Instance.player_attack;
+                a.Hp -= testplayer.Instance.player_attack;
+                if (a.hurt_count < 0)
+                {
+                    a.enemy.SetStage(a.bird_hurt_stage);
+                }
+               
             }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());

@@ -30,6 +30,9 @@ public class enemy_bird : enemy_base
         bird_move_stage = new Bird_Move(self);
         bird_stand_stage = new Bird_Stand(self);
 
+
+        hurt_count = hurt_yuzhi;
+
         enemy = new Enemy(bird_stand_stage);
     }
     private void Start()
