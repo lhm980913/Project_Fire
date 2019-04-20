@@ -21,7 +21,8 @@ public class testplayer : MonoBehaviour
     public float canthurtcount;
     public float hurtforce;
     public GameObject playerwapon;
-
+   
+    public float player_attack;
 
     public ParticleSystem daoguang;
     public ParticleSystem slide_dust;
@@ -52,8 +53,7 @@ public class testplayer : MonoBehaviour
     public bool canrape;
     [HideInInspector]
     public float aa;
-    [HideInInspector]
-    public float player_attack;
+ 
     [HideInInspector]
     public float aaex;
     [HideInInspector]
@@ -83,6 +83,7 @@ public class testplayer : MonoBehaviour
     public Player_Base_Stage att_stage;
     public Player_Base_Stage hurt_stage;
     public Player_Base_Stage doublejump_stage;
+    public Player_Base_Stage attex_stage;
     private void Awake()
     {
         UIManager.Instance.PushPanel(UIBaseType.MainPanel);
@@ -96,6 +97,7 @@ public class testplayer : MonoBehaviour
         att_stage = new Att_Stage();
         hurt_stage = new Hurt_Stage();
         doublejump_stage = new DoubleJump_Stage();
+        attex_stage = new AttEx_Stage();
         if (Instance==null)
         {
             Instance = this;
@@ -104,7 +106,7 @@ public class testplayer : MonoBehaviour
         playergameobj = this.gameObject;
         aa = player_att_speed;
         canhurt = true;
-        player_attack = 100;
+        
     }
 
     void Start()
@@ -196,6 +198,13 @@ public class testplayer : MonoBehaviour
     }
     void attcount()
     {
+        if(aaex>0)
+        {
+            if(Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+            {
+                _player.SetStage(attex_stage);
+            }
+        }
         
         if(!canatt)
         {
@@ -224,8 +233,9 @@ public class testplayer : MonoBehaviour
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.00001f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
-            anim.CrossFade("att_pindao",0);
-            aaex = 0.2f;
+            //anim.CrossFade("att_pindao",0);
+            anim.CrossFade("player_tangfan1", 0);
+            aaex = 0.4f;
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             
         }

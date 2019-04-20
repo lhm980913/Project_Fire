@@ -33,10 +33,10 @@ public class AttEx_Stage : Player_Base_Stage
         //{
         //    testplayer.Instance.anim.SetTrigger("att1");
         //}
+        testplayer.Instance.anim.CrossFade("player_attack3", 0.1f);
+       // testplayer.Instance.anim.SetTrigger("att1");
         
-        testplayer.Instance.anim.SetTrigger("att1");
-        
-        ttt = 0.3f;
+        ttt = 0.6f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
