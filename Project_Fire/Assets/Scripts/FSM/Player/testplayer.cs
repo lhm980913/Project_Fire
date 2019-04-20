@@ -119,9 +119,6 @@ public class testplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
-
         attcount();
         FFilp();
 
@@ -138,6 +135,10 @@ public class testplayer : MonoBehaviour
 
         _player.Update();
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            FActiveRune();
+        }
     }
     bool FCheckground()
     {
@@ -253,5 +254,10 @@ public class testplayer : MonoBehaviour
         canhurt = false;
         yield return new WaitForSeconds(time);
         canhurt = true;
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position + Vector3.right * face_to * 2.0f * 0.6f, new Vector3(2.0f, 1.0f, 1.0f));
     }
 }

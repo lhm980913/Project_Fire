@@ -48,19 +48,18 @@ public class testRune : Rune
 
 public class XianDan : Rune
 {
-    Transform playerTransform;
+    testplayer player;
     public XianDan(RuneEntity runeEntity) : base(runeEntity)
     {
         runeEvent = RuneEvent.Active;
         this.name = "XianDan";
         this.runeEntity = runeEntity;
-        playerTransform = testplayer.Instance.transform;
+        player = testplayer.Instance;
     }
     public override void Execute()
     {
-        Debug.Log("XianDan");
         Collider[] colliders;
-        colliders = Physics.OverlapBox(playerTransform.position + playerTransform.forward * 2.0f, new Vector3(2.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
+        colliders = Physics.OverlapBox(player.transform.position + Vector3.right * testplayer.Instance.face_to * 2.0f * 0.6f, new Vector3(2.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
         foreach (var collider in colliders)
         {
             if(collider.tag == "enemy")
@@ -71,38 +70,18 @@ public class XianDan : Rune
     }
 }
 
-//public class XianDan : activeEffect
-//{
-//    float Distance;
-//    int Damage;
+public class YinXian : Rune
+{
+    public YinXian(RuneEntity runeEntity) : base(runeEntity)
+    {
 
-//    Transform playerTransform;
+    }
 
-//    public XianDan(int damage)
-//    {
-//        callType = CallType.active;
-//        Distance = 4;
-//        playerTransform = testplayer.Instance.transform;
-//        Name = "霰弹";
-//        Damage = damage;
-//        Description = "对角色面前距离为" + Distance + "以内的敌人造成" + Damage + "的伤害，将其击飞，伤害随距离递减";
-//    }
-
-//    public override void Execute()
-//    {
-//        Transform playerTransform = testplayer.Instance.transform;
-//        Collider[] colliders;
-//        colliders = Physics.OverlapBox(playerTransform.position + playerTransform.forward * 0.5f, new Vector3(Distance / 2, 1, 1), Quaternion.identity, enemy_layermask);
-//        foreach (var collider in colliders)
-//        {
-//            if (collider.transform.tag == "Enemy")
-//            {
-//                collider.GetComponent<enemy_base>().FBeatBack();
-//                collider.GetComponent<enemy_base>().FBeHurt(Damage);
-//            }
-//        }
-//    }
-//}
+    public override void Execute()
+    {
+        throw new NotImplementedException();
+    }
+}
 
 //public class YinXian : activeEffect
 //{

@@ -9,7 +9,7 @@ public class RuneEntity : MonoBehaviour
 
     private void Awake()
     {
-        rune = new testRune(this);
+        rune = new XianDan(this);
     }
     //private void OnTriggerStay(Collider other)
     //{

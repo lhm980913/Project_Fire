@@ -68,6 +68,7 @@ public class ProcessSystem : MonoBehaviour
 
     public void FPlayerSkill_Enemy(enemy_base enemy)
     {
+        Debug.Log(enemy.name);
         if (enemy.type == "lizarrd")
         {
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;

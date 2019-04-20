@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e94760d06ba58e944854736f5a646dc4
+guid: 806c43ecbc22d184da88a8d398115a99
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -311,11 +311,10 @@ ModelImporter:
     4300040: mainbody
     4300042: pasted__GREATSWORD
     4300044: minihair1:polySurface2
-    7400000: player_jump2
-    7400002: player_Jump_Start
-    7400004: player_Jump_Raising
-    7400006: player_Jump_Falling
-    7400008: player_Jump_Down
+    7400000: player_Jump_Start
+    7400002: player_Jump_Raise
+    7400004: player_Jump_Falling
+    7400006: player_Jump_Ground
     9500000: //RootNode
     13700000: armprotect
     13700002: foxear
@@ -370,7 +369,7 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: player_Jump_Start
-      takeName: player_jump_test
+      takeName: player_jump2
       firstFrame: 1
       lastFrame: 5
       wrapMode: 0
@@ -397,10 +396,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: player_Jump_Raising
-      takeName: player_jump_test
+      name: player_Jump_Raise
+      takeName: player_jump2
       firstFrame: 5
-      lastFrame: 13
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -426,8 +425,8 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: player_Jump_Falling
-      takeName: player_jump_test
-      firstFrame: 13
+      takeName: player_jump2
+      firstFrame: 9
       lastFrame: 26
       wrapMode: 0
       orientationOffsetY: 0
@@ -453,8 +452,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: player_Jump_Down
-      takeName: player_jump_test
+      name: player_Jump_Ground
+      takeName: player_jump2
       firstFrame: 26
       lastFrame: 30
       wrapMode: 0
@@ -504,7 +503,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.099999994
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
