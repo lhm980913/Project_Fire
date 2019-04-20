@@ -30,9 +30,10 @@ public class enemy_bird : enemy_base
         bird_move_stage = new Bird_Move(self);
         bird_stand_stage = new Bird_Stand(self);
 
-
+        
         hurt_count = hurt_yuzhi;
-
+        Hp = maxhp;
+        
         enemy = new Enemy(bird_stand_stage);
     }
     private void Start()
@@ -51,6 +52,13 @@ public class enemy_bird : enemy_base
         else
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
+        }
+
+        if (Hp <= 0 && !dead)
+        {
+
+            enemy.SetStage(bird_dead_stage);
+            dead = true;
         }
     }
 
@@ -92,7 +100,7 @@ public class enemy_bird : enemy_base
     public void Fatt()
     {
 
-        print("att");
+        //print("att");
         GameObject a = Instantiate(bullet);
         a.transform.position = this.transform.position;
         

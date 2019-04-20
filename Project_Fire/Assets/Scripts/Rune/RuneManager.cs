@@ -30,6 +30,10 @@ public class RuneManager : MonoBehaviour
         {
             Debug.Log("SDSD");
         }
+        if(rune == null)
+        {
+            Debug.Log("Rune");
+        }
         if (!RunesDictionary.TryGetValue(rune.runeEvent, out temp))
         {
             RunesDictionary.Add(rune.runeEvent, new List<Rune>());
@@ -80,9 +84,20 @@ public class RuneManager : MonoBehaviour
         return false;
     }
 
-    public Sprite GetIcon(Rune rune)
+    public bool TryGetIcon(Rune rune, out Sprite sprite)
     {
-        return runePrefabs[rune.Name].Icon;
+        RunePrefab temp;
+        Debug.Log(rune);
+        if(runePrefabs.TryGetValue(rune.Name,out temp))
+        {
+            sprite = temp.Icon;
+            return true;
+        }
+        else
+        {
+            sprite = null;
+            return false;
+        }
     }
 
     [Serializable]
@@ -105,6 +120,7 @@ public class RuneManager : MonoBehaviour
 
     public Rune GetRune(int index)
     {
+        Debug.Log(runes.Length+ " " + index);
         return runes[index];
     }
 

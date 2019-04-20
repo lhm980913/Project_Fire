@@ -132,6 +132,7 @@ public class enemy_base : MonoBehaviour
     public float hurt_count;
     public float hurt_yuzhi;
     public bool atting = false;
+    public bool dead = false;
     public Animator anim;
 
     private bool canMove;
@@ -221,5 +222,8 @@ public class enemy_base : MonoBehaviour
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
     }
-
+    public virtual void destroyself()
+    {
+        Destroy(this.gameObject);
+    }
 }

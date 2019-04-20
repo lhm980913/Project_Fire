@@ -46,6 +46,7 @@ public class Player_Function
         player.GetComponent<Rigidbody>().velocity = Vector3.right * speed * ac.Evaluate(time) *faceto;
        
     }
+
     static public void FFace_to()
     {
         if (Player_Controller_System.Instance.Horizontal_Left < 0)

@@ -23,18 +23,19 @@ public class testplayer : MonoBehaviour
     public GameObject playerwapon;
    
     public float player_attack;
+    public float tanfan_time;
 
     public ParticleSystem daoguang;
     public ParticleSystem slide_dust;
     public ParticleSystem slide_dust1;
-    public ParticleSystem att_up_effect;
-    public ParticleSystem att_down_effect;
+
     public GameObject weapon;
 
     [HideInInspector]
     public Vector3 enemypos;
     [HideInInspector]
     public float flashtime;
+
     [HideInInspector]
     public GameObject playergameobj;
     [HideInInspector]
@@ -84,6 +85,7 @@ public class testplayer : MonoBehaviour
     public Player_Base_Stage hurt_stage;
     public Player_Base_Stage doublejump_stage;
     public Player_Base_Stage attex_stage;
+    public Player_Base_Stage tanfan_stage;
     private void Awake()
     {
         UIManager.Instance.PushPanel(UIBaseType.MainPanel);
@@ -98,6 +100,7 @@ public class testplayer : MonoBehaviour
         hurt_stage = new Hurt_Stage();
         doublejump_stage = new DoubleJump_Stage();
         attex_stage = new AttEx_Stage();
+        tanfan_stage = new Tanfan_stage();
         if (Instance==null)
         {
             Instance = this;
@@ -171,8 +174,7 @@ public class testplayer : MonoBehaviour
         slide_dust1.startRotation3D = new Vector3(slide_dust1.startRotation3D.x, 1.57f + face_to * 1.57f, slide_dust1.startRotation3D.z);
         //slide_dust.shape.position = new Vector3(0.5f*face_to, 0.5f, 0.3f);
         // slide_dust.shape.position.Set(0.5f * face_to, -0.5f, 0.3f);
-        att_up_effect.startRotation3D = new Vector3(att_up_effect.startRotation3D.x, 1.57f + -1*face_to * 1.57f, att_up_effect.startRotation3D.z);
-        att_down_effect.startRotation3D = new Vector3(att_down_effect.startRotation3D.x, 1.57f + -1 * face_to * 1.57f, att_down_effect.startRotation3D.z);
+      
         playerwapon.transform.localRotation = Quaternion.Euler(0, -face_to*30, 0);
 
     }
@@ -185,7 +187,7 @@ public class testplayer : MonoBehaviour
     }
     void FAnimation()
     {
-        anim.SetBool("atting", atting);
+       // anim.SetBool("atting", atting);
         anim.SetFloat("jumpSpeed", playergameobj.GetComponent<Rigidbody>().velocity.y);
         if (Mathf.Abs(playergameobj.GetComponent<Rigidbody>().velocity.x) > 0.001)
         {
@@ -199,19 +201,13 @@ public class testplayer : MonoBehaviour
     }
     void attcount()
     {
-        if(aaex>0)
-        {
-            if(Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
-            {
-                _player.SetStage(attex_stage);
-            }
-        }
+
         
         if(!canatt)
         {
 
             aa -= Time.deltaTime;
-            aaex -= Time.deltaTime;
+          //  aaex -= Time.deltaTime;
             if (aa<0)
             {
                 canatt = true;
@@ -235,8 +231,9 @@ public class testplayer : MonoBehaviour
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
-            anim.CrossFade("player_tangfan1", 0);
-            aaex = 0.4f;
+            _player.SetStage(tanfan_stage);
+            
+           // aaex = 0.4f;
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             
         }

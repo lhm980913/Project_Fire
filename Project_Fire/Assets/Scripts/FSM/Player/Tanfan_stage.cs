@@ -2,30 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttEx_Stage : Player_Base_Stage
+public class Tanfan_stage : Player_Base_Stage
 {
     float ttt = 0.3f;
     bool atttarget;
-    public AttEx_Stage()
+    public Tanfan_stage()
     {
 
     }
     public void Enter()
     {
         Debug.Log("att");
-        testplayer.Instance.atting = false;
+       
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
         //if (Player_Controller_System.Instance.Vertical_Left < 0.7 && Player_Controller_System.Instance.Vertical_Left > -0.7)
         //{
         //    testplayer.Instance.anim.SetTrigger("att1");
-        //}
-        //else if (Player_Controller_System.Instance.Vertical_Left > 0.7)
+        //}else if(Player_Controller_System.Instance.Vertical_Left > 0.7)
         //{
         //    testplayer.Instance.anim.SetTrigger("att_up");
         //}
-        //else if (Player_Controller_System.Instance.Vertical_Left < -0.7 && !testplayer.Instance.grounded)
+        //else if(Player_Controller_System.Instance.Vertical_Left <-0.7 &&!testplayer.Instance.grounded)
         //{
         //    testplayer.Instance.anim.SetTrigger("att1");
         //}
@@ -33,10 +32,11 @@ public class AttEx_Stage : Player_Base_Stage
         //{
         //    testplayer.Instance.anim.SetTrigger("att1");
         //}
-        testplayer.Instance.anim.CrossFade("player_attack3", 0.1f);
-       // testplayer.Instance.anim.SetTrigger("att1");
-        
-        ttt = 0.6f;
+        testplayer.Instance.anim.CrossFade("player_tangfan1", 0f);
+      
+
+
+        ttt = 0.5f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
@@ -57,7 +57,10 @@ public class AttEx_Stage : Player_Base_Stage
             testplayer.Instance.atting = false;
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
         }
-
+        if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+        {
+            testplayer._player.SetStage(testplayer.Instance.attex_stage);
+        }
     }
 
     // Update is called once per frame

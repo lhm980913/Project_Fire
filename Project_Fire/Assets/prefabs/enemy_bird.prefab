@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 
-  maxhp: 0
+  maxhp: 200
   attfield: 0
   movespeed: 3
   visionfield: 4
@@ -84,6 +84,7 @@ MonoBehaviour:
   hurt_count: 0
   hurt_yuzhi: 90
   atting: 0
+  dead: 0
   anim: {fileID: 0}
   faceto: 1
   player_layermask:

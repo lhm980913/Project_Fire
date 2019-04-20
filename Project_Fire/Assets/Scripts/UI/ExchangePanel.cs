@@ -17,8 +17,11 @@ public class ExchangePanel : BasePanel
         base.OnEnter();
         for(int index = 0; index < RuneImages.Length; index++)
         {
-            PickedRuneImage.GetComponent<Image>().sprite = RuneManager.Instance.GetIcon(RuneManager.Instance.GetRune(index));
-            RuneImages[index].GetComponent<Image>().sprite = RuneManager.Instance.GetIcon(RuneManager.Instance.GetRune(index));
+            Sprite temp;
+            if(RuneManager.Instance.TryGetIcon(RuneManager.Instance.GetRune(index), out temp))
+            {
+                RuneImages[index].GetComponent<Image>().sprite = temp;
+            }
         }
     }
 
@@ -48,6 +51,10 @@ public class ExchangePanel : BasePanel
     {
         Rune temp = RuneManager.Instance.GetRune(index);
         RuneManager.Instance.DeleteRune(temp);
+        if(PickedRune == null)
+        {
+            Debug.Log("PickedRune");
+        }
         RuneManager.Instance.AddRune(PickedRune);
 
         temp.runeEntity.gameObject.SetActive(true);

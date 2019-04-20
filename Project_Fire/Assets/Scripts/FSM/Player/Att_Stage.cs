@@ -5,6 +5,7 @@ using UnityEngine;
 public class Att_Stage : Player_Base_Stage
 {
     float ttt = 0.3f;
+    float attcount;
     bool atttarget;
     public Att_Stage()
     {
@@ -35,7 +36,7 @@ public class Att_Stage : Player_Base_Stage
         testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
         testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
 
-
+        attcount = testplayer.Instance.tanfan_time;
         ttt = 0.3f;
 
 
@@ -45,6 +46,13 @@ public class Att_Stage : Player_Base_Stage
 
     public void Input()
     {
+        attcount -= Time.deltaTime;
+
+        if(attcount<0)
+        {
+            testplayer.Instance.atting = false;
+        }
+
         Player_Function.FStop(testplayer.Instance.playergameobj);
         ttt -= Time.deltaTime;
         if(ttt<0)

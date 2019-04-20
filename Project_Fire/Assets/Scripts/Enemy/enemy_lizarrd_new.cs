@@ -238,6 +238,7 @@ public class enemy_lizarrd_new : enemy_base
         lizarrd_run_stage = new Lizarrd_Run(self);
         lizarrd_walk_stage = new Lizarrd_Walk(self);
 
+        Hp = maxhp;
         hurt_count = hurt_yuzhi;
         enemy = new Enemy(lizarrd_walk_stage);
     }
@@ -259,7 +260,12 @@ public class enemy_lizarrd_new : enemy_base
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
 
-        
+        if(Hp<=0&&!dead)
+        {
+            
+            enemy.SetStage(lizarrd_dead_stage);
+            dead = true;
+        }
 
     }
 

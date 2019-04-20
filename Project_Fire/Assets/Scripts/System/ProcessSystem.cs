@@ -43,7 +43,7 @@ public class ProcessSystem : MonoBehaviour
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack;
                 a.Hp -= testplayer.Instance.player_attack;
-                if (a.hurt_count<0)
+                if (a.hurt_count<0&&!a.dead)
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
                 }
@@ -54,7 +54,7 @@ public class ProcessSystem : MonoBehaviour
                 enemy_bird a = (enemy_bird)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack;
                 a.Hp -= testplayer.Instance.player_attack;
-                if (a.hurt_count < 0)
+                if (a.hurt_count < 0&&!a.dead)
                 {
                     a.enemy.SetStage(a.bird_hurt_stage);
                 }
