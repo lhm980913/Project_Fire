@@ -6,6 +6,11 @@ public class Tanfan_stage : Player_Base_Stage
 {
     float ttt = 0.3f;
     bool atttarget;
+
+
+    float inputcount;
+    bool nextatt = false;
+
     public Tanfan_stage()
     {
 
@@ -33,8 +38,8 @@ public class Tanfan_stage : Player_Base_Stage
         //    testplayer.Instance.anim.SetTrigger("att1");
         //}
         testplayer.Instance.anim.CrossFade("player_tangfan1", 0f);
-      
-
+        nextatt = false;
+        inputcount = 0.3f;
 
         ttt = 0.5f;
 
@@ -57,7 +62,16 @@ public class Tanfan_stage : Player_Base_Stage
             testplayer.Instance.atting = false;
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
         }
+        inputcount -= Time.deltaTime;
+       
+        
+
         if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+        {
+            nextatt = true;
+            
+        }
+        if (inputcount < 0 && nextatt)
         {
             testplayer._player.SetStage(testplayer.Instance.attex_stage);
         }
@@ -66,6 +80,7 @@ public class Tanfan_stage : Player_Base_Stage
     // Update is called once per frame
     public void Update_()
     {
+        
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
 
     }
