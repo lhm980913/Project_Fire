@@ -66,6 +66,34 @@ public class ProcessSystem : MonoBehaviour
         }
     }
 
+    public void FPlayerSkill_Enemy(enemy_base enemy)
+    {
+        if (enemy.type == "lizarrd")
+        {
+            enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
+            a.hurt_count -= testplayer.Instance.player_attack;
+            a.Hp -= testplayer.Instance.player_attack;
+            if (a.hurt_count < 0)
+            {
+                a.enemy.SetStage(a.lizarrd_hurt_stage);
+            }
+
+        }
+        if (enemy.type == "bird")
+        {
+            enemy_bird a = (enemy_bird)enemy;
+            a.hurt_count -= testplayer.Instance.player_attack;
+            a.Hp -= testplayer.Instance.player_attack;
+            if (a.hurt_count < 0)
+            {
+                a.enemy.SetStage(a.bird_hurt_stage);
+            }
+
+        }
+        StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
+        StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
+    }
+
     public void FPlayerWeapon_EnemyWeapon(playerweapon PlayerWeapon)
     {
        

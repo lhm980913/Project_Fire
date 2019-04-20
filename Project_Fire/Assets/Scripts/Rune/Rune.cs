@@ -63,7 +63,10 @@ public class XianDan : Rune
         colliders = Physics.OverlapBox(playerTransform.position + playerTransform.forward * 2.0f, new Vector3(2.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
         foreach (var collider in colliders)
         {
-            //
+            if(collider.tag == "enemy")
+            {
+                ProcessSystem.Instance.FPlayerSkill_Enemy(collider.gameObject.GetComponent<enemy_base>());
+            }
         }
     }
 }
