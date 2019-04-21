@@ -225,20 +225,21 @@ public class testplayer : MonoBehaviour
     {
         if (other.tag == "enemy_weapon" && atting)
         {
-            //print(1110);
-            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.00001f));
+            ProcessSystem.Instance.Fenemy_re(other.gameObject);
+           
+            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
-            
-           // aaex = 0.4f;
-            ProcessSystem.Instance.Fenemy_re(other.gameObject);
+
+           
+         
             
         }
         if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
         {
-            //print("tmd死");
+            
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
