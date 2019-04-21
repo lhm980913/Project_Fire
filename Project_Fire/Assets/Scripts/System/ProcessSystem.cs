@@ -5,15 +5,17 @@ using UnityEngine;
 public class ProcessSystem : MonoBehaviour
 {
     static public ProcessSystem Instance;
+    public float pianyi;
     //public Collider player_att = null;
     //public Collider player_body = null;
     //public Collider enemy_att = null;
     //public Collider enemy_body = null;
-    public ParticleSystem att;
-    public ParticleSystem att1;
-    public ParticleSystem att2;
+    public ParticleSystem enemy_hurt1;
+    public ParticleSystem enemy_hurt2;
+    public ParticleSystem enemy_hurt3;
     public ParticleSystem att3;
-    public ParticleSystem att4;
+    public ParticleSystem att4; 
+    public ParticleSystem att5;
     private void Awake()
     {
         if(Instance == null)
@@ -41,11 +43,13 @@ public class ProcessSystem : MonoBehaviour
     {
         if (playeratt.tag == "player_weapon")
         {
-            Instantiate(att, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
-            Instantiate(att1, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
-            Instantiate(att2, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
-            Instantiate(att3, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
-            Instantiate(att4, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);
+            Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
+            Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);
+            //Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
+            //Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
+            //Instantiate(att3, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            //Instantiate(att4, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
             
             if (Enemy.type=="lizarrd")
             {
@@ -114,7 +118,13 @@ public class ProcessSystem : MonoBehaviour
     }
     public void Fenemy_re(GameObject enemy)
     {
-        if(enemy.GetComponent<enemy_lizarrd_new>())
+
+
+        Destroy(Instantiate(att3, testplayer.Instance.transform.position + pianyi*(Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+        Destroy(Instantiate(att4, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+        Destroy(Instantiate(att5, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+
+        if (enemy.GetComponent<enemy_lizarrd_new>())
         {
             enemy.GetComponentInParent<Animator>().CrossFade("lizarrd_stand1", 0.1f);
         }

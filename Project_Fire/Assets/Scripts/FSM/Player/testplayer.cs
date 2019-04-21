@@ -25,7 +25,7 @@ public class testplayer : MonoBehaviour
     public float player_attack;
     public float tanfan_time;
 
-
+  
     public GameObject weapon;
 
     [HideInInspector]

@@ -45,18 +45,29 @@ public class AttEx_Stage : Player_Base_Stage
 
     public void Input()
     {
-        Player_Function.FStop(testplayer.Instance.playergameobj);
         ttt -= Time.deltaTime;
+
+        if (ttt<0.2f)
+        {
+            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.5f,0.1f));
+           
+        }
+
+
+        Player_Function.FStop(testplayer.Instance.playergameobj);
+       
         if (ttt < 0)
         {
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
+           
             testplayer.Instance.atting = false;
         }
-        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
-        {
-            testplayer.Instance.atting = false;
-            testplayer._player.SetStage(testplayer.Instance.flash_stage);
-        }
+        //if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        //{
+        //    testplayer.Instance.atting = false;
+            
+        //    testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        //}
 
     }
 

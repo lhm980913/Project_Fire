@@ -39,9 +39,9 @@ public class Tanfan_stage : Player_Base_Stage
         //}
         testplayer.Instance.anim.CrossFade("player_tangfan1", 0f);
         nextatt = false;
-        inputcount = 0.3f;
+        inputcount = 0.6f;
 
-        ttt = 0.5f;
+        ttt = 0.7f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
@@ -52,16 +52,22 @@ public class Tanfan_stage : Player_Base_Stage
     {
         Player_Function.FStop(testplayer.Instance.playergameobj);
         ttt -= Time.deltaTime;
+
+        if (ttt < 0.55f)
+        {
+            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.1f));
+        }
+
         if (ttt < 0)
         {
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
         }
-        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
-        {
-            testplayer.Instance.atting = false;
-            testplayer._player.SetStage(testplayer.Instance.flash_stage);
-        }
+        //if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        //{
+        //    testplayer.Instance.atting = false;
+        //    testplayer._player.SetStage(testplayer.Instance.flash_stage);
+        //}
         inputcount -= Time.deltaTime;
        
         
