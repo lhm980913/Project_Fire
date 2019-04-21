@@ -9,12 +9,41 @@ public class RuneEntity : MonoBehaviour
 
     private void Awake()
     {
-        rune = new testRune(this);
+        rune = new XianDan(this);
     }
-    //private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            UIManager.Instance.PushPanel(UIBaseType.IntroducePanel, this);
+            if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+            {
+                if (RuneManager.Instance.PickUpRune(rune))
+                {
+                    this.gameObject.SetActive(false);
+                    UIManager.Instance.PopPanelIntro();
+                }
+                else
+                {
+                    UIManager.Instance.ExangeRune(this);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            UIManager.Instance.PopPanelIntro();
+        }
+    }
+
+    //private void FixedUpdate()
     //{
-    //    if (other.tag == "Player")
+    //    if (Physics.CheckSphere(transform.position, Radius, 1 << 12))
     //    {
+    //        UIManager.Instance.PushPanel(UIBaseType.IntroducePanel, this);
     //        if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
     //        {
     //            if (RuneManager.Instance.PickUpRune(rune))
@@ -23,34 +52,15 @@ public class RuneEntity : MonoBehaviour
     //            }
     //            else
     //            {
-    //                UIManager.Instance.PushPanel(UIBaseType.ExchangePanel);
+    //                UIManager.Instance.ExangeRune(this);
     //            }
-    //            //Debug.Log(Time.realtimeSinceStartup);
+    //            Debug.Log(Time.realtimeSinceStartup);
     //        }
     //    }
     //}
 
-    private void FixedUpdate()
-    {
-        if(Physics.CheckSphere(transform.position, Radius, 1 << 12))
-        {
-            if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
-            {
-                if (RuneManager.Instance.PickUpRune(rune))
-                {
-                    this.gameObject.SetActive(false);
-                }
-                else
-                {
-                    UIManager.Instance.ExangeRune(this);
-                }
-                //Debug.Log(Time.realtimeSinceStartup);
-            }
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, Radius);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(transform.position, Radius);
+    //}
 }

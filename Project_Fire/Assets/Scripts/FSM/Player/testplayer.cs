@@ -143,7 +143,7 @@ public class testplayer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            FActiveRune();
+            FActiveRuneOne();
         }
     }
     bool FCheckground()
@@ -216,9 +216,9 @@ public class testplayer : MonoBehaviour
         }
     }
 
-    private void FActiveRune()
+    private void FActiveRuneOne()
     {
-        RuneManager.Instance.UseRune(RuneEvent.Active);
+        RuneManager.Instance.UseRune(RuneEvent.ActiveOne);
     }
 
     private void OnTriggerEnter(Collider other)

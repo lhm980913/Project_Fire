@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum RuneType
+{
+    passive,
+    active
+}
+
 public abstract class Rune
 {
-    private RuneEvent rune_Event;
+    protected RuneEvent rune_Event;
     public RuneEvent runeEvent
     {
         get
         {
             return rune_Event;
         }
-        set
-        {
-            rune_Event = value;
-        }
     }
     public RuneEntity runeEntity;
+    protected RuneType rune_Type;
+    public RuneType runeType
+    {
+        get
+        {
+            return rune_Type;
+        }
+    }
     protected string name;
     public string Name
     {
@@ -30,14 +40,26 @@ public abstract class Rune
         this.runeEntity = runeEntity;
     }
     public abstract void Execute();
+    public void SetActiveEvent(int index)
+    {
+        if (rune_Event != RuneEvent.ActiveOne || rune_Event != RuneEvent.ActiveTwo)
+        {
+            return;
+        }
+        else
+        {
+            rune_Event = (RuneEvent)index;
+        }
+    }
 }
 
 public class testRune : Rune
 {
     public testRune(RuneEntity runeEntity):base(runeEntity)
     {
-        runeEvent = RuneEvent.OnAttack;
+        rune_Event = RuneEvent.OnAttack;
         this.name = "Test";
+        rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }
     public override void Execute()
@@ -51,8 +73,9 @@ public class XianDan : Rune
     testplayer player;
     public XianDan(RuneEntity runeEntity) : base(runeEntity)
     {
-        runeEvent = RuneEvent.Active;
+        rune_Event = RuneEvent.ActiveOne;
         this.name = "XianDan";
+        rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
     }
@@ -72,69 +95,44 @@ public class XianDan : Rune
 
 public class YinXian : Rune
 {
+    int Damage;
+    testplayer player;
     public YinXian(RuneEntity runeEntity) : base(runeEntity)
     {
-
+        rune_Event = RuneEvent.ActiveOne;
+        this.name = "YinXian";
+        rune_Type = RuneType.active;
+        this.runeEntity = runeEntity;
+        Damage = 4;
+        player = testplayer.Instance;
     }
 
     public override void Execute()
     {
-        throw new NotImplementedException();
+        Collider[] colliders;
+        colliders = Physics.OverlapBox(player.transform.position, new Vector3(100, 1, 1), Quaternion.identity, 1 << 11);
+        enemy_base[] enemys = new enemy_base[colliders.Length];
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            enemys[i] = colliders[i].GetComponent<enemy_base>();
+            ProcessSystem.Instance.FPlayerSkill_Enemy(enemys[i]);
+        }
+        RuneManager.Instance.StartCoroutine(buffer(enemys));
+    }
+
+    public IEnumerator<YieldInstruction> buffer(enemy_base[] enemys)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            foreach (var enemy in enemys)
+            {
+                enemy.FBeHurt(Damage);
+            }
+            yield return new WaitForSeconds(0.25f);
+        }
+        
     }
 }
-
-//public class YinXian : activeEffect
-//{
-//    float Duration;
-//    float Intervals;
-//    int Damage;
-
-//    Transform playerTransform;
-
-//    public YinXian(int damage)
-//    {
-//        callType = CallType.active;
-//        Duration = 0.75f;
-//        Intervals = 0.25f;
-//        Damage = damage;
-//        playerTransform = testplayer.Instance.transform;
-//        Name = "银线";
-//        Description = "将与主角同一水平面的所有敌人定身，持续" + Duration + "秒，每" + Intervals + "秒对敌人造成" + Damage + "点伤害";
-//    }
-
-//    public override void Execute()
-//    {
-
-//        Collider[] colliders;
-//        colliders = Physics.OverlapBox(playerTransform.position, new Vector3(100,1,1), Quaternion.identity, enemy_layermask);
-//        enemy_base[] enemys = new enemy_base[colliders.Length];
-//        for (int i = 0; i < colliders.Length; i++)
-//        {
-//            enemys[i] = colliders[i].GetComponent<enemy_base>();
-//            enemys[i].FDisableMove();
-//        }
-//        WeaponSystem.instance.StartCoroutine(Disable(enemys));
-//    }
-
-//    private IEnumerator<YieldInstruction> Disable(enemy_base[] enemys)
-//    {
-//        float time = 0;
-//        while(time < Duration)
-//        {
-//            foreach (var enemy in enemys)
-//            {
-//                enemy.FBeHurt(Damage);
-//            }
-//            yield return new WaitForSeconds(Intervals);
-//        }
-//        foreach (var enemy in enemys)
-//        {
-//            enemy.FEnableMove();
-//        }
-//    }
-
-
-//}
 
 //public class HuiShen : activeEffect
 //{

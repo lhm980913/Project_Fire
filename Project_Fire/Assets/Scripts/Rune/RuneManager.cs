@@ -5,7 +5,8 @@ using System;
 
 public enum RuneEvent
 {
-    Active,
+    ActiveOne,
+    ActiveTwo,
     OnAttack
 }
 
@@ -45,6 +46,10 @@ public class RuneManager : MonoBehaviour
     public void DeleteRune(Rune rune)
     {
         List<Rune> temp;
+        if(rune == null)
+        {
+            return;
+        }
         if (!RunesDictionary.TryGetValue(rune.runeEvent, out temp))
             return;
         if (!temp.Remove(rune))
@@ -72,13 +77,31 @@ public class RuneManager : MonoBehaviour
 
     public bool PickUpRune(Rune rune)
     {
-        for(int index = 0; index < runes.Length; index++)
+        
+        if(rune.runeType == RuneType.passive)
         {
-            if (runes[index] == null)
+            for (int index = 0; index < runes.Length; index++)
             {
-                runes[index] = rune;
-                AddRune(rune);
-                return true;
+                if (runes[index] == null)
+                {
+                    runes[index] = rune;
+                    AddRune(rune);
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            for(int index = 0;index < 2; index++)
+            {
+                
+                if (runes[index] == null)
+                {
+                    rune.SetActiveEvent(index);
+                    runes[index] = rune;
+                    AddRune(rune);
+                    return true;
+                }
             }
         }
         return false;
@@ -87,7 +110,11 @@ public class RuneManager : MonoBehaviour
     public bool TryGetIcon(Rune rune, out Sprite sprite)
     {
         RunePrefab temp;
-        Debug.Log(rune);
+        if(rune == null)
+        {
+            sprite = null;
+            return false;
+        }
         if(runePrefabs.TryGetValue(rune.Name,out temp))
         {
             sprite = temp.Icon;
@@ -120,7 +147,6 @@ public class RuneManager : MonoBehaviour
 
     public Rune GetRune(int index)
     {
-        Debug.Log(runes.Length+ " " + index);
         return runes[index];
     }
 
