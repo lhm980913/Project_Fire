@@ -7358,7 +7358,7 @@ MonoBehaviour:
   Key_Button_A: 32
   Key_Button_B: 304
   Key_Button_X: 106
-  Key_Button_Y: 116
+  Key_Button_Y: 104
   Key_Button_LB: 0
   Key_Button_RB: 107
   Key_Button_Back: 0
@@ -7954,6 +7954,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749331, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749331, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749331, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749331, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749329, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: startDelay.scalar
+      value: 0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749329, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: UVModule.cycles
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749329, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010380192698749329, guid: 048ac3c2b98912040b8d05703bf4c131,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 048ac3c2b98912040b8d05703bf4c131, type: 3}
