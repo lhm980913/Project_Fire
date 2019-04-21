@@ -51,7 +51,7 @@ public class UIManager
     }
 
     //入栈+显示
-    public void PushPanel(UIBaseType type)
+    public void PushPanel(UIBaseType type, RuneEntity runeEntity = null)
     {
         if(panelStack == null)
         {
@@ -67,6 +67,16 @@ public class UIManager
         BasePanel panel = GetPanel(type);
         if (!panel)
             Debug.Log("SSS");
+        if(type == UIBaseType.ExchangePanel)
+        {
+            ExchangePanel temp = (ExchangePanel)panel;
+            temp.PickedRune = runeEntity.rune;
+        }
+        if(type == UIBaseType.IntroducePanel)
+        {
+            IntroducePanel temp = (IntroducePanel)panel;
+            temp.IntroducedRune = runeEntity.rune;
+        }
         panel.OnEnter();
         panelStack.Push(panel);
     }
@@ -88,12 +98,26 @@ public class UIManager
         top.OnResume();
     }
 
+    public void PopPanelIntro()
+    {
+        if (panelStack == null)
+        {
+            panelStack = new Stack<BasePanel>();
+        }
+
+        if (panelStack.Count <= 0) return;
+        BasePanel temp = panelStack.Peek();
+        if(temp.GetType() == typeof(IntroducePanel))
+        {
+            PopPanel();
+        }
+
+    }
+
     //更换Rune
     public void ExangeRune(RuneEntity entity)
     {
-        PushPanel(UIBaseType.ExchangePanel);
-        ExchangePanel temp = (ExchangePanel)panelStack.Peek();
-        temp.PickedRune = entity.rune;
+        PushPanel(UIBaseType.ExchangePanel,entity);
     }
 
     public BasePanel GetPanel(UIBaseType type)
