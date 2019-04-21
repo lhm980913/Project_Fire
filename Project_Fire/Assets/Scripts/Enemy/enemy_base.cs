@@ -220,6 +220,7 @@ public class enemy_base : MonoBehaviour
     {
 
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        
 
     }
     public virtual void destroyself()

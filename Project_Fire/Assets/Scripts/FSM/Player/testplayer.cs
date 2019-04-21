@@ -25,9 +25,6 @@ public class testplayer : MonoBehaviour
     public float player_attack;
     public float tanfan_time;
 
-    public ParticleSystem daoguang;
-    public ParticleSystem slide_dust;
-    public ParticleSystem slide_dust1;
 
     public GameObject weapon;
 
@@ -128,7 +125,13 @@ public class testplayer : MonoBehaviour
         FCountFlash();
         FAnimation();
         
-        grounded = FCheckground();
+
+        if(grounded!=FCheckground())
+        {
+            grounded = FCheckground();
+           
+        }
+        
         if(grounded)
         {
             doublejump = true;
@@ -167,11 +170,7 @@ public class testplayer : MonoBehaviour
     void FFilp()
     {
         moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 120, 0);
-        daoguang.transform.position = new Vector3(daoguang.transform.position.x, daoguang.transform.position.y, 0.37f*face_to);
-        daoguang.startRotation3D = new Vector3(daoguang.startRotation3D.x, 1.57f+face_to*1.57f ,daoguang.startRotation3D.z);
-        //slide_dust.transform.position = new Vector3(slide_dust.transform.position.x , slide_dust.transform.position.y, transform.position.z + face_to * 0.5f);
-        slide_dust.startRotation3D = new Vector3(slide_dust.startRotation3D.x, 1.57f + face_to * 1.57f, slide_dust.startRotation3D.z);
-        slide_dust1.startRotation3D = new Vector3(slide_dust1.startRotation3D.x, 1.57f + face_to * 1.57f, slide_dust1.startRotation3D.z);
+    
         //slide_dust.shape.position = new Vector3(0.5f*face_to, 0.5f, 0.3f);
         // slide_dust.shape.position.Set(0.5f * face_to, -0.5f, 0.3f);
       

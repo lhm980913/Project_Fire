@@ -16,6 +16,7 @@ public class Flash_Stage : Player_Base_Stage
         testplayer.Instance.anim.SetTrigger("flash");
         CameraEffectSystem.Instance.FMotionVector();
         testplayer.Instance.canhurt = false;
+
     }
 
     public void Input()

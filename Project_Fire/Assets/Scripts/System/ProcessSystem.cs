@@ -9,8 +9,11 @@ public class ProcessSystem : MonoBehaviour
     //public Collider player_body = null;
     //public Collider enemy_att = null;
     //public Collider enemy_body = null;
-
-
+    public ParticleSystem att;
+    public ParticleSystem att1;
+    public ParticleSystem att2;
+    public ParticleSystem att3;
+    public ParticleSystem att4;
     private void Awake()
     {
         if(Instance == null)
@@ -38,7 +41,13 @@ public class ProcessSystem : MonoBehaviour
     {
         if (playeratt.tag == "player_weapon")
         {
-            if(Enemy.type=="lizarrd")
+            Instantiate(att, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            Instantiate(att1, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            Instantiate(att2, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            Instantiate(att3, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            Instantiate(att4, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
+            
+            if (Enemy.type=="lizarrd")
             {
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack;
