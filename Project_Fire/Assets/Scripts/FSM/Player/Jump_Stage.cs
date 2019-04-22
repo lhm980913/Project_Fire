@@ -15,6 +15,7 @@ public class Jump_Stage : Player_Base_Stage
         //testplayer.Instance.canflash = true;
         //Debug.Log("jump");
         //jumpcount = 0.25f;
+        //testplayer.Instance.anim.CrossFade("player_jump_on", 0.1f);
     }
 
     public void Input()

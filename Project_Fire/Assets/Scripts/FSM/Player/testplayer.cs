@@ -25,8 +25,34 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float player_attack;
     public float tanfan_time;
 
-  
-    public GameObject weapon;
+    public float Hpmax;
+    public float Manamax;
+    public float _hp;
+    public float _mana;
+
+    public float hp
+    {
+        set
+        {
+            this._hp = Mathf.Clamp(value, 0, Hpmax);
+        }
+        get
+        {
+            return this._hp;
+        }
+    }
+    public float mana
+    {
+        set
+        {
+            this._mana = Mathf.Clamp(value, 0, Hpmax);
+        }
+        get
+        {
+            return this._mana;
+        }
+    }
+
 
     [HideInInspector]
     public Vector3 enemypos;
@@ -72,6 +98,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public GameObject moudle_player;
     public bool canjump;
 
+   // 
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -170,10 +197,10 @@ public class testplayer : UnityEngine.MonoBehaviour
     void FFilp()
     {
         moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 120, 0);
-    
+
         //slide_dust.shape.position = new Vector3(0.5f*face_to, 0.5f, 0.3f);
         // slide_dust.shape.position.Set(0.5f * face_to, -0.5f, 0.3f);
-      
+        
         playerwapon.transform.localRotation = Quaternion.Euler(0, -face_to*30, 0);
 
     }

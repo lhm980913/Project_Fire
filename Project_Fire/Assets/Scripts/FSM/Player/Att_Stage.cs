@@ -7,6 +7,7 @@ public class Att_Stage : Player_Base_Stage
     float ttt = 0.3f;
     float attcount;
     bool atttarget;
+    public bool jattack=false;
     public Att_Stage()
     {
 
@@ -18,23 +19,26 @@ public class Att_Stage : Player_Base_Stage
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
-        //if (Player_Controller_System.Instance.Vertical_Left < 0.7 && Player_Controller_System.Instance.Vertical_Left > -0.7)
-        //{
-        //    testplayer.Instance.anim.SetTrigger("att1");
-        //}else if(Player_Controller_System.Instance.Vertical_Left > 0.7)
-        //{
-        //    testplayer.Instance.anim.SetTrigger("att_up");
-        //}
-        //else if(Player_Controller_System.Instance.Vertical_Left <-0.7 &&!testplayer.Instance.grounded)
-        //{
-        //    testplayer.Instance.anim.SetTrigger("att1");
-        //}
-        //else
-        //{
-        //    testplayer.Instance.anim.SetTrigger("att1");
-        //}
-        testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
-        testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+        if (testplayer.Instance.grounded)
+        {
+            testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+            jattack = false;
+        }
+        else if(!testplayer.Instance.grounded)
+        {
+            testplayer.Instance.anim.CrossFade("player_jattack1", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_jattack", 0.1f);
+            //testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+            jattack = true;
+        }
+        else
+        {
+            testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+            jattack = false;
+        }
+       
 
         attcount = testplayer.Instance.tanfan_time;
         ttt = 0.3f;
@@ -53,15 +57,28 @@ public class Att_Stage : Player_Base_Stage
             testplayer.Instance.atting = false;
         }
 
-        Player_Function.FStop(testplayer.Instance.playergameobj);
+        if(jattack)
+        {
+
+        }
+        else
+        {
+            Player_Function.FStop(testplayer.Instance.playergameobj);
+        }
+       
+
         ttt -= Time.deltaTime;
         if(ttt<0)
         {
+            jattack = false;
+            
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
+            
         }
         if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
         {
+            jattack = false;
             testplayer.Instance.atting = false;
             testplayer._player.SetStage(testplayer.Instance.flash_stage);
         }
