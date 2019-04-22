@@ -25,8 +25,35 @@ public class testplayer : MonoBehaviour
     public float player_attack;
     public float tanfan_time;
 
-  
-    
+    public float Hpmax;
+    public float Manamax;
+    public float _hp;
+    public float _mana;
+
+    public float hp
+    {
+        set
+        {
+            this._hp = Mathf.Clamp(value, 0, Hpmax);
+        }
+        get
+        {
+            return this._hp;
+        }
+    }
+    public float mana
+    {
+        set
+        {
+            this._mana = Mathf.Clamp(value, 0, Hpmax);
+        }
+        get
+        {
+            return this._mana;
+        }
+    }
+
+
     [HideInInspector]
     public Vector3 enemypos;
     [HideInInspector]

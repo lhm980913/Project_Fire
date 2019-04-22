@@ -18,7 +18,7 @@ public class Camera_test : MonoBehaviour
         //this.transform.position = Vector3.SmoothDamp(
         //    this.transform.position,
         //    new Vector3(testplayer.Instance.playergameobj.transform.position.x, testplayer.Instance.playergameobj.transform.position.y, this.transform.position.z), ref a, ttt);
-       
+        this.transform.position = new Vector3(testplayer.Instance.transform.position.x, testplayer.Instance.transform.position.y, -11);
         if(Input.GetKeyDown(KeyCode.O))
         {
             transform.position=transform.position+Vector3.forward;

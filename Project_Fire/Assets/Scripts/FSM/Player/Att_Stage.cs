@@ -19,14 +19,15 @@ public class Att_Stage : Player_Base_Stage
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
-        if (Player_Controller_System.Instance.Vertical_Left < 0.7 )
+        if (testplayer.Instance.grounded)
         {
             testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
             testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
             jattack = false;
         }
-        else if(Player_Controller_System.Instance.Vertical_Left > 0.7f&&!testplayer.Instance.grounded)
+        else if(!testplayer.Instance.grounded)
         {
+            testplayer.Instance.anim.CrossFade("player_jattack1", 0.1f);
             testplayer.Instance.anim.CrossFade("player_jattack", 0.1f);
             //testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
             jattack = true;
@@ -55,6 +56,7 @@ public class Att_Stage : Player_Base_Stage
         {
             testplayer.Instance.atting = false;
         }
+
         if(jattack)
         {
 
@@ -69,6 +71,7 @@ public class Att_Stage : Player_Base_Stage
         if(ttt<0)
         {
             jattack = false;
+            
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
             

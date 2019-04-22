@@ -41,14 +41,16 @@ public class ProcessSystem : MonoBehaviour
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
-        Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
-        if (b.jattack)
-        {
-            Player_Function.FJump(testplayer.Instance.gameObject, 11);
-        }
+        
        
         if (playeratt.tag == "player_weapon")
         {
+            Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
+            if (b.jattack)
+            {
+                Player_Function.FJump(testplayer.Instance.gameObject, 11);
+            }
+
             Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);
             Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
             Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);

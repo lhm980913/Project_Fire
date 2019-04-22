@@ -45,7 +45,8 @@ public class player_animevent : MonoBehaviour
     public void Fjattack()
     {
         jattack1.transform.position = testplayer.Instance.transform.position - 0.5f*Vector3.up;
-        jattack1.startRotation3D = new Vector3(0, 90 * testplayer.Instance.face_to, 0);
+        
+        jattack1.startRotation3D = new Vector3(0, (Mathf.PI/2) * testplayer.Instance.face_to, 0);
         jattack1.Play();
     }
 
