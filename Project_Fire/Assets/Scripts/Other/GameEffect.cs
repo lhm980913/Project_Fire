@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Effect
 {
-    public class GameEffect : MonoBehaviour
+    public class GameEffect : UnityEngine.MonoBehaviour
     {
         ParticleSystem ps;
         float playTime;

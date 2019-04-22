@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Controller_System : MonoBehaviour
+public class Player_Controller_System : UnityEngine.MonoBehaviour
 {
     static public Player_Controller_System Instance; //单例模式
 

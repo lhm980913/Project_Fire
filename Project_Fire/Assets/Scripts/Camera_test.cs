@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_test : MonoBehaviour
+public class Camera_test : UnityEngine.MonoBehaviour
 {
     Vector3 a = Vector3.zero;
     public float ttt;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class animevent : MonoBehaviour
+public class animevent : UnityEngine.MonoBehaviour
 {
     public GameObject weapon;
     

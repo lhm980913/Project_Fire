@@ -7,7 +7,8 @@ public enum RuneEvent
 {
     ActiveOne,
     ActiveTwo,
-    OnAttack
+    OnAttack,
+    OnDefence
 }
 
 public class RuneManager : MonoBehaviour

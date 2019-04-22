@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class sign_point : MonoBehaviour
+public class sign_point : UnityEngine.MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

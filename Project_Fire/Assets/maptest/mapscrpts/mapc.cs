@@ -21,7 +21,7 @@ public struct Modledetil
 }
 
 
-public class mapc : MonoBehaviour
+public class mapc : UnityEngine.MonoBehaviour
 {
     public int length;
     public int width;

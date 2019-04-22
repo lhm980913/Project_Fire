@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player_animevent : MonoBehaviour
+public class player_animevent : UnityEngine.MonoBehaviour
 {
     public AnimationCurve ac;
     public ParticleSystem slide_dust;

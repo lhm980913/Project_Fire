@@ -120,7 +120,7 @@ using UnityEngine;
 //    run,
 //    hurt
 //}
-public class enemy_base : MonoBehaviour
+public class enemy_base : UnityEngine.MonoBehaviour
 {
 
     public string type = "";

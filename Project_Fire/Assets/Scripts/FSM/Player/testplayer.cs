@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class testplayer : MonoBehaviour
+public class testplayer : UnityEngine.MonoBehaviour
 {
     static public testplayer Instance;
 

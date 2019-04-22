@@ -55,7 +55,7 @@ public struct MotionVectorPara
     public float ratio;
 }
 
-public class CameraEffectSystem : MonoBehaviour
+public class CameraEffectSystem : UnityEngine.MonoBehaviour
 {
     static public CameraEffectSystem Instance;
 

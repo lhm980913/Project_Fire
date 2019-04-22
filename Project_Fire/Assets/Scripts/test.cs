@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test : MonoBehaviour
+public class test : UnityEngine.MonoBehaviour
 {
     CameraEffectSystem instance;
     // Start is called before the first frame update

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class BasePanel : MonoBehaviour
+public class BasePanel : UnityEngine.MonoBehaviour
 {
     protected CanvasGroup canvasGroup;
     protected bool IsTop;
