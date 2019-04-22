@@ -345,7 +345,7 @@ public class enemy_lizarrd_new : enemy_base
 
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
-        if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage)
+        if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage&& enemy._enemy != lizarrd_dead_stage)
         {
             if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
             {

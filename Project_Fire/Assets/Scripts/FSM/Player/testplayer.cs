@@ -26,8 +26,7 @@ public class testplayer : MonoBehaviour
     public float tanfan_time;
 
   
-    public GameObject weapon;
-
+    
     [HideInInspector]
     public Vector3 enemypos;
     [HideInInspector]
@@ -72,6 +71,7 @@ public class testplayer : MonoBehaviour
     public GameObject moudle_player;
     public bool canjump;
 
+   // 
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -170,10 +170,10 @@ public class testplayer : MonoBehaviour
     void FFilp()
     {
         moudle_player.transform.rotation = Quaternion.Euler(0, face_to * 120, 0);
-    
+
         //slide_dust.shape.position = new Vector3(0.5f*face_to, 0.5f, 0.3f);
         // slide_dust.shape.position.Set(0.5f * face_to, -0.5f, 0.3f);
-      
+        
         playerwapon.transform.localRotation = Quaternion.Euler(0, -face_to*30, 0);
 
     }
