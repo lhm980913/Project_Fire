@@ -86,6 +86,10 @@ public class createmap : MonoBehaviour
     public int width;
     public int height;
     public GameObject wall, floor, connect,door,dead,room,romwall;
+    [SerializeField]
+    public GameObject[] mud, wood, stone;
+
+    public bool test;
 
     int fuzadu;
     private Transform mapParent;
@@ -205,7 +209,7 @@ public class createmap : MonoBehaviour
                 {
                     if(map_final[i,j+1]==Tiles.Room|| map_final[i, j] == Tiles.Door || map_final[i, j] == Tiles.Floor)
                     {
-                        if(Random.Range(0,100)<20)
+                        if(Random.Range(0,100)<-1)
                         {
                             GameObject dec = Instantiate(decorate[Random.Range(0, 3)], new Vector3(i, j+1, 0), Quaternion.identity);
                             dec.transform.SetParent(mapParent);
@@ -798,6 +802,9 @@ public class createmap : MonoBehaviour
                         //}
                         a.area = (int)a.room.width * (int)a.room.height;
                         Room_Data.Add(a);
+
+
+
                     }            
                 }
               
@@ -1135,167 +1142,157 @@ public class createmap : MonoBehaviour
 
     private void InstanceMap()
     {
-        //for (int x = 0; x < width + 4; x++)
-        //{
-        //    for (int y = 0; y < height + 4; y++)
-        //    {
-        //        map1[x, y] = Tiles.Wall;
-        //    }
-        //}
-        //for (int i = 0; i < width; i++)
-        //{
-        //    for (int j = 0; j < height; j++)
-        //    {
-        //        map1[2 + i, 2 + j] = map[i, j];
-
-        //    }
-        //}
-        //for (int x = 0; x < 3*width + 12; x++)
-        //{
-        //    for (int y = 0; y < 3*height + 12; y++)
-        //    {
-        //        map_final[x, y] = Tiles.Bianjie;
-        //    }
-        //}
-        //for (int i = 3; i < 3*width+6; i+=3)
-        //{
-        //    for (int j = 3; j < 3*height+6; j+=3)
-        //    {
-        //        int[] a;
-        //        a = new int[9];
-        //        for (int k=0;k<9;k++)
-        //        {
-        //            map_final[i + k % 3, j + (int)k / 3] = map1[i  / 3, j  / 3];
-        //            if (map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Wall ||
-        //                map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Tianchong ||
-        //                map1[i / 3 + (int)ninecube.all[k].x, j / 3 + (int)ninecube.all[k].y] == Tiles.Connect)
-        //            {                    
-        //                a[k] = 1;
-        //            }
-        //            else
-        //            {
-        //                a[k] = 0;
-        //            }
-        //        }
-        //        destory(a ,i, j);
-
-
-        //    }
-        //}
-
-        for (int i = 0; i < 3*width + 12; i++)
+        if(!test)
         {
-            for (int j = 0; j < 3*height + 12; j++)
+            for (int i = 0; i < 3 * width + 12; i++)
             {
-                if (map_final[i, j] == Tiles.Floor)
+                for (int j = 0; j < 3 * height + 12; j++)
                 {
-                    GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //设置层级
-                    //chuancan(go,i,j);
+                    if (map_final[i, j] == Tiles.Floor)
+                    {
+                        GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //设置层级
+                        //chuancan(go,i,j);
 
-                    go.layer = LayerMask.NameToLayer("floor");
-                }
-                else if (map_final[i, j] == Tiles.Wall)
-                {
-                    GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("Ground");
-                }
-                else if (map_final[i, j] == Tiles.Connect)
-                {
-                    GameObject go = Instantiate(connect, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("Ground");
-                }
-                else if (map_final[i, j] == Tiles.Door)
-                {
-                    GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(rape_manager);
-                    //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("Rape_Point");
-                }
-                else if (map_final[i, j] == Tiles.Tianchong)
-                {
-                    GameObject go = Instantiate(dead, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("Ground");
-                }
-                else if (map_final[i, j] == Tiles.Bianjie)
-                {
-                    GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //chuancan(go, i, j);
-                    go.layer = LayerMask.NameToLayer("Ground");
-                }
-                else if (map_final[i, j] == Tiles.Room)
-                {
-                    GameObject go = Instantiate(room, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //设置层级
-                    //chuancan(go,i,j);
+                        go.layer = LayerMask.NameToLayer("floor");
+                    }
+                    else if (map_final[i, j] == Tiles.Wall)
+                    {
+                        GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Ground");
+                    }
+                    else if (map_final[i, j] == Tiles.Connect)
+                    {
+                        GameObject go = Instantiate(connect, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Ground");
+                    }
+                    else if (map_final[i, j] == Tiles.Door)
+                    {
+                        GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(rape_manager);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Rape_Point");
+                    }
+                    else if (map_final[i, j] == Tiles.Tianchong)
+                    {
+                        GameObject go = Instantiate(dead, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Ground");
+                    }
+                    else if (map_final[i, j] == Tiles.Bianjie)
+                    {
+                        GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Ground");
+                    }
+                    else if (map_final[i, j] == Tiles.Room)
+                    {
+                        GameObject go = Instantiate(room, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //设置层级
+                        //chuancan(go,i,j);
 
-                    go.layer = LayerMask.NameToLayer("floor");
-                }
-                else if (map_final[i, j] == Tiles.RoomWall)
-                {
-                    GameObject go = Instantiate(romwall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    go.transform.SetParent(mapParent);
-                    //设置层级
-                    //chuancan(go,i,j);
+                        go.layer = LayerMask.NameToLayer("floor");
+                    }
+                    else if (map_final[i, j] == Tiles.RoomWall)
+                    {
+                        GameObject go = Instantiate(romwall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //设置层级
+                        //chuancan(go,i,j);
 
-                    go.layer = LayerMask.NameToLayer("Ground");
+                        go.layer = LayerMask.NameToLayer("Ground");
+                    }
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < 3 * width + 12; i++)
+            {
+                for (int j = 0; j < 3 * height + 12; j++)
+                {
+                    if (map_final[i, j] == Tiles.Floor)
+                    {
+                        GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
 
-        //for (int i = 1; i < width+3; i++)
-        //{
-        //    for (int j = 1; j < height+3; j++)
-        //    {
-        //        if (map1[i, j] == Tiles.Floor)
-        //        {
-        //            GameObject go = Instantiate(floor, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-        //            go.transform.SetParent(mapParent);
-        //            //设置层级
-        //            //chuancan(go,i,j);
 
-        //            go.layer = LayerMask.NameToLayer("floor");
-        //        }
-        //        else if (map1[i, j] == Tiles.Wall)
-        //        {
-        //            GameObject go = Instantiate(wall, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-        //            go.transform.SetParent(mapParent);
-        //            //chuancan(go, i, j);
-        //            go.layer = LayerMask.NameToLayer("Ground");
-        //        }
-        //        else if (map1[i, j] == Tiles.Connect)
-        //        {
-        //            GameObject go = Instantiate(connect, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-        //            go.transform.SetParent(mapParent);
-        //            //chuancan(go, i, j);
-        //            go.layer = LayerMask.NameToLayer("Ground");
-        //        }
-        //        else if (map1[i, j] == Tiles.Door)
-        //        {
-        //            GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-        //            go.transform.SetParent(rape_manager);
-        //            //chuancan(go, i, j);
-        //            go.layer = LayerMask.NameToLayer("Rape_Point");
-        //        }
-        //        else if (map1[i, j] == Tiles.Tianchong)
-        //        {
-        //            GameObject go = Instantiate(dead, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-        //            go.transform.SetParent(mapParent);
-        //            //chuancan(go, i, j);
-        //            go.layer = LayerMask.NameToLayer("Ground");
-        //        }
-        //    }
-        //}
+                        go.layer = LayerMask.NameToLayer("floor");
+                    }
+                    else if (map_final[i, j] == Tiles.Wall || map_final[i, j] == Tiles.Connect || map_final[i, j] == Tiles.Tianchong|| map_final[i, j] == Tiles.Bianjie|| map_final[i, j] == Tiles.RoomWall)
+                    {
+                        if(!FCheckEnvironmentHas(new Vector2(i,j),Tiles.Floor)&&!FCheckEnvironmentHas(new Vector2(i, j), Tiles.Door)&&! FCheckEnvironmentHas(new Vector2(i, j), Tiles.Room))
+                        {
+                            GameObject go = Instantiate(mud[Random.Range(0,4)], new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                            go.transform.SetParent(mapParent);
+                            //chuancan(go, i, j);
+                            go.layer = LayerMask.NameToLayer("Ground");
+
+                        }
+                        else 
+                        {
+                            GameObject go = Instantiate(stone[i%4], new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                            go.transform.SetParent(mapParent);
+                            //chuancan(go, i, j);
+                            go.layer = LayerMask.NameToLayer("Ground");
+                        }
+                        
+
+
+
+
+
+                    }
+                    else if (map_final[i, j] == Tiles.Door)
+                    {
+                        GameObject go = Instantiate(door, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(rape_manager);
+                        //chuancan(go, i, j);
+                        go.layer = LayerMask.NameToLayer("Rape_Point");
+                    }
+                  
+                    else if (map_final[i, j] == Tiles.Room)
+                    {
+                        GameObject go = Instantiate(room, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                        go.transform.SetParent(mapParent);
+                        //设置层级
+                        //chuancan(go,i,j);
+
+                        go.layer = LayerMask.NameToLayer("floor");
+                    }
+                   
+                }
+            }
+        }
+        
+
+
     }
+    //检测上下左右四个格子，有目标方块就返回true，否则false
+    bool FCheckEnvironmentHas(Vector2 pos,Tiles target)
+    {
+        foreach(Vector2 dir in Directions.all)
+        {
+            if(map_final[Mathf.Clamp((int)(pos.x+dir.x),0, 3 * width + 11), Mathf.Clamp((int)(pos.y+dir.y),0, 3 * height + 11)]==target)
+            {
+                return true;
+            }
+          
+            
+
+        }
+        return false;
+    }
+
+
     void chuancan(GameObject go,int i,int j)
     {
         int[] a;

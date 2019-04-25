@@ -79,6 +79,7 @@ public class Tanfan_stage : Player_Base_Stage
         }
         if (inputcount < 0 && nextatt)
         {
+            Player_Function.FFace_to();
             testplayer._player.SetStage(testplayer.Instance.attex_stage);
         }
     }
