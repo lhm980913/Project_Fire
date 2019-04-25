@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class rope_point_manager : MonoBehaviour
+public class rope_point_manager : UnityEngine.MonoBehaviour
 {
    // public List<GameObject> rape_point_list;
     LayerMask rape_point;

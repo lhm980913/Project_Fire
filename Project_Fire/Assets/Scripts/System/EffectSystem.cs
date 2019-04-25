@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Effect;
 
-public class EffectSystem : MonoBehaviour
+public class EffectSystem : UnityEngine.MonoBehaviour
 {
     static public EffectSystem instance;
     private EffectConfig effectConfig;

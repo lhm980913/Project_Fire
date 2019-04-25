@@ -70,7 +70,7 @@ enum Tiles
 }
 
 //确保地图的长宽是奇数
-public class createmap : MonoBehaviour
+public class createmap : UnityEngine.MonoBehaviour
 {
     //尝试生成房间的数量
     public int numRoomTries = 50;

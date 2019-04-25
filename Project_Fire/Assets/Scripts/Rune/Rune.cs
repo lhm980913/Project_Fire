@@ -134,58 +134,74 @@ public class YinXian : Rune
     }
 }
 
-//public class HuiShen : activeEffect
-//{
-//    float Duration;
-//    float Intervals;
-//    float Distance;
-//    float Damage;
-//    float ShockRadius;
-//    float ShockDamage;
+public class YinZheng : Rune
+{
+    GameObject Pin;
+    testplayer player;
+    public YinZheng(RuneEntity runeEntity) : base(runeEntity)
+    {
+        rune_Event = RuneEvent.ActiveOne;
+        this.name = "YinZheng";
+        rune_Type = RuneType.active;
+        this.runeEntity = runeEntity;
+        player = testplayer.Instance;
+        Pin = (GameObject)Resources.Load("Prefab/Pin");
+    }
+    public override void Execute()
+    {
+        UnityEngine.Object.Instantiate(Pin, player.transform.position, Quaternion.identity);
+    }
+}
 
-//    Transform playerTransform;
+public class LianDao : Rune
+{
+    GameObject Sickle;
+    testplayer player;
+    public LianDao(RuneEntity runeEntity) : base(runeEntity)
+    {
+        rune_Event = RuneEvent.ActiveOne;
+        this.name = "LianDao";
+        rune_Type = RuneType.active;
+        this.runeEntity = runeEntity;
+        player = testplayer.Instance;
+        Sickle = (GameObject)Resources.Load("Prefab/Sickle");
+    }
+    public override void Execute()
+    {
+        UnityEngine.Object.Instantiate(Sickle, player.transform.position, Quaternion.identity);
+    }
+}
 
-//    public HuiShen(int damage, int shockDamage)
-//    {
-//        Duration = 3;
-//        Intervals = 0.5f;
-//        Distance = 2;
-//        ShockDamage = shockDamage;
-//        playerTransform = testplayer.Instance.transform;
-//        Damage = damage;
-//        ShockRadius = 2;
-//        callType = CallType.active;
-//        Name = "回身";
-//        Description = "每" + Intervals + "秒对角色左右分别释放一道距离为" + Distance + "的斩击，造成" + damage + "点伤害，持续" + Duration + "秒." + "期间再次激活可以造成一次半径为" +
-//            ShockRadius + "的冲击波，造成" + damage + "点伤害，并击飞敌人";
-//    }
+public class XinYan : Rune
+{
+    testplayer player;
+    public XinYan(RuneEntity runeEntity) : base(runeEntity)
+    {
+        rune_Event = RuneEvent.OnDefence;
+        this.name = "XinYan";
+        rune_Type = RuneType.passive;
+        this.runeEntity = runeEntity;
+        player = testplayer.Instance;
+    }
+    public override void Execute()
+    {
+        
+    }
+}
 
-//    public override void Execute()
-//    {
+public class TuXi : Rune
+{
+    testplayer player;
+    public TuXi(RuneEntity runeEntity) : base(runeEntity)
+    {
+        rune_Event = RuneEvent.OnDefence;
+        this.name = "TuXi";
+        rune_Type = RuneType.passive;
+        this.runeEntity = runeEntity;
+        player = testplayer.Instance;
+    }
+    public override void Execute()
+    {
 
-//    }
-
-//    private IEnumerator<YieldInstruction> Sword()
-//    {
-//        float time = 0;
-//        Collider[] colliders;
-//        enemy_base[] enemys;
-//        while (time < Duration)
-//        {
-//            colliders = Physics.OverlapBox(playerTransform.position, new Vector3(Distance + 1, 1, 1));
-//            enemys = new enemy_base[colliders.Length];
-//            for (int i = 0; i < colliders.Length; i++)
-//            {
-//                enemys[i] = colliders[i].GetComponent<enemy_base>();
-//                enemys[i].FBeHurt(Damage);
-//            }
-//            yield return new WaitForSeconds(Intervals);
-//        }
-//    }
-
-//    //private IEnumerator<YieldInstruction> Shock()
-//    //{
-//    //    float time = 0;
-//    //    Player_Controller_System.Instance.
-//    //}
-//}
+    }
+}

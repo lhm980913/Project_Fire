@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DynamicBoneDemo1 : MonoBehaviour
+public class DynamicBoneDemo1 : UnityEngine.MonoBehaviour
 {
     public GameObject m_Player;
 

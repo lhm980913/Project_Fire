@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DynamicBoneColliderBase : MonoBehaviour
+public class DynamicBoneColliderBase : UnityEngine.MonoBehaviour
 {
     public enum Direction
     {

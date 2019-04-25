@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cube : MonoBehaviour
+public class cube : UnityEngine.MonoBehaviour
 {
     public int[] suround=new int[9];
     // Start is called before the first frame update

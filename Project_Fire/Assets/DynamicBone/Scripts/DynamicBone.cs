@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [AddComponentMenu("Dynamic Bone/Dynamic Bone")]
-public class DynamicBone : MonoBehaviour
+public class DynamicBone : UnityEngine.MonoBehaviour
 {
 #if UNITY_5
 	[Tooltip("The root of the transform hierarchy to apply physics.")]

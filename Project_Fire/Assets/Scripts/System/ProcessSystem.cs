@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProcessSystem : MonoBehaviour
+public class ProcessSystem : UnityEngine.MonoBehaviour
 {
     static public ProcessSystem Instance;
     public float pianyi;

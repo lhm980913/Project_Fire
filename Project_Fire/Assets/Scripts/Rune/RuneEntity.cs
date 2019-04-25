@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RuneEntity : MonoBehaviour
+public class RuneEntity : UnityEngine.MonoBehaviour
 {
     public Rune rune;
     public float Radius = 1.0f;

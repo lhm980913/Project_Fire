@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class bullet : UnityEngine.MonoBehaviour
 {
     float speed = 10;
     public Transform player;
