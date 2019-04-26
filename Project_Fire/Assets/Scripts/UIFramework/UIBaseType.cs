@@ -8,5 +8,5 @@ public enum UIBaseType
     ExchangePanel,
     PausePanel,
     MapPanel,
-    IntroducePanel
+    IntroducePanel,
 }

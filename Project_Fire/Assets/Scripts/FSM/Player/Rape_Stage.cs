@@ -9,7 +9,6 @@ public class Rape_Stage : Player_Base_Stage
     Vector3 target;
     float initDistance;
     Vector3 dir;
-    Quaternion original;
     public Rape_Stage()
     {
 
@@ -18,14 +17,10 @@ public class Rape_Stage : Player_Base_Stage
     public void Enter()
     {
         
-        CameraEffectSystem.Instance.FMotionVector();
-        Debug.Log("rape");
+        
         playerTransform = testplayer.Instance.playergameobj.transform;
         time = 0;
         target = testplayer.Instance.target_pos;
-
-        original = testplayer.Instance.transform.rotation;
-        testplayer.Instance.transform.LookAt(target);
 
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity = Vector3.zero;
         initDistance = (target - playerTransform.position).sqrMagnitude;
@@ -48,7 +43,6 @@ public class Rape_Stage : Player_Base_Stage
         {
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
-            testplayer.Instance.transform.rotation = original;
             testplayer.Instance.anim.SetFloat("DistancePercent", 1);
             testplayer.Instance.anim.SetTrigger("ArrivePoint");
         }
