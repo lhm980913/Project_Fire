@@ -29,9 +29,11 @@ public class UIManager
             return canvasTransform;
         }
     }
+
     private Dictionary<UIBaseType, string> panelPathPairs;
     private Dictionary<UIBaseType, BasePanel> Panels;
     private Stack<BasePanel> panelStack;
+    private List<DamageUI> DamageUIList;
 
     [Serializable]
     public class UIPanelInfoList
@@ -48,6 +50,44 @@ public class UIManager
         {
             panelPathPairs.Add(temp.PanelList[index].PanelType, temp.PanelList[index].path);
         }
+    }
+
+    private void InitDamageList()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            AddNewDamageUI();
+        }
+    }
+
+    private DamageUI GetDamageUI(int damage)
+    {
+        foreach (var UI in DamageUIList)
+        {
+            if (!UI.gameObject.activeSelf)
+            {
+                UI.Enter(damage);
+                return UI;
+            }
+        }
+        DamageUI temp = AddNewDamageUI();
+        temp.Enter(damage);
+        return temp;
+    }
+
+    private DamageUI AddNewDamageUI()
+    {
+        GameObject go = Resources.Load<GameObject>("UIPanel/DamageNumber");
+        GameObject temp = UnityEngine.Object.Instantiate(go);
+        DamageUIList.Add(temp.GetComponent<DamageUI>());
+        temp.SetActive(false);
+        return temp.GetComponent<DamageUI>();
+    }
+
+    public void DisplayDamageNumber(int damage, Vector3 pos)
+    {
+        DamageUI temp = GetDamageUI(damage);
+        temp.gameObject.transform.position = pos;
     }
 
     //入栈+显示
@@ -145,7 +185,9 @@ public class UIManager
     {
         instance = this;
         panelPathPairs = new Dictionary<UIBaseType, string>();
+        DamageUIList = new List<DamageUI>();
         ParseUIPanelTypeJson();
+        InitDamageList();
     }
 
 }

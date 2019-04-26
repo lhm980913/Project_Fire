@@ -16,11 +16,12 @@ public class Rape_Stage : Player_Base_Stage
 
     public void Enter()
     {
-       
-        Debug.Log("rape");
+        
+        
         playerTransform = testplayer.Instance.playergameobj.transform;
         time = 0;
         target = testplayer.Instance.target_pos;
+
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity = Vector3.zero;
         initDistance = (target - playerTransform.position).sqrMagnitude;
         testplayer.Instance.anim.SetBool("AfterRope", true);

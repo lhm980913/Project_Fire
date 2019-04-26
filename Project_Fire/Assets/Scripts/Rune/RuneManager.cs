@@ -8,7 +8,11 @@ public enum RuneEvent
     ActiveOne,
     ActiveTwo,
     OnAttack,
-    OnDefence
+    OnDefence,
+    OnFlash,
+    OnAttackFlyItem,
+    OnManaFull,
+    OnPickRune
 }
 
 public class RuneManager : MonoBehaviour
@@ -67,7 +71,6 @@ public class RuneManager : MonoBehaviour
     public void UseRune(RuneEvent runeEvent)
     {
         List<Rune> tempRunes;
-        Debug.Log(runeEvent.ToString());
         if (!RunesDictionary.TryGetValue(runeEvent, out tempRunes))
             return;
         foreach (var rune in tempRunes)

@@ -9,7 +9,7 @@ public class RuneEntity : UnityEngine.MonoBehaviour
 
     private void Awake()
     {
-        rune = new XianDan(this);
+        rune = new LianDao(this);
     }
     private void OnTriggerStay(Collider other)
     {

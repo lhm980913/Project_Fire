@@ -9,25 +9,28 @@ public class player_animevent : UnityEngine.MonoBehaviour
     public ParticleSystem jump_dust;
     public ParticleSystem tanfaneffect;
     public ParticleSystem jattack;
-
+    public ParticleSystem slide_dust_Main;
 
     ParticleSystem slide;
+    ParticleSystem slide_Main;
     ParticleSystem jump;
     ParticleSystem tanfaneffect1;
     ParticleSystem jattack1;
     private void Start()
     {
         slide = Instantiate(slide_dust);
+        slide_Main = Instantiate(slide_dust_Main, testplayer.Instance.transform);
         slide.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         jump = Instantiate(jump_dust);
         jump.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         tanfaneffect1 = Instantiate(tanfaneffect);
-        jattack1 = Instantiate(jattack);
+        jattack1 = Instantiate(jattack,testplayer.Instance.transform);
     }
     public void slidedust()
     {
         slide.transform.position = testplayer.Instance.transform.position + Vector3.down * 0.5f;
         slide.Play();
+        slide_Main.Play();
     }
 
     public void jumpdust()

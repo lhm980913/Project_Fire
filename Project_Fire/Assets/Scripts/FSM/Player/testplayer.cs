@@ -41,7 +41,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             return this._hp;
         }
     }
-    public float mana
+    private float mana
     {
         set
         {
@@ -273,6 +273,17 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
        
     }
+
+    public void FGetMana(float num)
+    {
+        mana += num;
+    }
+
+    public void FSubMana(float num)
+    {
+        mana -= num;
+    }
+
    public IEnumerator wudi(float time)
     {
         canhurt = false;
