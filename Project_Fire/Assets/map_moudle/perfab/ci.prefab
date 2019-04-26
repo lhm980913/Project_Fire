@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8810386100231790361}
   - component: {fileID: 4091786181219953067}
   - component: {fileID: 1789276266272026460}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ci
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5808235240174411078}
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -6.928, y: -5.257, z: 0}
-  m_LocalScale: {x: 0.71, y: 0.71, z: 1}
+  m_LocalScale: {x: 0.71, y: 0.71, z: 0.79709}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,7 +86,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808235240174411078}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
