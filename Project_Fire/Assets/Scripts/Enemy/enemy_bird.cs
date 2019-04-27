@@ -60,6 +60,8 @@ public class enemy_bird : enemy_base
             enemy.SetStage(bird_dead_stage);
             dead = true;
         }
+
+        
     }
 
     public override bool FAttPlayer()
@@ -84,7 +86,8 @@ public class enemy_bird : enemy_base
     }
     public override bool FCheckFilp()
     {
-        if (this.transform.position.x > beginpos.x + xunluofanwei)
+        bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
+        if (this.transform.position.x > beginpos.x + xunluofanwei||a)
         {
             return true;
         }

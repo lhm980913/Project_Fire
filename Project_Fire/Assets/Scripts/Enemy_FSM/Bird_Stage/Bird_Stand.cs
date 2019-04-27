@@ -14,7 +14,7 @@ public class Bird_Stand : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 2;
+        count = 1;
     }
     public override void Update()
     {
