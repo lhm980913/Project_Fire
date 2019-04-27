@@ -28,4 +28,9 @@ public class AnimationAudioPlay : MonoBehaviour
     {
         AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.Jump);
     }
+
+    public void PlayDefence()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.Defence);
+    }
 }
