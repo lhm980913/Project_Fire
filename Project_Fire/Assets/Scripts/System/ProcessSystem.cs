@@ -41,10 +41,11 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
+
         
-       
         if (playeratt.tag == "player_weapon")
         {
+            AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
             if (b.jattack)
             {

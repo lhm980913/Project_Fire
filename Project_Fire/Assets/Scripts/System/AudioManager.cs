@@ -12,7 +12,9 @@ public class AudioManager : MonoBehaviour
         Walk,
         Slide,
         Ground,
-        Jump
+        Jump,
+        Defence,
+        AttackEnemy
     }
     [Serializable]
     struct AudioAndType
