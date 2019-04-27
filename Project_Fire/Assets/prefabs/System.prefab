@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2588722225526585556}
   - component: {fileID: 2588722225526585558}
   - component: {fileID: 2588722225526585557}
+  - component: {fileID: 5299540477303123168}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -242,3 +243,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5299540477303123168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2588722225526585560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04315d636eb89a444940f6567df346a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rape_point_cd: 2

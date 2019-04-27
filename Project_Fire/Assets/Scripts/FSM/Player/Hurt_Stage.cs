@@ -76,9 +76,7 @@ public class Hurt_Stage : Player_Base_Stage
                 }
             }
             
-
-
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.1f);
             c += 0.3f;
             if(c>=count)
             {
