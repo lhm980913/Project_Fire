@@ -22,7 +22,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float hurtforce;
     public GameObject playerwapon;
 
-    [SerializeField]
+    [HideInInspector]
     public SkinnedMeshRenderer[] skins;
 
 

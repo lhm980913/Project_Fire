@@ -28,6 +28,7 @@ public abstract class Rune
         }
     }
     protected string name;
+    public string RuneName;
     public string Name
     {
         get
