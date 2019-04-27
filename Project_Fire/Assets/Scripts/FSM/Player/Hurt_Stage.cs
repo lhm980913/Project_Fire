@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hurt_Stage : Player_Base_Stage
 {
     Vector3 enemypos;
-   
+    float count;
     public Hurt_Stage()
     {
 
@@ -13,6 +13,8 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Enter()
     {
+        count = 0.25f;
+        testplayer.Instance.anim.CrossFade("player_strike", 0.1f);
         //Debug.Log("hurt");
         enemypos = testplayer.Instance.enemypos;
         testplayer.Instance.canhurt = false;
@@ -30,8 +32,12 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Input()
     {
-        
+        count -= Time.deltaTime;
+        if(count<0)
+        {
             testplayer._player.SetStage(testplayer.Instance.stand_stage);
+        }
+            
         
     }
 
