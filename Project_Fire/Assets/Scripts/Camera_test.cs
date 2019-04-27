@@ -8,11 +8,13 @@ public class Camera_test : UnityEngine.MonoBehaviour
     public float ttt;
     public float z;
 
+    public float z_max;
+
     bool aix;
     // Start is called before the first frame update
     void Start()
     {
-        z = -11;
+        z = -z_max;
         aix = true;
     }
 
@@ -28,13 +30,13 @@ public class Camera_test : UnityEngine.MonoBehaviour
         {
             if(aix)
             {
-                if (z == -11)
+                if (z == -z_max)
                 {
                     z = -5;
                 }
                 else
                 {
-                    z = -11;
+                    z = -z_max;
                 }
             }
             aix = false;
