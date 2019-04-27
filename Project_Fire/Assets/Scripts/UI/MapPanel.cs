@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class MapPanel : BasePanel
 {
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        Time.timeScale = 0.0f;
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        Time.timeScale = 1.0f;
+    }
+
     private void Update()
     {
         if (IsTop)
