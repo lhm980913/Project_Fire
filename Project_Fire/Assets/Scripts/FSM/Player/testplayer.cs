@@ -21,7 +21,11 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float canthurtcount;
     public float hurtforce;
     public GameObject playerwapon;
-   
+
+    [SerializeField]
+    public SkinnedMeshRenderer[] skins;
+
+
     public float player_attack;
     public float tanfan_time;
 
@@ -133,7 +137,8 @@ public class testplayer : UnityEngine.MonoBehaviour
         playergameobj = this.gameObject;
         aa = player_att_speed;
         canhurt = true;
-        
+
+        skins = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
 
     void Start()

@@ -28,6 +28,7 @@ public class Hurt_Stage : Player_Base_Stage
         }
 
         testplayer.Instance.StartCoroutine(counthurt(testplayer.Instance.canthurtcount));
+        testplayer.Instance.StartCoroutine(bullingbuling(testplayer.Instance.canthurtcount));
     }
 
     public void Input()
@@ -51,7 +52,43 @@ public class Hurt_Stage : Player_Base_Stage
     {
         yield return new WaitForSeconds(count);
         testplayer.Instance.canhurt = true;
+
         //testplayer.Instance.StopAllCoroutines();
     }
+    IEnumerator bullingbuling(float count)
+    {
+        float c= 0;
+        while(c<count)
+        {
+            if(testplayer.Instance.skins[0].enabled)
+            {
+                for(int i =0;i< testplayer.Instance.skins.Length;i++)
+                {
+                    testplayer.Instance.skins[i].enabled = false;
+                }
 
+            }
+            else
+            {
+                for (int i = 0; i < testplayer.Instance.skins.Length; i++)
+                {
+                    testplayer.Instance.skins[i].enabled = true;
+                }
+            }
+            
+
+
+            yield return new WaitForSeconds(0.3f);
+            c += 0.3f;
+            if(c>=count)
+            {
+                for (int i = 0; i < testplayer.Instance.skins.Length; i++)
+                {
+                    testplayer.Instance.skins[i].enabled = true;
+                }
+            }
+        }
+ 
+        //testplayer.Instance.StopAllCoroutines();
+    }
 }
