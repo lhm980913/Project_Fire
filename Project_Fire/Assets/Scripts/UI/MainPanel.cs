@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainPanel : BasePanel
 {
-    public GameObject[] RuneImages = new GameObject[4];
+    public Image[] RuneImages = new Image[4];
     private void Update()
     {
         if (IsTop)
