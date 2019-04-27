@@ -21,6 +21,7 @@ public class RuneEntity : UnityEngine.MonoBehaviour
                 if (RuneManager.Instance.PickUpRune(rune))
                 {
                     this.gameObject.SetActive(false);
+                    MainPanel.Instance.UpdateImage();
                     UIManager.Instance.PopPanelIntro();
                 }
                 else

@@ -1,10 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainPanel : BasePanel
 {
-    public GameObject[] RuneImages = new GameObject[4];
+    static private MainPanel instance;
+    static public MainPanel Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+    public Image[] RuneImages = new Image[4];
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Update()
     {
         if (IsTop)
@@ -17,6 +35,28 @@ public class MainPanel : BasePanel
             {
                 UIManager.Instance.PushPanel(UIBaseType.PausePanel);
             }
+        }
+    }
+
+    public void UpdateImage()
+    {
+        Sprite temp;
+        Rune tempRune;
+        for (int i = 0; i < 4; i++)
+        {
+            if(RuneManager.Instance.TryGetRune(i,out tempRune))
+            {
+                if (RuneManager.Instance.TryGetIcon(tempRune, out temp))
+                {
+                    RuneImages[i].sprite = temp;
+                    RuneImages[i].color = new Color(1, 1, 1, 1);
+                }
+                else
+                {
+                    RuneImages[i].color = new Color(1, 1, 1, 0);
+                }
+            }
+            
         }
     }
 }

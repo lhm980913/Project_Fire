@@ -7,7 +7,7 @@ public class DaoFan : Rune
     public DaoFan(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnAttackFlyItem;
-        this.name = "刀反";
+        this.name = "DaoFan";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }

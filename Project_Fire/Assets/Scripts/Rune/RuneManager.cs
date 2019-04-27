@@ -64,7 +64,7 @@ public class RuneManager : MonoBehaviour
     public void GenerateRune(Vector3 pos)
     {
         //test
-        GameObject go = Instantiate(runePrefabs["Test"].Prefab, pos, Quaternion.identity);
+        GameObject go = Instantiate(runePrefabs["LianDao"].Prefab, pos, Quaternion.identity);
         //test
     }
 
@@ -152,6 +152,20 @@ public class RuneManager : MonoBehaviour
     public Rune GetRune(int index)
     {
         return runes[index];
+    }
+
+    public bool TryGetRune(int index, out Rune rune)
+    {
+        if (runes[index] == null)
+        {
+            rune = null;
+            return false;
+        }
+        else
+        {
+            rune = runes[index];
+            return true;
+        }
     }
 
     private void Awake()

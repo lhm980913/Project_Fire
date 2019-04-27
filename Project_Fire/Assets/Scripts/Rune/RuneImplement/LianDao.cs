@@ -9,7 +9,7 @@ public class LianDao : Rune
     public LianDao(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.ActiveOne;
-        this.name = "镰刀";
+        this.name = "LianDao";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;

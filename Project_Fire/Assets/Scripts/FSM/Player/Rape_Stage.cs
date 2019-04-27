@@ -21,7 +21,7 @@ public class Rape_Stage : Player_Base_Stage
         playerTransform = testplayer.Instance.playergameobj.transform;
         time = 0;
         target = testplayer.Instance.target_pos;
-
+        testplayer.Instance.canhurt = false;
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity = Vector3.zero;
         initDistance = (target - playerTransform.position).sqrMagnitude;
         testplayer.Instance.anim.SetBool("AfterRope", true);
@@ -41,6 +41,7 @@ public class Rape_Stage : Player_Base_Stage
     {
         if(Vector3.Distance(testplayer.Instance.transform.position, target)<0.2f )
         {
+            testplayer.Instance.canhurt = true;
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.anim.SetFloat("DistancePercent", 1);
