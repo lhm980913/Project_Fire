@@ -7,7 +7,7 @@ public class FengMing : Rune
     public FengMing(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnPickRune;
-        this.name = "蜂鸣";
+        this.name = "FengMing";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }

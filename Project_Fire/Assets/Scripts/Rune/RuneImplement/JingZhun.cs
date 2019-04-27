@@ -7,7 +7,7 @@ public class JingZhun : Rune
     public JingZhun(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnAttackFlyItem;
-        this.name = "精准";
+        this.name = "JingZhun";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }

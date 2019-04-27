@@ -94,7 +94,7 @@ public class ExchangePanel : BasePanel
         temp.runeEntity.gameObject.SetActive(true);
         temp.runeEntity.gameObject.transform.position = testplayer.Instance.transform.position;
         PickedRune.runeEntity.gameObject.SetActive(false);
-        
+        MainPanel.Instance.UpdateImage();
         UIManager.Instance.PopPanel();
     }
 
