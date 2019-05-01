@@ -19,6 +19,10 @@ public class LianDao : Rune
     public override void Execute()
     {
         GameObject temp;
+        if (player == null)
+        {
+            player = testplayer.Instance;
+        }
         temp = UnityEngine.Object.Instantiate(Sickle, player.transform.position, Quaternion.identity);
         temp.GetComponent<LianDaoEntity>().dir = testplayer.Instance.face_to * new Vector3(1, 0, 0);
     }
