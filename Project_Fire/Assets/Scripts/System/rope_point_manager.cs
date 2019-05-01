@@ -39,7 +39,7 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
       
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
-        float min = 100;
+        float min = 180;
         for(int i=0;i<rp.Length;i++)
         {
 
