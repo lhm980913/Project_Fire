@@ -29,7 +29,6 @@ public class MainPanel : BasePanel
         {
             instance = this;
         }
-        player = testplayer.Instance;
     }
 
     private void Update()
@@ -71,11 +70,11 @@ public class MainPanel : BasePanel
 
     public void UpdateHp()
     {
-        Hp.value = player.hp / player.Hpmax;
+        Hp.value = testplayer.Instance.hp / testplayer.Instance.Hpmax;
     }
 
     public void UpdateMp()
     {
-        Mp.value = player.mana / player.Manamax;
+        Mp.value = testplayer.Instance.mana / testplayer.Instance.Manamax;
     }
 }

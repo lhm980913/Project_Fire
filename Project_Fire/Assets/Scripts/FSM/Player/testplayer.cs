@@ -139,6 +139,8 @@ public class testplayer : UnityEngine.MonoBehaviour
         canhurt = true;
 
         skins = GetComponentsInChildren<SkinnedMeshRenderer>();
+        hp = Hpmax;
+        mana = Manamax;
     }
 
     void Start()
@@ -256,7 +258,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
-            
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
@@ -275,11 +276,33 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FGetMana(float num)
     {
         mana += num;
+        MainPanel.Instance.UpdateMp();
     }
 
-    public void FSubMana(float num)
+    public bool FLoseMana(float num)
     {
-        mana -= num;
+        if(mana-num < 0)
+        {
+            return false;
+        }
+        else
+        {
+            mana -= num;
+            MainPanel.Instance.UpdateMp();
+            return true;
+        }
+    }
+
+    public void FGetHp(float num)
+    {
+        hp += num;
+        MainPanel.Instance.UpdateHp();
+    }
+
+    public void FLoseHp(float num)
+    {
+        hp -= num;
+        MainPanel.Instance.UpdateHp();
     }
 
    public IEnumerator wudi(float time)

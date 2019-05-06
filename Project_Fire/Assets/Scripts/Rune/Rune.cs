@@ -36,6 +36,7 @@ public abstract class Rune
             return name;
         }
     }
+    public float MpNeed;
     public Rune(RuneEntity runeEntity)
     {
         this.runeEntity = runeEntity;
