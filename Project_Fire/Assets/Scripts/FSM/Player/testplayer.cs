@@ -269,14 +269,53 @@ public class testplayer : UnityEngine.MonoBehaviour
          
             
         }
-        if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
+        if ((other.tag =="enemy_att"&&canhurt))
         {
-            
+  
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
         }
-       
+        if ((other.tag == "enemy" && canhurt))
+        {
+
+            enemy_base b = other.gameObject.GetComponent<enemy_base>();
+            bool c = b;
+            if(c)
+            {
+                if (b.type == "lizarrd")
+                {
+                    enemy_lizarrd_new a = (enemy_lizarrd_new)b;
+                    if (a.candamage)
+                    {
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if (b.type == "bird")
+                {
+                    enemy_bird a = (enemy_bird)b;
+                    if (a.candamage)
+                    {
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+            }
+            else
+            {
+                enemypos = other.transform.position;
+                atting = false;
+                _player.SetStage(hurt_stage);
+            }
+        
+        }
+
+
     }
 
     public void FGetMana(float num)

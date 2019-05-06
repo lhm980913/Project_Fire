@@ -264,6 +264,7 @@ public class enemy_lizarrd_new : enemy_base
         {
             
             enemy.SetStage(lizarrd_dead_stage);
+            candamage = false;
             dead = true;
         }
 
@@ -290,7 +291,7 @@ public class enemy_lizarrd_new : enemy_base
     {
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
        // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
-        bool b= Physics.Raycast(transform.position + transform.up + transform.forward * 1, -transform.up, 3, 1 << 9);
+        bool b= Physics.Raycast(transform.position + transform.up + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
        // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
         return a || !b;
@@ -345,7 +346,7 @@ public class enemy_lizarrd_new : enemy_base
 
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
-        if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage&& enemy._enemy != lizarrd_dead_stage)
+        if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage&& enemy._enemy != lizarrd_dead_stage && enemy._enemy != lizarrd_stand_stage)
         {
             if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
             {

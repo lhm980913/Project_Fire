@@ -34,6 +34,7 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
        rp =  Physics.OverlapSphere(testplayer.Instance.transform.position, testplayer.Instance.rapelength, rape_point);
 
         int[] id = FCheckHide(rp);
+       
         Fcheckdir(ref player_dir);
 
       
@@ -49,8 +50,6 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
                 if (dir_cha[i] < min)
                 {
                     min = dir_cha[i];
-
-
                     target = i;
 
 
@@ -58,11 +57,24 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
             }
             else
             {
-                dir_cha[i] = 180;
-                if (target == i)
+
+                dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
+                if (dir_cha[i] < min)
                 {
-                    target = 9999;
+                    min = dir_cha[i];
+
+
+                    target = i;
+
+
                 }
+
+
+                //dir_cha[i] = 180;
+                //if (target == i)
+                //{
+                //    target = 9999;
+                //}
             }
 
 
@@ -154,7 +166,7 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
             }
 
         }
-        return id; ;
+        return id;
 
 
     }

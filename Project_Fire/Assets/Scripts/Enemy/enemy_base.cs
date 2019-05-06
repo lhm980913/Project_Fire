@@ -134,6 +134,7 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public bool atting = false;
     public bool dead = false;
     public Animator anim;
+    public bool candamage = true;
 
     private bool canMove;
     public int faceto = 1;

@@ -47,9 +47,9 @@ public class AttEx_Stage : Player_Base_Stage
     {
         ttt -= Time.deltaTime;
 
-        if (ttt<0.2f)
+        if (ttt<0.6f)
         {
-            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.5f,0.1f));
+            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.8f,0.5f));
            
         }
 

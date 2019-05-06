@@ -56,7 +56,7 @@ public class enemy_bird : enemy_base
 
         if (Hp <= 0 && !dead)
         {
-
+            candamage = false;
             enemy.SetStage(bird_dead_stage);
             dead = true;
         }
