@@ -131,6 +131,7 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public float beattforce;
     public float hurt_count;
     public float hurt_yuzhi;
+    public float ATK;
     public bool atting = false;
     public bool dead = false;
     public Animator anim;

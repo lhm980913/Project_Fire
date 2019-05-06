@@ -31,8 +31,8 @@ public class testplayer : UnityEngine.MonoBehaviour
 
     public float Hpmax;
     public float Manamax;
-    public float _hp;
-    public float _mana;
+    private float _hp;
+    private float _mana;
 
     public float hp
     {
@@ -45,11 +45,11 @@ public class testplayer : UnityEngine.MonoBehaviour
             return this._hp;
         }
     }
-    private float mana
+    public float mana
     {
         set
         {
-            this._mana = Mathf.Clamp(value, 0, Hpmax);
+            this._mana = Mathf.Clamp(value, 0, Manamax);
         }
         get
         {
@@ -232,8 +232,6 @@ public class testplayer : UnityEngine.MonoBehaviour
     }
     void attcount()
     {
-
-        
         if(!canatt)
         {
 
@@ -243,8 +241,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             {
                 canatt = true;
             }
-
-
         }
     }
 
@@ -258,20 +254,17 @@ public class testplayer : UnityEngine.MonoBehaviour
         if (other.tag == "enemy_weapon" && atting)
         {
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
-           
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
+            
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
-
-           
-         
             
         }
         if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
         {
-            
+            CameraEffectSystem.Instance.FHitEffect();
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);

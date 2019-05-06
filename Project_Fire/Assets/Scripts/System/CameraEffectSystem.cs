@@ -55,6 +55,21 @@ public struct MotionVectorPara
     public float ratio;
 }
 
+[Serializable]
+public struct HitPara
+{
+    public float Duration;
+    public AnimationCurve Intensity;
+    [HideInInspector]
+    public float ratio;
+    [HideInInspector]
+    public float strength;
+    [HideInInspector]
+    public float startTime;
+    [HideInInspector]
+    public float deltaTime;
+}
+
 public class CameraEffectSystem : UnityEngine.MonoBehaviour
 {
     static public CameraEffectSystem Instance;
@@ -67,14 +82,18 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
     public TimeScale timeScale;
     [Header("Motion Vector")]
     public MotionVectorPara motionVector;
+    [Header("Hit")]
+    public HitPara hitEffect;
 
     private Camera mainCamera;
     private bool motionVectorIsOpen;
     private bool radialBlurIsOpen;
+    private bool hitEffectIsOpen;
 
     private PostProcessProfile PPP;
     private MotionBlur motionBlurSetting;
     private RadialBlur RadialBlurSetting;
+    private Vignette HitEffectSetting;
 
     private void Awake()
     {
@@ -91,12 +110,14 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
         PPP = GetComponent<PostProcessVolume>().sharedProfile;
         motionBlurSetting = PPP.GetSetting<MotionBlur>();
         RadialBlurSetting = PPP.GetSetting<RadialBlur>();
+        HitEffectSetting = PPP.GetSetting<Vignette>();
     }
 
     private void Update()
     {
         InvokeRadialBlur();
         InvokeMotionVector();
+        InvokeHitEffect();
     }
 
     public void FRaidalBlurShock()
@@ -112,6 +133,14 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
         motionBlurSetting.active = true;
         motionVector.startTime = Time.realtimeSinceStartup;
         motionVector.deltaTime = 0;
+    }
+
+    public void FHitEffect()
+    {
+        hitEffectIsOpen = true;
+        HitEffectSetting.active = true;
+        hitEffect.startTime = Time.realtimeSinceStartup;
+        hitEffect.deltaTime = 0;
     }
 
     public IEnumerator FCameraShake()
@@ -184,9 +213,22 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void FVigenette()
+    private void InvokeHitEffect()
     {
+        if (hitEffectIsOpen)
+        {
+            hitEffect.ratio = hitEffect.deltaTime / hitEffect.Duration;
+            hitEffect.strength = hitEffect.Intensity.Evaluate(hitEffect.ratio);
+            hitEffect.deltaTime = Time.realtimeSinceStartup - hitEffect.startTime;
 
+            HitEffectSetting.intensity.Override(hitEffect.strength);
+
+            if(hitEffect.deltaTime > hitEffect.Duration)
+            {
+                hitEffectIsOpen = false;
+                HitEffectSetting.active = false;
+            }
+        }
     }
 
     private void InvokeRadialBlur()
@@ -205,6 +247,7 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
             if (radialBlur.deltaTime > radialBlur.Duration)
             {
                 radialBlurIsOpen = false;
+                RadialBlurSetting.active = false;   
             }
         }
     }
