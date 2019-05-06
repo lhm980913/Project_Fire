@@ -82,6 +82,15 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                     a.enemy.SetStage(a.bird_hurt_stage);
                 }
                
+
+            }
+            if (Enemy.type == "bullet")
+            {
+                bullet a = (bullet)Enemy;
+               
+                a.Hp -= testplayer.Instance.player_attack;
+               
+
             }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());

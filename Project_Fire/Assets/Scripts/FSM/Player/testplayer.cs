@@ -274,16 +274,18 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
         if ((other.tag == "enemy" && canhurt))
         {
-
+           
             enemy_base b = other.gameObject.GetComponent<enemy_base>();
             bool c = b;
             if(c)
             {
                 if (b.type == "lizarrd")
                 {
+                    
                     enemy_lizarrd_new a = (enemy_lizarrd_new)b;
                     if (a.candamage)
                     {
+                        CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
                         _player.SetStage(hurt_stage);
@@ -292,9 +294,23 @@ public class testplayer : UnityEngine.MonoBehaviour
                 }
                 if (b.type == "bird")
                 {
+                   
                     enemy_bird a = (enemy_bird)b;
                     if (a.candamage)
                     {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if(b.type == "bullet")
+                {
+                    bullet a = (bullet)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
                         _player.SetStage(hurt_stage);
@@ -304,6 +320,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             }
             else
             {
+                CameraEffectSystem.Instance.FHitEffect();
                 enemypos = other.transform.position;
                 atting = false;
                 _player.SetStage(hurt_stage);

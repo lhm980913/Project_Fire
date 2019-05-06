@@ -47,11 +47,11 @@ public class AttEx_Stage : Player_Base_Stage
     {
         ttt -= Time.deltaTime;
 
-        if (ttt<0.6f)
-        {
-            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.8f,0.5f));
+        //if (ttt<0.6f)
+        //{
+        //    ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(1f,0.5f));
            
-        }
+        //}
 
 
         Player_Function.FStop(testplayer.Instance.playergameobj);
