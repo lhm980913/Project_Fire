@@ -14,6 +14,14 @@ public class MainPanel : BasePanel
         }
     }
     public Image[] RuneImages = new Image[4];
+    [SerializeField]
+    private Slider Hp;
+    [SerializeField]
+    private Slider Mp;
+    [SerializeField]
+    private Text Coin;
+
+    private testplayer player;
 
     private void Awake()
     {
@@ -58,5 +66,15 @@ public class MainPanel : BasePanel
             }
             
         }
+    }
+
+    public void UpdateHp()
+    {
+        Hp.value = testplayer.Instance.hp / testplayer.Instance.Hpmax;
+    }
+
+    public void UpdateMp()
+    {
+        Mp.value = testplayer.Instance.mana / testplayer.Instance.Manamax;
     }
 }

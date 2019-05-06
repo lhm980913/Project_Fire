@@ -75,7 +75,10 @@ public class RuneManager : MonoBehaviour
             return;
         foreach (var rune in tempRunes)
         {
-            rune.Execute();
+            if (testplayer.Instance.FLoseMana(rune.MpNeed))
+            {
+                rune.Execute();
+            }
         }
     }
 

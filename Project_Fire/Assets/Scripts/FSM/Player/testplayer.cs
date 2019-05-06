@@ -31,8 +31,8 @@ public class testplayer : UnityEngine.MonoBehaviour
 
     public float Hpmax;
     public float Manamax;
-    public float _hp;
-    public float _mana;
+    private float _hp;
+    private float _mana;
 
     public float hp
     {
@@ -45,11 +45,11 @@ public class testplayer : UnityEngine.MonoBehaviour
             return this._hp;
         }
     }
-    private float mana
+    public float mana
     {
         set
         {
-            this._mana = Mathf.Clamp(value, 0, Hpmax);
+            this._mana = Mathf.Clamp(value, 0, Manamax);
         }
         get
         {
@@ -139,6 +139,8 @@ public class testplayer : UnityEngine.MonoBehaviour
         canhurt = true;
 
         skins = GetComponentsInChildren<SkinnedMeshRenderer>();
+        hp = Hpmax;
+        mana = Manamax;
     }
 
     void Start()
@@ -232,8 +234,6 @@ public class testplayer : UnityEngine.MonoBehaviour
     }
     void attcount()
     {
-
-        
         if(!canatt)
         {
 
@@ -243,8 +243,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             {
                 canatt = true;
             }
-
-
         }
     }
 
@@ -258,20 +256,18 @@ public class testplayer : UnityEngine.MonoBehaviour
         if (other.tag == "enemy_weapon" && atting)
         {
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
-           
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
-
-           
-         
             
         }
         if ((other.tag =="enemy_att"&&canhurt))
         {
-  
+
+            CameraEffectSystem.Instance.FHitEffect();
+
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
@@ -321,11 +317,33 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FGetMana(float num)
     {
         mana += num;
+        MainPanel.Instance.UpdateMp();
     }
 
-    public void FSubMana(float num)
+    public bool FLoseMana(float num)
     {
-        mana -= num;
+        if(mana-num < 0)
+        {
+            return false;
+        }
+        else
+        {
+            mana -= num;
+            MainPanel.Instance.UpdateMp();
+            return true;
+        }
+    }
+
+    public void FGetHp(float num)
+    {
+        hp += num;
+        MainPanel.Instance.UpdateHp();
+    }
+
+    public void FLoseHp(float num)
+    {
+        hp -= num;
+        MainPanel.Instance.UpdateHp();
     }
 
    public IEnumerator wudi(float time)
