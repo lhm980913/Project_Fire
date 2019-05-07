@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lizarrd_Hurt : Enemy_Base_Stage
+public class Assassin_Hurt : Enemy_Base_Stage
 {
-    enemy_lizarrd_new enemy;
+    enemy_assassin enemy;
     float count;
-    public Lizarrd_Hurt(enemy_lizarrd_new ee)
+    public Assassin_Hurt(enemy_assassin ee)
     {
         enemy = ee;
     }
@@ -15,7 +15,7 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
     {
         count = enemy.yingzhi_time;
 
-        enemy.anim.CrossFade("lizarrd_hurt", 0.1f);
+        enemy.anim.CrossFade("", 0.1f);
         enemy.hurt_count = enemy.hurt_yuzhi;
 
     }
@@ -23,15 +23,15 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
     {
         count -= Time.deltaTime;
 
-        if(count<0)
+        if (count < 0)
         {
-            enemy.enemy.SetStage(enemy.lizarrd_walk_stage);
+            enemy.enemy.SetStage(enemy.assassin_walk_stage);
         }
-        
+
     }
 
     public override void Check()
     {
-        
+
     }
 }

@@ -102,6 +102,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public GameObject moudle_player;
     public bool canjump;
 
+    public float attlevel = 1;
    // 
 
     public Player_Base_Stage stand_stage;
@@ -263,6 +264,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             _player.SetStage(tanfan_stage);
             
         }
+
         if ((other.tag =="enemy_att"&&canhurt))
         {
 
@@ -272,6 +274,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             atting = false;
             _player.SetStage(hurt_stage);
         }
+
         if ((other.tag == "enemy" && canhurt))
         {
            
@@ -324,6 +327,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                 enemypos = other.transform.position;
                 atting = false;
                 _player.SetStage(hurt_stage);
+                print(1111);
             }
         
         }

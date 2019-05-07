@@ -136,11 +136,12 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public bool dead = false;
     public Animator anim;
     public bool candamage = true;
+    public float yingzhi_time;
 
     private bool canMove;
     public int faceto = 1;
     public LayerMask player_layermask = 1 << 12;
-
+    public float enemy_size;
 
     //Enemy_Stage _stage;
     //public Enemy_Stage Stage

@@ -41,7 +41,7 @@ public class Att_Stage : Player_Base_Stage
        
 
         attcount = testplayer.Instance.tanfan_time;
-        ttt = 0.4f;
+        ttt = 0.3f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
