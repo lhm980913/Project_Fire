@@ -13,7 +13,7 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = Random.Range(0.6f, 1f);
+        count = enemy.yingzhi_time;
 
         enemy.anim.CrossFade("lizarrd_hurt", 0.1f);
         enemy.hurt_count = enemy.hurt_yuzhi;

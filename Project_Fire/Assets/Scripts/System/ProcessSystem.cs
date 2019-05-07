@@ -63,9 +63,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             if (Enemy.type=="lizarrd")
             {
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
-                a.hurt_count -= testplayer.Instance.player_attack;
-                a.Hp -= testplayer.Instance.player_attack;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack, Enemy.transform.position);
+                a.hurt_count -= testplayer.Instance.player_attack*testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
                 if (a.hurt_count<0&&!a.dead)
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
@@ -75,8 +75,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             if (Enemy.type == "bird")
             {
                 enemy_bird a = (enemy_bird)Enemy;
-                a.hurt_count -= testplayer.Instance.player_attack;
-                a.Hp -= testplayer.Instance.player_attack;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
                 if (a.hurt_count < 0&&!a.dead)
                 {
                     a.enemy.SetStage(a.bird_hurt_stage);

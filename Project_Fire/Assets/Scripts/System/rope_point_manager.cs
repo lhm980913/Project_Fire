@@ -14,7 +14,9 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
     List<float> dir_cha;
     int target;
     public float rape_point_cd;
-    
+
+    Vector3 dir;
+
     private void Awake()
     {
        
@@ -37,7 +39,7 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
        
         Fcheckdir(ref player_dir);
 
-      
+        Fplayerdir(ref dir);
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
        // float a =FCheckdir(testplayer.Instance.transform.position, rp[0].transform.position);
         float min = 360;
@@ -46,7 +48,10 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
 
             if (id[i] != 1)
             {
-                dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
+                //dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
+
+                dir_cha[i] = Vector3.Distance(Vector3.Normalize(testplayer.Instance.transform.position - rp[i].transform.position) , dir);
+
                 if (dir_cha[i] < min)
                 {
                     min = dir_cha[i];
@@ -58,23 +63,25 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
             else
             {
 
-                dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
-                if (dir_cha[i] < min)
-                {
-                    min = dir_cha[i];
+                //dir_cha[i] = Mathf.Abs(FCheckdir(testplayer.Instance.transform.position, rp[i].transform.position) - player_dir);
 
-
-                    target = i;
-
-
-                }
-
-
-                //dir_cha[i] = 180;
-                //if (target == i)
+                dir_cha[i] = Vector3.Distance(Vector3.Normalize(testplayer.Instance.transform.position - rp[i].transform.position), dir);
+                //if (dir_cha[i] < min)
                 //{
-                //    target = 9999;
+                //    min = dir_cha[i];
+
+
+                //    target = i;
+
+
                 //}
+
+
+                dir_cha[i] = 180;
+                if (target == i)
+                {
+                    target = 9999;
+                }
             }
 
 
@@ -150,13 +157,37 @@ public class rope_point_manager : UnityEngine.MonoBehaviour
             player_dir = FCheckdir(Vector2.zero, new Vector2(Player_Controller_System.Instance.Horizontal_Right, Player_Controller_System.Instance.Vertical_Right));
         }
     }
+
+    //返回玩家方向（向量）
+    void Fplayerdir(ref Vector3 dir)
+    {
+        
+        if (Player_Controller_System.Instance.Horizontal_Left == 0 && Player_Controller_System.Instance.Vertical_Left == 0)
+        {
+
+        }
+        else
+        {
+            dir = new Vector2(-Player_Controller_System.Instance.Horizontal_Left, -Player_Controller_System.Instance.Vertical_Left);
+        }
+        if (Player_Controller_System.Instance.Horizontal_Right == 0 && Player_Controller_System.Instance.Vertical_Right == 0)
+        {
+
+        }
+        else
+        {
+            dir = new Vector2(-Player_Controller_System.Instance.Horizontal_Right, -Player_Controller_System.Instance.Vertical_Right);
+        }
+        dir = Vector3.Normalize(dir);
+    }
+
     int[] FCheckHide(Collider[] c)
     {
         
         int[] id = new int[c.Length];
         for (int i = 0; i < c.Length; i++)
         {
-            if (Physics.Raycast(testplayer.Instance.transform.position,c[i].transform.position - testplayer.Instance.transform.position, testplayer.Instance.rapelength,ground))
+            if (Physics.Raycast(testplayer.Instance.transform.position,c[i].transform.position - testplayer.Instance.transform.position, Vector3.Distance(c[i].transform.position, testplayer.Instance.transform.position),ground))
             {
                 id[i] = 1;
             }
