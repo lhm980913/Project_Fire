@@ -72,6 +72,18 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 }
                 
             }
+            if (Enemy.type == "assassin")
+            {
+                enemy_assassin a = (enemy_assassin)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.assassin_hurt_stage);
+                }
+
+            }
             if (Enemy.type == "bird")
             {
                 enemy_bird a = (enemy_bird)Enemy;
