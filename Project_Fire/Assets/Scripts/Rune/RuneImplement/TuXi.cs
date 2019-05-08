@@ -13,6 +13,7 @@ public class TuXi : Rune
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
+        gotMana = 10;
     }
     public override void Execute()
     {

@@ -30,7 +30,7 @@ public class enemy_assassin : enemy_base
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
-        enemy = new Enemy(lizarrd_walk_stage);
+        enemy = new Enemy(assassin_walk_stage);
     }
     private void Start()
     {
@@ -53,7 +53,7 @@ public class enemy_assassin : enemy_base
         if (Hp <= 0 && !dead)
         {
 
-            enemy.SetStage(lizarrd_dead_stage);
+            enemy.SetStage(assassin_dead_stage);
             candamage = false;
             dead = true;
         }
@@ -108,42 +108,42 @@ public class enemy_assassin : enemy_base
         return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
     }
 }
-    protected override void OnTriggerEnter(Collider other)
-    {
+//protected override void OnTriggerEnter(Collider other)
+//{
 
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+//    ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
-        if (other.tag == "player_weapon" && enemy._enemy != lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage && enemy._enemy != lizarrd_dead_stage && enemy._enemy != lizarrd_stand_stage)
-        {
-            if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
-            {
-                faceto *= -1;
-            }
-            else if (testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
-            {
-                faceto *= -1;
-            }
-        }
+//    if (other.tag == "player_weapon" && enemy._enemy != lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage && enemy._enemy != lizarrd_dead_stage && enemy._enemy != lizarrd_stand_stage)
+//    {
+//        if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
+//        {
+//            faceto *= -1;
+//        }
+//        else if (testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
+//        {
+//            faceto *= -1;
+//        }
+//    }
 
-    }
-
-
-
-    //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
-    //{
-    //    yield return new WaitForSeconds(time);
-    //    print(11);
-    //    FFaceToPlayer();
-    //    // FBeHurt();
-    //    Stage = stage_;
-    //    StopAllCoroutines();
+//}
 
 
 
-    //}
+//public override IEnumerator FHurt(float time, Enemy_Stage stage_)
+//{
+//    yield return new WaitForSeconds(time);
+//    print(11);
+//    FFaceToPlayer();
+//    // FBeHurt();
+//    Stage = stage_;
+//    StopAllCoroutines();
+
+
+
+//}
 
 
 
 
-}
+//}
 

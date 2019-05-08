@@ -41,8 +41,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
-
-        
         if (playeratt.tag == "player_weapon")
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
@@ -70,7 +68,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
                 }
-                
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
             if (Enemy.type == "assassin")
             {
@@ -82,7 +80,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 {
                     a.enemy.SetStage(a.assassin_hurt_stage);
                 }
-
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
             if (Enemy.type == "bird")
             {
@@ -94,7 +92,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 {
                     a.enemy.SetStage(a.bird_hurt_stage);
                 }
-               
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
 
             }
             if (Enemy.type == "bullet")
@@ -102,12 +100,11 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 bullet a = (bullet)Enemy;
                
                 a.Hp -= testplayer.Instance.player_attack;
-               
-
+                RuneManager.Instance.UseRune(RuneEvent.OnAttackFlyItem);
             }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
-            RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            
         }
     }
 

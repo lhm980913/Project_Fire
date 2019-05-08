@@ -83,13 +83,17 @@ MonoBehaviour:
   beattforce: 0
   hurt_count: 0
   hurt_yuzhi: 90
+  ATK: 10
   atting: 0
   dead: 0
   anim: {fileID: 0}
+  candamage: 1
+  yingzhi_time: 0
   faceto: 1
   player_layermask:
     serializedVersion: 2
     m_Bits: 4096
+  enemy_size: 0
   self: {fileID: 0}
   xunluofanwei: 5
   bullet: {fileID: 252370912523670591, guid: 962f84dda060c214db097a3c773f4506, type: 3}

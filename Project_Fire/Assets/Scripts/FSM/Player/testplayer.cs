@@ -252,6 +252,11 @@ public class testplayer : UnityEngine.MonoBehaviour
         RuneManager.Instance.UseRune(RuneEvent.ActiveOne);
     }
 
+    private void FActiveRuneTwo()
+    {
+        RuneManager.Instance.UseRune(RuneEvent.ActiveTwo);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy_weapon" && atting)
@@ -262,14 +267,13 @@ public class testplayer : UnityEngine.MonoBehaviour
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
-            
+            RuneManager.Instance.UseRune(RuneEvent.OnDefence);
         }
 
         if ((other.tag =="enemy_att"&&canhurt))
         {
-
             CameraEffectSystem.Instance.FHitEffect();
-
+            FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
@@ -277,14 +281,13 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         if ((other.tag == "enemy" && canhurt))
         {
-           
             enemy_base b = other.gameObject.GetComponent<enemy_base>();
             bool c = b;
             if(c)
             {
+                FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
                 if (b.type == "lizarrd")
                 {
-                    
                     enemy_lizarrd_new a = (enemy_lizarrd_new)b;
                     if (a.candamage)
                     {
@@ -338,6 +341,10 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FGetMana(float num)
     {
         mana += num;
+        if(mana == Manamax)
+        {
+            RuneManager.Instance.UseRune(RuneEvent.OnManaFull);
+        }
         MainPanel.Instance.UpdateMp();
     }
 
@@ -364,6 +371,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FLoseHp(float num)
     {
         hp -= num;
+        Debug.Log(hp);
         MainPanel.Instance.UpdateHp();
     }
 
