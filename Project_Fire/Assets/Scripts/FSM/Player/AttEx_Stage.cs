@@ -15,6 +15,8 @@ public class AttEx_Stage : Player_Base_Stage
         Debug.Log("att");
         testplayer.Instance.atting = false;
         testplayer.Instance.canatt = false;
+        testplayer.Instance.attlevel = 4;
+
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
         //if (Player_Controller_System.Instance.Vertical_Left < 0.7 && Player_Controller_System.Instance.Vertical_Left > -0.7)
@@ -47,17 +49,18 @@ public class AttEx_Stage : Player_Base_Stage
     {
         ttt -= Time.deltaTime;
 
-        if (ttt<0.2f)
-        {
-            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.5f,0.1f));
+        //if (ttt<0.6f)
+        //{
+        //    ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(1f,0.5f));
            
-        }
+        //}
 
 
         Player_Function.FStop(testplayer.Instance.playergameobj);
        
         if (ttt < 0)
         {
+            testplayer.Instance.attlevel = 1;
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
            
             testplayer.Instance.atting = false;

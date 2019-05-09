@@ -5,7 +5,6 @@ using UnityEngine;
 public class RuneEntity : UnityEngine.MonoBehaviour
 {
     public Rune rune;
-    public float Radius = 1.0f;
 
     private void Awake()
     {

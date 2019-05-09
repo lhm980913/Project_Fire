@@ -14,11 +14,16 @@ public class LianDao : Rune
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
+        MpNeed = 10;
         Sickle = (GameObject)Resources.Load("Prefab/Sickle");
     }
     public override void Execute()
     {
         GameObject temp;
+        if (player == null)
+        {
+            player = testplayer.Instance;
+        }
         temp = UnityEngine.Object.Instantiate(Sickle, player.transform.position, Quaternion.identity);
         temp.GetComponent<LianDaoEntity>().dir = testplayer.Instance.face_to * new Vector3(1, 0, 0);
     }

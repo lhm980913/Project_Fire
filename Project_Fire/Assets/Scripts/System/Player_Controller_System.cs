@@ -107,8 +107,10 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
         Vertical_Right = FCheck_Axis("Vertical_Right",Key_Vertical_Right, Key_Vertical_Right_fu);
         Xbox_X = FCheck_Axis("Xbox_X",Key_Xbox_X, Key_Xbox_X_fu);
         Xbox_Y = FCheck_Axis("Xbox_Y",Key_Xbox_Y, Key_Xbox_Y_fu);
+
         LT = FCheck_Axis("LT",Key_LT);
         RT = FCheck_Axis("RT", Key_RT);
+
         Button_A = FCheck_Button_Stage("Button_A",Key_Button_A);
         Button_B = FCheck_Button_Stage("Button_B",Key_Button_B);
         Button_X = FCheck_Button_Stage("Button_X",Key_Button_X);
@@ -177,5 +179,18 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
     //{
     //    print(LT+"lt");
     //    print(RT + "rt");
+    //}
+
+
+
+
+
+    //把aixs变成button
+    //Button_Stage aixs2button(float aixs)
+    //{
+        
+
+
+
     //}
 }

@@ -53,10 +53,10 @@ public class Tanfan_stage : Player_Base_Stage
         Player_Function.FStop(testplayer.Instance.playergameobj);
         ttt -= Time.deltaTime;
 
-        if (ttt < 0.55f)
-        {
-            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.3f, 0.1f));
-        }
+        //if (ttt < 0.55f)
+        //{
+        //    ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.01f));
+        //}
 
         if (ttt < 0)
         {

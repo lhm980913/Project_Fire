@@ -41,7 +41,7 @@ public class player_animevent : UnityEngine.MonoBehaviour
 
     public void tanfan()
     {
-        tanfaneffect1.transform.position = testplayer.Instance.transform.position + new Vector3(1.81f * testplayer.Instance.face_to, -0.78f, 0 );
+        tanfaneffect1.transform.position = testplayer.Instance.transform.position + new Vector3(1.8f * testplayer.Instance.face_to, -0.78f, 0 );
         tanfaneffect1.transform.rotation = testplayer.Instance.moudle_player.transform.rotation;
         tanfaneffect1.Play();
     }
@@ -69,7 +69,7 @@ public class player_animevent : UnityEngine.MonoBehaviour
         float count = 0;
         while(count<0.5f)
         {
-            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 6;
+            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 3;
             count += Time.deltaTime;
             yield return null;
         }
@@ -80,7 +80,7 @@ public class player_animevent : UnityEngine.MonoBehaviour
     IEnumerator front()
     {
         float count = 0;
-        while (count < 0.5f)
+        while (count < 0.25f)
         {
             testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right * testplayer.Instance.face_to * 5;
             count += Time.deltaTime;

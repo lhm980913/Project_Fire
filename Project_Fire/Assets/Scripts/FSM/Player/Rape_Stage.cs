@@ -41,11 +41,16 @@ public class Rape_Stage : Player_Base_Stage
     {
         if(Vector3.Distance(testplayer.Instance.transform.position, target)<0.2f )
         {
-            testplayer.Instance.canhurt = true;
+         
             Player_Function.FJump(testplayer.Instance.playergameobj, testplayer.Instance.little_jump_speed);
+            ProcessSystem.Instance.StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.5f));
+
+            testplayer.Instance.doublejump = true;
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.anim.SetFloat("DistancePercent", 1);
             testplayer.Instance.anim.SetTrigger("ArrivePoint");
+            testplayer.Instance.canhurt = true;
+
         }
     }
 

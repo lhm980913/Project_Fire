@@ -45,18 +45,18 @@ public class enemy_bird : enemy_base
     private void Update()
     {
         enemy.Update();
-        if (faceto == 1)
+        if (faceto == 1&&!dead)
         {
             transform.rotation = Quaternion.Euler(0, 90, 0);
         }
-        else
+        else if(faceto == -1 && !dead)
         {
             transform.rotation = Quaternion.Euler(0, -90, 0);
         }
 
         if (Hp <= 0 && !dead)
         {
-
+            candamage = false;
             enemy.SetStage(bird_dead_stage);
             dead = true;
         }

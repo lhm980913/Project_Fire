@@ -31,8 +31,8 @@ public class testplayer : UnityEngine.MonoBehaviour
 
     public float Hpmax;
     public float Manamax;
-    public float _hp;
-    public float _mana;
+    private float _hp;
+    private float _mana;
 
     public float hp
     {
@@ -45,11 +45,11 @@ public class testplayer : UnityEngine.MonoBehaviour
             return this._hp;
         }
     }
-    private float mana
+    public float mana
     {
         set
         {
-            this._mana = Mathf.Clamp(value, 0, Hpmax);
+            this._mana = Mathf.Clamp(value, 0, Manamax);
         }
         get
         {
@@ -102,6 +102,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public GameObject moudle_player;
     public bool canjump;
 
+    public float attlevel = 1;
    // 
 
     public Player_Base_Stage stand_stage;
@@ -139,6 +140,8 @@ public class testplayer : UnityEngine.MonoBehaviour
         canhurt = true;
 
         skins = GetComponentsInChildren<SkinnedMeshRenderer>();
+        hp = Hpmax;
+        mana = Manamax;
     }
 
     void Start()
@@ -173,7 +176,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         _player.Update();
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
         {
             FActiveRuneOne();
         }
@@ -232,8 +235,6 @@ public class testplayer : UnityEngine.MonoBehaviour
     }
     void attcount()
     {
-
-        
         if(!canatt)
         {
 
@@ -243,8 +244,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             {
                 canatt = true;
             }
-
-
         }
     }
 
@@ -253,40 +252,127 @@ public class testplayer : UnityEngine.MonoBehaviour
         RuneManager.Instance.UseRune(RuneEvent.ActiveOne);
     }
 
+    private void FActiveRuneTwo()
+    {
+        RuneManager.Instance.UseRune(RuneEvent.ActiveTwo);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy_weapon" && atting)
         {
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
-           
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
-
-           
-         
-            
+            RuneManager.Instance.UseRune(RuneEvent.OnDefence);
         }
-        if ((other.tag =="enemy_att"&&canhurt)|| (other.tag == "enemy" && canhurt))
+
+        if ((other.tag =="enemy_att"&&canhurt))
         {
-            
+            CameraEffectSystem.Instance.FHitEffect();
+            FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
             enemypos = other.transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
         }
-       
+
+        if ((other.tag == "enemy" && canhurt))
+        {
+            enemy_base b = other.gameObject.GetComponent<enemy_base>();
+            bool c = b;
+            if(c)
+            {
+                FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
+                if (b.type == "lizarrd")
+                {
+                    enemy_lizarrd_new a = (enemy_lizarrd_new)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if (b.type == "bird")
+                {
+                   
+                    enemy_bird a = (enemy_bird)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if(b.type == "bullet")
+                {
+                    bullet a = (bullet)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+            }
+            else
+            {
+                CameraEffectSystem.Instance.FHitEffect();
+                enemypos = other.transform.position;
+                atting = false;
+                _player.SetStage(hurt_stage);
+                print(1111);
+            }
+        
+        }
+
+
     }
 
     public void FGetMana(float num)
     {
         mana += num;
+        if(mana == Manamax)
+        {
+            RuneManager.Instance.UseRune(RuneEvent.OnManaFull);
+        }
+        MainPanel.Instance.UpdateMp();
     }
 
-    public void FSubMana(float num)
+    public bool FLoseMana(float num)
     {
-        mana -= num;
+        if(mana-num < 0)
+        {
+            return false;
+        }
+        else
+        {
+            mana -= num;
+            MainPanel.Instance.UpdateMp();
+            return true;
+        }
+    }
+
+    public void FGetHp(float num)
+    {
+        hp += num;
+        MainPanel.Instance.UpdateHp();
+    }
+
+    public void FLoseHp(float num)
+    {
+        hp -= num;
+        Debug.Log(hp);
+        MainPanel.Instance.UpdateHp();
     }
 
    public IEnumerator wudi(float time)

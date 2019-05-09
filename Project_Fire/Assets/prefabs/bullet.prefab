@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1733747280672496607}
   m_Layer: 11
   m_Name: bullet
-  m_TagString: enemy_weapon
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0.37}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1733747280672496607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +105,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde9cee5983c9954588bc6079633001e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 
+  maxhp: 1
+  attfield: 0
+  movespeed: 0
+  visionfield: 0
+  beattforce: 0
+  hurt_count: 0
+  hurt_yuzhi: 0
+  ATK: 0
+  atting: 0
+  dead: 0
+  anim: {fileID: 0}
+  candamage: 1
+  faceto: 1
+  player_layermask:
+    serializedVersion: 2
+    m_Bits: 4096
   player: {fileID: 0}
 --- !u!1 &1712064805657974907
 GameObject:

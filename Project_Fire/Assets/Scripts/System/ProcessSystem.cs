@@ -41,8 +41,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
-
-        
         if (playeratt.tag == "player_weapon")
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
@@ -63,29 +61,50 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             if (Enemy.type=="lizarrd")
             {
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
-                a.hurt_count -= testplayer.Instance.player_attack;
-                a.Hp -= testplayer.Instance.player_attack;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack, Enemy.transform.position);
+                a.hurt_count -= testplayer.Instance.player_attack*testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
                 if (a.hurt_count<0&&!a.dead)
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
                 }
-                
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            }
+            if (Enemy.type == "assassin")
+            {
+                enemy_assassin a = (enemy_assassin)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.assassin_hurt_stage);
+                }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
             if (Enemy.type == "bird")
             {
                 enemy_bird a = (enemy_bird)Enemy;
-                a.hurt_count -= testplayer.Instance.player_attack;
-                a.Hp -= testplayer.Instance.player_attack;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
                 if (a.hurt_count < 0&&!a.dead)
                 {
                     a.enemy.SetStage(a.bird_hurt_stage);
                 }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+
+            }
+            if (Enemy.type == "bullet")
+            {
+                bullet a = (bullet)Enemy;
                
+                a.Hp -= testplayer.Instance.player_attack;
+                RuneManager.Instance.UseRune(RuneEvent.OnAttackFlyItem);
             }
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
-            RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            
         }
     }
 
@@ -128,8 +147,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
     }
     public void Fenemy_re(GameObject enemy)
     {
-
-
         Destroy(Instantiate(att3, testplayer.Instance.transform.position + pianyi*(Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att4, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att5, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);

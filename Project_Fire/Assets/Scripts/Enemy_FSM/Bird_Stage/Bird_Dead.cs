@@ -19,6 +19,8 @@ public class Bird_Dead : Enemy_Base_Stage
     public override void Update()
     {
         count -= Time.deltaTime;
+        enemy.gameObject.transform.position += Vector3.down * 6 * Time.deltaTime;
+        enemy.gameObject.transform.Rotate(new Vector3(720*Time.deltaTime , 0, 0));
         if(count<0)
         {
             enemy.destroyself();
