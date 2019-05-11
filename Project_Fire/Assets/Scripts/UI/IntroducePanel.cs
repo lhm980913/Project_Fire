@@ -20,6 +20,11 @@ public class IntroducePanel : BasePanel
         DisplayRune(IntroducedRune);
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+    }
+
     public void DisplayRune(Rune rune)
     {
         Sprite sprite;
