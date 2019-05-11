@@ -41,7 +41,7 @@ public class Att_Stage : Player_Base_Stage
        
 
         attcount = testplayer.Instance.tanfan_time;
-        ttt = 0.3f;
+        ttt = 0.5f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
@@ -68,7 +68,22 @@ public class Att_Stage : Player_Base_Stage
        
 
         ttt -= Time.deltaTime;
-        if(ttt<0)
+        if (ttt < 0.1f)
+        {
+            if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && testplayer.Instance.canatt)
+            {
+
+                jattack = false;
+
+                testplayer._player.SetStage(testplayer.Instance.att_stage);
+                testplayer.Instance.atting = false;
+
+
+            }
+         
+
+        }
+        if (ttt<0)
         {
             jattack = false;
             
