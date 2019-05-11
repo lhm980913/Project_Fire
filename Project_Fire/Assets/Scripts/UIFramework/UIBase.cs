@@ -39,7 +39,7 @@ public class BasePanel : UnityEngine.MonoBehaviour
     public virtual void OnExit()
     {
         canvasGroup.alpha = 0;
-        canvasGroup.gameObject.SetActive(false);
         IsTop = false;
+        canvasGroup.gameObject.SetActive(false);
     }
 }
