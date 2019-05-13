@@ -17,6 +17,8 @@ public class enemy_bird : enemy_base
     Vector3 beginpos;
     public float xunluofanwei;
     public GameObject bullet;
+    [SerializeField]
+    public GameObject[] wings;
     private void Awake()
     {
         type = "bird";
@@ -61,7 +63,10 @@ public class enemy_bird : enemy_base
             dead = true;
         }
 
-        
+        for(int i=0;i<2;i++)
+        {
+            wings[i].transform.Rotate(new Vector3(0, 0, 10));
+        }
     }
 
     public override bool FAttPlayer()
@@ -80,6 +85,11 @@ public class enemy_bird : enemy_base
         }
         else
         {
+            if(Physics.Raycast(this.transform.position,testplayer.Instance.transform.position-this.transform.position,visionfield,1<<9))
+            {
+                return false;
+            }
+            else
             return true;
         }
          
@@ -87,7 +97,8 @@ public class enemy_bird : enemy_base
     public override bool FCheckFilp()
     {
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
-        if (this.transform.position.x > beginpos.x + xunluofanwei||a)
+        if (a) return true;
+        if (this.transform.position.x > beginpos.x + xunluofanwei)
         {
             return true;
         }
