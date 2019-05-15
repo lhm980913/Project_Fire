@@ -13,6 +13,7 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Enter()
     {
+        testplayer.Instance.attlevel = 1;
         count = 0.25f;
         testplayer.Instance.anim.CrossFade("player_strike", 0.1f);
         //Debug.Log("hurt");
@@ -77,7 +78,7 @@ public class Hurt_Stage : Player_Base_Stage
             }
             
             yield return new WaitForSeconds(0.1f);
-            c += 0.3f;
+            c += 0.1f;
             if(c>=count)
             {
                 for (int i = 0; i < testplayer.Instance.skins.Length; i++)

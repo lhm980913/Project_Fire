@@ -259,7 +259,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "enemy_weapon" && atting)
+        if (other.tag == "enemy_weapon" && atting&&grounded)
         {
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));

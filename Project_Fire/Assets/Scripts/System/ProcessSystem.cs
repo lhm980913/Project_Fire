@@ -41,7 +41,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
-        if (playeratt.tag == "player_weapon")
+        if (playeratt.tag == "player_weapon"&&!Physics.Raycast(testplayer.Instance.transform.position,Enemy.transform.position-testplayer.Instance.transform.position,Vector3.Distance(Enemy.transform.position, testplayer.Instance.transform.position),1<<9))
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;

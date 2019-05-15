@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1978598325568531829}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -12.26, y: 6.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1978598325628295298}
   m_Father: {fileID: 0}
@@ -97,6 +97,9 @@ MonoBehaviour:
   self: {fileID: 0}
   xunluofanwei: 5
   bullet: {fileID: 252370912523670591, guid: 962f84dda060c214db097a3c773f4506, type: 3}
+  wings:
+  - {fileID: 1978598325628585130}
+  - {fileID: 1978598325628585136}
 --- !u!1001 &1978598325628682754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,6 +252,18 @@ PrefabInstance:
 --- !u!4 &1978598325628295298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f3ae0ce3f0259794d9b4bfce5888e5d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1978598325628682754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1978598325628585130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: f3ae0ce3f0259794d9b4bfce5888e5d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1978598325628682754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1978598325628585136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100018, guid: f3ae0ce3f0259794d9b4bfce5888e5d0,
     type: 3}
   m_PrefabInstance: {fileID: 1978598325628682754}
   m_PrefabAsset: {fileID: 0}

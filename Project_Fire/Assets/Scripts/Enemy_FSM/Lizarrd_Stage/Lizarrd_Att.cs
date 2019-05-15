@@ -14,7 +14,7 @@ public class Lizarrd_Att : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 1.75f;
+        count = Random.Range(1.7f, 2.2f);
         enemy.anim.CrossFade("lizarrd_att", 0.2f);
     }
     public override void Update()

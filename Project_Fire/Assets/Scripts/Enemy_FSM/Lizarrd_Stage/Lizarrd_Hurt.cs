@@ -16,7 +16,7 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
         count = enemy.yingzhi_time;
 
         enemy.anim.CrossFade("lizarrd_hurt", 0.1f);
-        enemy.hurt_count = enemy.hurt_yuzhi;
+        enemy.hurt_count = Random.Range(enemy.hurt_yuzhi-0.15f, enemy.hurt_yuzhi+0.15f) ;
 
     }
     public override void Update()
