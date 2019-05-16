@@ -47,7 +47,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
             if (b.jattack)
             {
-                Player_Function.FJump(testplayer.Instance.gameObject, 11);
+                Player_Function.FJump(testplayer.Instance.gameObject, 8);
             }
 
             Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);

@@ -72,6 +72,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     [HideInInspector]
     public float flashcd;
     [HideInInspector]
+    public int attanim = 1;
+    [HideInInspector]
     public int face_to = 1;
     [HideInInspector]
     public bool canflash = true;
@@ -256,7 +258,67 @@ public class testplayer : UnityEngine.MonoBehaviour
     {
         RuneManager.Instance.UseRune(RuneEvent.ActiveTwo);
     }
+    private void OnTriggerStay(Collider other)
+    {
 
+        if ((other.tag == "enemy" && canhurt))
+        {
+            enemy_base b = other.gameObject.GetComponent<enemy_base>();
+            bool c = b;
+            if (c)
+            {
+                FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
+                if (b.type == "lizarrd")
+                {
+                    enemy_lizarrd_new a = (enemy_lizarrd_new)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if (b.type == "bird")
+                {
+
+                    enemy_bird a = (enemy_bird)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if (b.type == "bullet")
+                {
+                    bullet a = (bullet)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
+            }
+            else
+            {
+                CameraEffectSystem.Instance.FHitEffect();
+                enemypos = other.transform.position;
+                atting = false;
+                _player.SetStage(hurt_stage);
+                print(1111);
+            }
+
+        }
+
+
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy_weapon" && atting&&grounded)
@@ -278,63 +340,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             atting = false;
             _player.SetStage(hurt_stage);
         }
-
-        if ((other.tag == "enemy" && canhurt))
-        {
-            enemy_base b = other.gameObject.GetComponent<enemy_base>();
-            bool c = b;
-            if(c)
-            {
-                FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
-                if (b.type == "lizarrd")
-                {
-                    enemy_lizarrd_new a = (enemy_lizarrd_new)b;
-                    if (a.candamage)
-                    {
-                        CameraEffectSystem.Instance.FHitEffect();
-                        enemypos = other.transform.position;
-                        atting = false;
-                        _player.SetStage(hurt_stage);
-                    }
-
-                }
-                if (b.type == "bird")
-                {
-                   
-                    enemy_bird a = (enemy_bird)b;
-                    if (a.candamage)
-                    {
-                        CameraEffectSystem.Instance.FHitEffect();
-                        enemypos = other.transform.position;
-                        atting = false;
-                        _player.SetStage(hurt_stage);
-                    }
-
-                }
-                if(b.type == "bullet")
-                {
-                    bullet a = (bullet)b;
-                    if (a.candamage)
-                    {
-                        CameraEffectSystem.Instance.FHitEffect();
-                        enemypos = other.transform.position;
-                        atting = false;
-                        _player.SetStage(hurt_stage);
-                    }
-
-                }
-            }
-            else
-            {
-                CameraEffectSystem.Instance.FHitEffect();
-                enemypos = other.transform.position;
-                atting = false;
-                _player.SetStage(hurt_stage);
-                print(1111);
-            }
-        
-        }
-
 
     }
 
@@ -386,4 +391,17 @@ public class testplayer : UnityEngine.MonoBehaviour
     {
         Gizmos.DrawWireCube(transform.position + Vector3.right * face_to * 2.0f * 0.6f, new Vector3(2.0f, 1.0f, 1.0f));
     }
+
+    void attint(ref float count)
+    {
+        if(attanim==2)
+        {
+            count += Time.deltaTime;
+            if(count>1)
+            {
+                attanim = 1;
+            }
+        }
+    }
+
 }
