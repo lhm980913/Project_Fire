@@ -34,9 +34,9 @@ public class Camera_test : UnityEngine.MonoBehaviour
     {
         //this.transform.position = new Vector3(testplayer.Instance.transform.position.x, testplayer.Instance.transform.position.y, z);
 
-        if(Input.GetKeyDown(KeyCode.O)||Player_Controller_System.Instance.Xbox_Y==-1)
+        if (Input.GetKeyDown(KeyCode.O) || Player_Controller_System.Instance.Xbox_Y == -1)
         {
-            if(aix)
+            if (aix)
             {
                 if (fovStage == CurrentFOV.Normal)
                 {
@@ -50,19 +50,20 @@ public class Camera_test : UnityEngine.MonoBehaviour
                 }
             }
             aix = false;
-           // transform.position=transform.position+Vector3.forward;
-        }else
-        {
-            aix = true;
-        }
-    
-        if(Player_Controller_System.Instance.Vertical_Left < 0.0 && testplayer.Instance.grounded)
-        {
-            cameraTarget.localPosition = new Vector3(0, -2.5f, 0);
+            // transform.position=transform.position+Vector3.forward;
         }
         else
         {
-            cameraTarget.localPosition = Vector3.zero;
+            aix = true;
         }
+
+        //if(Player_Controller_System.Instance.Vertical_Left < 0.0 && testplayer.Instance.grounded)
+        //{
+        //    cameraTarget.localPosition = new Vector3(0, -2.5f, 0);
+        //}
+        //else
+        //{
+        //    cameraTarget.localPosition = Vector3.zero;
+        //}
     }
 }
