@@ -922,12 +922,12 @@ MonoBehaviour:
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.018
-  m_DeadZoneHeight: 0.031
+  m_DeadZoneWidth: 0.167
+  m_DeadZoneHeight: 0.289
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.11
-  m_SoftZoneHeight: 0.18
+  m_SoftZoneWidth: 0.316
+  m_SoftZoneHeight: 0.496
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 0
@@ -1824,6 +1824,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   candamage: 1
   yingzhi_time: 0
+  fighting: 0
   faceto: 1
   player_layermask:
     serializedVersion: 2

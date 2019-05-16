@@ -13,10 +13,18 @@ public class Lizarrd_Walk : Enemy_Base_Stage
     public override void Enter()
     {
         enemy.anim.CrossFade("lizarrd_walk",0.2f);
+        if (enemy.fighting)
+        {
+            enemy.FFaceToPlayer();
+        }
     }
     public override void Update()
     {
-       enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
+        if (enemy.fighting&&Vector3.Distance(enemy.transform.position,testplayer.Instance.transform.position)<5)
+        {
+            enemy.FFaceToPlayer();
+        }
+        enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
     }
 
     public override void Check()

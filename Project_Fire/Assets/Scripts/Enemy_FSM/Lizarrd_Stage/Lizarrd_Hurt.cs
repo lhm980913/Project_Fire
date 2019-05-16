@@ -25,6 +25,7 @@ public class Lizarrd_Hurt : Enemy_Base_Stage
 
         if(count<0)
         {
+            enemy.FFaceToPlayer();
             enemy.enemy.SetStage(enemy.lizarrd_walk_stage);
         }
         

@@ -5696,6 +5696,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1072807188}
     m_Modifications:
+    - target: {fileID: 154851442270544184, guid: 3f5876c8d3e6a4140954c81f301dbb10,
+        type: 3}
+      propertyPath: m_Name
+      value: Ground (310)
+      objectReference: {fileID: 0}
     - target: {fileID: 154851442270544188, guid: 3f5876c8d3e6a4140954c81f301dbb10,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5725,11 +5730,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 154851442270544184, guid: 3f5876c8d3e6a4140954c81f301dbb10,
-        type: 3}
-      propertyPath: m_Name
-      value: Ground (310)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f5876c8d3e6a4140954c81f301dbb10, type: 3}
@@ -47776,6 +47776,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1072807188}
     m_Modifications:
+    - target: {fileID: 154851442270544184, guid: 3f5876c8d3e6a4140954c81f301dbb10,
+        type: 3}
+      propertyPath: m_Name
+      value: Ground (940)
+      objectReference: {fileID: 0}
     - target: {fileID: 154851442270544188, guid: 3f5876c8d3e6a4140954c81f301dbb10,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47805,11 +47810,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 154851442270544184, guid: 3f5876c8d3e6a4140954c81f301dbb10,
-        type: 3}
-      propertyPath: m_Name
-      value: Ground (940)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f5876c8d3e6a4140954c81f301dbb10, type: 3}
@@ -57304,9 +57304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89537da364175d94982ca0934cc2e939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ttt: 0.05
-  z: 9
-  z_max: 9
+  NormalFOV: 40
+  ZoomFOV: 15
+  Vcam: {fileID: 0}
+  cameraTarget: {fileID: 0}
 --- !u!114 &953008141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130419,6 +130420,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6678352631377510317}
     m_Modifications:
+    - target: {fileID: 1590022622123311712, guid: 78d454cbd9e788147b164da842475c72,
+        type: 3}
+      propertyPath: m_Name
+      value: "28_34\uFF080,0\uFF09\uFF0833,0\uFF09"
+      objectReference: {fileID: 0}
     - target: {fileID: 1590022622123311713, guid: 78d454cbd9e788147b164da842475c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -130473,11 +130479,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1590022622123311712, guid: 78d454cbd9e788147b164da842475c72,
-        type: 3}
-      propertyPath: m_Name
-      value: "28_34\uFF080,0\uFF09\uFF0833,0\uFF09"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78d454cbd9e788147b164da842475c72, type: 3}

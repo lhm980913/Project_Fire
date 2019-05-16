@@ -315,7 +315,12 @@ public class enemy_lizarrd_new : enemy_base
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
-        return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
+        bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
+        if(a)
+        {
+            fighting = true;
+        }
+        return a;
     }
     //public IEnumerator stand_lizarrd(float time)
     //{
