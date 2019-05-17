@@ -241,6 +241,7 @@ public class enemy_lizarrd_new : enemy_base
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
         enemy = new Enemy(lizarrd_walk_stage);
+        attfield = attfield - Random.Range(0, 0.25f);
     }
     private void Start()
     {
@@ -267,7 +268,7 @@ public class enemy_lizarrd_new : enemy_base
             candamage = false;
             dead = true;
         }
-
+        tuozhan();
     }
 
 
@@ -299,7 +300,7 @@ public class enemy_lizarrd_new : enemy_base
     public override bool FAttPlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
-        return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, attfield, player_layermask);
+        return Physics.BoxCast(transform.position - transform.forward*2, Vector3.one, transform.forward, Quaternion.identity, attfield+2, player_layermask);
     }
     public override void FFaceToPlayer()
     {
@@ -321,6 +322,13 @@ public class enemy_lizarrd_new : enemy_base
             fighting = true;
         }
         return a;
+    }
+    public void tuozhan()
+    {
+        if(Vector3.Distance(this.transform.position,testplayer.Instance.transform.position)>5)
+        {
+            fighting = false;
+        }
     }
     //public IEnumerator stand_lizarrd(float time)
     //{
