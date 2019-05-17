@@ -15,6 +15,9 @@ public class enemy_fire : enemy_base
     public Fire_Att fire_att_stage;
     public Fire_Throw fire_throw_stage;
 
+    public GameObject fire;
+    public GameObject fire1;
+    public Transform huoba;
     private void Awake()
     {
         type = "fire";
@@ -36,12 +39,13 @@ public class enemy_fire : enemy_base
     }
     private void Start()
     {
-
+        fire1 = Instantiate(fire);
     }
 
 
     private void Update()
     {
+        fire1.transform.position = huoba.position;
         enemy.Update();
         if (faceto == 1)
         {
@@ -113,14 +117,24 @@ public class enemy_fire : enemy_base
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position)>visionfield)
+        {
+            return false;
+        }
+        if (Physics.Raycast(this.transform.position, testplayer.Instance.transform.position - this.transform.position, Vector3.Distance(this.transform.position, testplayer.Instance.transform.position), 1 << 9))
+        {
+            return false;
+        }
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
         bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield/3, player_layermask);
         bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
         
+
         if ((a||b || c) &&!fighting)
         {
             fighting = true;
         }
+        
         return a||b||c;
     }
     public void tuozhan()
@@ -173,7 +187,11 @@ public class enemy_fire : enemy_base
 
     }
 
-
+    public override void destroyself()
+    {
+        Destroy(this.gameObject);
+        Destroy(fire1);
+    }
 
     //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
     //{

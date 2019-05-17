@@ -16,6 +16,10 @@ public class Fire_Att : Enemy_Base_Stage
     {
         count = Random.Range(1.8f, 2.2f);
         enemy.anim.CrossFade("att", 0.2f);
+        if (enemy.fighting)
+        {
+            enemy.FFaceToPlayer();
+        }
     }
     public override void Update()
     {
