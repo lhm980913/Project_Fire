@@ -22,6 +22,7 @@ public class Fire_Dead : Enemy_Base_Stage
         if (count < 0)
         {
             enemy.destroyself();
+            
         }
 
     }
