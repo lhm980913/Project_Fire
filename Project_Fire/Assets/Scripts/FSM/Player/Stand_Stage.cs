@@ -55,7 +55,7 @@ public class Stand_Stage :  Player_Base_Stage
 
     public void Update_()
     {
-        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 30 * Time.deltaTime; //zhongli
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
         Player_Function.FFace_to();
         
     }

@@ -14,14 +14,18 @@ public class Att_Stage : Player_Base_Stage
     }
     public void Enter()
     {
-        
         Debug.Log("att");
         testplayer.Instance.atting = true;
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
-        
-        if(!testplayer.Instance.grounded)
+        if (testplayer.Instance.grounded)
+        {
+            testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+            jattack = false;
+        }
+        else if(!testplayer.Instance.grounded)
         {
             testplayer.Instance.anim.CrossFade("player_jattack1", 0.1f);
             testplayer.Instance.anim.CrossFade("player_jattack", 0.1f);
@@ -30,24 +34,14 @@ public class Att_Stage : Player_Base_Stage
         }
         else
         {
-            if(testplayer.Instance.attanim==1)
-            {
-                testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
-                testplayer.Instance.attanim = 2;
-            }
-            else if(testplayer.Instance.attanim == 2)
-            {
-                testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
-                testplayer.Instance.attanim = 1;
-            }
-            
-            
+            testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
             jattack = false;
         }
        
 
         attcount = testplayer.Instance.tanfan_time;
-        ttt = 0.3f;
+        ttt = 0.5f;
 
 
         //atttarget = Physics.BoxCast(testplayer.Instance.transform.position, Vector3.one, testplayer.Instance.transform.forward,out RaycastHit hit ,Quaternion.identity, 1f, 1<<11);
@@ -74,21 +68,21 @@ public class Att_Stage : Player_Base_Stage
        
 
         ttt -= Time.deltaTime;
-        //if (ttt < 0.1f)
-        //{
-        //    if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && testplayer.Instance.canatt)
-        //    {
+        if (ttt < 0.1f)
+        {
+            if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && testplayer.Instance.canatt)
+            {
 
-        //        jattack = false;
+                jattack = false;
 
-        //        testplayer._player.SetStage(testplayer.Instance.att_stage);
-        //        testplayer.Instance.atting = false;
+                testplayer._player.SetStage(testplayer.Instance.att_stage);
+                testplayer.Instance.atting = false;
 
 
-        //    }
+            }
          
 
-        //}
+        }
         if (ttt<0)
         {
             jattack = false;
@@ -109,7 +103,7 @@ public class Att_Stage : Player_Base_Stage
     // Update is called once per frame
     public void Update_()
     {
-        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 20 * Time.deltaTime; //zhongli
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 40 * Time.deltaTime; //zhongli
 
     }
 }
