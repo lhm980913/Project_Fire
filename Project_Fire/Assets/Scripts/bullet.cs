@@ -14,6 +14,7 @@ public class bullet : enemy_base
     }
     void Start()
     {
+        Destroy(this.gameObject, 5);
         player = testplayer.Instance.transform;
         this.transform.LookAt(player);
     }
@@ -31,5 +32,14 @@ public class bullet : enemy_base
             dead = true;
             Destroy(this.gameObject);
         }
+    }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if(other.tag=="map")
+        {
+            Destroy(this.gameObject);
+        }
+       
     }
 }

@@ -85,7 +85,7 @@ public class enemy_bird : enemy_base
         }
         else
         {
-            if(Physics.Raycast(this.transform.position,testplayer.Instance.transform.position-this.transform.position,visionfield,1<<9))
+            if(Physics.Raycast(this.transform.position,testplayer.Instance.transform.position-this.transform.position,Vector3.Distance(this.transform.position,testplayer.Instance.transform.position),1<<9))
             {
                 return false;
             }
@@ -111,15 +111,19 @@ public class enemy_bird : enemy_base
             return false;
         }
     }
-    public void Fatt()
+    public IEnumerator Fatt()
     {
-
+        yield return new WaitForSeconds(0.5f);
         //print("att");
         GameObject a = Instantiate(bullet);
         a.transform.position = this.transform.position;
         
     }
+    //public IEnumerator qianyao()
+    //{
+    //    for(int i=0;i<360;i++)
 
-   
+    //}
+
 
 }

@@ -231,5 +231,6 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public virtual void destroyself()
     {
         Destroy(this.gameObject);
+        
     }
 }
