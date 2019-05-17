@@ -69,7 +69,7 @@ public class Att_Stage : Player_Base_Stage
         }
         else
         {
-            Player_Function.FStop(testplayer.Instance.playergameobj);
+           // Player_Function.FStop(testplayer.Instance.playergameobj);
         }
        
 
@@ -97,7 +97,7 @@ public class Att_Stage : Player_Base_Stage
             testplayer.Instance.atting = false;
             
         }
-        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down)
+        if (testplayer.Instance.flashcd < 0 && Player_Controller_System.Instance.Button_RB == Player_Controller_System.Button_Stage.down&&testplayer.Instance.canflash)
         {
             jattack = false;
             testplayer.Instance.atting = false;

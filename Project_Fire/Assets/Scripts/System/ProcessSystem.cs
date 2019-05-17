@@ -50,9 +50,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 Player_Function.FJump(testplayer.Instance.gameObject, 8);
             }
 
-            Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);
-            Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
-            Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero)).gameObject,3f);
+            Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up*0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
+            Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
+            Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
             //Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
             //Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
             //Instantiate(att3, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
@@ -67,6 +67,18 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 if (a.hurt_count<0&&!a.dead)
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
+                }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            }
+            if (Enemy.type == "fire")
+            {
+                enemy_fire a = (enemy_fire)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.fire_hurt_stage);
                 }
                 RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
@@ -155,6 +167,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         {
             enemy.GetComponentInParent<Animator>().CrossFade("lizarrd_stand1", 0.1f);
         }
-        
+        if (enemy.GetComponent<enemy_fire>())
+        {
+            enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
+        }
     }
 }
