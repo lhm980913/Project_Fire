@@ -139,7 +139,7 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public float yingzhi_time;
 
     public bool fighting = false;
-    public float attcd;
+
     private bool canMove;
     public int faceto = 1;
     public LayerMask player_layermask = 1 << 12;

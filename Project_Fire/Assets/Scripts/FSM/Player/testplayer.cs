@@ -293,19 +293,6 @@ public class testplayer : UnityEngine.MonoBehaviour
                     }
 
                 }
-                if (b.type == "fire")
-                {
-
-                    enemy_fire a = (enemy_fire)b;
-                    if (a.candamage)
-                    {
-                        CameraEffectSystem.Instance.FHitEffect();
-                        enemypos = other.transform.position;
-                        atting = false;
-                        _player.SetStage(hurt_stage);
-                    }
-
-                }
                 if (b.type == "bullet")
                 {
                     bullet a = (bullet)b;
