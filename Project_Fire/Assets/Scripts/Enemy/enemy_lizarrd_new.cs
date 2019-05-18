@@ -299,8 +299,9 @@ public class enemy_lizarrd_new : enemy_base
     }
     public override bool FAttPlayer()
     {
-        //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
-        return Physics.BoxCast(transform.position - transform.forward*2, Vector3.one, transform.forward, Quaternion.identity, attfield+2, player_layermask);
+        bool a = Physics.BoxCast(transform.position - transform.forward * 2, Vector3.one, transform.forward, Quaternion.identity, attfield + 2, player_layermask);
+        bool b = Physics.BoxCast(transform.position + transform.forward * 2, Vector3.one, -transform.forward, Quaternion.identity, attfield + 2, player_layermask);
+        return a || b;
     }
     public override void FFaceToPlayer()
     {
@@ -316,12 +317,15 @@ public class enemy_lizarrd_new : enemy_base
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
+        //bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
-        if(a)
+        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
+        bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
+        if (a||b||c && !fighting)
         {
             fighting = true;
         }
-        return a;
+        return a || b || c;
     }
     public void tuozhan()
     {

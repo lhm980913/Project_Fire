@@ -16,6 +16,10 @@ public class Lizarrd_Att : Enemy_Base_Stage
     {
         count = Random.Range(1.7f, 2.2f);
         enemy.anim.CrossFade("lizarrd_att", 0.2f);
+        if (enemy.fighting)
+        {
+            enemy.FFaceToPlayer();
+        }
     }
     public override void Update()
     {

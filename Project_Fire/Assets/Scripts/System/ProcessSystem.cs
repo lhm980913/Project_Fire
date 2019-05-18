@@ -82,6 +82,18 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 }
                 RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
+            if (Enemy.type == "lancer")
+            {
+                enemy_lancer a = (enemy_lancer)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.lancer_hurt_stage);
+                }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            }
             if (Enemy.type == "assassin")
             {
                 enemy_assassin a = (enemy_assassin)Enemy;
@@ -168,6 +180,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             enemy.GetComponentInParent<Animator>().CrossFade("lizarrd_stand1", 0.1f);
         }
         if (enemy.GetComponent<enemy_fire>())
+        {
+            enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
+        }
+        if (enemy.GetComponent<enemy_lancer>())
         {
             enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
         }

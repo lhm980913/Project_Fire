@@ -2,50 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy_fire : enemy_base
+public class enemy_lancer : enemy_base
 {
     public Enemy enemy;
-    public enemy_fire self;
+    public enemy_lancer self;
 
 
-    public Fire_Stand fire_stand_stage;
-    public Fire_Hurt fire_hurt_stage;
-    public Fire_Dead fire_dead_stage;
-    public Fire_Walk fire_walk_stage;
-    public Fire_Att fire_att_stage;
-    public Fire_Throw fire_throw_stage;
+    public Lancer_Stand lancer_stand_stage;
+    public Lancer_Hurt lancer_hurt_stage;
+    public Lancer_Dead lancer_dead_stage;
+    public Lancer_Walk lancer_walk_stage;
+    public Lancer_Att lancer_att_stage;
+    public Lancer_Throw lancer_throw_stage;
 
-    public GameObject fire;
-    public GameObject fire1;
-    public Transform huoba;
+    //public GameObject fire;
+    //public GameObject fire1;
+    //public Transform huoba;
     private void Awake()
     {
-        type = "fire";
+        type = "lancer";
         if (self != this)
         {
             self = this;
         }
-        fire_stand_stage = new Fire_Stand(self);
-        fire_att_stage = new Fire_Att(self);
-        fire_dead_stage = new Fire_Dead(self);
-        fire_hurt_stage = new Fire_Hurt(self);
-        fire_throw_stage = new Fire_Throw(self);
-        fire_walk_stage = new Fire_Walk(self);
+        lancer_stand_stage = new Lancer_Stand(self);
+        lancer_att_stage = new Lancer_Att(self);
+        lancer_dead_stage = new Lancer_Dead(self);
+        lancer_hurt_stage = new Lancer_Hurt(self);
+        lancer_throw_stage = new Lancer_Throw(self);
+        lancer_walk_stage = new Lancer_Walk(self);
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
-        enemy = new Enemy(fire_walk_stage);
-       // attfield = attfield - Random.Range(0, 0.25f);
+        enemy = new Enemy(lancer_walk_stage);
+        // attfield = attfield - Random.Range(0, 0.25f);
     }
     private void Start()
     {
-        fire1 = Instantiate(fire);
+        //fire1 = Instantiate(fire);
     }
 
 
     private void Update()
     {
-        fire1.transform.position = huoba.position;
+        //fire1.transform.position = huoba.position;
         enemy.Update();
         if (faceto == 1)
         {
@@ -59,7 +59,7 @@ public class enemy_fire : enemy_base
         if (Hp <= 0 && !dead)
         {
 
-            enemy.SetStage(fire_dead_stage);
+            enemy.SetStage(lancer_dead_stage);
             candamage = false;
             dead = true;
         }
@@ -88,7 +88,7 @@ public class enemy_fire : enemy_base
     public override bool FCheckFilp()
     {
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
-        
+
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
         bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
         print(b);
@@ -100,8 +100,8 @@ public class enemy_fire : enemy_base
     {
         //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
         bool a = Physics.BoxCast(transform.position - transform.forward * 2, Vector3.one, transform.forward, Quaternion.identity, attfield + 2, player_layermask);
-        bool b = Physics.BoxCast(transform.position + transform.forward * 2, Vector3.one, -transform.forward, Quaternion.identity,attfield + 2, player_layermask);
-        return a||b;
+        bool b = Physics.BoxCast(transform.position + transform.forward * 2, Vector3.one, -transform.forward, Quaternion.identity, attfield + 2, player_layermask);
+        return a || b;
     }
     public override void FFaceToPlayer()
     {
@@ -117,7 +117,7 @@ public class enemy_fire : enemy_base
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
-        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position)>visionfield)
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > visionfield)
         {
             return false;
         }
@@ -126,16 +126,16 @@ public class enemy_fire : enemy_base
             return false;
         }
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
-        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield/3, player_layermask);
+        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
         bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
-        
 
-        if ((a||b || c) &&!fighting)
+
+        if ((a || b || c) && !fighting)
         {
             fighting = true;
         }
-        
-        return a||b||c;
+
+        return a || b || c;
     }
     public void tuozhan()
     {
@@ -173,7 +173,7 @@ public class enemy_fire : enemy_base
 
         ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
-        if (other.tag == "player_weapon" && enemy._enemy != fire_att_stage && enemy._enemy != fire_hurt_stage && enemy._enemy != fire_dead_stage && enemy._enemy != fire_stand_stage && enemy._enemy != fire_throw_stage)
+        if (other.tag == "player_weapon" && enemy._enemy != lancer_att_stage && enemy._enemy != lancer_hurt_stage && enemy._enemy != lancer_dead_stage && enemy._enemy != lancer_stand_stage && enemy._enemy != lancer_throw_stage)
         {
             if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
             {
@@ -190,7 +190,7 @@ public class enemy_fire : enemy_base
     public override void destroyself()
     {
         Destroy(this.gameObject);
-        Destroy(fire1);
+        //Destroy(fire1);
     }
 
     //public override IEnumerator FHurt(float time, Enemy_Stage stage_)
@@ -201,12 +201,6 @@ public class enemy_fire : enemy_base
     //    // FBeHurt();
     //    Stage = stage_;
     //    StopAllCoroutines();
-
-
-
-    //}
-
-
 
 
 }

@@ -13,6 +13,7 @@ public class Fire_Walk : Enemy_Base_Stage
     public override void Enter()
     {
         enemy.anim.CrossFade("walk", 0.2f);
+
         if (enemy.fighting)
         {
             enemy.FFaceToPlayer();
