@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: huoba
+  m_Name: shield
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 2
@@ -20,19 +20,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 483cab52a8a06154fab8ffe0ed4def74, type: 3}
+        m_Texture: {fileID: 2800000, guid: a0616a5b9144ae045a1f7314043bddab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 0826daa513853724f94270d3f5f3f4b7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 693e8da134b23e94a84cd18b78c241c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: eeb236361c780464b88a6552f3ea789c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0f5bdddce77a47e4c9d5f109b8122e8e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: de4aaa4ab395dab4ca1340b8f5fae4f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dcc2a04f4cfac14da92bd368f34853d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -50,7 +50,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 0
-    - _GlossMapScale: 1
+    - _GlossMapScale: 0.054
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
@@ -64,5 +64,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1.8443027, g: 1.8443027, b: 1.8443027, a: 1}
+    - _EmissionColor: {r: 1.7411011, g: 1.7411011, b: 1.7411011, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

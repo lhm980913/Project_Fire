@@ -181,6 +181,8 @@ MonoBehaviour:
   anim: {fileID: 4366985692478661099}
   candamage: 1
   yingzhi_time: 0.3
+  fighting: 0
+  attcd: 0
   faceto: 1
   player_layermask:
     serializedVersion: 2
@@ -378,6 +380,18 @@ PrefabInstance:
     - target: {fileID: 400000, guid: cb1e0916ad93779409e69bccd46508b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cb1e0916ad93779409e69bccd46508b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cb1e0916ad93779409e69bccd46508b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: cb1e0916ad93779409e69bccd46508b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: cb1e0916ad93779409e69bccd46508b1, type: 3}
       propertyPath: m_LocalRotation.x
