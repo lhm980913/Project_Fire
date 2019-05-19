@@ -18,7 +18,8 @@ public class Tanfan_stage : Player_Base_Stage
     public void Enter()
     {
         Debug.Log("att");
-       
+
+        testplayer.Instance.canhurt = false;
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);
@@ -60,6 +61,7 @@ public class Tanfan_stage : Player_Base_Stage
 
         if (ttt < 0)
         {
+            testplayer.Instance.canhurt = true;
             testplayer._player.SetStage(testplayer.Instance.jump_stage);
             testplayer.Instance.atting = false;
         }
@@ -80,6 +82,7 @@ public class Tanfan_stage : Player_Base_Stage
         if (inputcount < 0 && nextatt)
         {
             Player_Function.FFace_to();
+            testplayer.Instance.canhurt = true;
             testplayer._player.SetStage(testplayer.Instance.attex_stage);
         }
     }

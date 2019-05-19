@@ -64,7 +64,7 @@ public class enemy_fire : enemy_base
             dead = true;
         }
         tuozhan();
-
+        FSeePlayer();
         attcd -= Time.deltaTime;
     }
 
@@ -139,7 +139,7 @@ public class enemy_fire : enemy_base
     }
     public void tuozhan()
     {
-        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 5)
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 7)
         {
             fighting = false;
         }

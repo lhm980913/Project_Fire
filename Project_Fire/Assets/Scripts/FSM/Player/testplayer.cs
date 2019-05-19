@@ -303,6 +303,19 @@ public class testplayer : UnityEngine.MonoBehaviour
                     }
 
                 }
+                if (b.type == "lancer")
+                {
+
+                    enemy_lancer a = (enemy_lancer)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
                 if (b.type == "fire")
                 {
 
@@ -352,6 +365,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
             //anim.CrossFade("att_pindao",0);
             _player.SetStage(tanfan_stage);
+            canhurt = false;
             RuneManager.Instance.UseRune(RuneEvent.OnDefence);
         }
 

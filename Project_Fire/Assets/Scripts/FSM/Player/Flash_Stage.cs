@@ -16,6 +16,7 @@ public class Flash_Stage : Player_Base_Stage
         testplayer.Instance.anim.SetTrigger("flash");
         CameraEffectSystem.Instance.FMotionVector();
         testplayer.Instance.canhurt = false;
+        testplayer.Instance.atting = true;
         RuneManager.Instance.UseRune(RuneEvent.OnFlash);
     }
 
@@ -24,6 +25,7 @@ public class Flash_Stage : Player_Base_Stage
         if(testplayer.Instance.flashtime>testplayer.Instance.ac.keys[2].time)
         {
             testplayer.Instance.canhurt = true;
+            testplayer.Instance.atting = false;
             if (!testplayer.Instance.grounded)
             {
 
@@ -38,6 +40,7 @@ public class Flash_Stage : Player_Base_Stage
         if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.down && testplayer.Instance.canrape)
         {
             testplayer.Instance.canhurt = true;
+            testplayer.Instance.atting = false;
             testplayer._player.SetStage(testplayer.Instance.rape_stage);
         }
     }
