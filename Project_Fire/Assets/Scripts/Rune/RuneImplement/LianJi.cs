@@ -8,7 +8,8 @@ public class LianJi : Rune
     public LianJi(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnAttack;
-        this.name = "连击";
+        RuneName = "连击";
+        name = "LianJi";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }

@@ -9,7 +9,8 @@ public class JiHuo : Rune
     public JiHuo(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnManaFull;
-        this.name = "JiHuo";
+        RuneName = "激活";
+        name = "JiHuo";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }

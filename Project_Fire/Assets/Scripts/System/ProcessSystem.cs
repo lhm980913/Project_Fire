@@ -144,6 +144,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
             a.hurt_count -= testplayer.Instance.player_attack;
             a.Hp -= testplayer.Instance.player_attack;
+            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.lizarrd_hurt_stage);

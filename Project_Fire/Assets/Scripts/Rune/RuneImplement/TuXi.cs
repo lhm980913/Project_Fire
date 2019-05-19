@@ -8,7 +8,8 @@ public class TuXi : Rune
     public TuXi(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnDefence;
-        this.name = "吐息";
+        RuneName = "吐息";
+        name = "TuXi";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;

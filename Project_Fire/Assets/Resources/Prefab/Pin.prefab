@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3031693438937057168}
   - component: {fileID: 5869489065336269912}
   - component: {fileID: 4588564415491153444}
-  - component: {fileID: 4265401359483276925}
+  - component: {fileID: 1616423457485514380}
   m_Layer: 0
   m_Name: Pin
   m_TagString: Untagged
@@ -78,16 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &4265401359483276925
-SphereCollider:
+--- !u!136 &1616423457485514380
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8814263811243122421}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 0.99999994
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}

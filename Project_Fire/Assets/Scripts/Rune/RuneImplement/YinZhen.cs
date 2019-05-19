@@ -9,14 +9,20 @@ public class YinZhen : Rune
     public YinZhen(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.ActiveOne;
-        this.name = "银针";
+        RuneName = "银针";
+        name = "YinZhen";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
+        MpNeed = 10;
         Pin = (GameObject)Resources.Load("Prefab/Pin");
     }
     public override void Execute()
     {
-        UnityEngine.Object.Instantiate(Pin, player.transform.position, Quaternion.identity);
+        if (!player)
+        {
+            player = testplayer.Instance;
+        }
+        UnityEngine.Object.Instantiate(Pin, player.transform.position + player.face_to * player.transform.right * 1.0f, Quaternion.identity);
     }
 }

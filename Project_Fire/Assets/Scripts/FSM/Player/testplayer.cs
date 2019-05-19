@@ -113,7 +113,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public Animator anim;
     public GameObject moudle_player;
     public bool canjump;
-
+    [HideInInspector]
     public float attlevel = 1;
    // 
 
@@ -191,6 +191,10 @@ public class testplayer : UnityEngine.MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
         {
             FActiveRuneOne();
+        }
+        if (Input.GetKeyDown(KeyCode.L) || Player_Controller_System.Instance.Left_Down == Player_Controller_System.Button_Stage.down)
+        {
+            FActiveRuneTwo();
         }
     }
     bool FCheckground()

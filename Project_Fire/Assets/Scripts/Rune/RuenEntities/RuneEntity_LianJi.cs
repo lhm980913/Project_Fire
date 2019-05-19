@@ -9,7 +9,7 @@ public class RuneEntity_LianJi : RuneEntity
         rune = new LianJi(this);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         PanelOn(other);
     }

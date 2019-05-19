@@ -10,7 +10,7 @@ public class RuneEntity : UnityEngine.MonoBehaviour
     {
         rune = new LianDao(this);
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         PanelOn(other);
     }
