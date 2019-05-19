@@ -5,7 +5,6 @@ using UnityEngine;
 public class TuXi : Rune
 {
     testplayer player;
-    float gotMana;
     public TuXi(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnDefence;
@@ -13,10 +12,9 @@ public class TuXi : Rune
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
-        gotMana = 10;
     }
     public override void Execute()
     {
-        testplayer.Instance.FGetMana(gotMana);
+        testplayer.Instance.FGetMana(testplayer.Instance.GotMana * 2.0f);
     }
 }

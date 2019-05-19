@@ -21,6 +21,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float canthurtcount;
     public float hurtforce;
     public GameObject playerwapon;
+    [SerializeField]
+    private float gotMana;
 
     [HideInInspector]
     public SkinnedMeshRenderer[] skins;
@@ -54,6 +56,14 @@ public class testplayer : UnityEngine.MonoBehaviour
         get
         {
             return this._mana;
+        }
+    }
+
+    public float GotMana
+    {
+        get
+        {
+            return gotMana;
         }
     }
 
@@ -376,8 +386,10 @@ public class testplayer : UnityEngine.MonoBehaviour
         {
             mana -= num;
             MainPanel.Instance.UpdateMp();
+            RuneManager.Instance.UseRune(RuneEvent.OnManaFull);
             return true;
         }
+        
     }
 
     public void FGetHp(float num)

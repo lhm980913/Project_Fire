@@ -60,6 +60,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             
             if (Enemy.type=="lizarrd")
             {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack*testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
@@ -72,6 +73,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             }
             if (Enemy.type == "fire")
             {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_fire a = (enemy_fire)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
@@ -84,6 +86,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             }
             if (Enemy.type == "assassin")
             {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_assassin a = (enemy_assassin)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
@@ -96,6 +99,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             }
             if (Enemy.type == "bird")
             {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_bird a = (enemy_bird)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;

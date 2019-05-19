@@ -13,6 +13,6 @@ public class JingZhun : Rune
     }
     public override void Execute()
     {
-        Debug.Log(ToString());
+        testplayer.Instance.FGetMana(testplayer.Instance.GotMana * 2.0f);
     }
 }

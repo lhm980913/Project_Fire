@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LianJi : Rune
 {
+    int count = 0;
     public LianJi(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnAttack;
@@ -13,6 +14,15 @@ public class LianJi : Rune
     }
     public override void Execute()
     {
-        Debug.Log(ToString());
+        if(count < 4)
+        {
+            testplayer.Instance.attlevel = 1;
+            count++;
+        }
+        else
+        {
+            testplayer.Instance.attlevel = 2;
+            count = 0;
+        }
     }
 }
