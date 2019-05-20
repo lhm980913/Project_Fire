@@ -7,12 +7,13 @@ public class JingZhun : Rune
     public JingZhun(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnAttackFlyItem;
-        this.name = "JingZhun";
+        RuneName = "精准";
+        name = "JingZhun";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
     }
     public override void Execute()
     {
-        Debug.Log(ToString());
+        testplayer.Instance.FGetMana(testplayer.Instance.GotMana * 2.0f);
     }
 }

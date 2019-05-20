@@ -44,7 +44,7 @@ public abstract class Rune
     public abstract void Execute();
     public void SetActiveEvent(int index)
     {
-        if (rune_Event != RuneEvent.ActiveOne || rune_Event != RuneEvent.ActiveTwo)
+        if (rune_Event != RuneEvent.ActiveOne && rune_Event != RuneEvent.ActiveTwo)
         {
             return;
         }

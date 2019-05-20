@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class IntroducePanel : BasePanel
 {
-    [HideInInspector]
+    //[HideInInspector]
     public Rune IntroducedRune; 
     [SerializeField]
     private Image IconImage;

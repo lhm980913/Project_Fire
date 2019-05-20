@@ -99,16 +99,41 @@ public class RuneManager : MonoBehaviour
         }
         else
         {
-            for(int index = 0;index < 2; index++)
+            //for(int index = 0;index < 2; index++)
+            //{
+
+            //    if (runes[index] == null)
+            //    {
+            //        rune.SetActiveEvent(index);
+            //        runes[index] = rune;
+            //        AddRune(rune);
+            //        return true;
+            //    }
+            //}
+            int count = 0;
+            int spaceIndex = 0;
+            for (int index = 0; index < runes.Length; index++)
             {
-                
-                if (runes[index] == null)
+                if(runes[index] == null)
                 {
-                    rune.SetActiveEvent(index);
-                    runes[index] = rune;
-                    AddRune(rune);
-                    return true;
+                    spaceIndex = index;
+                    break;
                 }
+                if(runes[index].runeType == RuneType.active)
+                {
+                    count++;
+                }
+            }
+            if (count < 2)
+            {
+                rune.SetActiveEvent(count);
+                runes[spaceIndex] = rune;
+                AddRune(rune);
+                return true;
+            }
+            else
+            {
+                return false;   
             }
         }
         return false;

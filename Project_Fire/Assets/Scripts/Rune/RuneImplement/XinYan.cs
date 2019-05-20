@@ -8,7 +8,8 @@ public class XinYan : Rune
     public XinYan(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnDefence;
-        this.name = "心眼";
+        RuneName = "心眼";
+        name = "XinYan";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;

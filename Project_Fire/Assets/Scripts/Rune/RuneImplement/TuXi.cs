@@ -5,18 +5,17 @@ using UnityEngine;
 public class TuXi : Rune
 {
     testplayer player;
-    float gotMana;
     public TuXi(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnDefence;
-        this.name = "吐息";
+        RuneName = "吐息";
+        name = "TuXi";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
-        gotMana = 10;
     }
     public override void Execute()
     {
-        testplayer.Instance.FGetMana(gotMana);
+        testplayer.Instance.FGetMana(testplayer.Instance.GotMana * 2.0f);
     }
 }

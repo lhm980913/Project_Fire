@@ -9,9 +9,11 @@ public class YinXian : Rune
     public YinXian(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.ActiveOne;
-        this.name = "银线";
+        RuneName = "银线";
+        name = "YinXian";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
+        MpNeed = 10;
         Damage = 4;
         player = testplayer.Instance;
     }
@@ -19,6 +21,10 @@ public class YinXian : Rune
     public override void Execute()
     {
         Collider[] colliders;
+        if (!player)
+        {
+            player = testplayer.Instance;
+        }
         colliders = Physics.OverlapBox(player.transform.position, new Vector3(100, 1, 1), Quaternion.identity, 1 << 11);
         enemy_base[] enemys = new enemy_base[colliders.Length];
         for (int i = 0; i < colliders.Length; i++)
@@ -35,7 +41,7 @@ public class YinXian : Rune
         {
             foreach (var enemy in enemys)
             {
-                enemy.FBeHurt(Damage);
+                ProcessSystem.Instance.FPlayerSkill_Enemy(enemys[i]);
             }
             yield return new WaitForSeconds(0.25f);
         }

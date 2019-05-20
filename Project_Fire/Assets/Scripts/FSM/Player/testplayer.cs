@@ -21,6 +21,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float canthurtcount;
     public float hurtforce;
     public GameObject playerwapon;
+    [SerializeField]
+    private float gotMana;
 
     [HideInInspector]
     public SkinnedMeshRenderer[] skins;
@@ -54,6 +56,14 @@ public class testplayer : UnityEngine.MonoBehaviour
         get
         {
             return this._mana;
+        }
+    }
+
+    public float GotMana
+    {
+        get
+        {
+            return gotMana;
         }
     }
 
@@ -103,7 +113,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public Animator anim;
     public GameObject moudle_player;
     public bool canjump;
-
+    [HideInInspector]
     public float attlevel = 1;
    // 
 
@@ -181,6 +191,10 @@ public class testplayer : UnityEngine.MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
         {
             FActiveRuneOne();
+        }
+        if (Input.GetKeyDown(KeyCode.L) || Player_Controller_System.Instance.Left_Down == Player_Controller_System.Button_Stage.down)
+        {
+            FActiveRuneTwo();
         }
     }
     bool FCheckground()
@@ -402,8 +416,10 @@ public class testplayer : UnityEngine.MonoBehaviour
         {
             mana -= num;
             MainPanel.Instance.UpdateMp();
+            RuneManager.Instance.UseRune(RuneEvent.OnManaFull);
             return true;
         }
+        
     }
 
     public void FGetHp(float num)
