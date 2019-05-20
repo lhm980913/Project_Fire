@@ -12,7 +12,7 @@ public class Assassin_Walk : Enemy_Base_Stage
 
     public override void Enter()
     {
-        enemy.anim.CrossFade("", 0.2f);
+        enemy.anim.CrossFade("walk", 0.2f);
     }
     public override void Update()
     {

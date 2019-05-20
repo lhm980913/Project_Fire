@@ -80,17 +80,22 @@ public class enemy_assassin : enemy_base
     public override bool FCheckFilp()
     {
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
+
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
-        bool b = Physics.Raycast(transform.position + transform.up + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
+        bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
+        print(b);
         // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
         return a || !b;
     }
     public override bool FAttPlayer()
     {
-        
-        return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, attfield, player_layermask);
+        //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
+        bool a = Physics.BoxCast(transform.position - transform.forward * 2, Vector3.one, transform.forward, Quaternion.identity, attfield + 2, player_layermask);
+        bool b = Physics.BoxCast(transform.position + transform.forward * 2, Vector3.one, -transform.forward, Quaternion.identity, attfield + 2, player_layermask);
+        return a || b;
     }
+
     public override void FFaceToPlayer()
     {
         if (testplayer.Instance.transform.position.x < this.transform.position.x)

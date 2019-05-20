@@ -280,6 +280,18 @@ public class testplayer : UnityEngine.MonoBehaviour
                     }
 
                 }
+                if (b.type == "assassin")
+                {
+                    enemy_assassin a = (enemy_assassin)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
                 if (b.type == "bird")
                 {
 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assassin_Hurt : Enemy_Base_Stage
+public class Shield_Hurt : Enemy_Base_Stage
 {
-    enemy_assassin enemy;
+    enemy_shield enemy;
     float count;
-    public Assassin_Hurt(enemy_assassin ee)
+    public Shield_Hurt(enemy_shield ee)
     {
         enemy = ee;
     }
@@ -15,8 +15,8 @@ public class Assassin_Hurt : Enemy_Base_Stage
     {
         count = enemy.yingzhi_time;
 
-        enemy.anim.CrossFade("hurt", 0.1f);
-        enemy.hurt_count = enemy.hurt_yuzhi;
+        enemy.anim.CrossFade("hurt1", 0.1f);
+        enemy.hurt_count = Random.Range(enemy.hurt_yuzhi - 0.15f, enemy.hurt_yuzhi + 0.15f);
 
     }
     public override void Update()
@@ -25,7 +25,8 @@ public class Assassin_Hurt : Enemy_Base_Stage
 
         if (count < 0)
         {
-            enemy.enemy.SetStage(enemy.assassin_walk_stage);
+            enemy.FFaceToPlayer();
+            enemy.enemy.SetStage(enemy.shield_walk_stage);
         }
 
     }

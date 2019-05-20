@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assassin_Dead : Enemy_Base_Stage
+public class Shield_Dead : Enemy_Base_Stage
 {
-    enemy_assassin enemy;
+    enemy_shield enemy;
     float count;
-    public Assassin_Dead(enemy_assassin ee)
+    public Shield_Dead(enemy_shield ee)
     {
         enemy = ee;
     }
@@ -22,6 +22,7 @@ public class Assassin_Dead : Enemy_Base_Stage
         if (count < 0)
         {
             enemy.destroyself();
+
         }
 
     }

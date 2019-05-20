@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assassin_Att : Enemy_Base_Stage
+public class Shield_Def : Enemy_Base_Stage
 {
-    enemy_assassin enemy;
+    enemy_shield enemy;
     float count;
-    public Assassin_Att(enemy_assassin ee)
+    public Shield_Def(enemy_shield ee)
     {
 
         enemy = ee;
@@ -14,8 +14,12 @@ public class Assassin_Att : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 1.3f;
-        enemy.anim.CrossFade("att1", 0.2f);
+        count = Random.Range(1.8f, 2.2f);
+        enemy.anim.CrossFade("tanfan", 0.2f);
+        if (enemy.fighting)
+        {
+            enemy.FFaceToPlayer();
+        }
     }
     public override void Update()
     {
@@ -26,7 +30,7 @@ public class Assassin_Att : Enemy_Base_Stage
     {
         if (count < 0)
         {
-            enemy.enemy.SetStage(enemy.assassin_walk_stage);
+            enemy.enemy.SetStage(enemy.shield_walk_stage);
         }
     }
 }
