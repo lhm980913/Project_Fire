@@ -294,6 +294,18 @@ public class testplayer : UnityEngine.MonoBehaviour
                     }
 
                 }
+                if (b.type == "shield")
+                {
+                    enemy_shield a = (enemy_shield)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
                 if (b.type == "assassin")
                 {
                     enemy_assassin a = (enemy_assassin)b;
@@ -364,7 +376,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                 enemypos = other.transform.position;
                 atting = false;
                 _player.SetStage(hurt_stage);
-                print(1111);
+              
             }
 
         }

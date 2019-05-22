@@ -14,7 +14,7 @@ public class Hurt_Stage : Player_Base_Stage
     public void Enter()
     {
         testplayer.Instance.attlevel = 1;
-        count = 0.25f;
+        count = 0.3f;
         testplayer.Instance.anim.CrossFade("player_strike", 0.1f);
         //Debug.Log("hurt");
         enemypos = testplayer.Instance.enemypos;
