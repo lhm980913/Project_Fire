@@ -25,19 +25,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
 
     }
-    private void Start()
-    {
-        
-    }
-
-
-    private void Update()
-    {
-        
-
-
-
-    }
 
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
@@ -53,10 +40,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up*0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
             Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
             Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
-            //Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
-            //Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up, Quaternion.Euler(Vector3.zero));
-            //Instantiate(att3, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
-            //Instantiate(att4, Enemy.transform.position, Quaternion.Euler(Vector3.zero));
             
             if (Enemy.type=="lizarrd")
             {

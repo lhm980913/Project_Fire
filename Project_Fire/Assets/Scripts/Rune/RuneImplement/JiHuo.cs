@@ -6,6 +6,7 @@ public class JiHuo : Rune
 {
     private float AttackLevel = 1.25f;
     private float SpeedLevel = 1.25f;
+    private bool Trigger;
     public JiHuo(RuneEntity runeEntity) : base(runeEntity)
     {
         rune_Event = RuneEvent.OnManaFull;
@@ -13,19 +14,27 @@ public class JiHuo : Rune
         name = "JiHuo";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
+        Trigger = false;
     }
     public override void Execute()
     {
         if (testplayer.Instance.mana == testplayer.Instance.Manamax)
         {
-            testplayer.Instance.player_attack *= AttackLevel;
-            testplayer.Instance.speed *= SpeedLevel;
+            if (!Trigger)
+            {
+                testplayer.Instance.player_attack *= AttackLevel;
+                testplayer.Instance.speed *= SpeedLevel;
+                Trigger = true;
+            }
         }
         else
         {
-            testplayer.Instance.player_attack /= AttackLevel;
-            testplayer.Instance.speed /= SpeedLevel;
+            if (Trigger)
+            {
+                testplayer.Instance.player_attack /= AttackLevel;
+                testplayer.Instance.speed /= SpeedLevel;
+                Trigger = false;
+            }
         }
-        
     }
 }
