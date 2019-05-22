@@ -29,7 +29,7 @@ public class RuneManager : MonoBehaviour
     Dictionary<RuneEvent, List<Rune>> RunesDictionary;
     Rune[] runes;
 
-    public void AddRune(Rune rune)
+    public void AddRune(Rune rune, int index)
     {
         List<Rune> temp;
         if (RunesDictionary == null)
@@ -46,9 +46,10 @@ public class RuneManager : MonoBehaviour
             RunesDictionary.TryGetValue(rune.runeEvent, out temp);
         }
         temp.Add(rune);
+        runes[index] = rune;
     }
 
-    public void DeleteRune(Rune rune)
+    public void DeleteRune(Rune rune, int index)
     {
         List<Rune> temp;
         if(rune == null)
@@ -59,6 +60,7 @@ public class RuneManager : MonoBehaviour
             return;
         if (!temp.Remove(rune))
             Debug.Log("There is no such rune " + rune.ToString());
+        runes[index] = null;
     }
 
     public void GenerateRune(Vector3 pos)
@@ -75,7 +77,14 @@ public class RuneManager : MonoBehaviour
             return;
         foreach (var rune in tempRunes)
         {
-            if (testplayer.Instance.FLoseMana(rune.MpNeed))
+            if(rune.runeType == RuneType.active)
+            {
+                if (testplayer.Instance.FLoseMana(rune.MpNeed))
+                {
+                    rune.Execute();
+                }
+            }
+            else
             {
                 rune.Execute();
             }
@@ -87,54 +96,67 @@ public class RuneManager : MonoBehaviour
         
         if(rune.runeType == RuneType.passive)
         {
-            for (int index = 0; index < runes.Length; index++)
+            //for (int index = 0; index < runes.Length; index++)
+            //{
+            //    if (runes[index] == null)
+            //    {
+            //        AddRune(rune,index);
+            //        return true;
+            //    }
+            //}
+            for(int index = 2;index < 4; index++)
             {
-                if (runes[index] == null)
+                if(runes[index] == null)
                 {
-                    runes[index] = rune;
-                    AddRune(rune);
+                    AddRune(rune, index);
+                    return true;
+                }
+            }
+            for(int index = 0;index < 2; index++)
+            {
+                if(runes[index] == null)
+                {
+                    AddRune(rune, index);
                     return true;
                 }
             }
         }
         else
         {
-            //for(int index = 0;index < 2; index++)
-            //{
+            for (int index = 0; index < 2; index++)
+            {
 
+                if (runes[index] == null)
+                {
+                    rune.SetActiveEvent(index);
+                    AddRune(rune, index);
+                    return true;
+                }
+            }
+            //int count = 0;
+            //int spaceIndex = 0;
+            //for (int index = 0; index < runes.Length; index++)
+            //{
             //    if (runes[index] == null)
             //    {
-            //        rune.SetActiveEvent(index);
-            //        runes[index] = rune;
-            //        AddRune(rune);
-            //        return true;
+            //        spaceIndex = index;
+            //        break;
+            //    }
+            //    if (runes[index].runeType == RuneType.active)
+            //    {
+            //        count++;
             //    }
             //}
-            int count = 0;
-            int spaceIndex = 0;
-            for (int index = 0; index < runes.Length; index++)
-            {
-                if(runes[index] == null)
-                {
-                    spaceIndex = index;
-                    break;
-                }
-                if(runes[index].runeType == RuneType.active)
-                {
-                    count++;
-                }
-            }
-            if (count < 2)
-            {
-                rune.SetActiveEvent(count);
-                runes[spaceIndex] = rune;
-                AddRune(rune);
-                return true;
-            }
-            else
-            {
-                return false;   
-            }
+            //if (count < 2)
+            //{
+            //    rune.SetActiveEvent(count);
+            //    AddRune(rune, spaceIndex);
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
         }
         return false;
     }
