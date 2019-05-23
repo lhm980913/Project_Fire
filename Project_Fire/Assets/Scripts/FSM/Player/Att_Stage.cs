@@ -23,8 +23,8 @@ public class Att_Stage : Player_Base_Stage
         
         if(!testplayer.Instance.grounded)
         {
-            testplayer.Instance.anim.CrossFade("player_jattack1", 0.1f);
-            testplayer.Instance.anim.CrossFade("player_jattack", 0.1f);
+            testplayer.Instance.anim.CrossFade("player_jattack1", 0.01f);
+            testplayer.Instance.anim.CrossFade("player_jattack", 0.01f);
             //testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
             jattack = true;
         }
@@ -32,12 +32,12 @@ public class Att_Stage : Player_Base_Stage
         {
             if(testplayer.Instance.attanim==1)
             {
-                testplayer.Instance.anim.CrossFade("player_attack1", 0.1f);
+                testplayer.Instance.anim.CrossFade("player_attack1", 0.01f);
                 testplayer.Instance.attanim = 2;
             }
             else if(testplayer.Instance.attanim == 2)
             {
-                testplayer.Instance.anim.CrossFade("player_att2", 0.1f);
+                testplayer.Instance.anim.CrossFade("player_att2", 0.01f);
                 testplayer.Instance.attanim = 1;
             }
             

@@ -32,6 +32,8 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
+            CameraEffectSystem.Instance.FCameraShake(0.1f, 0.1f);
+            CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f);
             if (b.jattack)
             {
                 Player_Function.FJump(testplayer.Instance.gameObject, 8);
@@ -69,6 +71,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             }
             if (Enemy.type == "lancer")
             {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_lancer a = (enemy_lancer)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
@@ -76,6 +79,19 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 if (a.hurt_count < 0 && !a.dead)
                 {
                     a.enemy.SetStage(a.lancer_hurt_stage);
+                }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            }
+            if (Enemy.type == "shield")
+            {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
+                enemy_shield a = (enemy_shield)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.shield_hurt_stage);
                 }
                 RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
@@ -132,7 +148,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             {
                 a.enemy.SetStage(a.lizarrd_hurt_stage);
             }
-
         }
         if (enemy.type == "bird")
         {
@@ -143,7 +158,39 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             {
                 a.enemy.SetStage(a.bird_hurt_stage);
             }
-
+        }
+        if (enemy.type == "assassin")
+        {
+            enemy_assassin a = (enemy_assassin)enemy;
+            a.hurt_count -= testplayer.Instance.player_attack;
+            a.Hp -= testplayer.Instance.player_attack;
+            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            if (a.hurt_count < 0)
+            {
+                a.enemy.SetStage(a.assassin_hurt_stage);
+            }
+        }
+        if (enemy.type == "lancer")
+        {
+            enemy_lancer a = (enemy_lancer)enemy;
+            a.hurt_count -= testplayer.Instance.player_attack;
+            a.Hp -= testplayer.Instance.player_attack;
+            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            if (a.hurt_count < 0)
+            {
+                a.enemy.SetStage(a.lancer_hurt_stage);
+            }
+        }
+        if (enemy.type == "shield")
+        {
+            enemy_shield a = (enemy_shield)enemy;
+            a.hurt_count -= testplayer.Instance.player_attack;
+            a.Hp -= testplayer.Instance.player_attack;
+            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            if (a.hurt_count < 0)
+            {
+                a.enemy.SetStage(a.shield_hurt_stage);
+            }
         }
         StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
         StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
