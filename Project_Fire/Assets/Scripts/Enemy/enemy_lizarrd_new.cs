@@ -360,8 +360,12 @@ public class enemy_lizarrd_new : enemy_base
     //}
     protected override void OnTriggerEnter(Collider other)
     {
-
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        if (!wudi)
+        {
+            ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+            StartCoroutine(wudicount());
+        }
+       // ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
         if(other.tag=="player_weapon"&&enemy._enemy!=lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage&& enemy._enemy != lizarrd_dead_stage && enemy._enemy != lizarrd_stand_stage)
         {

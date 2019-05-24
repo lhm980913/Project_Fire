@@ -385,7 +385,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "enemy_weapon" && atting&&grounded)
+        if (other.tag == "enemy_weapon" && atting&&grounded && (transform.position.x - other.transform.position.x) * face_to < 0)
         {
             ProcessSystem.Instance.Fenemy_re(other.gameObject);
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
@@ -443,7 +443,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FLoseHp(float num)
     {
         hp -= num;
-        Debug.Log(hp);
+
         MainPanel.Instance.UpdateHp();
     }
 

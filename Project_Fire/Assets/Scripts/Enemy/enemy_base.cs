@@ -145,6 +145,7 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public LayerMask player_layermask = 1 << 12;
     public float enemy_size;
 
+    public bool wudi = false;
     //Enemy_Stage _stage;
     //public Enemy_Stage Stage
     //{
@@ -223,8 +224,12 @@ public class enemy_base : UnityEngine.MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        if(!wudi)
+        {
+            ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+            StartCoroutine(wudicount());
+        }
+      
         
 
     }
@@ -232,5 +237,12 @@ public class enemy_base : UnityEngine.MonoBehaviour
     {
         Destroy(this.gameObject);
         
+    }
+    public virtual IEnumerator wudicount()
+    {
+        wudi = true;
+        yield return new WaitForSeconds(0.05f);
+        wudi = false;
+
     }
 }

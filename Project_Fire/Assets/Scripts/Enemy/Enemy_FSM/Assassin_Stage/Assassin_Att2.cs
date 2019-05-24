@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Assassin_Att : Enemy_Base_Stage
+public class Assassin_Att2 : Enemy_Base_Stage
 {
     enemy_assassin enemy;
     float count;
-    public Assassin_Att(enemy_assassin ee)
+    public Assassin_Att2(enemy_assassin ee)
     {
 
         enemy = ee;
@@ -15,18 +15,17 @@ public class Assassin_Att : Enemy_Base_Stage
     public override void Enter()
     {
         count = 2f;
-        if(enemy.skillcound < 0)
-        {
-            enemy.anim.CrossFade("extraatt", 0.2f);
-            enemy.skillcound = enemy.skillcd;
-        }
-      
- 
+
+        enemy.FFaceToPlayer();
+            enemy.anim.CrossFade("att2", 0.2f);
+            
+        
+       
     }
     public override void Update()
     {
         count -= Time.deltaTime;
-        
+
     }
 
     public override void Check()

@@ -91,7 +91,7 @@ public class enemy_fire : enemy_base
         
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
         bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
-        print(b);
+
         // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
         return a || !b;
@@ -170,8 +170,12 @@ public class enemy_fire : enemy_base
     //}
     protected override void OnTriggerEnter(Collider other)
     {
-
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        if (!wudi)
+        {
+            ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+            StartCoroutine(wudicount());
+        }
+       // ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
         if (other.tag == "player_weapon" && enemy._enemy != fire_att_stage && enemy._enemy != fire_hurt_stage && enemy._enemy != fire_dead_stage && enemy._enemy != fire_stand_stage && enemy._enemy != fire_throw_stage)
         {

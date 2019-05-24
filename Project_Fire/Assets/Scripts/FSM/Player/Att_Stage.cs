@@ -15,7 +15,7 @@ public class Att_Stage : Player_Base_Stage
     public void Enter()
     {
         
-        Debug.Log("att");
+
         testplayer.Instance.atting = true;
         testplayer.Instance.canatt = false;
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;

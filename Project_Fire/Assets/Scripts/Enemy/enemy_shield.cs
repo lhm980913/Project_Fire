@@ -14,7 +14,8 @@ public class enemy_shield : enemy_base
     public Shield_Walk shield_walk_stage;
     public Shield_Att shield_att_stage;
     public Shield_Def shield_def_stage;
-
+    public Shield_Tanfan shield_tanfan_stage;
+    public Shield_Back shield_back_stage;
     //public GameObject fire;
     //public GameObject fire1;
     //public Transform huoba;
@@ -31,6 +32,8 @@ public class enemy_shield : enemy_base
         shield_hurt_stage = new Shield_Hurt(self);
         shield_def_stage = new Shield_Def(self);
         shield_walk_stage = new Shield_Walk(self);
+        shield_tanfan_stage = new Shield_Tanfan(self);
+        shield_back_stage = new Shield_Back(self);
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
@@ -91,7 +94,7 @@ public class enemy_shield : enemy_base
 
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
         bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
-        print(b);
+
         // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
         return a || !b;
@@ -139,7 +142,7 @@ public class enemy_shield : enemy_base
     }
     public void tuozhan()
     {
-        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 7)
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 5)
         {
             fighting = false;
         }
@@ -170,8 +173,21 @@ public class enemy_shield : enemy_base
     //}
     protected override void OnTriggerEnter(Collider other)
     {
+        if (!wudi)
+        {
+            
+            if((transform.position.x - testplayer.Instance.transform.position.x) * faceto < 0&&enemy._enemy==shield_def_stage)
+            {
+                ProcessSystem.Instance.Def(other, this);
+            }
+            else
+            {
+                ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+                StartCoroutine(wudicount());
+            }
 
-        ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+        }
+        // ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
 
         if (other.tag == "player_weapon" && enemy._enemy != shield_att_stage && enemy._enemy != shield_hurt_stage && enemy._enemy != shield_dead_stage && enemy._enemy != shield_stand_stage && enemy._enemy != shield_def_stage)
         {

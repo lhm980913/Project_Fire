@@ -14,8 +14,10 @@ public class Shield_Hurt : Enemy_Base_Stage
     public override void Enter()
     {
         count = enemy.yingzhi_time;
-
+       
         enemy.anim.CrossFade("hurt1", 0.1f);
+        
+        
         enemy.hurt_count = Random.Range(enemy.hurt_yuzhi - 0.15f, enemy.hurt_yuzhi + 0.15f);
 
     }

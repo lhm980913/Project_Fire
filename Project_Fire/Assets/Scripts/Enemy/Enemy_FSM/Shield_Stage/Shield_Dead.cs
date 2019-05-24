@@ -13,7 +13,7 @@ public class Shield_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 2.5f;
+        count = 5f;
         enemy.anim.CrossFade("dead", 0.2f);
     }
     public override void Update()

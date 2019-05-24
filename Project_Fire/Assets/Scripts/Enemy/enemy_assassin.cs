@@ -13,7 +13,11 @@ public class enemy_assassin : enemy_base
     public Assassin_Dead assassin_dead_stage;
     public Assassin_Walk assassin_walk_stage;
     public Assassin_Att assassin_att_stage;
-   
+    public Assassin_Att2 assassin_att2_stage;
+    public float skillcd;
+    [HideInInspector]
+    public float skillcound  = 0;
+
     private void Awake()
     {
         type = "assassin";
@@ -25,12 +29,12 @@ public class enemy_assassin : enemy_base
         assassin_att_stage = new Assassin_Att(self);
         assassin_dead_stage = new Assassin_Dead(self);
         assassin_hurt_stage = new Assassin_Hurt(self);
-
+        assassin_att2_stage = new Assassin_Att2(self);
         assassin_walk_stage = new Assassin_Walk(self);
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
-        enemy = new Enemy(assassin_walk_stage);
+        enemy = new Enemy(assassin_stand_stage);
     }
     private void Start()
     {
@@ -57,7 +61,7 @@ public class enemy_assassin : enemy_base
             candamage = false;
             dead = true;
         }
-
+        skillcound -= Time.deltaTime;
     }
 
 
@@ -83,7 +87,7 @@ public class enemy_assassin : enemy_base
 
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
         bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
-        print(b);
+
         // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
         return a || !b;
@@ -110,27 +114,50 @@ public class enemy_assassin : enemy_base
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
-        return Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > visionfield)
+        {
+            return false;
+        }
+        if (Physics.Raycast(this.transform.position, testplayer.Instance.transform.position - this.transform.position, Vector3.Distance(this.transform.position, testplayer.Instance.transform.position), 1 << 9))
+        {
+            return false;
+        }
+        bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
+        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
+        bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
+
+
+        if ((a || b || c) && !fighting)
+        {
+            fighting = true;
+        }
+
+        return a || b || c;
     }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (!wudi)
+        {
+            ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+            StartCoroutine(wudicount());
+        }
+      //  ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
+
+        if (other.tag == "player_weapon" && enemy._enemy != assassin_att_stage && enemy._enemy != assassin_hurt_stage && enemy._enemy != assassin_dead_stage && enemy._enemy != assassin_stand_stage )
+        {
+            if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
+            {
+                faceto *= -1;
+            }
+            else if (testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
+            {
+                faceto *= -1;
+            }
+        }
+
+    }
+
 }
-//protected override void OnTriggerEnter(Collider other)
-//{
-
-//    ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
-
-//    if (other.tag == "player_weapon" && enemy._enemy != lizarrd_att_stage && enemy._enemy != lizarrd_hurt_stage && enemy._enemy != lizarrd_dead_stage && enemy._enemy != lizarrd_stand_stage)
-//    {
-//        if (testplayer.Instance.transform.position.x - this.transform.position.x > 0 && faceto == -1)
-//        {
-//            faceto *= -1;
-//        }
-//        else if (testplayer.Instance.transform.position.x - this.transform.position.x < 0 && faceto == 1)
-//        {
-//            faceto *= -1;
-//        }
-//    }
-
-//}
 
 
 

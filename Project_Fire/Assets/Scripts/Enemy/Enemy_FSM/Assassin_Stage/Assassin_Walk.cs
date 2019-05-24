@@ -13,6 +13,7 @@ public class Assassin_Walk : Enemy_Base_Stage
     public override void Enter()
     {
         enemy.anim.CrossFade("walk", 0.2f);
+        enemy.FFaceToPlayer();
     }
     public override void Update()
     {
@@ -23,14 +24,18 @@ public class Assassin_Walk : Enemy_Base_Stage
     {
         if (enemy.FCheckFilp())
         {
-            enemy.enemy.SetStage(enemy.assassin_stand_stage);
+            enemy.faceto*=-1;
         }
         //if (enemy.FSeePlayer())
         //{
         //    enemy.enemy.SetStage(enemy.assassin_run_stage);
 
         //}
-        else if (enemy.FAttPlayer())
+        else if(enemy.FAttPlayer())
+        {
+            enemy.enemy.SetStage(enemy.assassin_att2_stage);
+        }
+        else if (enemy.fighting&& enemy.skillcound < 0)
         {
             enemy.enemy.SetStage(enemy.assassin_att_stage);
             ////anim.SetTrigger("att");

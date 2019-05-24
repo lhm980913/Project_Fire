@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield_Att : Enemy_Base_Stage
+public class Shield_Tanfan : Enemy_Base_Stage
 {
     enemy_shield enemy;
     float count;
-    public Shield_Att(enemy_shield ee)
+    public Shield_Tanfan(enemy_shield ee)
     {
 
         enemy = ee;
@@ -14,8 +14,8 @@ public class Shield_Att : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = Random.Range(1.5f, 1.8f);
-        enemy.anim.CrossFade("att", 0.2f);
+        count = Random.Range(1.1f, 1.4f);
+        enemy.anim.CrossFade("light_att", 0.2f);
         if (enemy.fighting)
         {
             enemy.FFaceToPlayer();
@@ -28,7 +28,7 @@ public class Shield_Att : Enemy_Base_Stage
 
     public override void Check()
     {
-        if(count < 0.7f)
+        if (count < 0.35f)
         {
             if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && enemy.fighting && testplayer.Instance.grounded)
             {

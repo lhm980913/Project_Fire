@@ -33,14 +33,33 @@ public class Shield_Walk : Enemy_Base_Stage
         {
             enemy.enemy.SetStage(enemy.shield_stand_stage);
         }
-
+        if(Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down&&enemy.fighting&&testplayer.Instance.grounded)
+        {
+            enemy.enemy.SetStage(enemy.shield_def_stage);
+        }
+        if(Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && enemy.fighting && !testplayer.Instance.grounded)
+        {
+            if(Vector3.Distance(testplayer.Instance.transform.position,enemy.transform.position)<3)
+            {
+                enemy.enemy.SetStage(enemy.shield_back_stage);
+            }
+            
+        }
         if (enemy.FAttPlayer())
         {
-
-            enemy.enemy.SetStage(enemy.shield_att_stage);
-
-
-
+            if(Random.Range(0,2)==0)
+            {
+                enemy.enemy.SetStage(enemy.shield_att_stage);
+                //enemy.enemy.SetStage(enemy.shield_tanfan_stage);
+            }
+            else
+            {
+                enemy.enemy.SetStage(enemy.shield_tanfan_stage);
+            }
+           
+            
+            
+            
             ////anim.SetTrigger("att");
             //anim.CrossFade("lizarrd_att", 0.2f);
         }

@@ -25,15 +25,28 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
 
     }
+    public void Def(Collider playeratt, enemy_shield Enemy)
+    {
+       
+        Destroy(Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up * 0.5f+ Vector3.right* Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+        Destroy(Instantiate(att5, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+        Destroy(Instantiate(att4, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+        Destroy(Instantiate(att3, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
 
+      
+
+
+        StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001f));
+    }
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
         if (playeratt.tag == "player_weapon"&&!Physics.Raycast(testplayer.Instance.transform.position,Enemy.transform.position-testplayer.Instance.transform.position,Vector3.Distance(Enemy.transform.position, testplayer.Instance.transform.position),1<<9))
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
-            CameraEffectSystem.Instance.FCameraShake(0.1f, 0.1f);
-            CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f);
+            print(111123123);
+            StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.1f, 0.5f));
+            StartCoroutine( CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f));
             if (b.jattack)
             {
                 Player_Function.FJump(testplayer.Instance.gameObject, 8);
@@ -86,14 +99,22 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             {
                 testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_shield a = (enemy_shield)Enemy;
-                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
-                if (a.hurt_count < 0 && !a.dead)
+                if (testplayer.Instance.attlevel == 4 && (a.transform.position.x - testplayer.Instance.transform.position.x) *a.faceto < 0)
                 {
+                    if(!a.dead)
                     a.enemy.SetStage(a.shield_hurt_stage);
                 }
-                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+                else
+                {
+                    a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                    a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+       
+                    RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+                }
+
+                
+               
             }
             if (Enemy.type == "assassin")
             {
