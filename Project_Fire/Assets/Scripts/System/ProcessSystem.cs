@@ -44,9 +44,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
-            print(111123123);
+
             StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.1f, 0.5f));
             StartCoroutine( CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f));
+
             if (b.jattack)
             {
                 Player_Function.FJump(testplayer.Instance.gameObject, 8);

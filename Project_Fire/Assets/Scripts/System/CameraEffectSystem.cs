@@ -2,10 +2,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using Cinemachine;
 
 [Serializable]
 public struct CameraShake
 {
+    public CinemachineVirtualCamera camera;
     public float Duration;
     public float Strength;
     public AnimationCurve StrengthCurve;
@@ -70,6 +72,15 @@ public struct HitPara
     public float deltaTime;
 }
 
+[Serializable]
+public struct CameraZoom
+{
+    public float NormalFOV;
+    public float ZoomFOV;
+    [HideInInspector]
+    public bool fovStage;
+}
+
 public class CameraEffectSystem : UnityEngine.MonoBehaviour
 {
     static public CameraEffectSystem Instance;
@@ -84,8 +95,12 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
     public MotionVectorPara motionVector;
     [Header("Hit")]
     public HitPara hitEffect;
+    [Header("CameraZoom")]
+    public CameraZoom cameraZoom;
 
-    private Camera mainCamera;
+    private CinemachineVirtualCamera mainCamera;
+    private CinemachineBasicMultiChannelPerlin noise;
+
     private bool motionVectorIsOpen;
     private bool radialBlurIsOpen;
     private bool hitEffectIsOpen;
@@ -102,7 +117,15 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
             Instance = this;
         }
         //init
-        mainCamera = Camera.main;
+        if (cameraShake.camera)
+        {
+            mainCamera = cameraShake.camera;
+        }
+        else
+        {
+            mainCamera = GetComponentInChildren<CinemachineVirtualCamera>();
+        }
+        noise = mainCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         radialBlurIsOpen = false;
         motionVectorIsOpen = false;
@@ -147,35 +170,30 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
     {
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
-        Vector3 originalPos = mainCamera.transform.position;
         float ratio;
         while(deltaTime < cameraShake.Duration)
         {
             ratio = deltaTime / cameraShake.Duration;
-            float strength = cameraShake.StrengthCurve.Evaluate(ratio);
-            mainCamera.transform.position = originalPos + UnityEngine.Random.insideUnitSphere * cameraShake.Strength;
+            float strength = cameraShake.StrengthCurve.Evaluate(ratio) * cameraShake.Strength;
+            noise.m_AmplitudeGain = strength;
             deltaTime = Time.realtimeSinceStartup - startTime;
             yield return null;
         }
-        
-        mainCamera.transform.position = originalPos;
+        noise.m_AmplitudeGain = 0;
     }
-    public IEnumerator FCameraShake(float time,float sterength)
+    public IEnumerator FCameraShake(float time,float strength)
     {
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
-        Vector3 originalPos = mainCamera.transform.position;
         float ratio;
         while (deltaTime < time)
         {
-            ratio = deltaTime / time;
-            
-            mainCamera.transform.position = originalPos + UnityEngine.Random.insideUnitSphere * sterength;
+            ratio = deltaTime / cameraShake.Duration;
+            noise.m_AmplitudeGain = strength;
             deltaTime = Time.realtimeSinceStartup - startTime;
             yield return null;
         }
-
-        mainCamera.transform.position = originalPos;
+        noise.m_AmplitudeGain = 0;
     }
 
     public IEnumerator FTimeScaleControl()
@@ -268,6 +286,20 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
                 motionVectorIsOpen = false;
                 motionBlurSetting.active = false;
             }
+        }
+    }
+
+    public void ZoomFov()
+    {
+        if (cameraZoom.fovStage == true)
+        {
+            mainCamera.m_Lens.FieldOfView = cameraZoom.ZoomFOV;
+            cameraZoom.fovStage = false;
+        }
+        else
+        {
+            mainCamera.m_Lens.FieldOfView = cameraZoom.NormalFOV;
+            cameraZoom.fovStage = true;
         }
     }
 }
