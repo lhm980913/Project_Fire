@@ -23,17 +23,17 @@ public class PausePanel : BasePanel
     {
         if (IsTop)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W)||Player_Controller_System.Instance.DPad_Up)
             {
                 if (index > 0) index--;
                 translateSelectedOutline();
             }
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S) || Player_Controller_System.Instance.DPad_Down)
             {
                 if (index < goArray.Length-1) index++;
                 translateSelectedOutline();
             }
-            if (Input.GetKeyDown(KeyCode.Escape)||Player_Controller_System.Instance.Button_Start==Player_Controller_System.Button_Stage.down)
+            if (Input.GetKeyDown(KeyCode.Escape)||Input.GetButtonDown("Button_Start"))
             {
                 UIManager.Instance.PopPanel();
             }

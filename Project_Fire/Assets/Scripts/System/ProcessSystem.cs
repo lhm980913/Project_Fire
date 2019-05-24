@@ -32,7 +32,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
-            CameraEffectSystem.Instance.FCameraShake(1f, 6f);
+            CameraEffectSystem.Instance.FCameraShake(0.1f, 6f);
             CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f);
             if (b.jattack)
             {

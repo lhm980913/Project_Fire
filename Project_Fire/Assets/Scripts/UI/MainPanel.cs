@@ -35,13 +35,17 @@ public class MainPanel : BasePanel
     {
         if (IsTop)
         {
-            if (Input.GetKeyDown(KeyCode.Tab)|| Player_Controller_System.Instance.Button_Back == Player_Controller_System.Button_Stage.down)
+            if (Input.GetKeyDown(KeyCode.Tab)|| Input.GetButtonDown("Button_Back"))
             {
                 UIManager.Instance.PushPanel(UIBaseType.MapPanel);
             }
-            if (Input.GetKeyDown(KeyCode.Escape) || Player_Controller_System.Instance.Button_Start == Player_Controller_System.Button_Stage.down)
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Button_Start"))
             {
                 UIManager.Instance.PushPanel(UIBaseType.PausePanel);
+            }
+            if(Input.GetKeyDown(KeyCode.O))
+            {
+                CameraEffectSystem.Instance.ZoomFov();
             }
         }
     }

@@ -49,8 +49,14 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
     public Button_Stage Left_Down;
     [HideInInspector]
     public Button_Stage Right_Down;
-
-
+    [HideInInspector]
+    public bool DPad_Up;
+    [HideInInspector]
+    public bool DPad_Down;
+    [HideInInspector]
+    public bool DPad_Left;
+    [HideInInspector]
+    public bool DPad_Right;
 
     public KeyCode Key_Button_A;
     public KeyCode Key_Button_B;
@@ -86,16 +92,12 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
             Instance = this;
         }
     }
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {  
-        FGet_Input_value(); 
-
+        FGet_Input_value();
+        FTranslateDPadToButton();
 
     }
 
@@ -160,7 +162,6 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
         }
         return Mathf.Clamp(Input.GetAxis(axis_name)+a,-1,1);
     } //摇杆
-
     float FCheck_Axis(string axis_name, KeyCode key)
     {
         int a = 0;
@@ -175,22 +176,33 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
         }
         return Mathf.Clamp(Input.GetAxis(axis_name) + a, 0, 1);
     } //摇杆
-    //void check()
-    //{
-    //    print(LT+"lt");
-    //    print(RT + "rt");
-    //}
-
-
-
-
-
-    //把aixs变成button
-    //Button_Stage aixs2button(float aixs)
-    //{
-        
-
-
-
-    //}
+    void FTranslateDPadToButton()
+    {
+        float horizontal = Input.GetAxisRaw("DPad_Horizontal");
+        float vertical = Input.GetAxisRaw("DPad_Vertical");
+        if (horizontal > 0.9){
+            DPad_Up = true;
+            DPad_Down = false;
+        }
+        if(horizontal < -0.9)
+        {
+            DPad_Up = false;
+            DPad_Down = true;
+        }
+        if(horizontal > -0.9 && horizontal < 0.9)
+        {
+            DPad_Up = false;
+            DPad_Down = false;
+        }
+        if(vertical > 0.5)
+        {
+            DPad_Right = true;
+            DPad_Left = false;
+        }
+        if(vertical < -0.5)
+        {
+            DPad_Right = false;
+            DPad_Up = true;
+        }
+    }
 }

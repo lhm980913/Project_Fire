@@ -72,6 +72,15 @@ public struct HitPara
     public float deltaTime;
 }
 
+[Serializable]
+public struct CameraZoom
+{
+    public float NormalFOV;
+    public float ZoomFOV;
+    [HideInInspector]
+    public bool fovStage;
+}
+
 public class CameraEffectSystem : UnityEngine.MonoBehaviour
 {
     static public CameraEffectSystem Instance;
@@ -86,6 +95,8 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
     public MotionVectorPara motionVector;
     [Header("Hit")]
     public HitPara hitEffect;
+    [Header("CameraZoom")]
+    public CameraZoom cameraZoom;
 
     private CinemachineVirtualCamera mainCamera;
     private CinemachineBasicMultiChannelPerlin noise;
@@ -160,17 +171,6 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
         float ratio;
-        //Vector3 originalPos = mainCamera.position;
-        //while(deltaTime < cameraShake.Duration)
-        //{
-        //    ratio = deltaTime / cameraShake.Duration;
-        //    float strength = cameraShake.StrengthCurve.Evaluate(ratio);
-        //    mainCamera.position = originalPos + UnityEngine.Random.insideUnitSphere * cameraShake.Strength;
-        //    deltaTime = Time.realtimeSinceStartup - startTime;
-        //    yield return null;
-        //}
-        
-        //mainCamera.position = originalPos;
         while(deltaTime < cameraShake.Duration)
         {
             ratio = deltaTime / cameraShake.Duration;
@@ -186,16 +186,6 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
         float startTime = Time.realtimeSinceStartup;
         float deltaTime = 0;
         float ratio;
-        //Vector3 originalPos = mainCamera.position;
-        //while (deltaTime < time)
-        //{
-        //    ratio = deltaTime / time;
-
-        //    mainCamera.position = originalPos + UnityEngine.Random.insideUnitSphere * sterength;
-        //    deltaTime = Time.realtimeSinceStartup - startTime;
-        //    yield return null;
-        //}
-        //mainCamera.position = originalPos;
         while (deltaTime < time)
         {
             ratio = deltaTime / cameraShake.Duration;
@@ -296,6 +286,20 @@ public class CameraEffectSystem : UnityEngine.MonoBehaviour
                 motionVectorIsOpen = false;
                 motionBlurSetting.active = false;
             }
+        }
+    }
+
+    public void ZoomFov()
+    {
+        if (cameraZoom.fovStage == true)
+        {
+            mainCamera.m_Lens.FieldOfView = cameraZoom.ZoomFOV;
+            cameraZoom.fovStage = false;
+        }
+        else
+        {
+            mainCamera.m_Lens.FieldOfView = cameraZoom.NormalFOV;
+            cameraZoom.fovStage = true;
         }
     }
 }
