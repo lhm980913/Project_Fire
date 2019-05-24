@@ -178,7 +178,11 @@ public class enemy_shield : enemy_base
             
             if((transform.position.x - testplayer.Instance.transform.position.x) * faceto < 0&&enemy._enemy==shield_def_stage)
             {
-                ProcessSystem.Instance.Def(other, this);
+                if(other.tag=="player_weapon")
+                {
+                    ProcessSystem.Instance.Def(other, this);
+                }
+               
             }
             else
             {
