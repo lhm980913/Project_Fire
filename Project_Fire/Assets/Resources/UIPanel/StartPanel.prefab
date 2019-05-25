@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27, y: 111.6}
-  m_SizeDelta: {x: 268.6, y: 137.5}
+  m_AnchoredPosition: {x: -5.5, y: 176.6}
+  m_SizeDelta: {x: 556.34, y: 284.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1219115544826348511
 CanvasRenderer:
@@ -220,7 +220,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 68
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -268,8 +268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.1, y: -148.5}
-  m_SizeDelta: {x: 140.3, y: 45.8}
+  m_AnchoredPosition: {x: -5.5, y: -169.72}
+  m_SizeDelta: {x: 290.6, y: 94.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3647715667158180552
 CanvasRenderer:
@@ -347,7 +347,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2831865873453341433}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 953090210153309872}
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &4515411620863509130
@@ -442,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d05ab1cc5df9042a7728945de0b705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTop: 0
 --- !u!225 &8451829709273979133
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -490,8 +502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.1, y: 5.5}
-  m_SizeDelta: {x: 140.3, y: 45.8}
+  m_AnchoredPosition: {x: -5.5, y: -43.16}
+  m_SizeDelta: {x: 290.6, y: 94.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &925953530953185741
 CanvasRenderer:
@@ -569,7 +581,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8315316386983979273}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 953090210153309872}
+        m_MethodName: StartGame
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5464732621004385103
@@ -639,7 +662,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 68
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -669,7 +692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7654494136240440342
 RectTransform:
   m_ObjectHideFlags: 0
