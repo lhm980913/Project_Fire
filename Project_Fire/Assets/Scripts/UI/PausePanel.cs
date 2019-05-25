@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PausePanel : BasePanel
 {
@@ -43,5 +44,15 @@ public class PausePanel : BasePanel
     private void translateSelectedOutline()
     {
         SelectedOutline.transform.position = goArray[index].transform.position;
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void ResumeGame()
+    {
+        UIManager.Instance.PopPanel();
     }
 }
