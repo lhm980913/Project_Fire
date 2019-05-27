@@ -40,7 +40,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
     }
     public void FPlayerWeapon_Enemy(Collider playeratt, enemy_base Enemy)
     {
-        if (playeratt.tag == "player_weapon"&&!Physics.Raycast(testplayer.Instance.transform.position,Enemy.transform.position-testplayer.Instance.transform.position,Vector3.Distance(Enemy.transform.position, testplayer.Instance.transform.position),1<<9))
+        if (playeratt.tag == "player_weapon"&& !Physics.Raycast(testplayer.Instance.transform.position,Enemy.transform.position-testplayer.Instance.transform.position,Vector3.Distance(Enemy.transform.position, testplayer.Instance.transform.position),1<<9))
         {
             AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
             Att_Stage b = (Att_Stage)testplayer.Instance.att_stage;
@@ -56,14 +56,19 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             Destroy( Instantiate(enemy_hurt1, Enemy.transform.position + Vector3.up*0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
             Destroy( Instantiate(enemy_hurt2, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject ,3f);
             Destroy( Instantiate(enemy_hurt3, Enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject,3f);
-            
+            Enemy.GetComponent<Rigidbody>().velocity = Enemy.beattforce * Vector3.Normalize(new Vector3((testplayer.Instance.transform.position.x - Enemy.transform.position.x)/-Mathf.Abs( testplayer.Instance.transform.position.x - Enemy.transform.position.x), 1,0));
             if (Enemy.type=="lizarrd")
             {
                 testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_lizarrd_new a = (enemy_lizarrd_new)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack*testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if(!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
+ 
+               
                 if (a.hurt_count<0&&!a.dead)
                 {
                     a.enemy.SetStage(a.lizarrd_hurt_stage);
@@ -76,7 +81,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 enemy_fire a = (enemy_fire)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
                 if (a.hurt_count < 0 && !a.dead)
                 {
                     a.enemy.SetStage(a.fire_hurt_stage);
@@ -89,7 +97,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 enemy_lancer a = (enemy_lancer)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
                 if (a.hurt_count < 0 && !a.dead)
                 {
                     a.enemy.SetStage(a.lancer_hurt_stage);
@@ -109,8 +120,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 {
                     a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                     a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
-       
+                    if (!a.wudi11)
+                    {
+                        UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                    }
                     RuneManager.Instance.UseRune(RuneEvent.OnAttack);
                 }
 
@@ -123,7 +136,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 enemy_assassin a = (enemy_assassin)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
                 if (a.hurt_count < 0 && !a.dead)
                 {
                     a.enemy.SetStage(a.assassin_hurt_stage);
@@ -136,7 +152,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 enemy_bird a = (enemy_bird)Enemy;
                 a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
                 a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                if (!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
                 if (a.hurt_count < 0&&!a.dead)
                 {
                     a.enemy.SetStage(a.bird_hurt_stage);
@@ -159,7 +178,10 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerSkill_Enemy(enemy_base enemy)
     {
+        if(!enemy.wudi11)
+        {
 
+        
         if (enemy.type == "lizarrd")
         {
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
@@ -171,11 +193,23 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 a.enemy.SetStage(a.lizarrd_hurt_stage);
             }
         }
-        if (enemy.type == "bird")
+            if (enemy.type == "fire")
+            {
+                enemy_fire a = (enemy_fire)enemy;
+                a.hurt_count -= testplayer.Instance.player_attack;
+                a.Hp -= testplayer.Instance.player_attack;
+                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+                if (a.hurt_count < 0)
+                {
+                    a.enemy.SetStage(a.fire_hurt_stage);
+                }
+            }
+            if (enemy.type == "bird")
         {
             enemy_bird a = (enemy_bird)enemy;
             a.hurt_count -= testplayer.Instance.player_attack;
             a.Hp -= testplayer.Instance.player_attack;
+            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.bird_hurt_stage);
@@ -216,6 +250,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         }
         StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl());
         StartCoroutine(CameraEffectSystem.Instance.FCameraShake());
+        }
     }
 
     public void FPlayerWeapon_EnemyWeapon(playerweapon PlayerWeapon)
@@ -226,23 +261,32 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
     {
 
     }
-    public void Fenemy_re(GameObject enemy)
+    public void Fenemy_re(enemy_base enemy)
     {
         Destroy(Instantiate(att3, testplayer.Instance.transform.position + pianyi*(Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att4, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att5, testplayer.Instance.transform.position + pianyi * (Vector3.up + testplayer.Instance.face_to * Vector3.right), Quaternion.Euler(Vector3.zero)).gameObject, 3f);
 
-        if (enemy.GetComponent<enemy_lizarrd_new>())
+        if (enemy.type == "lizarrd")
         {
-            enemy.GetComponentInParent<Animator>().CrossFade("lizarrd_stand1", 0.1f);
+            enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
+            a.anim.CrossFade("lizarrd_stand1", 0.2f);
+
         }
-        if (enemy.GetComponent<enemy_fire>())
+        if (enemy.type == "lancer")
         {
-            enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
+            enemy_lancer a = (enemy_lancer)enemy;
+            a.enemy.SetStage(a.lancer_stand_stage);
+
         }
-        if (enemy.GetComponent<enemy_lancer>())
-        {
-            enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
-        }
+
+        //if (enemy.GetComponent<enemy_fire>())
+        //{
+        //    enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
+        //}
+        //if (enemy.GetComponent<enemy_lancer>())
+        //{
+        //    enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
+        //}
     }
 }

@@ -13,6 +13,7 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Enter()
     {
+        
         testplayer.Instance.attlevel = 1;
         count = 0.3f;
         testplayer.Instance.anim.CrossFade("player_strike", 0.1f);
@@ -37,6 +38,7 @@ public class Hurt_Stage : Player_Base_Stage
         count -= Time.deltaTime;
         if(count<0)
         {
+            testplayer.Instance.hurtforce = 7;
             testplayer._player.SetStage(testplayer.Instance.stand_stage);
         }
             

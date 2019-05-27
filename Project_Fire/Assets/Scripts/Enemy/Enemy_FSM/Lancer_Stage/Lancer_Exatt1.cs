@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lancer_Exatt : Enemy_Base_Stage
+public class Lancer_Exatt1 : Enemy_Base_Stage
 {
     enemy_lancer enemy;
     float count;
-    public Lancer_Exatt(enemy_lancer ee)
+    public Lancer_Exatt1(enemy_lancer ee)
     {
 
         enemy = ee;
@@ -14,10 +14,9 @@ public class Lancer_Exatt : Enemy_Base_Stage
 
     public override void Enter()
     {
-        testplayer.Instance.hurtforce = 20;
-        count = 3.5f;
-        enemy.anim.CrossFade("att3", 0.2f);
-        if (enemy.fighting&&Random.Range(0,2)==0)
+        count = Random.Range(1.8f, 2.2f);
+        enemy.anim.CrossFade("att1", 0.2f);
+        if (enemy.fighting)
         {
             enemy.FFaceToPlayer();
         }
@@ -31,7 +30,6 @@ public class Lancer_Exatt : Enemy_Base_Stage
     {
         if (count < 0)
         {
-            testplayer.Instance.hurtforce = 7;
             enemy.enemy.SetStage(enemy.lancer_walk_stage);
         }
     }

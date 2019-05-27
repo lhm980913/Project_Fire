@@ -13,8 +13,9 @@ public class Lancer_Throw : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 3;
-        enemy.anim.CrossFade("throw", 0.2f);
+        count = 1.1f;
+        enemy.anim.CrossFade("throw1", 0.2f);
+        enemy.weapon.stage = 2;
         if (enemy.fighting)
         {
             enemy.FFaceToPlayer();
@@ -25,8 +26,16 @@ public class Lancer_Throw : Enemy_Base_Stage
         count -= Time.deltaTime;
         if (count < 0)
         {
-
-            enemy.enemy.SetStage(enemy.lancer_walk_stage);
+            if(Random.Range(0,3)==0)
+            {
+                enemy.enemy.SetStage(enemy.lancer_throw1_stage);
+            }
+            else
+            {
+               
+                enemy.enemy.SetStage(enemy.lancer_walk_stage);
+            }
+           
 
 
         }

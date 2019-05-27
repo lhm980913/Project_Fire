@@ -25,7 +25,7 @@ public class Fire_Walk : Enemy_Base_Stage
         //{
         //    enemy.FFaceToPlayer();
         //}
-        enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
+       
 
 
 
@@ -56,6 +56,7 @@ public class Fire_Walk : Enemy_Base_Stage
             ////anim.SetTrigger("att");
             //anim.CrossFade("lizarrd_att", 0.2f);
         }
+        enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
     }
 
     public override void Check()

@@ -15,6 +15,8 @@ public class Fire_Dead : Enemy_Base_Stage
     {
         count = 2.5f;
         enemy.anim.CrossFade("dead", 0.2f);
+        enemy.wudi11 = true;
+        enemy.beattforce = 20;
     }
     public override void Update()
     {

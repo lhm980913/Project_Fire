@@ -13,8 +13,11 @@ public class Lancer_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 2.5f;
+        count = 5f;
         enemy.anim.CrossFade("dead", 0.2f);
+        enemy.weapon.stage = 0;
+        enemy.wudi11 = true;
+        enemy.beattforce = 20;
     }
     public override void Update()
     {
@@ -22,7 +25,7 @@ public class Lancer_Dead : Enemy_Base_Stage
         if (count < 0)
         {
             enemy.destroyself();
-
+            
         }
 
     }

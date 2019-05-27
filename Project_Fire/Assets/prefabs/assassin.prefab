@@ -206,7 +206,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &725896530992325969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +223,8 @@ MonoBehaviour:
   maxhp: 1000
   attfield: 0.7
   movespeed: 3.5
-  visionfield: 7
-  beattforce: 4
+  visionfield: 5
+  beattforce: 0
   hurt_count: 0
   hurt_yuzhi: 400
   ATK: 20
@@ -235,15 +235,20 @@ MonoBehaviour:
   yingzhi_time: 0.3
   fighting: 0
   attcd: 0
+  exattcd: 0
   faceto: 1
   player_layermask:
     serializedVersion: 2
     m_Bits: 4096
   enemy_size: 0
+  wudi11: 0
   wudi: 0
   self: {fileID: 725896530992325969}
   skillcd: 3
   skillcound: 0
+  assassin1: {fileID: 725896532414949218}
+  assassin2: {fileID: 725896531421003194}
+  assassin_mar: {fileID: 2100000, guid: eabe07a76d956954c905b5da0ba7921b, type: 2}
 --- !u!136 &725896530992325970
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1056,7 +1061,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 838056dbf9ff19c4f82c52eea751ab2b, type: 3}
+  - {fileID: 2100000, guid: 2f4dcd24bd5599544932a3401e2c3584, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2428,7 +2433,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eabe07a76d956954c905b5da0ba7921b, type: 2}
+  - {fileID: 2100000, guid: 2f4dcd24bd5599544932a3401e2c3584, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -16,6 +16,7 @@ public class Bird_Dead : Enemy_Base_Stage
     {
         count = 2.5f;
         enemy.StopAllCoroutines();
+        enemy.wudi11 = true;
     }
     public override void Update()
     {

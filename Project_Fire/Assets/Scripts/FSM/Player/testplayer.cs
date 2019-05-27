@@ -196,6 +196,7 @@ public class testplayer : UnityEngine.MonoBehaviour
         {
             FActiveRuneTwo();
         }
+        
     }
     bool FCheckground()
     {
@@ -281,7 +282,7 @@ public class testplayer : UnityEngine.MonoBehaviour
             bool c = b;
             if (c)
             {
-                FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
+                
                 if (b.type == "lizarrd")
                 {
                     enemy_lizarrd_new a = (enemy_lizarrd_new)b;
@@ -290,6 +291,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
                     }
 
@@ -303,6 +305,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         enemypos = other.transform.position;
                         atting = false;
                         _player.SetStage(hurt_stage);
+                        FLoseHp(a.ATK);
                     }
 
                 }
@@ -314,6 +317,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
                     }
 
@@ -327,6 +331,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
                     }
 
@@ -340,6 +345,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
                     }
 
@@ -353,6 +359,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
                     }
 
@@ -365,7 +372,21 @@ public class testplayer : UnityEngine.MonoBehaviour
                         CameraEffectSystem.Instance.FHitEffect();
                         enemypos = other.transform.position;
                         atting = false;
+                        FLoseHp(a.ATK);
                         _player.SetStage(hurt_stage);
+                    }
+
+                }
+                if (b.type == "lance")
+                {
+                    lancetest a = (lancetest)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        _player.SetStage(hurt_stage);
+                        FLoseHp(a.ATK);
                     }
 
                 }
@@ -376,7 +397,8 @@ public class testplayer : UnityEngine.MonoBehaviour
                 enemypos = other.transform.position;
                 atting = false;
                 _player.SetStage(hurt_stage);
-              
+                FLoseHp(b.ATK);
+
             }
 
         }
@@ -387,7 +409,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     {
         if (other.tag == "enemy_weapon" && atting&&grounded && (transform.position.x - other.transform.position.x) * face_to < 0)
         {
-            ProcessSystem.Instance.Fenemy_re(other.gameObject);
+            ProcessSystem.Instance.Fenemy_re(other.GetComponentInParent<enemy_base>());
             StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
             StartCoroutine(wudi(0.2f));
             //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));

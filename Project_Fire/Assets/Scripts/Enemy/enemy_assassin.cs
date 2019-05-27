@@ -18,6 +18,9 @@ public class enemy_assassin : enemy_base
     [HideInInspector]
     public float skillcound  = 0;
 
+    public SkinnedMeshRenderer assassin1;
+    public SkinnedMeshRenderer assassin2;
+    public Material assassin_mar;
     private void Awake()
     {
         type = "assassin";

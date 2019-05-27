@@ -21,10 +21,10 @@ public class Shield_Walk : Enemy_Base_Stage
     }
     public override void Update()
     {
-        //if (enemy.fighting&&Vector3.Distance(enemy.transform.position,testplayer.Instance.transform.position)<5)
-        //{
-        //    enemy.FFaceToPlayer();
-        //}
+        if (enemy.fighting && Vector3.Distance(enemy.transform.position, testplayer.Instance.transform.position) < 5)
+        {
+            enemy.FFaceToPlayer();
+        }
         enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
 
 

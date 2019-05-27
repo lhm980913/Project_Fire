@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lancer_Att : Enemy_Base_Stage
+public class Lancer_Start : Enemy_Base_Stage
 {
     enemy_lancer enemy;
     float count;
-    public Lancer_Att(enemy_lancer ee)
+    public Lancer_Start(enemy_lancer ee)
     {
 
         enemy = ee;
@@ -15,11 +15,8 @@ public class Lancer_Att : Enemy_Base_Stage
     public override void Enter()
     {
         count = 2;
-        enemy.anim.CrossFade("att1", 0.2f);
-        if (enemy.fighting)
-        {
-            enemy.FFaceToPlayer();
-        }
+        enemy.anim.CrossFade("chaofeng", 0.2f);
+
     }
     public override void Update()
     {
@@ -30,7 +27,7 @@ public class Lancer_Att : Enemy_Base_Stage
     {
         if (count < 0)
         {
-            enemy.enemy.SetStage(enemy.lancer_att1_stage);
+            enemy.enemy.SetStage(enemy.lancer_stand_stage);
         }
     }
 }

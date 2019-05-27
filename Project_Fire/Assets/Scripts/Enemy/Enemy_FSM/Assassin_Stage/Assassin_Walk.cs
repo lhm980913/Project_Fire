@@ -31,7 +31,7 @@ public class Assassin_Walk : Enemy_Base_Stage
         //    enemy.enemy.SetStage(enemy.assassin_run_stage);
 
         //}
-        else if(enemy.FAttPlayer())
+        if(enemy.FAttPlayer())
         {
             enemy.enemy.SetStage(enemy.assassin_att2_stage);
         }

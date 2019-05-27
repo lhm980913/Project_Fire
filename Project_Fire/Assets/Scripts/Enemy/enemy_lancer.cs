@@ -13,13 +13,22 @@ public class enemy_lancer : enemy_base
     public Lancer_Dead lancer_dead_stage;
     public Lancer_Walk lancer_walk_stage;
     public Lancer_Att lancer_att_stage;
+    public Lancer_Att1 lancer_att1_stage;
     public Lancer_Throw lancer_throw_stage;
+    public Lancer_Throw1 lancer_throw1_stage;
+    public Lancer_Exatt lancer_exatt_stage;
+    public Lancer_Exatt1 lancer_exatt1_stage;
+    public Lancer_Start lancer_start_stage;
 
+    public GameObject _weapon;
+    [HideInInspector]
+    public lancetest weapon;
     //public GameObject fire;
     //public GameObject fire1;
     //public Transform huoba;
     private void Awake()
     {
+       
         type = "lancer";
         if (self != this)
         {
@@ -31,11 +40,20 @@ public class enemy_lancer : enemy_base
         lancer_hurt_stage = new Lancer_Hurt(self);
         lancer_throw_stage = new Lancer_Throw(self);
         lancer_walk_stage = new Lancer_Walk(self);
+        lancer_att1_stage = new Lancer_Att1(self);
+        lancer_throw1_stage = new Lancer_Throw1(self);
+        lancer_exatt1_stage = new Lancer_Exatt1(self);
+        lancer_exatt_stage = new Lancer_Exatt(self);
+        lancer_start_stage = new Lancer_Start(self);
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
-        enemy = new Enemy(lancer_walk_stage);
+        enemy = new Enemy(lancer_stand_stage);
         // attfield = attfield - Random.Range(0, 0.25f);
+
+        GameObject lance = Instantiate(_weapon);
+        weapon = lance.GetComponent<lancetest>();
+        weapon.lancer = self;
     }
     private void Start()
     {
@@ -63,9 +81,10 @@ public class enemy_lancer : enemy_base
             candamage = false;
             dead = true;
         }
-        tuozhan();
+       // tuozhan();
         FSeePlayer();
         attcd -= Time.deltaTime;
+        exattcd -= Time.deltaTime;
     }
 
 
@@ -194,6 +213,7 @@ public class enemy_lancer : enemy_base
     public override void destroyself()
     {
         Destroy(this.gameObject);
+       // Destroy(weapon.gameObject);
         //Destroy(fire1);
     }
 

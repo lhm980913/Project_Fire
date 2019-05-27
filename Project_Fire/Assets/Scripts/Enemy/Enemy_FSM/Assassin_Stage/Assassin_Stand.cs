@@ -30,6 +30,8 @@ public class Assassin_Stand : Enemy_Base_Stage
         {
 
             enemy.faceto *= -1;
+            enemy.assassin1.material = enemy.assassin_mar;
+            enemy.assassin2.material = enemy.assassin_mar;
             enemy.enemy.SetStage(enemy.assassin_walk_stage);
         }
     }

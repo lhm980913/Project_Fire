@@ -140,11 +140,12 @@ public class enemy_base : UnityEngine.MonoBehaviour
 
     public bool fighting = false;
     public float attcd;
+    public float exattcd;
     private bool canMove;
     public int faceto = 1;
     public LayerMask player_layermask = 1 << 12;
     public float enemy_size;
-
+    public bool wudi11 = false;
     public bool wudi = false;
     //Enemy_Stage _stage;
     //public Enemy_Stage Stage
