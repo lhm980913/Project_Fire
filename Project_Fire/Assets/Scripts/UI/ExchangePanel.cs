@@ -63,7 +63,7 @@ public class ExchangePanel : BasePanel
     private void Update()
     {
         SelectRune();
-        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Button_A"))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Button_A"))
         {
             ExchangeRune(SelectedIndex);
         }

@@ -9,7 +9,7 @@ public class RuneEntity_LianDao : RuneEntity
         rune = new LianDao(this);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PanelOn(other);
     }

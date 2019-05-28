@@ -9,7 +9,7 @@ public class RuneEntity_TuXi : RuneEntity
         rune = new TuXi(this);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PanelOn(other);
     }

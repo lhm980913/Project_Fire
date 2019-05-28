@@ -6,7 +6,7 @@ using UnityEngine;
 public class BasePanel : UnityEngine.MonoBehaviour
 {
     protected CanvasGroup canvasGroup;
-    [HideInInspector]
+    //[HideInInspector]
     public bool IsTop;
 
     private void Awake()

@@ -9,7 +9,7 @@ public class RuneEntity_JiHuo : RuneEntity
         rune = new JiHuo(this);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PanelOn(other);
     }

@@ -9,7 +9,7 @@ public class RuneEntity_JingZhun : RuneEntity
         rune = new JingZhun(this);
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         PanelOn(other);
     }
