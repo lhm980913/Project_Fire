@@ -188,11 +188,11 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         
 
-        if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
+        if (Input.GetKeyDown(KeyCode.I)|| Player_Controller_System.Instance.LTDown)
         {
             FActiveRuneOne();
         }
-        if (Input.GetKeyDown(KeyCode.L) || Player_Controller_System.Instance.Left_Down == Player_Controller_System.Button_Stage.down)
+        if (Input.GetKeyDown(KeyCode.L) || Player_Controller_System.Instance.RTDown)
         {
             FActiveRuneTwo();
         }

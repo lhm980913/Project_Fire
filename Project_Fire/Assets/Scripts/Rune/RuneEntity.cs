@@ -15,6 +15,11 @@ public class RuneEntity : UnityEngine.MonoBehaviour
         PanelOn(other);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        PanelExecute(other);
+    }
+
     private void OnTriggerExit(Collider other)
     {
         PanelOff(other);
@@ -25,7 +30,14 @@ public class RuneEntity : UnityEngine.MonoBehaviour
         if (other.tag == "Player")
         {
             UIManager.Instance.PushPanel(UIBaseType.IntroducePanel, this);
-            if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Button_Y"))
+        }
+    }
+
+    protected void PanelExecute(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Button_B"))
             {
                 if (RuneManager.Instance.PickUpRune(rune))
                 {

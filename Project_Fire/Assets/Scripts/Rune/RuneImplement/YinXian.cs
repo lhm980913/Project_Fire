@@ -37,6 +37,10 @@ public class YinXian : Rune
 
     public IEnumerator<YieldInstruction> buffer(enemy_base[] enemys)
     {
+        if(enemys.Length < 1)
+        {
+            yield return null;
+        }
         for (int i = 0; i < 3; i++)
         {
             foreach (var enemy in enemys)
