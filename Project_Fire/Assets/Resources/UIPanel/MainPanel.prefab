@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93d48e0c69bfcb469d66c450faa0536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTop: 0
   RuneImages:
   - {fileID: 6958627131120696990}
   - {fileID: 6707062337817825133}
@@ -1274,7 +1275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3177673460626079191
 RectTransform:
   m_ObjectHideFlags: 0

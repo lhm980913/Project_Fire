@@ -25,9 +25,14 @@ public class ExchangePanel : BasePanel
         base.OnEnter();
         activeIndex.Clear();
         passiveIndex.Clear();
-        for(int index = 0; index < RuneImages.Length; index++)
+        Sprite temp;
+        if (RuneManager.Instance.TryGetIcon(PickedRune, out temp))
         {
-            Sprite temp;
+            PickedRuneImage.GetComponent<Image>().sprite = temp;
+        }
+        for (int index = 0; index < RuneImages.Length; index++)
+        {
+            
             if(RuneManager.Instance.TryGetIcon(RuneManager.Instance.GetRune(index), out temp))
             {
                 RuneImages[index].GetComponent<Image>().sprite = temp;
@@ -58,7 +63,7 @@ public class ExchangePanel : BasePanel
     private void Update()
     {
         SelectRune();
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Button_A"))
         {
             ExchangeRune(SelectedIndex);
         }
@@ -68,7 +73,7 @@ public class ExchangePanel : BasePanel
     {
         if(PickedRune.runeType == RuneType.passive)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Button_LB"))
             {
                 if (SelectedIndex > 0)
                 {
@@ -76,7 +81,7 @@ public class ExchangePanel : BasePanel
                     translateSelectedOutline();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Button_RB"))
             {
                 if (SelectedIndex < 3)
                 {
@@ -87,7 +92,7 @@ public class ExchangePanel : BasePanel
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetButtonDown("Button_LB"))
             {
                 if (SelectedIndex > 0)
                 {
@@ -95,7 +100,7 @@ public class ExchangePanel : BasePanel
                     translateSelectedOutline();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetButtonDown("Button_RB"))
             {
                 if (SelectedIndex < 1)
                 {

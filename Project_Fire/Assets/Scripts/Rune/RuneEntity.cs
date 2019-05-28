@@ -25,7 +25,7 @@ public class RuneEntity : UnityEngine.MonoBehaviour
         if (other.tag == "Player")
         {
             UIManager.Instance.PushPanel(UIBaseType.IntroducePanel, this);
-            if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+            if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Button_Y"))
             {
                 if (RuneManager.Instance.PickUpRune(rune))
                 {

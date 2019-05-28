@@ -671,6 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92133372e957f084bb6df50de90469cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTop: 0
   PickedRuneImage: {fileID: 4915153298532524984}
   RuneImages:
   - {fileID: 8948606183365268542}
@@ -901,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
