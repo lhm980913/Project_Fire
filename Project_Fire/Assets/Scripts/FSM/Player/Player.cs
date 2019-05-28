@@ -22,4 +22,5 @@ public class Player
         stage.Input();
         stage.Update_();
     }
+    
 }
