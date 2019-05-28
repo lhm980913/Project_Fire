@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PausePanel : BasePanel
 {
     public GameObject SelectedOutline;
     public GameObject[] goArray;
+    public string sceneName;
     private int index;
 
     public override void OnEnter()
@@ -24,6 +26,10 @@ public class PausePanel : BasePanel
     {
         if (IsTop)
         {
+            if (Input.GetButtonDown("Button_A"))
+            {
+                ExecuteButton();
+            }
             if (Input.GetKeyDown(KeyCode.W)||Player_Controller_System.Instance.DPad_Up)
             {
                 if (index > 0) index--;
@@ -46,7 +52,22 @@ public class PausePanel : BasePanel
         SelectedOutline.transform.position = goArray[index].transform.position;
     }
 
-    public void LoadScene(string sceneName)
+    private void ExecuteButton()
+    {
+        switch (index)
+        {
+            case 0:
+                ResumeGame();
+                break;
+            case 1:
+                LoadScene();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void LoadScene()
     {
         SceneManager.LoadScene(sceneName);
     }

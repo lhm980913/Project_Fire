@@ -186,7 +186,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         FYspeedclamp();
 
-        _player.Update();
+        
 
         if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
         {
@@ -197,6 +197,10 @@ public class testplayer : UnityEngine.MonoBehaviour
             FActiveRuneTwo();
         }
         
+    }
+    private void FixedUpdate()
+    {
+        _player.Update();
     }
     bool FCheckground()
     {
