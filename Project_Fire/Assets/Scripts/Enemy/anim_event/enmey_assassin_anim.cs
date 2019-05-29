@@ -11,7 +11,7 @@ public class enmey_assassin_anim : MonoBehaviour
     }
     void chuansong()
     {
-        assassin.transform.position = testplayer.Instance.transform.position - testplayer.Instance.face_to * Vector3.right * 1.7f;
+        assassin.transform.position = testplayer.Instance.transform.position - testplayer.Instance.face_to * Vector3.right * 1f;
         assassin.faceto = testplayer.Instance.face_to;
     }
    

@@ -186,7 +186,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         FYspeedclamp();
 
-        
+        _player.Update();
 
         if (Input.GetKeyDown(KeyCode.I)|| Player_Controller_System.Instance.LTDown)
         {
@@ -200,7 +200,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _player.Update();
+        
     }
     bool FCheckground()
     {
@@ -277,16 +277,172 @@ public class testplayer : UnityEngine.MonoBehaviour
     {
         RuneManager.Instance.UseRune(RuneEvent.ActiveTwo);
     }
-    private void OnTriggerStay(Collider other)
+    //private void OnTriggerStay(Collider other)
+    //{
+
+    //    if ((other.tag == "enemy" && canhurt))
+    //    {
+            
+    //        enemy_base b = other.gameObject.GetComponent<enemy_base>();
+    //        bool c = b;
+    //        if (c)
+    //        {
+                
+    //            if (b.type == "lizarrd")
+    //            {
+    //                enemy_lizarrd_new a = (enemy_lizarrd_new)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "shield")
+    //            {
+    //                enemy_shield a = (enemy_shield)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    _player.SetStage(hurt_stage);
+    //                    FLoseHp(a.ATK);
+    //                }
+
+    //            }
+    //            if (b.type == "assassin")
+    //            {
+    //                enemy_assassin a = (enemy_assassin)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "bird")
+    //            {
+
+    //                enemy_bird a = (enemy_bird)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "lancer")
+    //            {
+    //                print(11112313);
+    //                enemy_lancer a = (enemy_lancer)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "fire")
+    //            {
+
+    //                enemy_fire a = (enemy_fire)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "bullet")
+    //            {
+    //                bullet a = (bullet)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    FLoseHp(a.ATK);
+    //                    _player.SetStage(hurt_stage);
+    //                }
+
+    //            }
+    //            if (b.type == "lance")
+    //            {
+    //                lancetest a = (lancetest)b;
+    //                if (a.candamage)
+    //                {
+    //                    CameraEffectSystem.Instance.FHitEffect();
+    //                    enemypos = other.transform.position;
+    //                    atting = false;
+    //                    _player.SetStage(hurt_stage);
+    //                    FLoseHp(a.ATK);
+                       
+    //                }
+
+    //            }
+    //        }
+    //        else
+    //        {
+    //            CameraEffectSystem.Instance.FHitEffect();
+    //            enemypos = other.transform.position;
+    //            atting = false;
+    //            _player.SetStage(hurt_stage);
+    //            FLoseHp(b.ATK);
+                
+    //        }
+
+    //    }
+
+
+    //}
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "enemy_weapon" && atting&&grounded && (transform.position.x - other.transform.position.x) * face_to < 0)
+        {
+            ProcessSystem.Instance.Fenemy_re(other.GetComponentInParent<enemy_base>());
+            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
+            StartCoroutine(wudi(0.2f));
+            //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
+            //anim.CrossFade("att_pindao",0);
+            _player.SetStage(tanfan_stage);
+            canhurt = false;
+            RuneManager.Instance.UseRune(RuneEvent.OnDefence);
+        }
+
+        if ((other.tag =="enemy_att"&&canhurt))
+        {
+            CameraEffectSystem.Instance.FHitEffect();
+            FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
+            enemypos = other.transform.position;
+            atting = false;
+            _player.SetStage(hurt_stage);
+        }
+
 
         if ((other.tag == "enemy" && canhurt))
         {
+
             enemy_base b = other.gameObject.GetComponent<enemy_base>();
             bool c = b;
             if (c)
             {
-                
+
                 if (b.type == "lizarrd")
                 {
                     enemy_lizarrd_new a = (enemy_lizarrd_new)b;
@@ -342,7 +498,6 @@ public class testplayer : UnityEngine.MonoBehaviour
                 }
                 if (b.type == "lancer")
                 {
-
                     enemy_lancer a = (enemy_lancer)b;
                     if (a.candamage)
                     {
@@ -391,6 +546,7 @@ public class testplayer : UnityEngine.MonoBehaviour
                         atting = false;
                         _player.SetStage(hurt_stage);
                         FLoseHp(a.ATK);
+
                     }
 
                 }
@@ -407,30 +563,6 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         }
 
-
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "enemy_weapon" && atting&&grounded && (transform.position.x - other.transform.position.x) * face_to < 0)
-        {
-            ProcessSystem.Instance.Fenemy_re(other.GetComponentInParent<enemy_base>());
-            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001000f));
-            StartCoroutine(wudi(0.2f));
-            //StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.05f,0.2f));
-            //anim.CrossFade("att_pindao",0);
-            _player.SetStage(tanfan_stage);
-            canhurt = false;
-            RuneManager.Instance.UseRune(RuneEvent.OnDefence);
-        }
-
-        if ((other.tag =="enemy_att"&&canhurt))
-        {
-            CameraEffectSystem.Instance.FHitEffect();
-            FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
-            enemypos = other.transform.position;
-            atting = false;
-            _player.SetStage(hurt_stage);
-        }
 
     }
 
