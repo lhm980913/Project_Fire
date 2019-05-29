@@ -71,6 +71,7 @@ public class player_animevent : UnityEngine.MonoBehaviour
         {
             testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 3;
             count += Time.deltaTime;
+
             yield return null;
         }
 
