@@ -429,7 +429,7 @@ public class testplayer : UnityEngine.MonoBehaviour
         {
             CameraEffectSystem.Instance.FHitEffect();
             FLoseHp(other.GetComponentInParent<enemy_base>().ATK);
-            enemypos = other.transform.position;
+            enemypos = other.GetComponentInParent<enemy_base>().transform.position;
             atting = false;
             _player.SetStage(hurt_stage);
         }
