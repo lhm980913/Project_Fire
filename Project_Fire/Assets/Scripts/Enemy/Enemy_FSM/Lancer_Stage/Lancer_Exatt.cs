@@ -17,6 +17,7 @@ public class Lancer_Exatt : Enemy_Base_Stage
         testplayer.Instance.hurtforce = 20;
         count = 3.5f;
         enemy.anim.CrossFade("att3", 0.2f);
+        enemy.ATK = 40;
         if (enemy.fighting&&Random.Range(0,2)==0)
         {
             enemy.FFaceToPlayer();

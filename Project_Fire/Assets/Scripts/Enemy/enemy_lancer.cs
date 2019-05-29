@@ -189,8 +189,10 @@ public class enemy_lancer : enemy_base
     //}
     protected override void OnTriggerEnter(Collider other)
     {
+
         if (!wudi)
         {
+
             ProcessSystem.Instance.FPlayerWeapon_Enemy(other, this);
             StartCoroutine(wudicount());
         }

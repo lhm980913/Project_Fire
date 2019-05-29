@@ -16,6 +16,7 @@ public class Lancer_Att : Enemy_Base_Stage
     {
         count = 2;
         enemy.anim.CrossFade("att1", 0.2f);
+        enemy.ATK = 20;
         if (enemy.fighting)
         {
             enemy.FFaceToPlayer();
@@ -30,7 +31,15 @@ public class Lancer_Att : Enemy_Base_Stage
     {
         if (count < 0)
         {
-            enemy.enemy.SetStage(enemy.lancer_att1_stage);
+            if(enemy.FAttPlayer())
+            {
+                enemy.enemy.SetStage(enemy.lancer_att1_stage);
+            }
+            else
+            {
+                enemy.enemy.SetStage(enemy.lancer_walk_stage);
+            }
+            
         }
     }
 }

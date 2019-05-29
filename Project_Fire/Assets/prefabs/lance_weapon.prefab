@@ -54,7 +54,7 @@ MonoBehaviour:
   beattforce: 20
   hurt_count: 0
   hurt_yuzhi: 0
-  ATK: 0
+  ATK: 30
   atting: 0
   dead: 0
   anim: {fileID: 0}
@@ -186,7 +186,7 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 0c847f7ea16161246b6ec92e7c92e59c, type: 3}
+    - target: {fileID: 2300004, guid: 0c847f7ea16161246b6ec92e7c92e59c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 738db4120957b704d9708997188e8359, type: 2}
@@ -194,7 +194,7 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 738db4120957b704d9708997188e8359, type: 2}
-    - target: {fileID: 2300004, guid: 0c847f7ea16161246b6ec92e7c92e59c, type: 3}
+    - target: {fileID: 2300000, guid: 0c847f7ea16161246b6ec92e7c92e59c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 738db4120957b704d9708997188e8359, type: 2}

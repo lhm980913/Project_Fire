@@ -10,6 +10,9 @@ public class player_animevent : UnityEngine.MonoBehaviour
     public ParticleSystem tanfaneffect;
     public ParticleSystem jattack;
     public ParticleSystem slide_dust_Main;
+    public GameObject player_weapon_att;
+    public GameObject player_weapon_jatt;
+
 
     ParticleSystem slide;
     ParticleSystem slide_Main;
@@ -93,5 +96,12 @@ public class player_animevent : UnityEngine.MonoBehaviour
     }
 
 
-
+    public void Att()
+    {
+        Destroy( Instantiate(player_weapon_att, testplayer.Instance.transform.position, Quaternion.Euler(0, 90 * testplayer.Instance.face_to, 0)),0.05f);
+    }
+    public void JAtt()
+    {
+        Destroy(Instantiate(player_weapon_jatt, testplayer.Instance.transform.position, Quaternion.Euler(0, 0, 0)), 0.05f);
+    }
 }
