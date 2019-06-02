@@ -79,7 +79,7 @@ public class MainPanel : BasePanel
 
     public void UpdateMp()
     {
-        Debug.Log(testplayer.Instance.mana);
+
         Mp.value = testplayer.Instance.mana / testplayer.Instance.Manamax;
     }
 }

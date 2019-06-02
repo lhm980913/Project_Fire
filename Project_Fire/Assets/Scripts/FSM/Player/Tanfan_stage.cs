@@ -17,7 +17,6 @@ public class Tanfan_stage : Player_Base_Stage
     }
     public void Enter()
     {
-       
 
         testplayer.Instance.canhurt = false;
         testplayer.Instance.canatt = false;

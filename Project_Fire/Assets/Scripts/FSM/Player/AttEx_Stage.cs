@@ -12,7 +12,7 @@ public class AttEx_Stage : Player_Base_Stage
     }
     public void Enter()
     {
-        Debug.Log("att");
+
         testplayer.Instance.atting = false;
         testplayer.Instance.canatt = false;
         testplayer.Instance.attlevel = 4;
