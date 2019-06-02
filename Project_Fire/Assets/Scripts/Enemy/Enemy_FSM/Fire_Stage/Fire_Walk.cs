@@ -14,18 +14,18 @@ public class Fire_Walk : Enemy_Base_Stage
     {
         enemy.anim.CrossFade("walk", 0.2f);
 
-        if (enemy.fighting)
-        {
-            enemy.FFaceToPlayer();
-        }
-    }
-    public override void Update()
-    {
-        //if (enemy.fighting&&Vector3.Distance(enemy.transform.position,testplayer.Instance.transform.position)<5)
+        //if (enemy.fighting)
         //{
         //    enemy.FFaceToPlayer();
         //}
-       
+    }
+    public override void Update()
+    {
+        if (enemy.fighting && Vector3.Distance(enemy.transform.position, testplayer.Instance.transform.position) < 5 && enemy.FSeePlayer())
+        {
+            enemy.FFaceToPlayer();
+        }
+
 
 
 

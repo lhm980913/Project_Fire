@@ -305,17 +305,25 @@ public class enemy_lizarrd_new : enemy_base
     }
     public override void FFaceToPlayer()
     {
-        if (testplayer.Instance.transform.position.x < this.transform.position.x)
+        if (testplayer.Instance.transform.position.x < this.transform.position.x-0.5f)
         {
             this.faceto = -1;
         }
-        else
+        else if((testplayer.Instance.transform.position.x > this.transform.position.x + 0.5f))
         {
             this.faceto = 1;
         }
     }
     public override bool FSeePlayer()
     {
+        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > visionfield)
+        {
+            return false;
+        }
+        if (Physics.Raycast(this.transform.position, testplayer.Instance.transform.position - this.transform.position, Vector3.Distance(this.transform.position, testplayer.Instance.transform.position), 1 << 9))
+        {
+            return false;
+        }
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
         //bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);

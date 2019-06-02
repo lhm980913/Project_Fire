@@ -25,6 +25,12 @@ public class Shield_Back : Enemy_Base_Stage
     public override void Update()
     {
         count -= Time.deltaTime;
+
+        if (enemy.FCheckFilp(1))
+        {
+            enemy.GetComponent<CapsuleCollider>().enabled = true;
+            enemy.enemy.SetStage(enemy.shield_walk_stage);
+        }
         enemy.transform.Translate(enemy.transform.right * enemy.faceto * enemy.movespeed*2 * Time.deltaTime, Space.Self);
     }
 

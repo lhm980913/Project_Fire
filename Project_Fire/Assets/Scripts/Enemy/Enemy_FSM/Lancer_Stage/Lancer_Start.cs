@@ -25,7 +25,7 @@ public class Lancer_Start : Enemy_Base_Stage
 
     public override void Check()
     {
-        if (count < 0)
+        if (enemy.FSeePlayer())
         {
             enemy.enemy.SetStage(enemy.lancer_stand_stage);
         }

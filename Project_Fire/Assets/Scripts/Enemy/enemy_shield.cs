@@ -99,6 +99,17 @@ public class enemy_shield : enemy_base
 
         return a || !b;
     }
+    public bool FCheckFilp(int typeid)
+    {
+        bool a = Physics.Raycast(transform.position, -transform.forward, 1f, 1 << 9);
+
+        // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
+        bool b = Physics.Raycast(transform.position - transform.forward * 1, -transform.up, 1.5f, 1 << 9);
+
+        // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
+
+        return a || !b;
+    }
     public override bool FAttPlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);

@@ -48,7 +48,7 @@ public class enemy_lancer : enemy_base
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
-        enemy = new Enemy(lancer_stand_stage);
+        enemy = new Enemy(lancer_start_stage);
         // attfield = attfield - Random.Range(0, 0.25f);
 
         GameObject lance = Instantiate(_weapon);
@@ -109,7 +109,7 @@ public class enemy_lancer : enemy_base
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
 
         // a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, 1, 1 << 9);
-        bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 1.5f, 1 << 9);
+        bool b = Physics.Raycast(transform.position + transform.forward * 1, -transform.up, 2f, 1 << 9);
 
         // b = Physics.BoxCast(transform.position + transform.up + transform.forward * 1, Vector3.one * 0.1f, -transform.up, Quaternion.identity, 3, 1 << 9);
 
@@ -144,9 +144,9 @@ public class enemy_lancer : enemy_base
         {
             return false;
         }
-        bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
-        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
-        bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
+        bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield*2, player_layermask);
+        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield , player_layermask);
+        bool c = Physics.OverlapSphere(this.transform.position, 5, player_layermask).Length != 0 ? true : false;
 
 
         if ((a || b || c) && !fighting)

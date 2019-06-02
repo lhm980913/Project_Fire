@@ -13,22 +13,18 @@ public class Lizarrd_Walk : Enemy_Base_Stage
     public override void Enter()
     {
         enemy.anim.CrossFade("lizarrd_walk",0.2f);
-        if (enemy.fighting)
-        {
-            enemy.FFaceToPlayer();
-        }
-    }
-    public override void Update()
-    {
-        //if (enemy.fighting&&Vector3.Distance(enemy.transform.position,testplayer.Instance.transform.position)<5)
+        //if (enemy.fighting)
         //{
         //    enemy.FFaceToPlayer();
         //}
-        enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
     }
-
-    public override void Check()
+    public override void Update()
     {
+        if (enemy.fighting && Vector3.Distance(enemy.transform.position, testplayer.Instance.transform.position) < 5 && enemy.FSeePlayer())
+        {
+            enemy.FFaceToPlayer();
+        }
+        enemy.transform.Translate(enemy.transform.right * -enemy.faceto * enemy.movespeed * Time.deltaTime, Space.Self);
         if (enemy.FCheckFilp())
         {
             enemy.enemy.SetStage(enemy.lizarrd_stand_stage);
@@ -44,5 +40,10 @@ public class Lizarrd_Walk : Enemy_Base_Stage
             ////anim.SetTrigger("att");
             //anim.CrossFade("lizarrd_att", 0.2f);
         }
+    }
+
+    public override void Check()
+    {
+       
     }
 }
