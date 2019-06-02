@@ -84,6 +84,12 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
 
     public KeyCode Key_LT;
     public KeyCode Key_RT;
+
+    public bool RTDown;
+    public bool LTDown;
+
+    private bool lastRT;
+    private bool lastLT;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -91,14 +97,18 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
         {
             Instance = this;
         }
+        RTDown = false;
+        LTDown = false;
+        lastRT = false;
+        lastLT = false;
     }
 
     // Update is called once per frame
     void Update()
     {  
         FGet_Input_value();
-        FTranslateDPadToButton();
-
+        FRTLTToButton();
+        
     }
 
     void FGet_Input_value()
@@ -176,33 +186,44 @@ public class Player_Controller_System : UnityEngine.MonoBehaviour
         }
         return Mathf.Clamp(Input.GetAxis(axis_name) + a, 0, 1);
     } //摇杆
-    void FTranslateDPadToButton()
+    void FRTLTToButton()
     {
-        float horizontal = Input.GetAxisRaw("DPad_Horizontal");
-        float vertical = Input.GetAxisRaw("DPad_Vertical");
-        if (horizontal > 0.9){
-            DPad_Up = true;
-            DPad_Down = false;
-        }
-        if(horizontal < -0.9)
+        var currentRT = Input.GetAxisRaw("RT") > 0;
+        var currentLT = Input.GetAxisRaw("LT") > 0;
+        
+        if (currentRT == lastRT)
         {
-            DPad_Up = false;
-            DPad_Down = true;
+            RTDown = false;
         }
-        if(horizontal > -0.9 && horizontal < 0.9)
+        else
         {
-            DPad_Up = false;
-            DPad_Down = false;
+            if (currentRT)
+            {
+                RTDown = true;
+            }
+            else
+            {
+                RTDown = false;
+            }
+            lastRT = currentRT;
+            
         }
-        if(vertical > 0.5)
+
+        if (currentLT && lastLT)
         {
-            DPad_Right = true;
-            DPad_Left = false;
+            LTDown = false;
         }
-        if(vertical < -0.5)
+        else
         {
-            DPad_Right = false;
-            DPad_Up = true;
+            if (currentLT)
+            {
+                LTDown = true;
+            }
+            else
+            {
+                LTDown = false;
+            }
+            lastLT = currentLT;
         }
     }
 }

@@ -17,7 +17,7 @@ public class Tanfan_stage : Player_Base_Stage
     }
     public void Enter()
     {
-        Debug.Log("att");
+       
 
         testplayer.Instance.canhurt = false;
         testplayer.Instance.canatt = false;

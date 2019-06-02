@@ -16,6 +16,7 @@ public class Lancer_Att1 : Enemy_Base_Stage
     {
         count = Random.Range(1.8f, 2.2f);
         enemy.anim.CrossFade("att2", 0.2f);
+        enemy.ATK = 20;
         if (enemy.fighting)
         {
             enemy.FFaceToPlayer();

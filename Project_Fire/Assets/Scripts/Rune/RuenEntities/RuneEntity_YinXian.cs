@@ -18,4 +18,9 @@ public class RuneEntity_YinXian : RuneEntity
     {
         PanelOff(other);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        PanelExecute(other);
+    }
 }

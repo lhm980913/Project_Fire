@@ -24,7 +24,6 @@ public class LianDao : Rune
         {
             player = testplayer.Instance;
         }
-        Debug.Log("SD");
         temp = UnityEngine.Object.Instantiate(Sickle, player.transform.position, Quaternion.identity);
         temp.GetComponent<LianDaoEntity>().dir = testplayer.Instance.face_to * new Vector3(1, 0, 0);
     }
