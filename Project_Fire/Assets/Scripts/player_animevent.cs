@@ -64,23 +64,19 @@ public class player_animevent : UnityEngine.MonoBehaviour
     public void gofront()
     {
         StartCoroutine(front());
-
-
     }
     IEnumerator back()
     {
         float count = 0;
-        while(count<0.5f)
+        while(count<10.5f)
         {
             testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 3;
             count += Time.deltaTime;
 
             yield return null;
         }
-
-       
-        yield return null;
     }
+
     IEnumerator front()
     {
         float count = 0;

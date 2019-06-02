@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class anim_att : UnityEngine.MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public ParticleSystem storePower;
 
     void attingtrue()
     {
@@ -24,5 +13,10 @@ public class anim_att : UnityEngine.MonoBehaviour
     void attingfalse()
     {
         this.GetComponentInParent<enemy_base>().atting = false;
+    }
+
+    void StorePower()
+    {
+        storePower.Play();
     }
 }
