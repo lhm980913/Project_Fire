@@ -155,14 +155,7 @@ public class testplayer : UnityEngine.MonoBehaviour
         hp = Hpmax;
         mana = Manamax;
     }
-
-    void Start()
-    {
-       
-
-
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -172,7 +165,6 @@ public class testplayer : UnityEngine.MonoBehaviour
         FCountFlash();
         FAnimation();
         
-
         if(grounded!=FCheckground())
         {
             grounded = FCheckground();
@@ -185,8 +177,6 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
 
         FYspeedclamp();
-
-        
 
         if (Input.GetKeyDown(KeyCode.I)||Player_Controller_System.Instance.Right_Down== Player_Controller_System.Button_Stage.down)
         {
@@ -480,9 +470,9 @@ public class testplayer : UnityEngine.MonoBehaviour
         canhurt = true;
     }
 
-    public void OnDrawGizmos()
+    private void OnGUI()
     {
-        Gizmos.DrawWireCube(transform.position + Vector3.right * face_to * 2.0f * 0.6f, new Vector3(2.0f, 1.0f, 1.0f));
+        GUI.Label(new Rect(0, 0, 100, 100), testplayer.Instance.GetComponent<Rigidbody>().velocity.ToString());
     }
 
     void attint(ref float count)

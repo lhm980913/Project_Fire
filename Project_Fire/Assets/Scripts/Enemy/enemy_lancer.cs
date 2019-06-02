@@ -7,7 +7,6 @@ public class enemy_lancer : enemy_base
     public Enemy enemy;
     public enemy_lancer self;
 
-
     public Lancer_Stand lancer_stand_stage;
     public Lancer_Hurt lancer_hurt_stage;
     public Lancer_Dead lancer_dead_stage;
@@ -87,11 +86,6 @@ public class enemy_lancer : enemy_base
         exattcd -= Time.deltaTime;
     }
 
-
-
-
-
-
     public override void FBeHurt(float force)
     {
         if (testplayer.Instance.transform.position.x < this.transform.position.x)
@@ -102,8 +96,8 @@ public class enemy_lancer : enemy_base
         {
             this.GetComponent<Rigidbody>().velocity += new Vector3(-1, 1, 0) * force;
         }
-
     }
+
     public override bool FCheckFilp()
     {
         bool a = Physics.Raycast(transform.position, transform.forward, 1f, 1 << 9);
@@ -115,6 +109,7 @@ public class enemy_lancer : enemy_base
 
         return a || !b;
     }
+
     public override bool FAttPlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, attfield, player_layermask);
@@ -122,6 +117,7 @@ public class enemy_lancer : enemy_base
         bool b = Physics.BoxCast(transform.position + transform.forward * 2, Vector3.one, -transform.forward, Quaternion.identity, attfield + 2, player_layermask);
         return a || b;
     }
+
     public override void FFaceToPlayer()
     {
         if (testplayer.Instance.transform.position.x < this.transform.position.x)
@@ -133,6 +129,7 @@ public class enemy_lancer : enemy_base
             this.faceto = 1;
         }
     }
+
     public override bool FSeePlayer()
     {
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
@@ -147,8 +144,7 @@ public class enemy_lancer : enemy_base
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
         bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
         bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
-
-
+        
         if ((a || b || c) && !fighting)
         {
             fighting = true;
@@ -156,6 +152,7 @@ public class enemy_lancer : enemy_base
 
         return a || b || c;
     }
+
     public void tuozhan()
     {
         if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 7)
@@ -207,7 +204,6 @@ public class enemy_lancer : enemy_base
                 faceto *= -1;
             }
         }
-
     }
 
     public override void destroyself()
