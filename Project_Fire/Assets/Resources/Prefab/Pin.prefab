@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5869489065336269912}
   - component: {fileID: 4588564415491153444}
   - component: {fileID: 1616423457485514380}
+  - component: {fileID: 7218825277397113364}
   m_Layer: 0
   m_Name: Pin
   m_TagString: Untagged
@@ -92,3 +93,17 @@ CapsuleCollider:
   m_Height: 0.99999994
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7218825277397113364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814263811243122421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1216b824c1577ae49a02609d8b31cccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12
+  Distance: 20
