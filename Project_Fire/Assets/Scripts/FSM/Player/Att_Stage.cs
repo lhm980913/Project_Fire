@@ -76,7 +76,7 @@ public class Att_Stage : Player_Base_Stage
         ttt -= Time.deltaTime;
         //if (ttt < 0.1f)
         //{
-        //    if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down && testplayer.Instance.canatt)
+        //    if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.stay && testplayer.Instance.canatt)
         //    {
 
         //        jattack = false;
@@ -86,7 +86,7 @@ public class Att_Stage : Player_Base_Stage
 
 
         //    }
-         
+
 
         //}
         if (ttt<0)
