@@ -51,6 +51,31 @@ public class Stand_Stage :  Player_Base_Stage
             
             
         }
+        if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.stay)
+        {
+            testplayer._player.SetStage(testplayer.Instance.interaction_stage);
+        }
+
+        if (Player_Controller_System.Instance.LTDown && RuneManager.Instance.TryGetRune(0, out Rune Rune1))
+        {
+
+            if (testplayer.Instance.mana > Rune1.MpNeed)
+            {
+                testplayer.Instance.skillid = 1;
+                testplayer._player.SetStage(testplayer.Instance.initiative_stage);
+            }
+            
+        }
+        if (Player_Controller_System.Instance.RTDown && RuneManager.Instance.TryGetRune(1, out Rune Rune2))
+        {
+            if (testplayer.Instance.mana > Rune2.MpNeed)
+            {
+                testplayer.Instance.skillid = 2;
+                testplayer._player.SetStage(testplayer.Instance.initiative_stage);
+            }
+               
+        }
+
     }
 
     public void Update_()

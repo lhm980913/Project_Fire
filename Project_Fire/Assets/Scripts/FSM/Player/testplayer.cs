@@ -72,7 +72,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     public Vector3 enemypos;
     [HideInInspector]
     public float flashtime;
-
+    [HideInInspector]
+    public int skillid=0;
     [HideInInspector]
     public GameObject playergameobj;
     [HideInInspector]
@@ -127,11 +128,14 @@ public class testplayer : UnityEngine.MonoBehaviour
     public Player_Base_Stage doublejump_stage;
     public Player_Base_Stage attex_stage;
     public Player_Base_Stage tanfan_stage;
+    public Player_Base_Stage initiative_stage;
+    public Player_Base_Stage interaction_stage;
     private void Awake()
     {
         UIManager.Instance.PushPanel(UIBaseType.MainPanel);
         _player = new Player();
-
+        initiative_stage = new Initiative_Stage();
+        interaction_stage = new Interaction_Stage();
         stand_stage = new Stand_Stage();
         run_stage = new Run_Stage();
         jump_stage = new Jump_Stage();
@@ -166,6 +170,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+       
         attcount();
         FFilp();
 
@@ -190,11 +196,13 @@ public class testplayer : UnityEngine.MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I)|| Player_Controller_System.Instance.LTDown)
         {
-            FActiveRuneOne();
+            
+            skillid = 1;
         }
         if (Input.GetKeyDown(KeyCode.L) || Player_Controller_System.Instance.RTDown)
         {
-            FActiveRuneTwo();
+            
+            skillid = 2;
         }
         
     }
@@ -268,12 +276,12 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
     }
 
-    private void FActiveRuneOne()
+    public void FActiveRuneOne()
     {
         RuneManager.Instance.UseRune(RuneEvent.ActiveOne);
     }
 
-    private void FActiveRuneTwo()
+    public void FActiveRuneTwo()
     {
         RuneManager.Instance.UseRune(RuneEvent.ActiveTwo);
     }

@@ -15,7 +15,7 @@ public class Jump_Stage : Player_Base_Stage
         //testplayer.Instance.canflash = true;
         //Debug.Log("jump");
         //jumpcount = 0.25f;
-        //testplayer.Instance.anim.CrossFade("player_jump_on", 0.1f);
+        testplayer.Instance.anim.CrossFade("player_jump_on", 0.1f);
     }
 
     public void Input()
@@ -52,6 +52,27 @@ public class Jump_Stage : Player_Base_Stage
             
 
         }
+
+        if (Player_Controller_System.Instance.LTDown && RuneManager.Instance.TryGetRune(0, out Rune Rune1))
+        {
+
+            if (testplayer.Instance.mana > Rune1.MpNeed)
+            {
+                testplayer.Instance.skillid = 1;
+                testplayer._player.SetStage(testplayer.Instance.initiative_stage);
+            }
+
+        }
+        if (Player_Controller_System.Instance.RTDown && RuneManager.Instance.TryGetRune(1, out Rune Rune2))
+        {
+            if (testplayer.Instance.mana > Rune2.MpNeed)
+            {
+                testplayer.Instance.skillid = 2;
+                testplayer._player.SetStage(testplayer.Instance.initiative_stage);
+            }
+
+        }
+
     }
 
     public void Update_()

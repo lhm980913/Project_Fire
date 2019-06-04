@@ -187,7 +187,7 @@ public class enemy_shield : enemy_base
         if (!wudi)
         {
             
-            if((transform.position.x - testplayer.Instance.transform.position.x) * faceto < 0&&enemy._enemy==shield_def_stage)
+            if((transform.position.x - testplayer.Instance.transform.position.x) * faceto < 0&&enemy._enemy==shield_def_stage&&testplayer.Instance.attlevel!=4)
             {
                 if(other.tag=="player_weapon")
                 {
