@@ -51,7 +51,7 @@ public class Stand_Stage :  Player_Base_Stage
             
             
         }
-        if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.stay)
+        if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.down)
         {
             testplayer._player.SetStage(testplayer.Instance.interaction_stage);
         }

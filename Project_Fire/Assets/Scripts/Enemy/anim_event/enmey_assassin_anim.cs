@@ -11,14 +11,14 @@ public class enmey_assassin_anim : MonoBehaviour
     }
     void chuansong()
     {
-        if(Physics.Raycast(testplayer.Instance.transform.position -testplayer.Instance.face_to * Vector3.right * 1f, testplayer.Instance.face_to * Vector3.right * 1f,3,1<<9))
+        if(Physics.Raycast(testplayer.Instance.transform.position -testplayer.Instance.face_to * Vector3.right * 3f, testplayer.Instance.face_to * Vector3.right * 3f,3,1<<9))
         {
-            assassin.transform.position = testplayer.Instance.transform.position + testplayer.Instance.face_to * Vector3.right * 1f;
+            assassin.transform.position = testplayer.Instance.transform.position + testplayer.Instance.face_to * Vector3.right * 1.5f;
             assassin.faceto = -testplayer.Instance.face_to;
         }
         else
         {
-            assassin.transform.position = testplayer.Instance.transform.position - testplayer.Instance.face_to * Vector3.right * 1f;
+            assassin.transform.position = testplayer.Instance.transform.position - testplayer.Instance.face_to * Vector3.right * 1.5f;
             assassin.faceto = testplayer.Instance.face_to;
         }
 

@@ -27,12 +27,23 @@ public class Interaction_Stage : Player_Base_Stage
     public void Update_()
     {
         count -= Time.deltaTime;
-        if(count<0&& testplayer.Instance.mana>0&& testplayer.Instance.hp< testplayer.Instance.Hpmax)
+        if (testplayer.Instance.mana <= 0 || testplayer.Instance.hp >= testplayer.Instance.Hpmax)
         {
-            testplayer.Instance.mana -= 50*Time.deltaTime;
-            testplayer.Instance.hp += 50 * Time.deltaTime;
-            MainPanel.Instance.UpdateHp();
-            MainPanel.Instance.UpdateMp();
+            testplayer._player.SetStage(testplayer.Instance.stand_stage);
         }
+        if (count<0)
+        {
+            if(testplayer.Instance.mana > 0 && testplayer.Instance.hp < testplayer.Instance.Hpmax)
+            {
+                testplayer.Instance.mana -= 50 * Time.deltaTime;
+                testplayer.Instance.hp += 50 * Time.deltaTime;
+                MainPanel.Instance.UpdateHp();
+                MainPanel.Instance.UpdateMp();
+            }
+          
+           
+        }
+       
+        testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 30 * Time.deltaTime; //zhongli
     }
 }

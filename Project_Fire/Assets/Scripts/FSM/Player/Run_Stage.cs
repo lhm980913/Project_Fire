@@ -59,6 +59,10 @@ public class Run_Stage : Player_Base_Stage
             }
 
         }
+        if (Player_Controller_System.Instance.Button_B == Player_Controller_System.Button_Stage.down)
+        {
+            testplayer._player.SetStage(testplayer.Instance.interaction_stage);
+        }
         if (Player_Controller_System.Instance.RTDown && RuneManager.Instance.TryGetRune(1, out Rune Rune2))
         {
             if (testplayer.Instance.mana > Rune2.MpNeed)
