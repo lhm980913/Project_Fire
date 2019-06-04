@@ -70,7 +70,7 @@ public class player_animevent : UnityEngine.MonoBehaviour
         float count = 0;
         while(count<0.5f)
         {
-            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 3;
+            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right* -testplayer.Instance.face_to * 4;
             count += Time.deltaTime;
 
             yield return null;
@@ -79,14 +79,20 @@ public class player_animevent : UnityEngine.MonoBehaviour
 
     IEnumerator front()
     {
+       if( Physics.Raycast(testplayer.Instance.transform.position, Vector3.right * testplayer.Instance.face_to, out RaycastHit info, 8, 1 << 11))
+       {
+            float dis =Mathf.Abs( info.transform.position.x - testplayer.Instance.transform.position.x)-2f;
+            float speed = dis / 0.3f;
+       
+
         float count = 0;
-        while (count < 0.25f)
+        while (count < 0.3f)
         {
-            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right * testplayer.Instance.face_to * 5;
+            testplayer.Instance.GetComponent<Rigidbody>().velocity = testplayer.Instance.transform.right * testplayer.Instance.face_to * speed;
             count += Time.deltaTime;
             yield return null;
         }
-
+        }
 
         yield return null;
     }

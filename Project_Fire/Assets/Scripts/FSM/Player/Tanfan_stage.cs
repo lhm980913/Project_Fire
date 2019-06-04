@@ -73,7 +73,7 @@ public class Tanfan_stage : Player_Base_Stage
        
         
 
-        if (Player_Controller_System.Instance.Button_Y == Player_Controller_System.Button_Stage.down)
+        if (Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down)
         {
             nextatt = true;
             

@@ -327,7 +327,7 @@ public class enemy_lizarrd_new : enemy_base
         //return Physics.Raycast(transform.position, transform.forward, visionfield, player_layermask);
         //bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
         bool a = Physics.BoxCast(transform.position, Vector3.one, transform.forward, Quaternion.identity, visionfield, player_layermask);
-        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield / 3, player_layermask);
+        bool b = Physics.BoxCast(transform.position, Vector3.one, -transform.forward, Quaternion.identity, visionfield , player_layermask);
         bool c = Physics.OverlapSphere(this.transform.position, 4, player_layermask).Length != 0 ? true : false;
         if (a||b||c && !fighting)
         {
