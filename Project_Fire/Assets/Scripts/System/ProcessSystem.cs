@@ -181,8 +181,6 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
     {
         if(!enemy.wudi11)
         {
-
-        
         if (enemy.type == "lizarrd")
         {
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
