@@ -112,7 +112,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             {
                 testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
                 enemy_shield a = (enemy_shield)Enemy;
-                if (testplayer.Instance.attlevel == 4 && (a.transform.position.x - testplayer.Instance.transform.position.x) *a.faceto < 0)
+                if (testplayer.Instance.attlevel == testplayer.Instance.Exatt && (a.transform.position.x - testplayer.Instance.transform.position.x) *a.faceto < 0)
                 {
                     if(!a.dead)
                     a.enemy.SetStage(a.shield_hurt_stage);
@@ -177,16 +177,16 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         }
     }
 
-    public void FPlayerSkill_Enemy(enemy_base enemy)
+    public void FPlayerSkill_Enemy(enemy_base enemy,float xishu)
     {
         if(!enemy.wudi11)
         {
         if (enemy.type == "lizarrd")
         {
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
-            a.hurt_count -= testplayer.Instance.player_attack;
-            a.Hp -= testplayer.Instance.player_attack;
-            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            a.hurt_count -= testplayer.Instance.player_attack * xishu;
+            a.Hp -= testplayer.Instance.player_attack* xishu;
+            UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.lizarrd_hurt_stage);
@@ -195,9 +195,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             if (enemy.type == "fire")
             {
                 enemy_fire a = (enemy_fire)enemy;
-                a.hurt_count -= testplayer.Instance.player_attack;
-                a.Hp -= testplayer.Instance.player_attack;
-                UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+                a.hurt_count -= testplayer.Instance.player_attack * xishu;
+                a.Hp -= testplayer.Instance.player_attack * xishu;
+                UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
                 if (a.hurt_count < 0)
                 {
                     a.enemy.SetStage(a.fire_hurt_stage);
@@ -206,9 +206,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             if (enemy.type == "bird")
         {
             enemy_bird a = (enemy_bird)enemy;
-            a.hurt_count -= testplayer.Instance.player_attack;
-            a.Hp -= testplayer.Instance.player_attack;
-            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            a.hurt_count -= testplayer.Instance.player_attack * xishu;
+            a.Hp -= testplayer.Instance.player_attack * xishu;
+            UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.bird_hurt_stage);
@@ -217,9 +217,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         if (enemy.type == "assassin")
         {
             enemy_assassin a = (enemy_assassin)enemy;
-            a.hurt_count -= testplayer.Instance.player_attack;
-            a.Hp -= testplayer.Instance.player_attack;
-            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            a.hurt_count -= testplayer.Instance.player_attack * xishu;
+            a.Hp -= testplayer.Instance.player_attack * xishu;
+            UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.assassin_hurt_stage);
@@ -228,9 +228,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         if (enemy.type == "lancer")
         {
             enemy_lancer a = (enemy_lancer)enemy;
-            a.hurt_count -= testplayer.Instance.player_attack;
-            a.Hp -= testplayer.Instance.player_attack;
-            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            a.hurt_count -= testplayer.Instance.player_attack * xishu;
+            a.Hp -= testplayer.Instance.player_attack * xishu;
+            UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.lancer_hurt_stage);
@@ -239,9 +239,9 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         if (enemy.type == "shield")
         {
             enemy_shield a = (enemy_shield)enemy;
-            a.hurt_count -= testplayer.Instance.player_attack;
-            a.Hp -= testplayer.Instance.player_attack;
-            UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, enemy.transform.position);
+            a.hurt_count -= testplayer.Instance.player_attack * xishu;
+            a.Hp -= testplayer.Instance.player_attack * xishu;
+            UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
             if (a.hurt_count < 0)
             {
                 a.enemy.SetStage(a.shield_hurt_stage);

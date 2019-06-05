@@ -11,7 +11,7 @@ public class YinZhenEntity : MonoBehaviour
     private float distance;
     private void Awake()
     {
-        dir = testplayer.Instance.transform.right;
+        dir = testplayer.Instance.transform.right*testplayer.Instance.face_to;
         distance = 0;
         if (!GetComponent<Collider>().isTrigger)
         {
@@ -33,6 +33,6 @@ public class YinZhenEntity : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy")
-            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>());
+            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(),0.34f);
     }
 }

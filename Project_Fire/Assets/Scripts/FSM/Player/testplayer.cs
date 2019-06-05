@@ -13,7 +13,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     public float doublejump_speed;
     public float little_jump_speed;
     public float maxflashspeed;
-
+    public float Exatt;
     public float rapelength;   
     public float rapespeed;
     public float ymaxspeed;
