@@ -510,4 +510,12 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
     }
 
+    public void DestroyGameObject(GameObject obj)
+    {
+        if (obj)
+        {
+            Destroy(obj);
+        }
+        
+    }
 }

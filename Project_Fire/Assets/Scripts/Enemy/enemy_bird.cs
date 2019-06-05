@@ -19,6 +19,7 @@ public class enemy_bird : enemy_base
     public GameObject bullet;
     [SerializeField]
     public GameObject[] wings;
+    public GameObject bird_att;
     private void Awake()
     {
         type = "bird";
@@ -113,11 +114,13 @@ public class enemy_bird : enemy_base
     }
     public IEnumerator Fatt()
     {
-        yield return new WaitForSeconds(0.5f);
+        bird_att.SetActive(true);
+        yield return new WaitForSeconds(1f);
         //print("att");
         GameObject a = Instantiate(bullet);
         a.transform.position = this.transform.position;
-        
+        bird_att.SetActive(false);
+
     }
     //public IEnumerator qianyao()
     //{
