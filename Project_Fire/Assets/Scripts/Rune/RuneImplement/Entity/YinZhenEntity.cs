@@ -11,7 +11,7 @@ public class YinZhenEntity : MonoBehaviour
     private float distance;
     private void Awake()
     {
-        dir = testplayer.Instance.transform.forward;
+        dir = testplayer.Instance.transform.right;
         distance = 0;
         if (!GetComponent<Collider>().isTrigger)
         {

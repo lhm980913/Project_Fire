@@ -47,7 +47,7 @@ public class Shield_Walk : Enemy_Base_Stage
         }
         if (enemy.FAttPlayer())
         {
-            if(Random.Range(0,2)==0)
+            if(Random.Range(0,1)==0)
             {
                 enemy.enemy.SetStage(enemy.shield_att_stage);
                 //enemy.enemy.SetStage(enemy.shield_tanfan_stage);
