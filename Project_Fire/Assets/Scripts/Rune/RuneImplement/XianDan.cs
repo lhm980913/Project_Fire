@@ -22,7 +22,7 @@ public class XianDan : Rune
         {
             player = testplayer.Instance;
         }
-        colliders = Physics.OverlapBox(player.transform.position + Vector3.right * testplayer.Instance.face_to * 2.0f * 0.6f, new Vector3(2.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
+        colliders = Physics.OverlapBox(player.transform.position + Vector3.right * testplayer.Instance.face_to * 4.0f * 0.6f, new Vector3(4.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
         foreach (var collider in colliders)
         {
             if (collider.tag == "enemy")
@@ -34,7 +34,7 @@ public class XianDan : Rune
 
     private IEnumerator Exe(GameObject gameObject)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.5f);
         ProcessSystem.Instance.FPlayerSkill_Enemy(gameObject.GetComponent<enemy_base>());
     }
 }

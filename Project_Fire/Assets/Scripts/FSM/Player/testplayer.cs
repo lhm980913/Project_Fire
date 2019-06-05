@@ -26,7 +26,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 
     [HideInInspector]
     public SkinnedMeshRenderer[] skins;
-
+    public GameObject heal;
 
     public float player_attack;
     public float tanfan_time;

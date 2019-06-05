@@ -13,7 +13,9 @@ public class Hurt_Stage : Player_Base_Stage
 
     public void Enter()
     {
-        
+        testplayer.Instance.heal.SetActive(false);
+        var shape = testplayer.Instance.heal.GetComponent<ParticleSystem>().shape;
+        shape.radius = 0.5f;
         testplayer.Instance.attlevel = 1;
         count = 0.3f;
         testplayer.Instance.anim.CrossFade("player_strike", 0.1f);
