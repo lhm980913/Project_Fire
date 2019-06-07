@@ -100,7 +100,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100002, guid: 5c7156fdce48c8d4993161e4c9da8c1c, type: 3}
+  - {fileID: 2100000, guid: 6088521b11711694d905da8a7be03277, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -351,7 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327f146ed5736514f9c68c44cc25ced1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  jumpmovespeed: 0.78
+  speed: 5.5
   jump_speed: 13
   doublejump_speed: 10
   little_jump_speed: 5
@@ -368,7 +369,7 @@ MonoBehaviour:
   skins: []
   heal: {fileID: 6066815994937507582}
   player_attack: 150
-  tanfan_time: 0.1
+  tanfan_time: 0.15
   Hpmax: 100
   Manamax: 100
   enemypos: {x: 0, y: 0, z: 0}
@@ -6888,6 +6889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: VelocityModule.y.scalar
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116665553751642406, guid: 5f769c5e31a90ca4d81e0ed4532a2800,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f769c5e31a90ca4d81e0ed4532a2800, type: 3}

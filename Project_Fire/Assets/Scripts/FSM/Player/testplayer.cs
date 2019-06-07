@@ -8,6 +8,7 @@ public class testplayer : UnityEngine.MonoBehaviour
 {
     static public testplayer Instance;
 
+    public float jumpmovespeed;
     public float speed;
     public float jump_speed;
     public float doublejump_speed;

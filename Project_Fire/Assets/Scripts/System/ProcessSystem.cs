@@ -179,6 +179,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
 
     public void FPlayerSkill_Enemy(enemy_base enemy,float xishu)
     {
+        
         if(!enemy.wudi11)
         {
         if (enemy.type == "lizarrd")

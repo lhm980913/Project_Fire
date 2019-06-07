@@ -46,6 +46,7 @@ public class YinXian : Rune
             else
             {
                 enemys.Add(temp);
+                if( temp.GetComponent<enemy_base>())
                 ProcessSystem.Instance.FPlayerSkill_Enemy(temp,0.34f);
             }
         }

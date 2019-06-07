@@ -36,8 +36,11 @@ public class LianDaoEntity : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "enemy")
-            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(),0.3f);
+        if (other.tag == "enemy"&&other.GetComponent<enemy_base>())
+        {
+            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(), 0.3f);
+        }
+            
         if (BeBack == true)
         {
             if (other.tag == "Player")
