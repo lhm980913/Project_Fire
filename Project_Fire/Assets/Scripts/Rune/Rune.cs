@@ -51,6 +51,7 @@ public abstract class Rune
         else
         {
             rune_Event = (RuneEvent)index;
+            Debug.Log(name + " " + rune_Event.ToString());
         }
     }
 }

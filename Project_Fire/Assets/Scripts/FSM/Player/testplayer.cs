@@ -204,6 +204,11 @@ public class testplayer : UnityEngine.MonoBehaviour
             
             skillid = 2;
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            RuneManager.Instance.DebugRunes();
+        }
         
     }
     private void FixedUpdate()
