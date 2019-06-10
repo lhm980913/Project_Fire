@@ -63,11 +63,12 @@ public class RuneManager : MonoBehaviour
         runes[index] = null;
     }
 
-    public void GenerateRune(Vector3 pos)
+    public void DebugRunes()
     {
-        //test
-        GameObject go = Instantiate(runePrefabs["LianDao"].Prefab, pos, Quaternion.identity);
-        //test
+        foreach (var item in runes)
+        {
+            Debug.Log(item.Name + " " + item.runeEvent + "\n");
+        }
     }
 
     public void UseRune(RuneEvent runeEvent)

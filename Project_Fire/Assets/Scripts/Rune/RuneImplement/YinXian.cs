@@ -32,7 +32,13 @@ public class YinXian : Rune
         List<enemy_base> enemys = new List<enemy_base>();
         for (int i = 0; i < colliders.Length; i++)
         {
-            enemy_base temp = colliders[i].GetComponent<enemy_base>();
+            enemy_base temp = null;
+            if (colliders[i].GetComponent<enemy_base>())
+            {
+                temp = colliders[i].GetComponent<enemy_base>();
+            }
+          
+            
             if(!temp)
             {
                 continue;
@@ -40,7 +46,8 @@ public class YinXian : Rune
             else
             {
                 enemys.Add(temp);
-                ProcessSystem.Instance.FPlayerSkill_Enemy(temp);
+                if( temp.GetComponent<enemy_base>())
+                ProcessSystem.Instance.FPlayerSkill_Enemy(temp,0.34f);
             }
         }
         RuneManager.Instance.StartCoroutine(buffer(enemys,xian));
@@ -56,7 +63,7 @@ public class YinXian : Rune
         {
             foreach (var enemy in enemys)
             {
-                ProcessSystem.Instance.FPlayerSkill_Enemy(enemy);
+                ProcessSystem.Instance.FPlayerSkill_Enemy(enemy,0.34f);
             }
             yield return new WaitForSeconds(0.25f);
         }

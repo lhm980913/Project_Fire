@@ -8,12 +8,13 @@ public class testplayer : UnityEngine.MonoBehaviour
 {
     static public testplayer Instance;
 
+    public float jumpmovespeed;
     public float speed;
     public float jump_speed;
     public float doublejump_speed;
     public float little_jump_speed;
     public float maxflashspeed;
-
+    public float Exatt;
     public float rapelength;   
     public float rapespeed;
     public float ymaxspeed;
@@ -205,6 +206,11 @@ public class testplayer : UnityEngine.MonoBehaviour
         {
             
             skillid = 2;
+        }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            RuneManager.Instance.DebugRunes();
         }
         
     }

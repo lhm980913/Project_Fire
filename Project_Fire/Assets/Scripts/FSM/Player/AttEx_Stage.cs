@@ -15,7 +15,7 @@ public class AttEx_Stage : Player_Base_Stage
 
         testplayer.Instance.atting = false;
         testplayer.Instance.canatt = false;
-        testplayer.Instance.attlevel = 4;
+        testplayer.Instance.attlevel = testplayer.Instance.Exatt;
 
         testplayer.Instance.aa = testplayer.Instance.player_att_speed;
         Player_Function.FStop(testplayer.Instance.playergameobj);

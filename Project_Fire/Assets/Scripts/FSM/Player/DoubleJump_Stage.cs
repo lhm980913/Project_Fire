@@ -65,7 +65,7 @@ public class DoubleJump_Stage : Player_Base_Stage
     // Update is called once per frame
     public void Update_()
     {
-        Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
+        Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed* testplayer.Instance.jumpmovespeed);
         testplayer.Instance.playergameobj.GetComponent<Rigidbody>().velocity += Vector3.down * 30 * Time.deltaTime; //zhongli
         Player_Function.FFace_to();
     }

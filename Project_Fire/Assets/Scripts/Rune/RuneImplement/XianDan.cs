@@ -35,6 +35,7 @@ public class XianDan : Rune
     private IEnumerator Exe(GameObject gameObject)
     {
         yield return new WaitForSeconds(0.5f);
-        ProcessSystem.Instance.FPlayerSkill_Enemy(gameObject.GetComponent<enemy_base>());
+        if(gameObject!=null && gameObject.GetComponent<enemy_base>())
+        ProcessSystem.Instance.FPlayerSkill_Enemy(gameObject.GetComponent<enemy_base>(),0.5f);
     }
 }

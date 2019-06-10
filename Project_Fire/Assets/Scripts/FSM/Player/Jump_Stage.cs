@@ -80,7 +80,7 @@ public class Jump_Stage : Player_Base_Stage
        
         //if (Player_Controller_System.Instance.Horizontal_Left != 0)
         //{
-            Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed);
+            Player_Function.FWalk(testplayer.Instance.playergameobj, Player_Controller_System.Instance, testplayer.Instance.speed* testplayer.Instance.jumpmovespeed);
         //}
         //if (Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.stay || Player_Controller_System.Instance.Button_A == Player_Controller_System.Button_Stage.down)
         //{
