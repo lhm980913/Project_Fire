@@ -15,7 +15,7 @@ public class LianDao : Rune
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
         MpNeed = 10;
-        Sickle = (GameObject)Resources.Load("Prefab/Sickle");
+        Sickle = testplayer.Instance.Sickle;
     }
     public override void Execute()
     {
