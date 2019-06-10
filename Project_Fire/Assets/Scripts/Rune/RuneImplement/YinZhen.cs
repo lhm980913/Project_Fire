@@ -15,7 +15,7 @@ public class YinZhen : Rune
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
         MpNeed = 10;
-        Pin = (GameObject)Resources.Load("Prefab/Pin");
+        Pin = testplayer.Instance.Pin;
     }
     public override void Execute()
     {

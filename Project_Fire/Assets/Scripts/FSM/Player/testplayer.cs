@@ -117,7 +117,9 @@ public class testplayer : UnityEngine.MonoBehaviour
     public bool canjump;
     [HideInInspector]
     public float attlevel = 1;
-   // 
+    // 
+    public GameObject Pin;
+    public GameObject Sickle;
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
