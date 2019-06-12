@@ -15,7 +15,7 @@ public class Boss_Hurt : Enemy_Base_Stage
     {
         count = enemy.yingzhi_time;
 
-        enemy.anim.CrossFade("hurt", 0.1f);
+        enemy.anim.CrossFade("boss_strike", 0.1f);
         enemy.hurt_count = Random.Range(enemy.hurt_yuzhi - 0.15f, enemy.hurt_yuzhi + 0.15f);
 
     }
@@ -26,7 +26,7 @@ public class Boss_Hurt : Enemy_Base_Stage
         if (count < 0)
         {
             enemy.FFaceToPlayer();
-            //enemy.enemy.SetStage(enemy.lancer_walk_stage);
+            enemy.enemy.SetStage(enemy.boss_stand_stage);
         }
 
     }

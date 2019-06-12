@@ -14,8 +14,8 @@ public class Boss_Backjump : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = Random.Range(1.8f, 2.2f);
-        enemy.anim.CrossFade("att2", 0.2f);
+        count = 1.7f;
+        enemy.anim.CrossFade("boss_6", 0.2f);
         enemy.ATK = 20;
         if (enemy.fighting)
         {
@@ -31,7 +31,7 @@ public class Boss_Backjump : Enemy_Base_Stage
     {
         if (count < 0)
         {
-
+            enemy.enemy.SetStage(enemy.boss_stand_stage);
         }
     }
 }

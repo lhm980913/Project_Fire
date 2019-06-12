@@ -14,8 +14,8 @@ public class Boss_Gun : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 2;
-        enemy.anim.CrossFade("att1", 0.2f);
+        count = 1;
+        enemy.anim.CrossFade("boss_4", 0.2f);
         enemy.ATK = 20;
         if (enemy.fighting)
         {
@@ -31,10 +31,9 @@ public class Boss_Gun : Enemy_Base_Stage
     {
         if (count < 0)
         {
-            if (enemy.FAttPlayer())
-            {
-                enemy.enemy.SetStage(enemy.boss_att1_stage);
-            }
+           
+                enemy.enemy.SetStage(enemy.boss_stand_stage);
+            
 
         }
     }

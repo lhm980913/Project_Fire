@@ -13,9 +13,9 @@ public class Boss_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
-        count = 5f;
-        enemy.anim.CrossFade("dead", 0.2f);
-        enemy.weapon.stage = 0;
+        count = 2f;
+        enemy.anim.CrossFade("boss_dead", 0.2f);
+
         enemy.wudi11 = true;
         enemy.beattforce = 20;
     }

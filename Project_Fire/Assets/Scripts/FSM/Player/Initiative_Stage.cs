@@ -14,7 +14,6 @@ public class Initiative_Stage : Player_Base_Stage
     {
         Rune Rune;
         
-        
         if(testplayer.Instance.skillid==1)
         {
             if (RuneManager.Instance.TryGetRune(0, out Rune))

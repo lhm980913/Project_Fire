@@ -15,10 +15,11 @@ public class enemy_boss : enemy_base
     public Boss_Gun boss_gun_stage;
     public Boss_Hurt boss_hurt_stage;
     public Boss_Jatt boss_jatt_stage;
+    public Boss_Att3 boss_att3_stage;
 
-    public GameObject _weapon;
-    [HideInInspector]
-    public lancetest weapon;
+
+    public float yingzhi = 0.4f;
+    int skillid=0;
     //public GameObject fire;
     //public GameObject fire1;
     //public Transform huoba;
@@ -30,7 +31,15 @@ public class enemy_boss : enemy_base
         {
             self = this;
         }
-     
+        boss_stand_stage = new Boss_Stand(self);
+        boss_dead_stage = new Boss_Dead(self);
+        boss_att1_stage = new Boss_Att1(self);
+        boss_att2_stage = new Boss_Att2(self);
+        boss_att3_stage = new Boss_Att3(self);
+        boss_backjump_stage = new Boss_Backjump(self);
+        boss_gun_stage = new Boss_Gun(self);
+        boss_hurt_stage = new Boss_Hurt(self);
+        boss_jatt_stage = new Boss_Jatt(self);
 
         Hp = maxhp;
         hurt_count = hurt_yuzhi;
@@ -69,6 +78,21 @@ public class enemy_boss : enemy_base
         FSeePlayer();
         attcd -= Time.deltaTime;
         exattcd -= Time.deltaTime;
+
+        houtiao();
+    }
+
+    void houtiao()
+    {
+        if(Vector3.Distance(testplayer.Instance.transform.position,transform.position)<3&&Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down)
+        {
+            if(Random.Range(0,100)<30)
+            {
+                if (enemy._enemy==boss_stand_stage)
+                enemy.SetStage(boss_backjump_stage);
+            }
+        }
+
     }
 
     public override void FBeHurt(float force)
@@ -141,13 +165,7 @@ public class enemy_boss : enemy_base
         return a || b || c;
     }
 
-    public void tuozhan()
-    {
-        if (Vector3.Distance(this.transform.position, testplayer.Instance.transform.position) > 7)
-        {
-            fighting = false;
-        }
-    }
+
     //public IEnumerator stand_lizarrd(float time)
     //{
     //    // yield return 
@@ -211,6 +229,40 @@ public class enemy_boss : enemy_base
     //    // FBeHurt();
     //    Stage = stage_;
     //    StopAllCoroutines();
-
+    public int switch_skill()
+    {
+        int a = -1;
+        while(a==-1)
+        {
+            if(FAttPlayer())
+            {
+                int[] fatt = { 1, 3, 4, 5 };
+                if(Random.Range(0,2)==0)
+                {
+                    a = 1;
+                }
+                else
+                {
+                    a = fatt[Random.Range(1,4)];
+                }
+            }
+            else
+            {
+                int[] fatt = { 2, 3, 4, 5 };
+                a = fatt[Random.Range(0, 4)];
+            }
+        }
+       
+        if(a!=skillid)
+        {
+            skillid = a;
+            return a;
+        }
+        else
+        {
+            return switch_skill();
+        }
+        
+    }
 
 }

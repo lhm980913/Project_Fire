@@ -46,7 +46,13 @@ public class RuneManager : MonoBehaviour
             RunesDictionary.TryGetValue(rune.runeEvent, out temp);
         }
         temp.Add(rune);
+        
         runes[index] = rune;
+        string all = " ";
+        foreach (var item in temp)
+        {
+            all += item.RuneName + " ";
+        }
     }
 
     public void DeleteRune(Rune rune, int index)
@@ -61,6 +67,13 @@ public class RuneManager : MonoBehaviour
         if (!temp.Remove(rune))
             Debug.Log("There is no such rune " + rune.ToString());
         runes[index] = null;
+
+        string all = " ";
+        foreach (var item in temp)
+        {
+            all += item.RuneName + " ";
+        }
+        Debug.Log(rune.runeEvent + " Delete " + all);
     }
 
     public void DebugRunes()
