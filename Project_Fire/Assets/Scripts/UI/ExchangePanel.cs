@@ -120,8 +120,8 @@ public class ExchangePanel : BasePanel
         {
             Debug.Log("PickedRune");
         }
-        RuneManager.Instance.AddRune(PickedRune, index);
         PickedRune.SetActiveEvent(index);
+        RuneManager.Instance.AddRune(PickedRune, index);
         temp.runeEntity.gameObject.SetActive(true);
         temp.runeEntity.gameObject.transform.position = testplayer.Instance.transform.position;
         PickedRune.runeEntity.gameObject.SetActive(false);

@@ -371,6 +371,19 @@ public class testplayer : UnityEngine.MonoBehaviour
                     }
 
                 }
+                if (b.type == "boss")
+                {
+                    enemy_boss a = (enemy_boss)b;
+                    if (a.candamage)
+                    {
+                        CameraEffectSystem.Instance.FHitEffect();
+                        enemypos = other.transform.position;
+                        atting = false;
+                        FLoseHp(a.ATK);
+                        _player.SetStage(hurt_stage);
+                    }
+
+                }
                 if (b.type == "fire")
                 {
 

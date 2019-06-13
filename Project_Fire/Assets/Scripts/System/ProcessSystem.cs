@@ -108,6 +108,22 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 }
                 RuneManager.Instance.UseRune(RuneEvent.OnAttack);
             }
+            if (Enemy.type == "boss")
+            {
+                testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
+                enemy_boss a = (enemy_boss)Enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                a.Hp -= testplayer.Instance.player_attack * testplayer.Instance.attlevel;
+                if (!a.wudi11)
+                {
+                    UIManager.Instance.DisplayDamageNumber((int)testplayer.Instance.player_attack * (int)testplayer.Instance.attlevel, Enemy.transform.position);
+                }
+                if (a.hurt_count < 0 && !a.dead)
+                {
+                    a.enemy.SetStage(a.boss_hurt_stage);
+                }
+                RuneManager.Instance.UseRune(RuneEvent.OnAttack);
+            }
             if (Enemy.type == "shield")
             {
                 testplayer.Instance.FGetMana(testplayer.Instance.GotMana);
@@ -168,6 +184,13 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             {
                 bullet a = (bullet)Enemy;
                
+                a.Hp -= testplayer.Instance.player_attack;
+                RuneManager.Instance.UseRune(RuneEvent.OnAttackFlyItem);
+            }
+            if (Enemy.type == "paodan")
+            {
+                paodan a = (paodan)Enemy;
+
                 a.Hp -= testplayer.Instance.player_attack;
                 RuneManager.Instance.UseRune(RuneEvent.OnAttackFlyItem);
             }
@@ -237,7 +260,18 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
                 a.enemy.SetStage(a.lancer_hurt_stage);
             }
         }
-        if (enemy.type == "shield")
+            if (enemy.type == "boss")
+            {
+                enemy_boss a = (enemy_boss)enemy;
+                a.hurt_count -= testplayer.Instance.player_attack * xishu;
+                a.Hp -= testplayer.Instance.player_attack * xishu;
+                UIManager.Instance.DisplayDamageNumber((int)(testplayer.Instance.player_attack * testplayer.Instance.attlevel * xishu), enemy.transform.position);
+                if (a.hurt_count < 0)
+                {
+                    a.enemy.SetStage(a.boss_hurt_stage);
+                }
+            }
+            if (enemy.type == "shield")
         {
             enemy_shield a = (enemy_shield)enemy;
             a.hurt_count -= testplayer.Instance.player_attack * xishu;
@@ -279,7 +313,13 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
             a.enemy.SetStage(a.lancer_stand_stage);
 
         }
+        if (enemy.type == "boss")
+        {
+            enemy_boss a = (enemy_boss)enemy;
+            a.yingzhi = 1.2f;
+            a.enemy.SetStage(a.boss_stand_stage);
 
+        }
         //if (enemy.GetComponent<enemy_fire>())
         //{
         //    enemy.GetComponentInParent<Animator>().CrossFade("stand", 0.1f);
