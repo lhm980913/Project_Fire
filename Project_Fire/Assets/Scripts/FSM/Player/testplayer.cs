@@ -68,6 +68,7 @@ public class testplayer : UnityEngine.MonoBehaviour
         }
     }
 
+    public float DeathTime;
 
     [HideInInspector]
     public Vector3 enemypos;
@@ -120,6 +121,8 @@ public class testplayer : UnityEngine.MonoBehaviour
     // 
     public GameObject Pin;
     public GameObject Sickle;
+    public ParticleSystem JiHuoEffect;
+    public ParticleSystem LianJiEffect;
 
     public Player_Base_Stage stand_stage;
     public Player_Base_Stage run_stage;
@@ -207,17 +210,8 @@ public class testplayer : UnityEngine.MonoBehaviour
             
             skillid = 2;
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            RuneManager.Instance.DebugRunes();
-        }
-        
-    }
-    private void FixedUpdate()
-    {
-        
-    }
     bool FCheckground()
     {
         LayerMask lm = 1 << 9;
@@ -462,10 +456,6 @@ public class testplayer : UnityEngine.MonoBehaviour
             atting = false;
             _player.SetStage(hurt_stage);
         }
-
-
-
-
     }
 
     public void FGetMana(float num)
@@ -503,8 +493,24 @@ public class testplayer : UnityEngine.MonoBehaviour
     public void FLoseHp(float num)
     {
         hp -= num;
-
         MainPanel.Instance.UpdateHp();
+        if (hp <= 0)
+        {
+            StartCoroutine(Dead());
+        }
+    }
+
+    public void FixHpAndMp()
+    {
+        hp = Hpmax;
+        mana = Manamax;
+    }
+
+    private IEnumerator Dead()
+    {
+        SceneSystem.instance.FixEnemy();
+        yield return new WaitForSecondsRealtime(DeathTime);
+        SceneSystem.instance.Reborn();
     }
 
    public IEnumerator wudi(float time)

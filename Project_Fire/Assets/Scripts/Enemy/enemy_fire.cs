@@ -20,6 +20,7 @@ public class enemy_fire : enemy_base
     public Transform huoba;
     private void Awake()
     {
+        base.FRegister();
         type = "fire";
         if (self != this)
         {

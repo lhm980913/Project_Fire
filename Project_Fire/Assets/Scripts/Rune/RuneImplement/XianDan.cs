@@ -22,6 +22,7 @@ public class XianDan : Rune
         {
             player = testplayer.Instance;
         }
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.XianDan);
         colliders = Physics.OverlapBox(player.transform.position + Vector3.right * testplayer.Instance.face_to * 4.0f * 0.6f, new Vector3(4.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
         foreach (var collider in colliders)
         {

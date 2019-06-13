@@ -17,11 +17,13 @@ public class LianJi : Rune
     {
         if(count < 4)
         {
+            testplayer.Instance.LianJiEffect.Stop();
             testplayer.Instance.attlevel = 1;
             count++;
         }
         else
         {
+            testplayer.Instance.LianJiEffect.Play();
             testplayer.Instance.attlevel = 2;
             count = 0;
         }

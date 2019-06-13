@@ -13,6 +13,7 @@ public class Boss_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
+        SceneSystem.instance.Delete(enemy);
         count = 2f;
         enemy.anim.CrossFade("boss_dead", 0.2f);
 

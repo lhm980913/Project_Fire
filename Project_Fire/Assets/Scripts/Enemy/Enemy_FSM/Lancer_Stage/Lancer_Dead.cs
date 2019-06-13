@@ -13,6 +13,7 @@ public class Lancer_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
+        SceneSystem.instance.Delete(enemy);
         count = 5f;
         enemy.anim.CrossFade("dead", 0.2f);
         enemy.weapon.stage = 0;

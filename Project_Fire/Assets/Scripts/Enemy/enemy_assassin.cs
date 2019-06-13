@@ -23,6 +23,7 @@ public class enemy_assassin : enemy_base
     public Material assassin_mar;
     private void Awake()
     {
+        base.FRegister();
         type = "assassin";
         if (self != this)
         {

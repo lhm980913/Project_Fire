@@ -27,7 +27,7 @@ public class enemy_lancer : enemy_base
     //public Transform huoba;
     private void Awake()
     {
-       
+        base.FRegister();
         type = "lancer";
         if (self != this)
         {
@@ -213,6 +213,7 @@ public class enemy_lancer : enemy_base
 
     public override void destroyself()
     {
+        SceneSystem.instance.OpenGate();
         Destroy(this.gameObject);
        // Destroy(weapon.gameObject);
         //Destroy(fire1);

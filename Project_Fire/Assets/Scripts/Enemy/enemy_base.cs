@@ -178,6 +178,25 @@ public class enemy_base : UnityEngine.MonoBehaviour
     //{
 
     //}
+
+    public void FRegister()
+    {
+        if (SceneSystem.instance)
+        {
+            SceneSystem.instance.AddEnemy(this);
+        }
+        else
+        {
+            StartCoroutine(DelayAddEnemy());
+        }
+    }
+
+    IEnumerator DelayAddEnemy()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        SceneSystem.instance.AddEnemy(this);
+    }
+
     public virtual void FBeatBack()
     {
 
@@ -244,6 +263,5 @@ public class enemy_base : UnityEngine.MonoBehaviour
         wudi = true;
         yield return new WaitForSeconds(0.05f);
         wudi = false;
-
     }
 }

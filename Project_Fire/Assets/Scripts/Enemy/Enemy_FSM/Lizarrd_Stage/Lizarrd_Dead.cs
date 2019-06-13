@@ -13,6 +13,7 @@ public class Lizarrd_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
+        SceneSystem.instance.Delete(enemy);
         count = 2.5f;
         enemy.anim.CrossFade("lizarrd_dead", 0.2f);
         enemy.wudi11 = true;

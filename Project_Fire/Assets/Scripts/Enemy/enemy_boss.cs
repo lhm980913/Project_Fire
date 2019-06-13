@@ -26,6 +26,7 @@ public class enemy_boss : enemy_base
     private void Awake()
     {
 
+        base.FRegister();
         type = "boss";
         if (self != this)
         {

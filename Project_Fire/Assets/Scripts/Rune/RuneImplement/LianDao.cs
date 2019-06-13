@@ -24,6 +24,7 @@ public class LianDao : Rune
         {
             player = testplayer.Instance;
         }
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.Sickle);
         temp = UnityEngine.Object.Instantiate(Sickle, player.transform.position, Quaternion.identity);
         temp.GetComponent<LianDaoEntity>().dir = testplayer.Instance.face_to * new Vector3(1, 0, 0);
     }

@@ -22,6 +22,7 @@ public class enemy_bird : enemy_base
     public GameObject bird_att;
     private void Awake()
     {
+        base.FRegister();
         type = "bird";
         if (self != this)
         {

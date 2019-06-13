@@ -8,11 +8,6 @@ public class enemy_boss_anim : MonoBehaviour
     public GameObject paodan;
     public Transform shootpos;
     public GameObject ci;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
 
@@ -153,8 +148,29 @@ public class enemy_boss_anim : MonoBehaviour
         key = Vector3.Lerp(begin, target, time_bian / time_ding);
         return key;
     }
-    void Update()
+
+    void Fire()
     {
-       
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.BossFire);
+    }
+
+    void FastAttack()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.BossFastAttack);
+    }
+
+    void Wave()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.BossWave);
+    }
+
+    void Flash()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.BossFlash);
+    }
+
+    void HeavyAttack()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.BossHeavyAttack);
     }
 }

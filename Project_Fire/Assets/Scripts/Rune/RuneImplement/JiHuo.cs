@@ -24,6 +24,7 @@ public class JiHuo : Rune
             {
                 testplayer.Instance.player_attack *= AttackLevel;
                 testplayer.Instance.speed *= SpeedLevel;
+                testplayer.Instance.JiHuoEffect.Play();
                 Trigger = true;
             }
         }
@@ -33,6 +34,7 @@ public class JiHuo : Rune
             {
                 testplayer.Instance.player_attack /= AttackLevel;
                 testplayer.Instance.speed /= SpeedLevel;
+                testplayer.Instance.JiHuoEffect.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 Trigger = false;
             }
         }

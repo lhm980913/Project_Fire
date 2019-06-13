@@ -14,7 +14,16 @@ public class AudioManager : MonoBehaviour
         Ground,
         Jump,
         Defence,
-        AttackEnemy
+        AttackEnemy,
+        YinZhen,
+        XianDan,
+        AttackShield,
+        BossFire,
+        BossHeavyAttack,
+        BossWave,
+        BossFastAttack,
+        Sickle,
+        BossFlash
     }
     [Serializable]
     struct AudioAndType

@@ -14,6 +14,7 @@ public class Bird_Dead : Enemy_Base_Stage
 
     public override void Enter()
     {
+        SceneSystem.instance.Delete(enemy);
         count = 2.5f;
         enemy.StopAllCoroutines();
         enemy.wudi11 = true;

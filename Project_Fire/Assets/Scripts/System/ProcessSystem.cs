@@ -32,9 +32,7 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         Destroy(Instantiate(att5, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att4, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
         Destroy(Instantiate(att3, Enemy.transform.position + Vector3.up * 0.5f + Vector3.right * Enemy.faceto * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
-
-      
-
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackShield);
 
         StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.2f, 0.00001f));
     }

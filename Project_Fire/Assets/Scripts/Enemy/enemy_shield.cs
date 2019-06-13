@@ -21,6 +21,7 @@ public class enemy_shield : enemy_base
     //public Transform huoba;
     private void Awake()
     {
+        base.FRegister();
         type = "shield";
         if (self != this)
         {

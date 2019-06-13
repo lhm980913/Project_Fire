@@ -226,6 +226,7 @@ public class enemy_lizarrd_new : enemy_base
     public Lizarrd_Run lizarrd_run_stage;
     private void Awake()
     {
+        base.FRegister();
         type = "lizarrd";
         if(self!=this)
         {
