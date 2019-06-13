@@ -67,7 +67,10 @@ public class RuneManager : MonoBehaviour
     {
         foreach (var item in runes)
         {
-            Debug.Log(item.Name + " " + item.runeEvent + "\n");
+            if (item != null)
+            {
+                Debug.Log(item.Name + " " + item.runeEvent + "\n");
+            }
         }
     }
 
