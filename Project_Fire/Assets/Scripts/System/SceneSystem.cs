@@ -59,6 +59,8 @@ public class SceneSystem : MonoBehaviour
     {
         testplayer.Instance.transform.position = LastSaveposition;
         testplayer.Instance.FixHpAndMp();
+        MainPanel.Instance.UpdateHp();
+        MainPanel.Instance.UpdateMp();
     }
 
     public void FixEnemy()

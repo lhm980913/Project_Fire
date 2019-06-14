@@ -121,6 +121,7 @@ public class testplayer : UnityEngine.MonoBehaviour
     // 
     public GameObject Pin;
     public GameObject Sickle;
+    public GameObject YinXian;
     public ParticleSystem JiHuoEffect;
     public ParticleSystem LianJiEffect;
 

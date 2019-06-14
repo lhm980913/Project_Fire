@@ -15,6 +15,7 @@ public class JiHuo : Rune
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         Trigger = false;
+        Description = "强化攻击与移动速度";
     }
     public override void Execute()
     {

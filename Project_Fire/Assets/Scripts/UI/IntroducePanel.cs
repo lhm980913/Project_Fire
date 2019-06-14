@@ -33,5 +33,6 @@ public class IntroducePanel : BasePanel
             IconImage.sprite = sprite;
         }
         RuneName.text = rune.RuneName;
+        IntroduceText.text = rune.Description;
     }
 }

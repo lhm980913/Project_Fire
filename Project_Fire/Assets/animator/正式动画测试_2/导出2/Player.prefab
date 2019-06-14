@@ -452,7 +452,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.42
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -567,9 +567,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.01
-      minScalar: 1
+      minMaxState: 3
+      scalar: 0.02
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -620,7 +620,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0.03
       minScalar: 1
       maxCurve:
@@ -673,7 +673,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 10.03
       minScalar: 1
       maxCurve:
@@ -885,7 +885,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 1000
-    size3D: 1
+    size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -1596,7 +1596,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.8396226, g: 0.7971045, b: 0.16237983, a: 0}
+        key0: {r: 0.8392157, g: 0.5069367, b: 0.16078429, a: 0}
         key1: {r: 1, g: 0.19761233, b: 0, a: 0.9764706}
         key2: {r: 0.9529412, g: 0.5246845, b: 0.2117647, a: 0.9876854}
         key3: {r: 1, g: 1, b: 1, a: 0}
@@ -5080,6 +5080,7 @@ MonoBehaviour:
   tanfan_time: 0.15
   Hpmax: 100
   Manamax: 100
+  DeathTime: 0.2
   enemypos: {x: 0, y: 0, z: 0}
   flashtime: 0
   skillid: 0
@@ -5138,6 +5139,7 @@ MonoBehaviour:
   attlevel: 1
   Pin: {fileID: 8814263811243122421, guid: 4ff53b26be1c0814cb66074c51983742, type: 3}
   Sickle: {fileID: 3924435374445191995, guid: ce92af67c843ba044bfe9d3743b59b26, type: 3}
+  YinXian: {fileID: 964358267671631747, guid: c9f79fc6855f7af4b80d84361a6a5d02, type: 3}
   JiHuoEffect: {fileID: 1350651677562565320}
   LianJiEffect: {fileID: 1929322918605366547}
 --- !u!136 &7390599886585282143
@@ -7583,7 +7585,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7390599888330831084}
-  m_LocalRotation: {x: 0.48425224, y: 0.000000059604623, z: 0.00000003725289, w: 0.8749284}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.21426502, y: 0, z: 5.5511148e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11618,11 +11620,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7390599888331319730}
     m_Modifications:
-    - target: {fileID: 2501403481409089626, guid: ac56558b64850494d98b69ea5a91b6a4,
-        type: 3}
-      propertyPath: m_Name
-      value: gun_fire
-      objectReference: {fileID: 0}
     - target: {fileID: 5025877543119715877, guid: ac56558b64850494d98b69ea5a91b6a4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11677,6 +11674,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501403481409089626, guid: ac56558b64850494d98b69ea5a91b6a4,
+        type: 3}
+      propertyPath: m_Name
+      value: gun_fire
       objectReference: {fileID: 0}
     - target: {fileID: 6793852862012388381, guid: ac56558b64850494d98b69ea5a91b6a4,
         type: 3}
@@ -11838,10 +11840,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7390599886585282112}
     m_Modifications:
-    - target: {fileID: 7854315909907832725, guid: 685684fb9ab9721409e41717abf7dc13,
+    - target: {fileID: 8236301119745998201, guid: 685684fb9ab9721409e41717abf7dc13,
         type: 3}
-      propertyPath: m_Name
-      value: JiHuo
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3044183262854481653, guid: 685684fb9ab9721409e41717abf7dc13,
         type: 3}
@@ -11898,10 +11900,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8236301119745998201, guid: 685684fb9ab9721409e41717abf7dc13,
+    - target: {fileID: 7854315909907832725, guid: 685684fb9ab9721409e41717abf7dc13,
         type: 3}
-      propertyPath: playOnAwake
-      value: 0
+      propertyPath: m_Name
+      value: JiHuo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 685684fb9ab9721409e41717abf7dc13, type: 3}
@@ -11924,16 +11926,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7390599888331319730}
     m_Modifications:
-    - target: {fileID: 68556590576401756, guid: 465299ef7781d2542a868846c3552d22,
-        type: 3}
-      propertyPath: m_Name
-      value: P
-      objectReference: {fileID: 0}
-    - target: {fileID: 68556590576401756, guid: 465299ef7781d2542a868846c3552d22,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 68556590576401759, guid: 465299ef7781d2542a868846c3552d22,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11999,6 +11991,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.18000019
       objectReference: {fileID: 0}
+    - target: {fileID: 68556590576401756, guid: 465299ef7781d2542a868846c3552d22,
+        type: 3}
+      propertyPath: m_Name
+      value: P
+      objectReference: {fileID: 0}
+    - target: {fileID: 68556590576401756, guid: 465299ef7781d2542a868846c3552d22,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 68556590576401757, guid: 465299ef7781d2542a868846c3552d22,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -12049,16 +12051,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7390599888331319730}
     m_Modifications:
-    - target: {fileID: 1592222993418476376, guid: bc4f5ebd9508aaf48adaba5c185309dd,
-        type: 3}
-      propertyPath: m_Name
-      value: attack2_spark
-      objectReference: {fileID: 0}
-    - target: {fileID: 1592222993418476376, guid: bc4f5ebd9508aaf48adaba5c185309dd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1592222993418476379, guid: bc4f5ebd9508aaf48adaba5c185309dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12123,6 +12115,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592222993418476376, guid: bc4f5ebd9508aaf48adaba5c185309dd,
+        type: 3}
+      propertyPath: m_Name
+      value: attack2_spark
+      objectReference: {fileID: 0}
+    - target: {fileID: 1592222993418476376, guid: bc4f5ebd9508aaf48adaba5c185309dd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1592222993418476378, guid: bc4f5ebd9508aaf48adaba5c185309dd,
         type: 3}

@@ -11,6 +11,7 @@ public class JingZhun : Rune
         name = "JingZhun";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
+        Description = "击落子弹恢复能量";
     }
     public override void Execute()
     {

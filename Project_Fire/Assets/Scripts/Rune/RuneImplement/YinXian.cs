@@ -16,8 +16,16 @@ public class YinXian : Rune
         this.runeEntity = runeEntity;
         MpNeed = 10;
         Damage = 4;
-        player = testplayer.Instance;
-        Xian = (GameObject)Resources.Load("Prefab/yinxian");
+        if(testplayer.Instance == null)
+        {
+            RuneManager.Instance.StartCoroutine(DelayInit());
+        }
+        else
+        {
+            player = testplayer.Instance;
+            Xian = testplayer.Instance.YinXian;
+        }
+        Description = "释放一个能造成多段伤害的陷阱";
     }
 
     public override void Execute()
@@ -68,5 +76,12 @@ public class YinXian : Rune
             yield return new WaitForSeconds(0.25f);
         }
         player.DestroyGameObject(xian);
+    }
+
+    public IEnumerator<YieldInstruction> DelayInit()
+    {
+        yield return new WaitForSeconds(0.2f);
+        player = testplayer.Instance;
+        Xian = testplayer.Instance.YinXian;
     }
 }

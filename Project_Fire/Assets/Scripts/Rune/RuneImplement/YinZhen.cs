@@ -13,9 +13,17 @@ public class YinZhen : Rune
         name = "YinZhen";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
-        player = testplayer.Instance;
         MpNeed = 10;
-        Pin = testplayer.Instance.Pin;
+        if (testplayer.Instance)
+        {
+            player = testplayer.Instance;
+            Pin = testplayer.Instance.Pin;
+        }
+        else
+        {
+            RuneManager.Instance.StartCoroutine(DelayInit());
+        }
+        Description = "发射一根不致命的银针";
     }
     public override void Execute()
     {
@@ -25,5 +33,12 @@ public class YinZhen : Rune
         }
         AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.YinZhen);
         UnityEngine.Object.Instantiate(Pin, player.transform.position + player.face_to * player.transform.right * 1.0f, Quaternion.identity);
+    }
+
+    public IEnumerator<YieldInstruction> DelayInit()
+    {
+        yield return new WaitForSeconds(0.2f);
+        player = testplayer.Instance;
+        Pin = testplayer.Instance.Pin;
     }
 }

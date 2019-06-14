@@ -14,6 +14,7 @@ public class XianDan : Rune
         this.runeEntity = runeEntity;
         MpNeed = 10;
         player = testplayer.Instance;
+        Description = "向前方一定区域发射致命的散弹";
     }
     public override void Execute()
     {

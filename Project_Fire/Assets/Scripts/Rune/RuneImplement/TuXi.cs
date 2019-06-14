@@ -13,6 +13,7 @@ public class TuXi : Rune
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
         player = testplayer.Instance;
+        Description = "招架成功后获得大量能量";
     }
     public override void Execute()
     {

@@ -12,6 +12,7 @@ public class LianJi : Rune
         name = "LianJi";
         rune_Type = RuneType.passive;
         this.runeEntity = runeEntity;
+        Description = "每三次攻击产生一次暴击";
     }
     public override void Execute()
     {
