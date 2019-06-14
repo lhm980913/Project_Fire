@@ -4,12 +4,25 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    public GameObject AnotherPortal;
+    public Transform AnotherPortal;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if(SceneSystem.instance.GateCoolDownTime <= 0)
         {
-            other.transform.position = AnotherPortal.transform.position;
+            if (other.CompareTag("Player"))
+            {
+                if (AnotherPortal)
+                {
+                    SceneSystem.instance.UseGate();
+                    Debug.Log(AnotherPortal.position);
+                    DelayTranslate(other.transform);
+                }
+            }
         }
+    }
+
+    void DelayTranslate(Transform transform)
+    {
+        transform.position = AnotherPortal.position;
     }
 }

@@ -6,6 +6,13 @@ public class SceneSystem : MonoBehaviour
 {
     static public SceneSystem instance;
     public GameObject Gate;
+
+    [SerializeField]
+    private float GateCD;
+    [SerializeField]
+    private Transform TargetPosition;
+    [HideInInspector]
+    public float GateCoolDownTime;
     
     List<enemy_base> enemys;
 
@@ -19,6 +26,23 @@ public class SceneSystem : MonoBehaviour
             instance = this;
         }
         enemys = new List<enemy_base>();
+    }
+
+    private void Update()
+    {
+        if(GateCoolDownTime <= 0)
+        {
+            GateCoolDownTime = 0;
+        }
+        else
+        {
+            GateCoolDownTime -= Time.deltaTime;
+        }
+    }
+
+    public void UseGate()
+    {
+        GateCoolDownTime = GateCD;
     }
 
     public void AddEnemy(enemy_base enemy)
@@ -57,6 +81,7 @@ public class SceneSystem : MonoBehaviour
 
     public void OpenGate()
     {
+        testplayer.Instance.transform.position = TargetPosition.position;
         if (!Gate)
         {
             Debug.LogWarning("SceneSystemDon'tHaveGate");
