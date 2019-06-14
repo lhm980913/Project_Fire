@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneSystem : MonoBehaviour
 {
     static public SceneSystem instance;
-    public GameObject Gate;
+    public GameObject[] Gates;
 
     [SerializeField]
     private float GateCD;
@@ -84,13 +84,16 @@ public class SceneSystem : MonoBehaviour
     public void OpenGate()
     {
         testplayer.Instance.transform.position = TargetPosition.position;
-        if (!Gate)
+        foreach(var Gate in Gates)
         {
-            Debug.LogWarning("SceneSystemDon'tHaveGate");
-        }
-        else
-        {
-            Gate.SetActive(true);
+            if (!Gate)
+            {
+                Debug.LogWarning("SceneSystemDon'tHaveGate");
+            }
+            else
+            {
+                Gate.SetActive(true);
+            }
         }
     }
 }
