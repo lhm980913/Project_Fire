@@ -83,7 +83,7 @@ public class SceneSystem : MonoBehaviour
 
     public void OpenGate()
     {
-        testplayer.Instance.transform.position = TargetPosition.position;
+        //testplayer.Instance.transform.position = TargetPosition.position;
         foreach(var Gate in Gates)
         {
             if (!Gate)
