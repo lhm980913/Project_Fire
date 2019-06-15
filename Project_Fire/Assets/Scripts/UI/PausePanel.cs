@@ -30,12 +30,12 @@ public class PausePanel : BasePanel
             {
                 ExecuteButton();
             }
-            if (Input.GetKeyDown(KeyCode.W)||Player_Controller_System.Instance.DPad_Up)
+            if (Input.GetKeyDown(KeyCode.W)||Player_Controller_System.Instance.LTDown)
             {
                 if (index > 0) index--;
                 translateSelectedOutline();
             }
-            if (Input.GetKeyDown(KeyCode.S) || Player_Controller_System.Instance.DPad_Down)
+            if (Input.GetKeyDown(KeyCode.S) || Player_Controller_System.Instance.RTDown)
             {
                 if (index < goArray.Length-1) index++;
                 translateSelectedOutline();

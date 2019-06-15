@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class SceneSystem : MonoBehaviour
 {
     static public SceneSystem instance;
     public GameObject[] Gates;
+    public enemy_boss boss;
+    public CinemachineVirtualCamera main;
 
     [SerializeField]
     private float GateCD;
@@ -57,10 +60,20 @@ public class SceneSystem : MonoBehaviour
 
     public void Reborn()
     {
+        boss.anim.CrossFade("boss_stand 1", 0.1f);
         testplayer.Instance.transform.position = LastSaveposition;
         testplayer.Instance.FixHpAndMp();
+
         MainPanel.Instance.UpdateHp();
         MainPanel.Instance.UpdateMp();
+        if (!main.enabled)
+        {
+            main.enabled = true;
+        }
+        if (boss.fighting)
+        {
+            boss.fighting = false;  
+        }
     }
 
     public void FixEnemy()

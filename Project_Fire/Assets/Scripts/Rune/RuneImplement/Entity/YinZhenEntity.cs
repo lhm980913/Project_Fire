@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YinZhenEntity : MonoBehaviour
 {
-    public float speed = 12.0f;
+    public float speed = 20f;
     public float Distance = 20;
 
     private Vector3 dir;
@@ -33,6 +33,6 @@ public class YinZhenEntity : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "enemy"&&other.GetComponent<enemy_base>())
-            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(),0.34f);
+            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(),0.5f);
     }
 }

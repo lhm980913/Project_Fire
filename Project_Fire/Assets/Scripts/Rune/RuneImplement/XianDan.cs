@@ -12,7 +12,7 @@ public class XianDan : Rune
         RuneName = "霰弹";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
-        MpNeed = 10;
+        MpNeed = 40;
         player = testplayer.Instance;
         Description = "向前方一定区域发射致命的散弹";
     }
@@ -23,7 +23,6 @@ public class XianDan : Rune
         {
             player = testplayer.Instance;
         }
-        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.XianDan);
         colliders = Physics.OverlapBox(player.transform.position + Vector3.right * testplayer.Instance.face_to * 4.0f * 0.6f, new Vector3(4.0f, 1.0f, 1.0f), Quaternion.identity, 1 << 11);
         foreach (var collider in colliders)
         {
@@ -38,6 +37,6 @@ public class XianDan : Rune
     {
         yield return new WaitForSeconds(0.5f);
         if(gameObject!=null && gameObject.GetComponent<enemy_base>())
-        ProcessSystem.Instance.FPlayerSkill_Enemy(gameObject.GetComponent<enemy_base>(),0.5f);
+        ProcessSystem.Instance.FPlayerSkill_Enemy(gameObject.GetComponent<enemy_base>(),1.7f);
     }
 }

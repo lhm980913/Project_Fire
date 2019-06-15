@@ -45,14 +45,15 @@ public class enemy_boss_anim : MonoBehaviour
     }
     IEnumerator chuci()
     {
+        Vector3 pos = boss.transform.position;
         for(int i=0;i<30;i++)
         {
             if(i>2)
             {
                 GameObject ci1 = Instantiate(ci);
-                ci1.transform.position = boss.transform.position + Vector3.down * 4 + Vector3.right * i * 0.6f;
+                ci1.transform.position = pos + Vector3.down * 4 + Vector3.right * i * 0.6f;
                 GameObject ci2 = Instantiate(ci);
-                ci2.transform.position = boss.transform.position + Vector3.down * 4 - Vector3.right * i * 0.6f;
+                ci2.transform.position = pos + Vector3.down * 4 - Vector3.right * i * 0.6f;
                 yield return new WaitForSeconds(0.1f);
             }
             yield return new WaitForSeconds(0.1f);

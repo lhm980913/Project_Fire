@@ -38,7 +38,7 @@ public class LianDaoEntity : MonoBehaviour
     {
         if (other.tag == "enemy"&&other.GetComponent<enemy_base>())
         {
-            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(), 0.3f);
+            ProcessSystem.Instance.FPlayerSkill_Enemy(other.gameObject.GetComponent<enemy_base>(), 0.8f);
         }
             
         if (BeBack == true)

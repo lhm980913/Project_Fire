@@ -87,7 +87,7 @@ public class enemy_boss : enemy_base
     {
         if(Vector3.Distance(testplayer.Instance.transform.position,transform.position)<3&&Player_Controller_System.Instance.Button_X == Player_Controller_System.Button_Stage.down)
         {
-            if(Random.Range(0,100)<30)
+            if(Random.Range(0,100)<50)
             {
                 if (enemy._enemy==boss_stand_stage)
                 enemy.SetStage(boss_backjump_stage);

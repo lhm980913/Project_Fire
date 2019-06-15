@@ -14,13 +14,9 @@ public class YinXian : Rune
         name = "YinXian";
         rune_Type = RuneType.active;
         this.runeEntity = runeEntity;
-        MpNeed = 10;
+        MpNeed = 30;
         Damage = 4;
-        if(testplayer.Instance == null)
-        {
-            RuneManager.Instance.StartCoroutine(DelayInit());
-        }
-        else
+        if(testplayer.Instance != null)
         {
             player = testplayer.Instance;
             Xian = testplayer.Instance.YinXian;
@@ -30,12 +26,17 @@ public class YinXian : Rune
 
     public override void Execute()
     {
-        GameObject xian =  Object.Instantiate(Xian, player.transform.position, Quaternion.Euler(0,0,-90));
+        
         Collider[] colliders;
         if (!player)
         {
             player = testplayer.Instance;
         }
+        if (!Xian)
+        {
+            Xian = testplayer.Instance.YinXian;
+        }
+        GameObject xian = Object.Instantiate(Xian, player.transform.position, Quaternion.Euler(0, 0, -90));
         colliders = Physics.OverlapBox(player.transform.position, new Vector3(Xian.transform.localScale.y, 1, 1), Quaternion.identity, 1 << 11);
         List<enemy_base> enemys = new List<enemy_base>();
         for (int i = 0; i < colliders.Length; i++)
@@ -55,7 +56,7 @@ public class YinXian : Rune
             {
                 enemys.Add(temp);
                 if( temp.GetComponent<enemy_base>())
-                ProcessSystem.Instance.FPlayerSkill_Enemy(temp,0.34f);
+                ProcessSystem.Instance.FPlayerSkill_Enemy(temp,0.5f);
             }
         }
         RuneManager.Instance.StartCoroutine(buffer(enemys,xian));

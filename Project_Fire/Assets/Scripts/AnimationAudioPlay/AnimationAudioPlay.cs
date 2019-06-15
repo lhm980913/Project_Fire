@@ -33,4 +33,9 @@ public class AnimationAudioPlay : MonoBehaviour
     {
         AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.Defence);
     }
+
+    public void PlayXianDan()
+    {
+        AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.XianDan);
+    }
 }

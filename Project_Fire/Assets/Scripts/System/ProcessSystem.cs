@@ -203,7 +203,15 @@ public class ProcessSystem : UnityEngine.MonoBehaviour
         
         if(!enemy.wudi11)
         {
-        if (enemy.type == "lizarrd")
+            AudioManager.Instance.TryPlayAudio(AudioManager.AudioType.AttackEnemy);
+           
+
+            StartCoroutine(CameraEffectSystem.Instance.FCameraShake(0.1f, 0.5f));
+            StartCoroutine(CameraEffectSystem.Instance.FTimeScaleControl(0.1f, 0.00001f));
+            Destroy(Instantiate(enemy_hurt1, enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+            Destroy(Instantiate(enemy_hurt2, enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+            Destroy(Instantiate(enemy_hurt3, enemy.transform.position + Vector3.up * 0.5f, Quaternion.Euler(Vector3.zero)).gameObject, 3f);
+            if (enemy.type == "lizarrd")
         {
             enemy_lizarrd_new a = (enemy_lizarrd_new)enemy;
             a.hurt_count -= testplayer.Instance.player_attack * xishu;
