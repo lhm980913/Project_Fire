@@ -147,6 +147,7 @@ public class enemy_base : UnityEngine.MonoBehaviour
     public float enemy_size;
     public bool wudi11 = false;
     public bool wudi = false;
+    public Vector3 begin_pos;
     //Enemy_Stage _stage;
     //public Enemy_Stage Stage
     //{
@@ -181,13 +182,16 @@ public class enemy_base : UnityEngine.MonoBehaviour
 
     public void FRegister()
     {
+        begin_pos = transform.position;
         if (SceneSystem.instance)
         {
             SceneSystem.instance.AddEnemy(this);
+            
         }
         else
         {
             StartCoroutine(DelayAddEnemy());
+
         }
     }
 

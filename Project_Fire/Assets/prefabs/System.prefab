@@ -376,7 +376,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f89dba0be72e91248be9aa9efea221c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gate: {fileID: 0}
+  Gates:
+  - {fileID: 0}
+  - {fileID: 0}
+  boss: {fileID: 0}
+  main: {fileID: 0}
+  GateCD: 1
+  TargetPosition: {fileID: 0}
+  GateCoolDownTime: 0
 --- !u!1 &2984459762717091592
 GameObject:
   m_ObjectHideFlags: 0

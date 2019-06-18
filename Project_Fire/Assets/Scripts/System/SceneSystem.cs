@@ -81,6 +81,7 @@ public class SceneSystem : MonoBehaviour
         foreach (var enemy in enemys)
         {
             enemy.Hp = enemy.maxhp;
+            enemy.transform.position = enemy.begin_pos;
         }
     }
 
